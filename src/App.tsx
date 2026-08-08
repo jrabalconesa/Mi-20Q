@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { AnswerButtons } from './components/AnswerButtons'
 import { candidates } from './data/candidates'
 import { getCandidateName, getQuestion } from './engine/gameEngine'
@@ -13,7 +14,8 @@ const categories: Array<{ id: Category; label: string }> = [
   { id: 'person', label: 'Personas' }
 ]
 
-const APP_VERSION = '0.3.1'
+const APP_VERSION = '0.4.0'
+const brandLogoUrl = `${import.meta.env.BASE_URL}brand/20q-logo.png`
 
 function App() {
   const game = useGame()
@@ -35,9 +37,11 @@ function App() {
       <main className="shell">
         {updateNotice}
         <section className="card hero">
+          <h1 className="brand-title">
+            <img className="hero-logo" src={brandLogoUrl} alt="20Q" />
+          </h1>
           <span className="badge">Juego de deducción</span>
-          <h1>20Q</h1>
-          <p>Piensa en algo. Intentaré adivinarlo haciendo como máximo veinte preguntas.</p>
+          <p className="hero-lead">Piensa en algo. Intentaré adivinarlo haciendo como máximo veinte preguntas.</p>
           <fieldset className="category-picker">
             <legend>¿En qué categoría estás pensando?</legend>
             <div className="category-grid">
@@ -83,15 +87,20 @@ function App() {
   return (
     <main className="shell">
       {updateNotice}
-      <section className="card">
-        <div className="topline">
-          <span>{activeCategoryLabel} · {state.status === 'playing' ? `Pregunta ${Math.min(state.questionCount + 1, 20)} de 20` : `${state.questionCount} preguntas`}</span>
-          <button className="link-button" onClick={game.reset}>Salir</button>
-        </div>
+      <section className={`card game-card status-${state.status}`}>
+        <header className="game-header">
+          <img className="game-logo" src={brandLogoUrl} alt="" aria-hidden="true" />
+          <div className="game-meta">
+            <div className="topline">
+              <span>{activeCategoryLabel} · {state.status === 'playing' ? `Pregunta ${Math.min(state.questionCount + 1, 20)} de 20` : `${state.questionCount} preguntas`}</span>
+              <button className="link-button" onClick={game.reset}>Salir</button>
+            </div>
 
-        <div className="progress" aria-hidden="true">
-          <div style={{ width: `${Math.min((state.questionCount / 20) * 100, 100)}%` }} />
-        </div>
+            <div className="progress" aria-hidden="true">
+              <div style={{ width: `${Math.min((state.questionCount / 20) * 100, 100)}%` }} />
+            </div>
+          </div>
+        </header>
 
         {state.status === 'playing' && question && (
           <>
@@ -135,4 +144,3 @@ function App() {
 }
 
 export default App
-import { useState } from 'react'

@@ -12,7 +12,7 @@ export function AnswerButtons({ onAnswer }: { onAnswer: (answer: Answer) => void
   return (
     <div className="answer-grid" aria-label="Opciones de respuesta">
       {answers.map(({ value, label }) => (
-        <button key={value} onClick={() => onAnswer(value)}>{label}</button>
+        <button className={`answer answer-${value}`} key={value} onClick={() => onAnswer(value)}>{label}</button>
       ))}
     </div>
   )
