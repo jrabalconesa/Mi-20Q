@@ -33,12 +33,21 @@ export function useAppUpdate(): boolean {
     const checkWhenVisible = () => {
       if (document.visibilityState === 'visible') void check()
     }
+    const refreshWhenRestored = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        window.location.reload()
+        return
+      }
+      void check()
+    }
     const interval = window.setInterval(() => void check(), CHECK_INTERVAL_MS)
     document.addEventListener('visibilitychange', checkWhenVisible)
+    window.addEventListener('pageshow', refreshWhenRestored)
     void check()
     return () => {
       window.clearInterval(interval)
       document.removeEventListener('visibilitychange', checkWhenVisible)
+      window.removeEventListener('pageshow', refreshWhenRestored)
     }
   }, [])
 
