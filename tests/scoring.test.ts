@@ -12,7 +12,8 @@ const candidate: Candidate = {
 const question: Question = {
   id: 'domestic',
   text: '¿Es doméstico?',
-  attribute: 'domestic'
+  attribute: 'domestic',
+  categories: ['animal']
 }
 
 describe('scoreAnswer', () => {

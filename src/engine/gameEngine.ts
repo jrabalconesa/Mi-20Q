@@ -10,7 +10,8 @@ const MAX_QUESTIONS = 20
 export function createGame(category: Category): GameState {
   const pool = candidates.filter(c => c.category === category)
   const ranked = rankCandidates(pool, questionsById, {})
-  const firstQuestion = selectNextQuestion(questions, ranked, [])
+  const categoryQuestions = questions.filter(question => question.categories.includes(category))
+  const firstQuestion = selectNextQuestion(categoryQuestions, ranked, [])
 
   return {
     category,
@@ -34,7 +35,8 @@ export function answerCurrentQuestion(state: GameState, answer: Answer): GameSta
   const questionCount = state.questionCount + 1
   const best = rankedCandidates[0]
   const second = rankedCandidates[1]
-  const dominant = Boolean(best && (best.score >= 0.92 || (second && best.score - second.score >= 0.18)))
+  const scoreGap = best && second ? best.score - second.score : 1
+  const dominant = Boolean(best && questionCount >= 3 && best.score >= 0.85 && scoreGap >= 0.12)
   const shouldGuess = dominant || questionCount >= MAX_QUESTIONS
 
   if (shouldGuess && best) {
@@ -50,7 +52,8 @@ export function answerCurrentQuestion(state: GameState, answer: Answer): GameSta
     }
   }
 
-  const next = selectNextQuestion(questions, rankedCandidates, askedQuestionIds)
+  const categoryQuestions = questions.filter(question => question.categories.includes(state.category))
+  const next = selectNextQuestion(categoryQuestions, rankedCandidates, askedQuestionIds)
 
   return {
     ...state,

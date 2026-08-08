@@ -13,6 +13,7 @@ export interface Question {
   id: string
   text: string
   attribute: string
+  categories: Category[]
 }
 
 export interface RankedCandidate extends Candidate {

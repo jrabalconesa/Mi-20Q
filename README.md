@@ -31,6 +31,8 @@ La opción `base: '/Mi-20Q/'` de Vite corresponde al nombre del repositorio. Si 
 - `src/components`: componentes visuales.
 - `src/hooks`: estado de la partida.
 - `src/stats.ts`: estadísticas locales y últimas diez partidas.
+- Base inicial de 60 candidatos: 20 animales, 20 objetos, 10 lugares y 10 personas.
+- Cada pregunta declara explícitamente las categorías en las que puede utilizarse.
 - `tests`: pruebas unitarias.
 
 ## Algoritmo
@@ -39,7 +41,6 @@ Cada respuesta se transforma en un valor entre 0 y 1. El motor compara ese valor
 
 ## Próximas mejoras
 
-- Añadir al menos 60 candidatos completos.
 - Guardar estadísticas en localStorage.
 - Incorporar aprendizaje cuando falle.
 - Añadir un backend y moderación de aportaciones.
