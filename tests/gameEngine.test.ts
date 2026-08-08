@@ -54,4 +54,16 @@ describe('gameEngine', () => {
       .map(candidate => categoryQuestions.map(question => candidate.attributes[question.attribute] ?? 0.5).join('|'))
     expect(new Set(signatures).size).toBe(signatures.length)
   })
+
+  it.each(candidates)('adivina $name con respuestas exactas', target => {
+    let state = createGame(target.category)
+    while (state.status === 'playing') {
+      const question = questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      const value = question ? target.attributes[question.attribute] : undefined
+      state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown')
+    }
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe(target.id)
+  })
 })

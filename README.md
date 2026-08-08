@@ -33,6 +33,8 @@ La opción `base: '/Mi-20Q/'` de Vite corresponde al nombre del repositorio. Si 
 - `src/stats.ts`: estadísticas locales y últimas diez partidas.
 - Base inicial de 60 candidatos: 20 animales, 20 objetos, 10 lugares y 10 personas.
 - Cada pregunta declara explícitamente las categorías en las que puede utilizarse.
+- La pantalla inicial muestra los candidatos conocidos y la partida mantiene visible la categoría activa.
+- La aplicación detecta un despliegue nuevo y ofrece recargarlo sin dejar pestañas antiguas ejecutándose indefinidamente.
 - `tests`: pruebas unitarias.
 
 ## Algoritmo

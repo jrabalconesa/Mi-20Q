@@ -1,5 +1,7 @@
 import { AnswerButtons } from './components/AnswerButtons'
+import { candidates } from './data/candidates'
 import { getCandidateName, getQuestion } from './engine/gameEngine'
+import { useAppUpdate } from './hooks/useAppUpdate'
 import { useGame } from './hooks/useGame'
 import type { Category } from './types/game'
 import './styles.css'
@@ -11,14 +13,27 @@ const categories: Array<{ id: Category; label: string }> = [
   { id: 'person', label: 'Personas' }
 ]
 
+const APP_VERSION = '0.3.0'
+
 function App() {
   const game = useGame()
   const state = game.state
   const [selectedCategory, setSelectedCategory] = useState<Category>('animal')
+  const updateAvailable = useAppUpdate()
+  const knownCandidates = candidates.filter(candidate => candidate.category === selectedCategory)
+  const activeCategoryLabel = categories.find(category => category.id === state?.category)?.label
+
+  const updateNotice = updateAvailable && (
+    <aside className="update-notice" role="status">
+      <span>Hay una versión nueva disponible.</span>
+      <button onClick={() => window.location.reload()}>Actualizar ahora</button>
+    </aside>
+  )
 
   if (!state) {
     return (
       <main className="shell">
+        {updateNotice}
         <section className="card hero">
           <span className="badge">Juego de deducción</span>
           <h1>20Q</h1>
@@ -39,6 +54,15 @@ function App() {
             ))}
             </div>
           </fieldset>
+          <p className="knowledge-note">
+            Piensa en una de las {knownCandidates.length} opciones que conozco en esta categoría.
+          </p>
+          <details className="known-candidates" key="known-candidates">
+            <summary>Ver las opciones que puedo adivinar</summary>
+            <ul>
+              {knownCandidates.map(candidate => <li key={candidate.id}>{candidate.name}</li>)}
+            </ul>
+          </details>
           <button className="start-button" onClick={() => game.start(selectedCategory)}>Comenzar partida</button>
           {game.stats.games > 0 && (
             <section className="stats" aria-label="Estadísticas de juego">
@@ -47,6 +71,7 @@ function App() {
               <div><strong>{game.stats.averageQuestions.toFixed(1)}</strong><span>Preguntas de media</span></div>
             </section>
           )}
+          <small className="version">Versión {APP_VERSION}</small>
         </section>
       </main>
     )
@@ -57,9 +82,10 @@ function App() {
 
   return (
     <main className="shell">
+      {updateNotice}
       <section className="card">
         <div className="topline">
-          <span>{state.status === 'playing' ? `Pregunta ${Math.min(state.questionCount + 1, 20)} de 20` : `${state.questionCount} preguntas`}</span>
+          <span>{activeCategoryLabel} · {state.status === 'playing' ? `Pregunta ${Math.min(state.questionCount + 1, 20)} de 20` : `${state.questionCount} preguntas`}</span>
           <button className="link-button" onClick={game.reset}>Salir</button>
         </div>
 
@@ -90,11 +116,12 @@ function App() {
             <p className="eyebrow">{state.status === 'won' ? '¡Acerté!' : 'No lo conseguí'}</p>
             <h2>{state.status === 'won' ? `Era ${guess}.` : 'Necesito seguir aprendiendo.'}</h2>
             <p>He utilizado {state.questionCount} preguntas.</p>
+            {state.status === 'lost' && <p>Esta versión solo puede adivinar las opciones indicadas al comenzar.</p>}
             <button onClick={game.reset}>Jugar otra vez</button>
           </>
         )}
 
-        {state.status === 'playing' && <details>
+        {state.status === 'playing' && <details key="ranked-candidates">
           <summary>Ver candidatos más probables</summary>
           <ol>
             {state.rankedCandidates.slice(0, 5).map(candidate => (
