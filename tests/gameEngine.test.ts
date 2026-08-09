@@ -1,0 +1,178 @@
+import { beforeAll, describe, expect, it } from 'vitest'
+import { loadCategoryKnowledge } from '../src/data/catalog'
+import { coreCandidates } from '../src/data/candidates'
+import { questions as allQuestions } from '../src/data/questions'
+import { answerCurrentQuestion, createGame, resolveGuess } from '../src/engine/gameEngine'
+import { selectNextQuestion } from '../src/engine/selectNextQuestion'
+import { expectedValue } from '../src/engine/scoring'
+import type { Candidate, Category, GameKnowledge } from '../src/types/game'
+
+const categories: Category[] = ['animal', 'object', 'place', 'person']
+const knowledgeByCategory = new Map<Category, GameKnowledge>()
+let candidates: Candidate[] = []
+
+beforeAll(async () => {
+  const loaded = await Promise.all(categories.map(loadCategoryKnowledge))
+  loaded.forEach((knowledge, index) => knowledgeByCategory.set(categories[index], knowledge))
+  candidates = loaded.flatMap(knowledge => knowledge.candidates)
+})
+
+function knowledgeFor(category: Category): GameKnowledge {
+  const knowledge = knowledgeByCategory.get(category)
+  if (!knowledge) throw new Error(`No se cargó la categoría ${category}`)
+  return knowledge
+}
+
+describe('gameEngine', () => {
+  it('crea una partida con una pregunta inicial', () => {
+    const state = createGame('animal', knowledgeFor('animal'))
+    expect(state.status).toBe('playing')
+    expect(state.currentQuestionId).not.toBeNull()
+  })
+
+  it('registra una respuesta y avanza el contador', () => {
+    const knowledge = knowledgeFor('animal')
+    const state = createGame('animal', knowledge)
+    const next = answerCurrentQuestion(state, 'yes', knowledge)
+    expect(next.questionCount).toBe(1)
+    expect(next.askedQuestionIds).toHaveLength(1)
+  })
+
+  it('evita volver a preguntar por clases taxonómicas después de confirmar mamífero', () => {
+    const rankedCandidates = [
+      { id: 'cow', name: 'Vaca', category: 'animal' as const, attributes: { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false, arachnid: false, mollusk: false, crustacean: false, vertebrate: true }, score: 0.92 },
+      { id: 'sparrow', name: 'Gorrión', category: 'animal' as const, attributes: { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, insect: false, arachnid: false, mollusk: false, crustacean: false, vertebrate: true }, score: 0.08 }
+    ]
+
+    const nextQuestion = selectNextQuestion(allQuestions, rankedCandidates, ['animal_mammal'])
+
+    expect(nextQuestion?.id).not.toBe('animal_bird')
+    expect(nextQuestion?.id).not.toBe('animal_reptile')
+    expect(nextQuestion?.id).not.toBe('animal_insect')
+    expect(nextQuestion?.id).not.toBe('animal_arachnid')
+    expect(nextQuestion?.id).not.toBe('animal_mollusk')
+  })
+
+  it('no repite la pregunta respondida', () => {
+    const knowledge = knowledgeFor('animal')
+    const state = createGame('animal', knowledge)
+    const answeredId = state.currentQuestionId
+    const next = answerCurrentQuestion(state, 'yes', knowledge)
+    expect(next.currentQuestionId).not.toBe(answeredId)
+  })
+
+  it('continúa preguntando tras una suposición temprana fallida', () => {
+    const knowledge = knowledgeFor('animal')
+    const initial = createGame('animal', knowledge)
+    const guessing = { ...initial, status: 'guessing' as const, guessCandidateId: initial.rankedCandidates[0].id, questionCount: 6 }
+    const next = resolveGuess(guessing, false, knowledge)
+    expect(next.status).toBe('playing')
+    expect(next.excludedCandidateIds).toContain(guessing.guessCandidateId)
+    expect(next.currentQuestionId).not.toBeNull()
+  })
+
+  it.each<Category>(['animal', 'object', 'place', 'person'])('no intenta adivinar %s después de una sola respuesta', category => {
+    const knowledge = knowledgeFor(category)
+    const state = answerCurrentQuestion(createGame(category, knowledge), 'yes', knowledge)
+    expect(state.status).toBe('playing')
+    expect(state.questionCount).toBe(1)
+  })
+
+  it.each<Category>(['animal', 'object', 'place', 'person'])('solo formula preguntas aplicables a %s', category => {
+    const knowledge = knowledgeByCategory.get(category)
+    expect(knowledge).toBeDefined()
+    if (!knowledge) return
+    let state = createGame(category, knowledge)
+    for (let turn = 0; turn < 20 && state.status === 'playing'; turn += 1) {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question?.categories).toContain(category)
+      state = answerCurrentQuestion(state, 'unknown', knowledge)
+    }
+  })
+
+  it.each(categories)('incluye al menos 1.000 candidatos de %s', category => {
+    expect(candidates.filter(candidate => candidate.category === category).length).toBeGreaterThanOrEqual(1_000)
+  })
+
+  it.each(categories)('no contiene nombres duplicados en %s', category => {
+    const names = candidates
+      .filter(candidate => candidate.category === category)
+      .map(candidate => candidate.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es'))
+    expect(new Set(names).size).toBe(names.length)
+  })
+
+  it('adivina los candidatos curados con respuestas exactas', () => {
+    for (const target of coreCandidates) {
+      const knowledge = knowledgeByCategory.get(target.category)
+      expect(knowledge).toBeDefined()
+      if (!knowledge) continue
+      const enrichedTarget = knowledge.candidates.find(candidate => candidate.id === target.id)
+      expect(enrichedTarget).toBeDefined()
+      if (!enrichedTarget) continue
+      let state = createGame(target.category, knowledge)
+      const askedTexts: string[] = []
+      while (state.status === 'playing') {
+        const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+        expect(question).toBeDefined()
+        if (question) askedTexts.push(question.text)
+        const value = question ? expectedValue(enrichedTarget, question) : undefined
+        state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown', knowledge)
+      }
+      expect(state.status).toBe('guessing')
+      expect(state.guessCandidateId, `${target.name}: ${askedTexts.join(' | ')}`).toBe(target.id)
+    }
+  }, 30_000)
+
+  it('adivina guepardo usando únicamente preguntas semánticas de animales', () => {
+    const knowledge = knowledgeFor('animal')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Guepardo')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('animal', knowledge)
+    const askedTexts: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question?.id).not.toContain('name-before')
+      if (!question) break
+      askedTexts.push(question.text)
+      const value = expectedValue(target, question)
+      state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown', knowledge)
+    }
+
+    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Pertenece a la familia de los felinos?')
+    expect(askedTexts).toContain('¿Tiene manchas bien visibles en el pelaje?')
+    expect(askedTexts).toContain('¿Puede superar aproximadamente los 80 km/h corriendo?')
+    expect(state.guessCandidateId).toBe(target.id)
+  }, 30_000)
+
+  it.each(['París', 'Murcia', 'Cartagena (España)'])(
+    'distingue %s mediante preguntas geográficas naturales',
+    targetName => {
+      const knowledge = knowledgeFor('place')
+      const target = knowledge.candidates.find(candidate => candidate.name === targetName)
+      expect(target).toBeDefined()
+      if (!target) return
+
+      let state = createGame('place', knowledge)
+      const askedTexts: string[] = []
+      while (state.status === 'playing') {
+        const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+        expect(question).toBeDefined()
+        if (!question) break
+        askedTexts.push(question.text)
+        const value = expectedValue(target, question)
+        state = answerCurrentQuestion(
+          state,
+          value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+          knowledge
+        )
+      }
+
+      expect(askedTexts.some(text => /España|Francia|península ibérica|capital de una comunidad|junto al mar/.test(text))).toBe(true)
+      expect(askedTexts.every(text => !/alfab|nombre está antes|nombre está después/i.test(text))).toBe(true)
+      expect(state.guessCandidateId).toBe(target.id)
+    },
+    30_000
+  )
+})
