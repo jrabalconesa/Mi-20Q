@@ -1,13 +1,24 @@
 import { compareCandidateNames } from '../engine/nameComparison'
 import type { Candidate, Category, GameKnowledge, Question } from '../types/game'
-import { coreCandidates } from './candidates'
 import { questions } from './questions'
 
-const categoryLoaders: Record<Category, () => Promise<{ generatedCandidates: Candidate[] }>> = {
-  animal: () => import('./generated/animal'),
-  object: () => import('./generated/object'),
-  place: () => import('./generated/place'),
-  person: () => import('./generated/person')
+const categoryLoaders: Record<Category, () => Promise<Candidate[]>> = {
+  animal: async () => {
+    const [core, generated] = await Promise.all([import('./core/animal'), import('./generated/animal')])
+    return [...core.coreCandidates, ...generated.generatedCandidates]
+  },
+  object: async () => {
+    const [core, generated] = await Promise.all([import('./core/object'), import('./generated/object')])
+    return [...core.coreCandidates, ...generated.generatedCandidates]
+  },
+  place: async () => {
+    const [core, generated] = await Promise.all([import('./core/place'), import('./generated/place')])
+    return [...core.coreCandidates, ...generated.generatedCandidates]
+  },
+  person: async () => {
+    const [core, generated] = await Promise.all([import('./core/person'), import('./generated/person')])
+    return [...core.coreCandidates, ...generated.generatedCandidates]
+  }
 }
 
 function normalizedName(candidate: Candidate): string {
@@ -39,11 +50,7 @@ export function createAlphabeticalQuestions(category: Category, candidates: Cand
 }
 
 export async function loadCategoryKnowledge(category: Category): Promise<GameKnowledge> {
-  const { generatedCandidates } = await categoryLoaders[category]()
-  const candidates = uniqueCandidates([
-    ...coreCandidates.filter(candidate => candidate.category === category),
-    ...generatedCandidates
-  ])
+  const candidates = uniqueCandidates(await categoryLoaders[category]())
   const categoryQuestions = questions.filter(question => question.categories.includes(category))
   return {
     candidates,

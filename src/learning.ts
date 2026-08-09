@@ -1,4 +1,3 @@
-import { coreCandidates as builtInCandidates } from './data/candidates'
 import { questions as builtInQuestions } from './data/questions'
 import type { Answer, Candidate, GameKnowledge, GameState, LearningRecord, Question } from './types/game'
 
@@ -70,7 +69,7 @@ export function createLearningRecord(
 
 export function buildKnowledge(
   records: LearningRecord[],
-  base: GameKnowledge = { candidates: builtInCandidates, questions: builtInQuestions }
+  base: GameKnowledge = { candidates: [], questions: builtInQuestions }
 ): GameKnowledge {
   const candidatesById = new Map<string, Candidate>(base.candidates.map(candidate => [
     candidate.id,

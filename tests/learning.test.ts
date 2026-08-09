@@ -1,10 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { buildKnowledge, createLearningRecord, readLearning } from '../src/learning'
 import { createGame } from '../src/engine/gameEngine'
+import { coreCandidates } from '../src/data/candidates'
+import { questions } from '../src/data/questions'
 
 describe('aprendizaje local', () => {
   it('convierte una derrota en un candidato y una pregunta diferenciadora', () => {
-    const base = createGame('animal')
+    const baseKnowledge = { candidates: coreCandidates, questions }
+    const base = createGame('animal', baseKnowledge)
     const lost = {
       ...base,
       status: 'lost' as const,
@@ -12,7 +15,7 @@ describe('aprendizaje local', () => {
       answers: { animal_eggs: 'yes' as const }
     }
     const record = createLearningRecord(lost, 'Ornitorrinco', '¿Es un mamífero que pone huevos', true, '2026-01-01')
-    const knowledge = buildKnowledge([record])
+    const knowledge = buildKnowledge([record], baseKnowledge)
     const learned = knowledge.candidates.find(candidate => candidate.id === record.id)
 
     expect(record.distinguishingQuestion).toBe('¿Es un mamífero que pone huevos?')

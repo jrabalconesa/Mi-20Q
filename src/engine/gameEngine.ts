@@ -1,11 +1,10 @@
-import { coreCandidates } from '../data/candidates'
 import { questions } from '../data/questions'
 import type { Answer, Category, GameKnowledge, GameState, Question } from '../types/game'
 import { rankCandidates } from './scoring'
 import { selectNextQuestion } from './selectNextQuestion'
 
 const MAX_QUESTIONS = 20
-const builtInKnowledge: GameKnowledge = { candidates: coreCandidates, questions }
+const builtInKnowledge: GameKnowledge = { candidates: [], questions }
 
 function questionMap(knowledge: GameKnowledge): Record<string, Question> {
   return Object.fromEntries(knowledge.questions.map(question => [question.id, question]))

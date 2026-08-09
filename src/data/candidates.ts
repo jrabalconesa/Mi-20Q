@@ -1,67 +1,12 @@
-import type { Candidate } from '../types/game'
+import { coreCandidates as animalCandidates } from './core/animal'
+import { coreCandidates as objectCandidates } from './core/object'
+import { coreCandidates as personCandidates } from './core/person'
+import { coreCandidates as placeCandidates } from './core/place'
 
-export const coreCandidates: Candidate[] = [
-  { id: 'elephant', name: 'Elefante', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:false, fourLegs:true, dangerous:true, fur:false, laysEggs:false, carnivore:false, farm:false, swims:true, insect:false } },
-  { id: 'dog', name: 'Perro', category: 'animal', attributes: { domestic:true, large:false, flies:false, water:false, fourLegs:true, dangerous:false, fur:true, laysEggs:false, carnivore:true, farm:false, swims:true, insect:false } },
-  { id: 'cat', name: 'Gato', category: 'animal', attributes: { domestic:true, large:false, flies:false, water:false, fourLegs:true, dangerous:false, fur:true, laysEggs:false, carnivore:true, farm:false, swims:false, insect:false } },
-  { id: 'dolphin', name: 'Delfín', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:true, fourLegs:false, dangerous:false, fur:false, laysEggs:false, carnivore:true, farm:false, swims:true, insect:false } },
-  { id: 'eagle', name: 'Águila', category: 'animal', attributes: { domestic:false, large:false, flies:true, water:false, fourLegs:false, dangerous:true, fur:false, laysEggs:true, carnivore:true, farm:false, swims:false, insect:false, nocturnal:false } },
-  { id: 'shark', name: 'Tiburón', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:true, fourLegs:false, dangerous:true, fur:false, laysEggs:false, carnivore:true, farm:false, swims:true, insect:false } },
-  { id: 'horse', name: 'Caballo', category: 'animal', attributes: { domestic:true, large:true, flies:false, water:false, fourLegs:true, dangerous:false, fur:true, laysEggs:false, carnivore:false, farm:true, swims:false, insect:false, ridden:true } },
-  { id: 'lion', name: 'León', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:false, fourLegs:true, dangerous:true, fur:true, laysEggs:false, carnivore:true, farm:false, swims:false, insect:false } },
-  { id: 'cow', name: 'Vaca', category: 'animal', attributes: { domestic:true, large:true, flies:false, water:false, fourLegs:true, dangerous:false, fur:true, laysEggs:false, carnivore:false, farm:true, swims:false, insect:false, ridden:false } },
-  { id: 'chicken', name: 'Gallina', category: 'animal', attributes: { domestic:true, large:false, flies:false, water:false, fourLegs:false, dangerous:false, fur:false, laysEggs:true, carnivore:false, farm:true, swims:false, insect:false } },
-  { id: 'penguin', name: 'Pingüino', category: 'animal', attributes: { domestic:false, large:false, flies:false, water:false, fourLegs:false, dangerous:false, fur:false, laysEggs:true, carnivore:true, farm:false, swims:true, insect:false } },
-  { id: 'crocodile', name: 'Cocodrilo', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:false, fourLegs:true, dangerous:true, fur:false, laysEggs:true, carnivore:true, farm:false, swims:true, insect:false } },
-  { id: 'bee', name: 'Abeja', category: 'animal', attributes: { domestic:false, large:false, flies:true, water:false, fourLegs:false, dangerous:false, fur:false, laysEggs:true, carnivore:false, farm:false, swims:false, insect:true, colorfulWings:false } },
-  { id: 'butterfly', name: 'Mariposa', category: 'animal', attributes: { domestic:false, large:false, flies:true, water:false, fourLegs:false, dangerous:false, fur:false, laysEggs:true, carnivore:false, farm:false, swims:false, insect:true, colorfulWings:true } },
-  { id: 'bear', name: 'Oso', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:false, fourLegs:true, dangerous:true, fur:true, laysEggs:false, carnivore:false, farm:false, swims:true, insect:false } },
-  { id: 'rabbit', name: 'Conejo', category: 'animal', attributes: { domestic:true, large:false, flies:false, water:false, fourLegs:true, dangerous:false, fur:true, laysEggs:false, carnivore:false, farm:true, swims:false, insect:false } },
-  { id: 'snake', name: 'Serpiente', category: 'animal', attributes: { domestic:false, large:false, flies:false, water:false, fourLegs:false, dangerous:true, fur:false, laysEggs:true, carnivore:true, farm:false, swims:false, insect:false } },
-  { id: 'frog', name: 'Rana', category: 'animal', attributes: { domestic:false, large:false, flies:false, water:false, fourLegs:true, dangerous:false, fur:false, laysEggs:true, carnivore:true, farm:false, swims:true, insect:false } },
-  { id: 'owl', name: 'Búho', category: 'animal', attributes: { domestic:false, large:false, flies:true, water:false, fourLegs:false, dangerous:true, fur:false, laysEggs:true, carnivore:true, farm:false, swims:false, insect:false, nocturnal:true } },
-  { id: 'whale', name: 'Ballena', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:true, fourLegs:false, dangerous:false, fur:false, laysEggs:false, carnivore:false, farm:false, swims:true, insect:false } },
-
-  { id: 'phone', name: 'Teléfono móvil', category: 'object', attributes: { usedDaily:true, electronic:true, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:true, furniture:false, tool:false, outdoors:false, computer:false } },
-  { id: 'laptop', name: 'Ordenador portátil', category: 'object', attributes: { usedDaily:true, electronic:true, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:true, furniture:false, tool:false, outdoors:false, computer:true } },
-  { id: 'chair', name: 'Silla', category: 'object', attributes: { usedDaily:true, electronic:false, portable:false, indoors:true, large:true, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:true, tool:false, outdoors:false, sitOn:true } },
-  { id: 'book', name: 'Libro', category: 'object', attributes: { usedDaily:true, electronic:false, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:false, tool:false, outdoors:false } },
-  { id: 'fridge', name: 'Frigorífico', category: 'object', attributes: { usedDaily:true, electronic:true, portable:false, indoors:true, large:true, kitchen:true, vehicle:false, wearable:false, screen:false, furniture:false, tool:false, outdoors:false } },
-  { id: 'umbrella', name: 'Paraguas', category: 'object', attributes: { usedDaily:false, electronic:false, portable:true, indoors:false, large:false, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:false, tool:false, outdoors:true } },
-  { id: 'television', name: 'Televisor', category: 'object', attributes: { usedDaily:true, electronic:true, portable:false, indoors:true, large:true, kitchen:false, vehicle:false, wearable:false, screen:true, furniture:false, tool:false, outdoors:false } },
-  { id: 'watch', name: 'Reloj de pulsera', category: 'object', attributes: { usedDaily:true, electronic:false, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:true, screen:false, furniture:false, tool:false, outdoors:false, tellsTime:true } },
-  { id: 'bicycle', name: 'Bicicleta', category: 'object', attributes: { usedDaily:false, electronic:false, portable:false, indoors:false, large:true, kitchen:false, vehicle:true, wearable:false, screen:false, furniture:false, tool:false, outdoors:true } },
-  { id: 'car', name: 'Coche', category: 'object', attributes: { usedDaily:true, electronic:true, portable:false, indoors:false, large:true, kitchen:false, vehicle:true, wearable:false, screen:false, furniture:false, tool:false, outdoors:true } },
-  { id: 'hammer', name: 'Martillo', category: 'object', attributes: { usedDaily:false, electronic:false, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:false, tool:true, outdoors:false } },
-  { id: 'drill', name: 'Taladro', category: 'object', attributes: { usedDaily:false, electronic:true, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:false, tool:true, outdoors:false } },
-  { id: 'table', name: 'Mesa', category: 'object', attributes: { usedDaily:true, electronic:false, portable:false, indoors:true, large:true, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:true, tool:false, outdoors:false, sitOn:false } },
-  { id: 'oven', name: 'Horno', category: 'object', attributes: { usedDaily:false, electronic:true, portable:false, indoors:true, large:true, kitchen:true, vehicle:false, wearable:false, screen:false, furniture:false, tool:false, outdoors:false } },
-  { id: 'pan', name: 'Sartén', category: 'object', attributes: { usedDaily:true, electronic:false, portable:true, indoors:true, large:false, kitchen:true, vehicle:false, wearable:false, screen:false, furniture:false, tool:false, outdoors:false } },
-  { id: 'glasses', name: 'Gafas', category: 'object', attributes: { usedDaily:true, electronic:false, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:true, screen:false, furniture:false, tool:false, outdoors:false, tellsTime:false } },
-  { id: 'camera', name: 'Cámara de fotos', category: 'object', attributes: { usedDaily:false, electronic:true, portable:true, indoors:false, large:false, kitchen:false, vehicle:false, wearable:false, screen:true, furniture:false, tool:false, outdoors:true } },
-  { id: 'tent', name: 'Tienda de campaña', category: 'object', attributes: { usedDaily:false, electronic:false, portable:false, indoors:false, large:true, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:false, tool:false, outdoors:true } },
-  { id: 'motorcycle', name: 'Motocicleta', category: 'object', attributes: { usedDaily:false, electronic:true, portable:false, indoors:false, large:true, kitchen:false, vehicle:true, wearable:false, screen:false, furniture:false, tool:false, outdoors:true } },
-  { id: 'headphones', name: 'Auriculares', category: 'object', attributes: { usedDaily:true, electronic:true, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:true, screen:false, furniture:false, tool:false, outdoors:false } },
-
-  { id: 'beach', name: 'Playa', category: 'place', attributes: { natural:true, urban:false, famous:false, europe:false, coastal:true, mountain:false, desert:false, building:false, americas:false, asia:false } },
-  { id: 'forest', name: 'Bosque', category: 'place', attributes: { natural:true, urban:false, famous:false, europe:false, coastal:false, mountain:false, desert:false, building:false, americas:false, asia:false } },
-  { id: 'paris', name: 'París', category: 'place', attributes: { natural:false, urban:true, famous:true, europe:true, coastal:false, mountain:false, desert:false, building:false, americas:false, asia:false, ancientCity:false } },
-  { id: 'rome', name: 'Roma', category: 'place', attributes: { natural:false, urban:true, famous:true, europe:true, coastal:false, mountain:false, desert:false, building:false, americas:false, asia:false, ancientCity:true } },
-  { id: 'sahara', name: 'Desierto del Sáhara', category: 'place', attributes: { natural:true, urban:false, famous:true, europe:false, coastal:false, mountain:false, desert:true, building:false, americas:false, asia:false } },
-  { id: 'everest', name: 'Monte Everest', category: 'place', attributes: { natural:true, urban:false, famous:true, europe:false, coastal:false, mountain:true, desert:false, building:false, americas:false, asia:true } },
-  { id: 'new_york', name: 'Nueva York', category: 'place', attributes: { natural:false, urban:true, famous:true, europe:false, coastal:true, mountain:false, desert:false, building:false, americas:true, asia:false } },
-  { id: 'machu_picchu', name: 'Machu Picchu', category: 'place', attributes: { natural:false, urban:false, famous:true, europe:false, coastal:false, mountain:true, desert:false, building:true, americas:true, asia:false } },
-  { id: 'taj_mahal', name: 'Taj Mahal', category: 'place', attributes: { natural:false, urban:true, famous:true, europe:false, coastal:false, mountain:false, desert:false, building:true, americas:false, asia:true } },
-  { id: 'grand_canyon', name: 'Gran Cañón', category: 'place', attributes: { natural:true, urban:false, famous:true, europe:false, coastal:false, mountain:false, desert:true, building:false, americas:true, asia:false } },
-
-  { id: 'einstein', name: 'Albert Einstein', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:false, sports:false, scientist:true, politician:false, writer:false, woman:false, europe:true, bornBefore1900:true } },
-  { id: 'picasso', name: 'Pablo Picasso', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:true, sports:false, scientist:false, politician:false, writer:false, woman:false, europe:true, bornBefore1900:true } },
-  { id: 'messi', name: 'Lionel Messi', category: 'person', attributes: { realPerson:true, living:true, historical:false, artist:false, sports:true, scientist:false, politician:false, writer:false, woman:false, europe:false, bornBefore1900:false } },
-  { id: 'frida', name: 'Frida Kahlo', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:true, sports:false, scientist:false, politician:false, writer:false, woman:true, europe:false, bornBefore1900:true } },
-  { id: 'shakespeare', name: 'William Shakespeare', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:true, sports:false, scientist:false, politician:false, writer:true, woman:false, europe:true, bornBefore1900:true } },
-  { id: 'curie', name: 'Marie Curie', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:false, sports:false, scientist:true, politician:false, writer:false, woman:true, europe:true, bornBefore1900:true } },
-  { id: 'mandela', name: 'Nelson Mandela', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:false, sports:false, scientist:false, politician:true, writer:false, woman:false, europe:false, bornBefore1900:true } },
-  { id: 'serena', name: 'Serena Williams', category: 'person', attributes: { realPerson:true, living:true, historical:false, artist:false, sports:true, scientist:false, politician:false, writer:false, woman:true, europe:false, bornBefore1900:false } },
-  { id: 'rowling', name: 'J. K. Rowling', category: 'person', attributes: { realPerson:true, living:true, historical:false, artist:true, sports:false, scientist:false, politician:false, writer:true, woman:true, europe:true, bornBefore1900:false } },
-  { id: 'cleopatra', name: 'Cleopatra', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:false, sports:false, scientist:false, politician:true, writer:false, woman:true, europe:false, bornBefore1900:true } }
+// Agregado para pruebas y herramientas de generación; la aplicación carga cada módulo bajo demanda.
+export const coreCandidates = [
+  ...animalCandidates,
+  ...objectCandidates,
+  ...placeCandidates,
+  ...personCandidates
 ]

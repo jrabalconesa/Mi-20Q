@@ -15,38 +15,48 @@ beforeAll(async () => {
   candidates = loaded.flatMap(knowledge => knowledge.candidates)
 })
 
+function knowledgeFor(category: Category): GameKnowledge {
+  const knowledge = knowledgeByCategory.get(category)
+  if (!knowledge) throw new Error(`No se cargó la categoría ${category}`)
+  return knowledge
+}
+
 describe('gameEngine', () => {
   it('crea una partida con una pregunta inicial', () => {
-    const state = createGame('animal')
+    const state = createGame('animal', knowledgeFor('animal'))
     expect(state.status).toBe('playing')
     expect(state.currentQuestionId).not.toBeNull()
   })
 
   it('registra una respuesta y avanza el contador', () => {
-    const state = createGame('animal')
-    const next = answerCurrentQuestion(state, 'yes')
+    const knowledge = knowledgeFor('animal')
+    const state = createGame('animal', knowledge)
+    const next = answerCurrentQuestion(state, 'yes', knowledge)
     expect(next.questionCount).toBe(1)
     expect(next.askedQuestionIds).toHaveLength(1)
   })
 
   it('no repite la pregunta respondida', () => {
-    const state = createGame('animal')
+    const knowledge = knowledgeFor('animal')
+    const state = createGame('animal', knowledge)
     const answeredId = state.currentQuestionId
-    const next = answerCurrentQuestion(state, 'yes')
+    const next = answerCurrentQuestion(state, 'yes', knowledge)
     expect(next.currentQuestionId).not.toBe(answeredId)
   })
 
   it('continúa preguntando tras una suposición temprana fallida', () => {
-    const initial = createGame('animal')
+    const knowledge = knowledgeFor('animal')
+    const initial = createGame('animal', knowledge)
     const guessing = { ...initial, status: 'guessing' as const, guessCandidateId: initial.rankedCandidates[0].id, questionCount: 6 }
-    const next = resolveGuess(guessing, false)
+    const next = resolveGuess(guessing, false, knowledge)
     expect(next.status).toBe('playing')
     expect(next.excludedCandidateIds).toContain(guessing.guessCandidateId)
     expect(next.currentQuestionId).not.toBeNull()
   })
 
   it.each<Category>(['animal', 'object', 'place', 'person'])('no intenta adivinar %s después de una sola respuesta', category => {
-    const state = answerCurrentQuestion(createGame(category), 'yes')
+    const knowledge = knowledgeFor(category)
+    const state = answerCurrentQuestion(createGame(category, knowledge), 'yes', knowledge)
     expect(state.status).toBe('playing')
     expect(state.questionCount).toBe(1)
   })
