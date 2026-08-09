@@ -1,11 +1,14 @@
-import { compareCandidateNames } from '../engine/nameComparison'
-import type { Candidate, Category, GameKnowledge, Question } from '../types/game'
+import type { Candidate, Category, GameKnowledge } from '../types/game'
 import { questions } from './questions'
 
 const categoryLoaders: Record<Category, () => Promise<Candidate[]>> = {
   animal: async () => {
-    const [core, generated] = await Promise.all([import('./core/animal'), import('./generated/animal')])
-    return [...core.coreCandidates, ...generated.generatedCandidates]
+    const [core, generated, knowledge] = await Promise.all([
+      import('./core/animal'),
+      import('./generated/animal'),
+      import('./animalKnowledge')
+    ])
+    return [...core.coreCandidates, ...generated.generatedCandidates].map(knowledge.enrichAnimalCandidate)
   },
   object: async () => {
     const [core, generated] = await Promise.all([import('./core/object'), import('./generated/object')])
@@ -35,26 +38,12 @@ function uniqueCandidates(candidates: Candidate[]): Candidate[] {
   })
 }
 
-export function createAlphabeticalQuestions(category: Category, candidates: Candidate[]): Question[] {
-  return [...candidates]
-    .sort((left, right) => compareCandidateNames(left.name, right.name))
-    .slice(0, -1)
-    .map(candidate => ({
-      id: `${category}_name_before_${candidate.id}`,
-      text: `Al ordenar alfabéticamente, ¿su nombre va antes de «${candidate.name}» o es «${candidate.name}»?`,
-      attribute: '__name_before__',
-      categories: [category],
-      kind: 'nameBefore',
-      pivotName: candidate.name
-    }))
-}
-
 export async function loadCategoryKnowledge(category: Category): Promise<GameKnowledge> {
   const candidates = uniqueCandidates(await categoryLoaders[category]())
   const categoryQuestions = questions.filter(question => question.categories.includes(category))
   return {
     candidates,
-    questions: [...categoryQuestions, ...createAlphabeticalQuestions(category, candidates)]
+    questions: categoryQuestions
   }
 }
 

@@ -1,5 +1,4 @@
 import type { Question, RankedCandidate } from '../types/game'
-import { compareCandidateNames } from './nameComparison'
 import { expectedValue } from './scoring'
 
 function asProbability(value: boolean | number | undefined): number {
@@ -19,9 +18,7 @@ export function selectNextQuestion(
   askedQuestionIds: string[]
 ): Question | null {
   const available = questions.filter(q => !askedQuestionIds.includes(q.id))
-  const semanticAvailable = available.filter(question => question.kind !== 'nameBefore')
-  const alphabeticalAvailable = available.filter(question => question.kind === 'nameBefore')
-  const scriptedOpening = semanticAvailable
+  const scriptedOpening = available
     .filter(question => question.openingOrder === askedQuestionIds.length + 1)
     .sort((left, right) => (left.openingOrder ?? 0) - (right.openingOrder ?? 0))[0]
   const bestScore = rankedCandidates[0]?.score
@@ -35,23 +32,9 @@ export function selectNextQuestion(
   if (!available.length || !top.length) return null
   if (scriptedOpening) return scriptedOpening
 
-  if (askedQuestionIds.length >= 7 && alphabeticalAvailable.length && top.length >= 2) {
-    const sortedCandidates = [...top].sort((left, right) => compareCandidateNames(left.name, right.name))
-    const halfPosterior = sortedCandidates.reduce((total, candidate) => total + candidate.score, 0) / 2
-    let cumulativePosterior = 0
-    const pivotName = sortedCandidates.find(candidate => {
-      cumulativePosterior += candidate.score
-      return cumulativePosterior >= halfPosterior
-    })?.name
-    const alphabeticalQuestion = alphabeticalAvailable.find(question => question.pivotName === pivotName)
-    if (alphabeticalQuestion) return alphabeticalQuestion
-  }
-
-  const questionPool = semanticAvailable.length ? semanticAvailable : alphabeticalAvailable
-
   const totalPosterior = top.reduce((total, candidate) => total + candidate.score, 0) || 1
 
-  return questionPool
+  return available
     .map(question => {
       const rawValues = top.map(candidate => expectedValue(candidate, question))
       const values = rawValues.map(asProbability)
@@ -73,7 +56,11 @@ export function selectNextQuestion(
       const confirmationBonus = askedQuestionIds.length >= 4 && askedQuestionIds.length % 4 === 0
         ? Math.abs(leaderValue - othersValue) * 0.18
         : 0
-      return { question, usefulness: informationGain + confirmationBonus }
+      const knownMass = rawValues.reduce<number>(
+        (total, value, index) => total + (value === undefined ? 0 : top[index].score),
+        0
+      ) / totalPosterior
+      return { question, usefulness: (informationGain + confirmationBonus) * knownMass * (question.importance ?? 1) }
     })
     .sort((a, b) => b.usefulness - a.usefulness)[0]?.question ?? null
 }

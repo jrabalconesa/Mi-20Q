@@ -17,6 +17,7 @@ export interface Question {
   kind?: 'attribute' | 'nameBefore'
   pivotName?: string
   openingOrder?: number
+  importance?: number
 }
 
 export interface RankedCandidate extends Candidate {

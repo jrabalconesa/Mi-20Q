@@ -18,13 +18,15 @@
 2. Sí, No y A veces se convierten en verosimilitudes con un suelo de ruido; «No lo sé» no altera el posterior.
 3. Una pregunta se valora por información mutua: entropía de su respuesta menos la ambigüedad esperada de sus celdas candidato-pregunta.
 4. Periódicamente se añade un bono a preguntas que separan al líder del resto.
-5. Los cortes alfabéticos usan la mediana de masa posterior y actúan como respaldo para conservar capacidad de identificación cuando faltan atributos semánticos.
+5. Las preguntas visibles deben describir propiedades reales del dominio. No se emplean cortes alfabéticos: cuando faltan atributos, el motor prefiere reconocer la incertidumbre y aprender antes que romper la experiencia con una búsqueda por nombre.
 6. Una partida acertada actualiza localmente las celdas observadas mediante una media limitada y suavizada con tres observaciones previas. Una derrota puede añadir un candidato y una pregunta diferenciadora.
 7. El catálogo se divide por categoría y se carga bajo demanda; la pantalla inicial no descarga ni revela la lista completa.
 
 ## Diferencias deliberadas
 
 La aplicación conserva Animal, Objeto, Lugar y Persona/personaje porque el catálogo disponible está organizado en esos cuatro dominios. Cambiar únicamente las etiquetas a Animal/Vegetal/Mineral/Otro produciría clasificaciones falsas y reduciría el porcentaje de acierto. La primera pregunta interna de animales sí sigue el ejemplo documentado de «encontrarlo en una granja»; los demás dominios comienzan con un filtro amplio equivalente.
+
+En animales, los filtros taxonómicos y observables se ponderan por relevancia. Por ejemplo, un posible guepardo se separa mediante mamífero, felino, dieta carnívora, manchas, comparación de tamaño y velocidad, sin preguntar por su posición alfabética.
 
 ## Enlaces
 

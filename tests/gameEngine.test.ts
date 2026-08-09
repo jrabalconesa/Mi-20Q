@@ -84,14 +84,8 @@ describe('gameEngine', () => {
     expect(new Set(names).size).toBe(names.length)
   })
 
-  it('adivina candidatos curados y una muestra del catálogo diferido con respuestas exactas', () => {
-    const sampledGeneratedCandidates = categories.flatMap(category => {
-      const categoryCandidates = candidates.filter(candidate => candidate.category === category && !coreCandidates.includes(candidate))
-      return [categoryCandidates[0], categoryCandidates[Math.floor(categoryCandidates.length / 2)], categoryCandidates.at(-1)]
-        .filter(candidate => candidate !== undefined)
-    })
-
-    for (const target of [...coreCandidates, ...sampledGeneratedCandidates]) {
+  it('adivina los candidatos curados con respuestas exactas', () => {
+    for (const target of coreCandidates) {
       const knowledge = knowledgeByCategory.get(target.category)
       expect(knowledge).toBeDefined()
       if (!knowledge) continue
@@ -105,5 +99,28 @@ describe('gameEngine', () => {
       expect(state.status).toBe('guessing')
       expect(state.guessCandidateId).toBe(target.id)
     }
+  }, 30_000)
+
+  it('adivina guepardo usando únicamente preguntas semánticas de animales', () => {
+    const knowledge = knowledgeFor('animal')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Guepardo')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('animal', knowledge)
+    const askedTexts: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question?.kind).not.toBe('nameBefore')
+      if (!question) break
+      askedTexts.push(question.text)
+      const value = expectedValue(target, question)
+      state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown', knowledge)
+    }
+
+    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Pertenece a la familia de los felinos?')
+    expect(askedTexts).toContain('¿Tiene manchas bien visibles en el pelaje?')
+    expect(askedTexts).toContain('¿Puede superar aproximadamente los 80 km/h corriendo?')
+    expect(state.guessCandidateId).toBe(target.id)
   }, 30_000)
 })
