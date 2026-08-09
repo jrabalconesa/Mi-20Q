@@ -1,6 +1,4 @@
 import type { Category, Question } from '../types/game'
-import { compareCandidateNames } from '../engine/nameComparison'
-import { candidates } from './candidates'
 
 const animal: Category[] = ['animal']
 const object: Category[] = ['object']
@@ -17,14 +15,14 @@ const semanticQuestions: Question[] = [
   { id: 'animal_fur', text: '¿Tiene pelo o pelaje?', attribute: 'fur', categories: animal },
   { id: 'animal_eggs', text: '¿Pone huevos?', attribute: 'laysEggs', categories: animal },
   { id: 'animal_carnivore', text: '¿Es principalmente carnívoro?', attribute: 'carnivore', categories: animal },
-  { id: 'animal_farm', text: '¿Es habitual encontrarlo en una granja?', attribute: 'farm', categories: animal },
+  { id: 'animal_farm', text: '¿Lo encontrarías normalmente en una granja?', attribute: 'farm', categories: animal, openingOrder: 1 },
   { id: 'animal_swims', text: '¿Es un buen nadador?', attribute: 'swims', categories: animal },
   { id: 'animal_insect', text: '¿Es un insecto?', attribute: 'insect', categories: animal },
   { id: 'animal_nocturnal', text: '¿Es principalmente nocturno?', attribute: 'nocturnal', categories: animal },
   { id: 'animal_colorful_wings', text: '¿Destaca por tener alas de colores?', attribute: 'colorfulWings', categories: animal },
   { id: 'animal_ridden', text: '¿Se utiliza habitualmente para montar?', attribute: 'ridden', categories: animal },
 
-  { id: 'object_daily', text: '¿Se usa habitualmente a diario?', attribute: 'usedDaily', categories: object },
+  { id: 'object_daily', text: '¿Se usa habitualmente a diario?', attribute: 'usedDaily', categories: object, openingOrder: 1 },
   { id: 'object_electronic', text: '¿Es electrónico?', attribute: 'electronic', categories: object },
   { id: 'object_portable', text: '¿Se puede transportar fácilmente con una mano?', attribute: 'portable', categories: object },
   { id: 'object_indoors', text: '¿Se encuentra normalmente en interiores?', attribute: 'indoors', categories: object },
@@ -40,7 +38,7 @@ const semanticQuestions: Question[] = [
   { id: 'object_sit', text: '¿Está diseñado para sentarse encima?', attribute: 'sitOn', categories: object },
   { id: 'object_time', text: '¿Sirve principalmente para saber la hora?', attribute: 'tellsTime', categories: object },
 
-  { id: 'place_natural', text: '¿Es un lugar principalmente natural?', attribute: 'natural', categories: place },
+  { id: 'place_natural', text: '¿Es un lugar principalmente natural?', attribute: 'natural', categories: place, openingOrder: 1 },
   { id: 'place_urban', text: '¿Es una ciudad o está dentro de una?', attribute: 'urban', categories: place },
   { id: 'place_famous', text: '¿Es conocido internacionalmente?', attribute: 'famous', categories: place },
   { id: 'place_europe', text: '¿Está en Europa?', attribute: 'europe', categories: place },
@@ -52,7 +50,7 @@ const semanticQuestions: Question[] = [
   { id: 'place_asia', text: '¿Está en Asia?', attribute: 'asia', categories: place },
   { id: 'place_ancient_city', text: '¿Es especialmente conocido por su legado de la Antigüedad?', attribute: 'ancientCity', categories: place },
 
-  { id: 'person_real', text: '¿Es una persona real?', attribute: 'realPerson', categories: person },
+  { id: 'person_real', text: '¿Es una persona real?', attribute: 'realPerson', categories: person, openingOrder: 1 },
   { id: 'person_living', text: '¿Sigue con vida?', attribute: 'living', categories: person },
   { id: 'person_historical', text: '¿Es principalmente una figura histórica?', attribute: 'historical', categories: person },
   { id: 'person_artist', text: '¿Se dedica o se dedicó al arte?', attribute: 'artist', categories: person },
@@ -98,25 +96,7 @@ const expandedSemanticQuestions: Question[] = [
   { id: 'person_after_1950', text: '¿Nació en 1950 o después?', attribute: 'bornAfter1950', categories: person }
 ]
 
-const categoryIds: Category[] = ['animal', 'object', 'place', 'person']
-
-const alphabeticalQuestions: Question[] = categoryIds.flatMap(category =>
-  candidates
-    .filter(candidate => candidate.category === category)
-    .sort((left, right) => compareCandidateNames(left.name, right.name))
-    .slice(0, -1)
-    .map(candidate => ({
-      id: `${category}_name_before_${candidate.id}`,
-      text: `Al ordenar alfabéticamente, ¿su nombre va antes de «${candidate.name}» o es «${candidate.name}»?`,
-      attribute: '__name_before__',
-      categories: [category],
-      kind: 'nameBefore' as const,
-      pivotName: candidate.name
-    }))
-)
-
 export const questions: Question[] = [
   ...semanticQuestions,
-  ...expandedSemanticQuestions,
-  ...alphabeticalQuestions
+  ...expandedSemanticQuestions
 ]

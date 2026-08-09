@@ -274,36 +274,26 @@ def person_rows(pantheon_bz2: Path) -> list[list[Any]]:
 
 
 def emit_typescript(output: Path, rows: dict[str, list[list[Any]]]) -> None:
-    lines = [
-        "// Archivo generado por scripts/generate_catalog.py. No editar a mano.",
-        "// Fuentes: BirdNET+ Taxonomy, Princeton WordNet/OMW, GeoNames y Pantheon 1.0.",
-        "import type { AttributeValue, Candidate, Category } from '../types/game'",
-        "",
-        "type CatalogRow = [id: string, name: string, attributes: Record<string, AttributeValue>]",
-        "",
-    ]
-    variable_names: list[tuple[str, str]] = []
+    output.mkdir(parents=True, exist_ok=True)
     for category, category_rows in rows.items():
-        variable = f"{category}Rows"
-        variable_names.append((category, variable))
-        lines.append(f"const {variable}: CatalogRow[] = [")
+        lines = [
+            "// Archivo generado por scripts/generate_catalog.py. No editar a mano.",
+            "// Fuentes: BirdNET+ Taxonomy, Princeton WordNet/OMW, GeoNames y Pantheon 1.0.",
+            "import type { AttributeValue, Candidate } from '../../types/game'",
+            "",
+            "type CatalogRow = [id: string, name: string, attributes: Record<string, AttributeValue>]",
+            "",
+            "const rows: CatalogRow[] = [",
+        ]
         lines.extend(f"  {json.dumps(row, ensure_ascii=False, separators=(',', ':'))}," for row in category_rows)
-        lines.append("]")
-        lines.append("")
-
-    lines.extend([
-        "function asCandidates(category: Category, rows: CatalogRow[]): Candidate[] {",
-        "  return rows.map(([id, name, attributes]) => ({ id, name, category, attributes }))",
-        "}",
-        "",
-        "export const generatedCandidates: Candidate[] = [",
-    ])
-    lines.extend(f"  ...asCandidates('{category}', {variable})," for category, variable in variable_names)
-    lines.extend([
-        "]",
-        "",
-    ])
-    output.write_text("\n".join(lines), encoding="utf-8", newline="\n")
+        lines.extend([
+            "]",
+            "",
+            "export const generatedCandidates: Candidate[] = rows.map(([id, name, attributes]) => ({",
+            f"  id, name, category: '{category}', attributes",
+            "}))",
+        ])
+        (output / f"{category}.ts").write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
 
 def main() -> None:
@@ -312,7 +302,7 @@ def main() -> None:
     parser.add_argument("--birdnet", type=Path, required=True)
     parser.add_argument("--cities", type=Path, required=True)
     parser.add_argument("--countries", type=Path, required=True)
-    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--out", type=Path, required=True, help="Directorio src/data/generated de salida")
     args = parser.parse_args()
 
     rows = {

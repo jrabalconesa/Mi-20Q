@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { AnswerButtons } from './components/AnswerButtons'
-import { candidates } from './data/candidates'
+import { HowToPlay } from './components/HowToPlay'
 import { getCandidateName, getQuestion } from './engine/gameEngine'
 import { useAppUpdate } from './hooks/useAppUpdate'
 import { useGame } from './hooks/useGame'
@@ -8,22 +9,42 @@ import type { Category } from './types/game'
 import './styles.css'
 
 const categories: Array<{ id: Category; label: string }> = [
-  { id: 'animal', label: 'Animales' },
-  { id: 'object', label: 'Objetos' },
-  { id: 'place', label: 'Lugares' },
-  { id: 'person', label: 'Personas' }
+  { id: 'animal', label: 'Animal' },
+  { id: 'object', label: 'Objeto' },
+  { id: 'place', label: 'Lugar' },
+  { id: 'person', label: 'Persona o personaje' }
 ]
 
-const APP_VERSION = '0.5.0'
+const APP_VERSION = '0.7.0'
 const brandLogoUrl = `${import.meta.env.BASE_URL}brand/20q-logo.png`
 
 function App() {
   const game = useGame()
   const state = game.state
   const [selectedCategory, setSelectedCategory] = useState<Category>('animal')
+  const [thoughtName, setThoughtName] = useState('')
+  const [distinguishingQuestion, setDistinguishingQuestion] = useState('')
+  const [learnedAnswer, setLearnedAnswer] = useState(true)
+  const [savedLearning, setSavedLearning] = useState(false)
   const updateAvailable = useAppUpdate()
-  const knownCandidates = candidates.filter(candidate => candidate.category === selectedCategory)
   const activeCategoryLabel = categories.find(category => category.id === state?.category)?.label
+
+  const clearLearningForm = () => {
+    setThoughtName('')
+    setDistinguishingQuestion('')
+    setLearnedAnswer(true)
+    setSavedLearning(false)
+  }
+
+  const startGame = () => {
+    clearLearningForm()
+    game.start(selectedCategory)
+  }
+
+  const resetGame = () => {
+    clearLearningForm()
+    game.reset()
+  }
 
   const updateNotice = updateAvailable && (
     <aside className="update-notice" role="status">
@@ -43,7 +64,7 @@ function App() {
             </h1>
             <div className="hero-copy">
               <span className="badge">Juego de deducción</span>
-              <p className="hero-lead">Piensa en algo. Intentaré adivinarlo haciendo como máximo veinte preguntas.</p>
+              <p className="hero-lead">Piensa en un animal, objeto, lugar o persona. Intentaré descubrirlo en veinte preguntas.</p>
             </div>
           </div>
           <fieldset className="category-picker">
@@ -63,16 +84,11 @@ function App() {
             </div>
           </fieldset>
           <div className="hero-actions">
-            <p className="knowledge-note">
-              Ya conozco <strong>{knownCandidates.length}</strong> opciones de esta categoría.
-            </p>
-            <details className="known-candidates" key="known-candidates">
-              <summary>Explorar el catálogo</summary>
-              <ul>
-                {knownCandidates.map(candidate => <li key={candidate.id}>{candidate.name}</li>)}
-              </ul>
-            </details>
-            <button className="start-button" onClick={() => game.start(selectedCategory)}>Comenzar partida</button>
+            <p className="knowledge-note">Elige la opción más cercana. Después responde con sinceridad, aunque alguna respuesta sea «A veces» o «No lo sé».</p>
+            <button className="start-button" disabled={game.loading} onClick={startGame}>
+              {game.loading ? 'Preparando preguntas…' : 'Comenzar partida'}
+            </button>
+            <HowToPlay />
             {game.stats.games > 0 && (
               <section className="stats" aria-label="Estadísticas de juego">
                 <div><strong>{game.stats.games}</strong><span>Partidas</span></div>
@@ -87,8 +103,15 @@ function App() {
     )
   }
 
-  const question = getQuestion(state.currentQuestionId)
-  const guess = getCandidateName(state.guessCandidateId)
+  const question = getQuestion(state.currentQuestionId, game.knowledge)
+  const guess = getCandidateName(state.guessCandidateId, game.knowledge)
+
+  const saveLearning = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!thoughtName.trim() || !distinguishingQuestion.trim()) return
+    game.learn(thoughtName, distinguishingQuestion, learnedAnswer)
+    setSavedLearning(true)
+  }
 
   return (
     <main className="shell">
@@ -99,7 +122,7 @@ function App() {
           <div className="game-meta">
             <div className="topline">
               <span>{activeCategoryLabel} · {state.status === 'playing' ? `Pregunta ${Math.min(state.questionCount + 1, 20)} de 20` : `${state.questionCount} preguntas`}</span>
-              <button className="link-button" onClick={game.reset}>Salir</button>
+              <button className="link-button" onClick={resetGame}>Salir</button>
             </div>
 
             <div className="progress" aria-hidden="true">
@@ -121,7 +144,7 @@ function App() {
             <h2>¿Estabas pensando en {guess}?</h2>
             <div className="answer-grid two">
               <button onClick={() => game.resolve(true)}>Sí, acertaste</button>
-              <button onClick={() => game.resolve(false)}>No</button>
+              <button onClick={() => game.resolve(false)}>{state.questionCount < 20 ? 'No, sigue preguntando' : 'No'}</button>
             </div>
           </>
         )}
@@ -129,21 +152,48 @@ function App() {
         {(state.status === 'won' || state.status === 'lost') && (
           <>
             <p className="eyebrow">{state.status === 'won' ? '¡Acerté!' : 'No lo conseguí'}</p>
-            <h2>{state.status === 'won' ? `Era ${guess}.` : 'Necesito seguir aprendiendo.'}</h2>
+            <h2>{state.status === 'won' ? `Era ${guess}.` : 'Ayúdame a aprender.'}</h2>
             <p>He utilizado {state.questionCount} preguntas.</p>
-            {state.status === 'lost' && <p>Esta versión solo puede adivinar las opciones indicadas al comenzar.</p>}
-            <button onClick={game.reset}>Jugar otra vez</button>
+            {state.status === 'lost' && !savedLearning && (
+              <form className="learning-form" onSubmit={saveLearning}>
+                <label>
+                  ¿En qué estabas pensando?
+                  <input
+                    autoComplete="off"
+                    maxLength={80}
+                    onChange={event => setThoughtName(event.target.value)}
+                    placeholder="Por ejemplo: ornitorrinco"
+                    required
+                    value={thoughtName}
+                  />
+                </label>
+                <label>
+                  Escribe una pregunta que lo diferencie de «{guess}»
+                  <input
+                    autoComplete="off"
+                    maxLength={160}
+                    onChange={event => setDistinguishingQuestion(event.target.value)}
+                    placeholder="¿Pone huevos?"
+                    required
+                    value={distinguishingQuestion}
+                  />
+                </label>
+                <fieldset>
+                  <legend>Para «{thoughtName || 'tu respuesta'}», la respuesta es:</legend>
+                  <div className="learning-choice">
+                    <button aria-pressed={learnedAnswer} className={learnedAnswer ? 'selected' : 'secondary'} onClick={() => setLearnedAnswer(true)} type="button">Sí</button>
+                    <button aria-pressed={!learnedAnswer} className={!learnedAnswer ? 'selected' : 'secondary'} onClick={() => setLearnedAnswer(false)} type="button">No</button>
+                  </div>
+                </fieldset>
+                <small>Se guardará solo en este navegador. La respuesta para «{guess}» se aprenderá como la contraria.</small>
+                <button type="submit">Guardar aprendizaje</button>
+              </form>
+            )}
+            {savedLearning && <p className="learning-success" role="status">¡Aprendido! Lo tendré en cuenta en la próxima partida.</p>}
+            <button className="play-again" onClick={resetGame}>Jugar otra vez</button>
           </>
         )}
 
-        {state.status === 'playing' && <details key="ranked-candidates">
-          <summary>Ver candidatos más probables</summary>
-          <ol>
-            {state.rankedCandidates.slice(0, 5).map(candidate => (
-              <li key={candidate.id}>{candidate.name}: {(candidate.score * 100).toFixed(0)}%</li>
-            ))}
-          </ol>
-        </details>}
       </section>
     </main>
   )

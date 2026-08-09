@@ -2,10 +2,9 @@ import type { Answer } from '../types/game'
 
 const answers: Array<{ value: Answer; label: string }> = [
   { value: 'yes', label: 'Sí' },
-  { value: 'probably_yes', label: 'Probablemente sí' },
-  { value: 'unknown', label: 'No sé' },
-  { value: 'probably_no', label: 'Probablemente no' },
-  { value: 'no', label: 'No' }
+  { value: 'no', label: 'No' },
+  { value: 'sometimes', label: 'A veces' },
+  { value: 'unknown', label: 'No lo sé' }
 ]
 
 export function AnswerButtons({ onAnswer }: { onAnswer: (answer: Answer) => void }) {

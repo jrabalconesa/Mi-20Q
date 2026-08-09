@@ -1,24 +1,19 @@
-import { describe, expect, it } from 'vitest'
-import { candidates } from '../src/data/candidates'
-import { questions } from '../src/data/questions'
-import { answerCurrentQuestion, createGame } from '../src/engine/gameEngine'
+import { beforeAll, describe, expect, it } from 'vitest'
+import { loadCategoryKnowledge } from '../src/data/catalog'
+import { coreCandidates } from '../src/data/candidates'
+import { answerCurrentQuestion, createGame, resolveGuess } from '../src/engine/gameEngine'
 import { expectedValue } from '../src/engine/scoring'
-import type { Category } from '../src/types/game'
+import type { Candidate, Category, GameKnowledge } from '../src/types/game'
 
 const categories: Category[] = ['animal', 'object', 'place', 'person']
-const generatedPrefixes = ['birdnet-', 'wn-', 'geonames-', 'pantheon-']
-const coreCandidates = candidates.filter(candidate => !generatedPrefixes.some(prefix => candidate.id.startsWith(prefix)))
-const sampledGeneratedCandidates = categories.flatMap(category => {
-  const categoryCandidates = candidates.filter(candidate =>
-    candidate.category === category && generatedPrefixes.some(prefix => candidate.id.startsWith(prefix))
-  )
-  return [
-    categoryCandidates[0],
-    categoryCandidates[Math.floor(categoryCandidates.length / 2)],
-    categoryCandidates.at(-1)
-  ].filter(candidate => candidate !== undefined)
+const knowledgeByCategory = new Map<Category, GameKnowledge>()
+let candidates: Candidate[] = []
+
+beforeAll(async () => {
+  const loaded = await Promise.all(categories.map(loadCategoryKnowledge))
+  loaded.forEach((knowledge, index) => knowledgeByCategory.set(categories[index], knowledge))
+  candidates = loaded.flatMap(knowledge => knowledge.candidates)
 })
-const sampledCandidates = [...coreCandidates, ...sampledGeneratedCandidates]
 
 describe('gameEngine', () => {
   it('crea una partida con una pregunta inicial', () => {
@@ -41,6 +36,15 @@ describe('gameEngine', () => {
     expect(next.currentQuestionId).not.toBe(answeredId)
   })
 
+  it('continúa preguntando tras una suposición temprana fallida', () => {
+    const initial = createGame('animal')
+    const guessing = { ...initial, status: 'guessing' as const, guessCandidateId: initial.rankedCandidates[0].id, questionCount: 6 }
+    const next = resolveGuess(guessing, false)
+    expect(next.status).toBe('playing')
+    expect(next.excludedCandidateIds).toContain(guessing.guessCandidateId)
+    expect(next.currentQuestionId).not.toBeNull()
+  })
+
   it.each<Category>(['animal', 'object', 'place', 'person'])('no intenta adivinar %s después de una sola respuesta', category => {
     const state = answerCurrentQuestion(createGame(category), 'yes')
     expect(state.status).toBe('playing')
@@ -48,11 +52,14 @@ describe('gameEngine', () => {
   })
 
   it.each<Category>(['animal', 'object', 'place', 'person'])('solo formula preguntas aplicables a %s', category => {
-    let state = createGame(category)
+    const knowledge = knowledgeByCategory.get(category)
+    expect(knowledge).toBeDefined()
+    if (!knowledge) return
+    let state = createGame(category, knowledge)
     for (let turn = 0; turn < 20 && state.status === 'playing'; turn += 1) {
-      const question = questions.find(item => item.id === state.currentQuestionId)
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
       expect(question?.categories).toContain(category)
-      state = answerCurrentQuestion(state, 'unknown')
+      state = answerCurrentQuestion(state, 'unknown', knowledge)
     }
   })
 
@@ -67,15 +74,26 @@ describe('gameEngine', () => {
     expect(new Set(names).size).toBe(names.length)
   })
 
-  it.each(sampledCandidates)('adivina $name con respuestas exactas', target => {
-    let state = createGame(target.category)
-    while (state.status === 'playing') {
-      const question = questions.find(item => item.id === state.currentQuestionId)
-      expect(question).toBeDefined()
-      const value = question ? expectedValue(target, question) : undefined
-      state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown')
+  it('adivina candidatos curados y una muestra del catálogo diferido con respuestas exactas', () => {
+    const sampledGeneratedCandidates = categories.flatMap(category => {
+      const categoryCandidates = candidates.filter(candidate => candidate.category === category && !coreCandidates.includes(candidate))
+      return [categoryCandidates[0], categoryCandidates[Math.floor(categoryCandidates.length / 2)], categoryCandidates.at(-1)]
+        .filter(candidate => candidate !== undefined)
+    })
+
+    for (const target of [...coreCandidates, ...sampledGeneratedCandidates]) {
+      const knowledge = knowledgeByCategory.get(target.category)
+      expect(knowledge).toBeDefined()
+      if (!knowledge) continue
+      let state = createGame(target.category, knowledge)
+      while (state.status === 'playing') {
+        const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+        expect(question).toBeDefined()
+        const value = question ? expectedValue(target, question) : undefined
+        state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown', knowledge)
+      }
+      expect(state.status).toBe('guessing')
+      expect(state.guessCandidateId).toBe(target.id)
     }
-    expect(state.status).toBe('guessing')
-    expect(state.guessCandidateId).toBe(target.id)
-  })
+  }, 30_000)
 })

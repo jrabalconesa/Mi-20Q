@@ -8,6 +8,11 @@ function asProbability(value: boolean | number | undefined): number {
   return 0.5
 }
 
+function binaryEntropy(probability: number): number {
+  if (probability <= 0 || probability >= 1) return 0
+  return -probability * Math.log2(probability) - (1 - probability) * Math.log2(1 - probability)
+}
+
 export function selectNextQuestion(
   questions: Question[],
   rankedCandidates: RankedCandidate[],
@@ -16,34 +21,59 @@ export function selectNextQuestion(
   const available = questions.filter(q => !askedQuestionIds.includes(q.id))
   const semanticAvailable = available.filter(question => question.kind !== 'nameBefore')
   const alphabeticalAvailable = available.filter(question => question.kind === 'nameBefore')
+  const scriptedOpening = semanticAvailable
+    .filter(question => question.openingOrder === askedQuestionIds.length + 1)
+    .sort((left, right) => (left.openingOrder ?? 0) - (right.openingOrder ?? 0))[0]
   const bestScore = rankedCandidates[0]?.score
-  const competitive = bestScore === undefined
+  const tiedLeaders = bestScore === undefined
     ? []
-    : rankedCandidates.filter(candidate => Math.abs(candidate.score - bestScore) < 0.000_001)
-  const top = competitive.length >= 2
-    ? competitive
-    : rankedCandidates.slice(0, Math.min(64, rankedCandidates.length))
+    : rankedCandidates.filter(candidate => Math.abs(candidate.score - bestScore) < 0.000_000_001)
+  const top = tiedLeaders.length >= 2
+    ? tiedLeaders
+    : rankedCandidates.slice(0, Math.min(256, rankedCandidates.length))
 
   if (!available.length || !top.length) return null
+  if (scriptedOpening) return scriptedOpening
 
-  if (askedQuestionIds.length >= 5 && alphabeticalAvailable.length && top.length >= 2) {
+  if (askedQuestionIds.length >= 7 && alphabeticalAvailable.length && top.length >= 2) {
     const sortedCandidates = [...top].sort((left, right) => compareCandidateNames(left.name, right.name))
-    const pivotName = sortedCandidates[Math.floor((sortedCandidates.length - 1) / 2)]?.name
+    const halfPosterior = sortedCandidates.reduce((total, candidate) => total + candidate.score, 0) / 2
+    let cumulativePosterior = 0
+    const pivotName = sortedCandidates.find(candidate => {
+      cumulativePosterior += candidate.score
+      return cumulativePosterior >= halfPosterior
+    })?.name
     const alphabeticalQuestion = alphabeticalAvailable.find(question => question.pivotName === pivotName)
     if (alphabeticalQuestion) return alphabeticalQuestion
   }
 
   const questionPool = semanticAvailable.length ? semanticAvailable : alphabeticalAvailable
 
+  const totalPosterior = top.reduce((total, candidate) => total + candidate.score, 0) || 1
+
   return questionPool
     .map(question => {
       const rawValues = top.map(candidate => expectedValue(candidate, question))
       const values = rawValues.map(asProbability)
-      const coverage = rawValues.filter(value => value !== undefined).length / rawValues.length
-      const mean = values.reduce((a, b) => a + b, 0) / values.length
-      const balance = 1 - Math.abs(0.5 - mean) * 2
-      const variance = values.reduce((sum, value) => sum + Math.pow(value - mean, 2), 0) / values.length
-      return { question, usefulness: (balance * 0.7 + variance * 0.3) * coverage }
+      const yesProbability = values.reduce(
+        (total, value, index) => total + value * top[index].score,
+        0
+      ) / totalPosterior
+      const expectedNoise = values.reduce(
+        (total, value, index) => total + binaryEntropy(value) * top[index].score,
+        0
+      ) / totalPosterior
+      const informationGain = Math.max(0, binaryEntropy(yesProbability) - expectedNoise)
+      const leaderValue = values[0] ?? 0.5
+      const othersWeight = Math.max(totalPosterior - top[0].score, Number.EPSILON)
+      const othersValue = values.slice(1).reduce(
+        (total, value, index) => total + value * top[index + 1].score,
+        0
+      ) / othersWeight
+      const confirmationBonus = askedQuestionIds.length >= 4 && askedQuestionIds.length % 4 === 0
+        ? Math.abs(leaderValue - othersValue) * 0.18
+        : 0
+      return { question, usefulness: informationGain + confirmationBonus }
     })
     .sort((a, b) => b.usefulness - a.usefulness)[0]?.question ?? null
 }
