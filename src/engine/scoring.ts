@@ -1,4 +1,5 @@
 import type { Answer, AttributeValue, Candidate, Question, RankedCandidate } from '../types/game'
+import { compareCandidateNames } from './nameComparison'
 
 const answerWeights: Record<Answer, number> = {
   yes: 1,
@@ -14,8 +15,15 @@ function normalizeAttribute(value: AttributeValue | undefined): number {
   return 0.5
 }
 
+export function expectedValue(candidate: Candidate, question: Question): AttributeValue | undefined {
+  if (question.kind === 'nameBefore' && question.pivotName) {
+    return compareCandidateNames(candidate.name, question.pivotName) <= 0
+  }
+  return candidate.attributes[question.attribute]
+}
+
 export function scoreAnswer(candidate: Candidate, question: Question, answer: Answer): number {
-  const expected = normalizeAttribute(candidate.attributes[question.attribute])
+  const expected = normalizeAttribute(expectedValue(candidate, question))
   const actual = answerWeights[answer]
   return 1 - Math.abs(expected - actual)
 }

@@ -1,11 +1,13 @@
 import type { Category, Question } from '../types/game'
+import { compareCandidateNames } from '../engine/nameComparison'
+import { candidates } from './candidates'
 
 const animal: Category[] = ['animal']
 const object: Category[] = ['object']
 const place: Category[] = ['place']
 const person: Category[] = ['person']
 
-export const questions: Question[] = [
+const semanticQuestions: Question[] = [
   { id: 'animal_domestic', text: '¿Suele vivir con personas?', attribute: 'domestic', categories: animal },
   { id: 'animal_large', text: '¿Es más grande que una persona?', attribute: 'large', categories: animal },
   { id: 'animal_flies', text: '¿Puede volar?', attribute: 'flies', categories: animal },
@@ -61,4 +63,60 @@ export const questions: Question[] = [
   { id: 'person_woman', text: '¿Es una mujer?', attribute: 'woman', categories: person },
   { id: 'person_europe', text: '¿Nació en Europa?', attribute: 'europe', categories: person },
   { id: 'person_before_1900', text: '¿Nació antes del año 1900?', attribute: 'bornBefore1900', categories: person }
+]
+
+const expandedSemanticQuestions: Question[] = [
+  { id: 'animal_mammal', text: '¿Es un mamífero?', attribute: 'mammal', categories: animal },
+  { id: 'animal_bird', text: '¿Es un ave?', attribute: 'bird', categories: animal },
+  { id: 'animal_fish', text: '¿Es un pez?', attribute: 'fish', categories: animal },
+  { id: 'animal_reptile', text: '¿Es un reptil?', attribute: 'reptile', categories: animal },
+  { id: 'animal_amphibian', text: '¿Es un anfibio?', attribute: 'amphibian', categories: animal },
+  { id: 'animal_arachnid', text: '¿Es un arácnido?', attribute: 'arachnid', categories: animal },
+  { id: 'animal_mollusk', text: '¿Es un molusco?', attribute: 'mollusk', categories: animal },
+  { id: 'animal_crustacean', text: '¿Es un crustáceo?', attribute: 'crustacean', categories: animal },
+  { id: 'animal_vertebrate', text: '¿Es un animal vertebrado?', attribute: 'vertebrate', categories: animal },
+
+  { id: 'object_device', text: '¿Es un dispositivo o aparato?', attribute: 'device', categories: object },
+  { id: 'object_machine', text: '¿Es una máquina?', attribute: 'machine', categories: object },
+  { id: 'object_instrument', text: '¿Es un instrumento musical?', attribute: 'musicalInstrument', categories: object },
+  { id: 'object_weapon', text: '¿Es un arma?', attribute: 'weapon', categories: object },
+  { id: 'object_container', text: '¿Sirve principalmente para contener otras cosas?', attribute: 'container', categories: object },
+  { id: 'object_game_equipment', text: '¿Se utiliza para jugar o practicar un deporte?', attribute: 'gameEquipment', categories: object },
+
+  { id: 'place_large_city', text: '¿Es una ciudad de más de un millón de habitantes?', attribute: 'largeCity', categories: place },
+  { id: 'place_mega_city', text: '¿Supera los cinco millones de habitantes?', attribute: 'megaCity', categories: place },
+  { id: 'place_capital', text: '¿Es la capital de un país?', attribute: 'capital', categories: place },
+  { id: 'place_africa', text: '¿Está en África?', attribute: 'africa', categories: place },
+  { id: 'place_oceania', text: '¿Está en Oceanía?', attribute: 'oceania', categories: place },
+  { id: 'place_northern', text: '¿Está en el hemisferio norte?', attribute: 'northernHemisphere', categories: place },
+  { id: 'place_eastern', text: '¿Está en el hemisferio oriental?', attribute: 'easternHemisphere', categories: place },
+
+  { id: 'person_americas', text: '¿Nació en América?', attribute: 'americas', categories: person },
+  { id: 'person_asia', text: '¿Nació en Asia?', attribute: 'asia', categories: person },
+  { id: 'person_africa', text: '¿Nació en África?', attribute: 'africa', categories: person },
+  { id: 'person_before_1800', text: '¿Nació antes del año 1800?', attribute: 'bornBefore1800', categories: person },
+  { id: 'person_after_1950', text: '¿Nació en 1950 o después?', attribute: 'bornAfter1950', categories: person }
+]
+
+const categoryIds: Category[] = ['animal', 'object', 'place', 'person']
+
+const alphabeticalQuestions: Question[] = categoryIds.flatMap(category =>
+  candidates
+    .filter(candidate => candidate.category === category)
+    .sort((left, right) => compareCandidateNames(left.name, right.name))
+    .slice(0, -1)
+    .map(candidate => ({
+      id: `${category}_name_before_${candidate.id}`,
+      text: `Al ordenar alfabéticamente, ¿su nombre va antes de «${candidate.name}» o es «${candidate.name}»?`,
+      attribute: '__name_before__',
+      categories: [category],
+      kind: 'nameBefore' as const,
+      pivotName: candidate.name
+    }))
+)
+
+export const questions: Question[] = [
+  ...semanticQuestions,
+  ...expandedSemanticQuestions,
+  ...alphabeticalQuestions
 ]

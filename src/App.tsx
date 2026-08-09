@@ -14,7 +14,7 @@ const categories: Array<{ id: Category; label: string }> = [
   { id: 'person', label: 'Personas' }
 ]
 
-const APP_VERSION = '0.4.0'
+const APP_VERSION = '0.5.0'
 const brandLogoUrl = `${import.meta.env.BASE_URL}brand/20q-logo.png`
 
 function App() {
@@ -37,11 +37,15 @@ function App() {
       <main className="shell">
         {updateNotice}
         <section className="card hero">
-          <h1 className="brand-title">
-            <img className="hero-logo" src={brandLogoUrl} alt="20Q" />
-          </h1>
-          <span className="badge">Juego de deducción</span>
-          <p className="hero-lead">Piensa en algo. Intentaré adivinarlo haciendo como máximo veinte preguntas.</p>
+          <div className="hero-intro">
+            <h1 className="brand-title">
+              <img className="hero-logo" src={brandLogoUrl} alt="20Q" />
+            </h1>
+            <div className="hero-copy">
+              <span className="badge">Juego de deducción</span>
+              <p className="hero-lead">Piensa en algo. Intentaré adivinarlo haciendo como máximo veinte preguntas.</p>
+            </div>
+          </div>
           <fieldset className="category-picker">
             <legend>¿En qué categoría estás pensando?</legend>
             <div className="category-grid">
@@ -58,24 +62,26 @@ function App() {
             ))}
             </div>
           </fieldset>
-          <p className="knowledge-note">
-            Piensa en una de las {knownCandidates.length} opciones que conozco en esta categoría.
-          </p>
-          <details className="known-candidates" key="known-candidates">
-            <summary>Ver las opciones que puedo adivinar</summary>
-            <ul>
-              {knownCandidates.map(candidate => <li key={candidate.id}>{candidate.name}</li>)}
-            </ul>
-          </details>
-          <button className="start-button" onClick={() => game.start(selectedCategory)}>Comenzar partida</button>
-          {game.stats.games > 0 && (
-            <section className="stats" aria-label="Estadísticas de juego">
-              <div><strong>{game.stats.games}</strong><span>Partidas</span></div>
-              <div><strong>{game.stats.wins}</strong><span>Aciertos</span></div>
-              <div><strong>{game.stats.averageQuestions.toFixed(1)}</strong><span>Preguntas de media</span></div>
-            </section>
-          )}
-          <small className="version">Versión {APP_VERSION}</small>
+          <div className="hero-actions">
+            <p className="knowledge-note">
+              Ya conozco <strong>{knownCandidates.length}</strong> opciones de esta categoría.
+            </p>
+            <details className="known-candidates" key="known-candidates">
+              <summary>Explorar el catálogo</summary>
+              <ul>
+                {knownCandidates.map(candidate => <li key={candidate.id}>{candidate.name}</li>)}
+              </ul>
+            </details>
+            <button className="start-button" onClick={() => game.start(selectedCategory)}>Comenzar partida</button>
+            {game.stats.games > 0 && (
+              <section className="stats" aria-label="Estadísticas de juego">
+                <div><strong>{game.stats.games}</strong><span>Partidas</span></div>
+                <div><strong>{game.stats.wins}</strong><span>Aciertos</span></div>
+                <div><strong>{game.stats.averageQuestions.toFixed(1)}</strong><span>Media</span></div>
+              </section>
+            )}
+            <small className="version">Versión {APP_VERSION}</small>
+          </div>
         </section>
       </main>
     )

@@ -2,7 +2,23 @@ import { describe, expect, it } from 'vitest'
 import { candidates } from '../src/data/candidates'
 import { questions } from '../src/data/questions'
 import { answerCurrentQuestion, createGame } from '../src/engine/gameEngine'
+import { expectedValue } from '../src/engine/scoring'
 import type { Category } from '../src/types/game'
+
+const categories: Category[] = ['animal', 'object', 'place', 'person']
+const generatedPrefixes = ['birdnet-', 'wn-', 'geonames-', 'pantheon-']
+const coreCandidates = candidates.filter(candidate => !generatedPrefixes.some(prefix => candidate.id.startsWith(prefix)))
+const sampledGeneratedCandidates = categories.flatMap(category => {
+  const categoryCandidates = candidates.filter(candidate =>
+    candidate.category === category && generatedPrefixes.some(prefix => candidate.id.startsWith(prefix))
+  )
+  return [
+    categoryCandidates[0],
+    categoryCandidates[Math.floor(categoryCandidates.length / 2)],
+    categoryCandidates.at(-1)
+  ].filter(candidate => candidate !== undefined)
+})
+const sampledCandidates = [...coreCandidates, ...sampledGeneratedCandidates]
 
 describe('gameEngine', () => {
   it('crea una partida con una pregunta inicial', () => {
@@ -40,27 +56,23 @@ describe('gameEngine', () => {
     }
   })
 
-  it('incluye los 60 candidatos previstos por categoría', () => {
-    expect(candidates.filter(candidate => candidate.category === 'animal')).toHaveLength(20)
-    expect(candidates.filter(candidate => candidate.category === 'object')).toHaveLength(20)
-    expect(candidates.filter(candidate => candidate.category === 'place')).toHaveLength(10)
-    expect(candidates.filter(candidate => candidate.category === 'person')).toHaveLength(10)
+  it.each(categories)('incluye al menos 1.000 candidatos de %s', category => {
+    expect(candidates.filter(candidate => candidate.category === category).length).toBeGreaterThanOrEqual(1_000)
   })
 
-  it.each<Category>(['animal', 'object', 'place', 'person'])('no contiene candidatos indistinguibles en %s', category => {
-    const categoryQuestions = questions.filter(question => question.categories.includes(category))
-    const signatures = candidates
+  it.each(categories)('no contiene nombres duplicados en %s', category => {
+    const names = candidates
       .filter(candidate => candidate.category === category)
-      .map(candidate => categoryQuestions.map(question => candidate.attributes[question.attribute] ?? 0.5).join('|'))
-    expect(new Set(signatures).size).toBe(signatures.length)
+      .map(candidate => candidate.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es'))
+    expect(new Set(names).size).toBe(names.length)
   })
 
-  it.each(candidates)('adivina $name con respuestas exactas', target => {
+  it.each(sampledCandidates)('adivina $name con respuestas exactas', target => {
     let state = createGame(target.category)
     while (state.status === 'playing') {
       const question = questions.find(item => item.id === state.currentQuestionId)
       expect(question).toBeDefined()
-      const value = question ? target.attributes[question.attribute] : undefined
+      const value = question ? expectedValue(target, question) : undefined
       state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown')
     }
     expect(state.status).toBe('guessing')

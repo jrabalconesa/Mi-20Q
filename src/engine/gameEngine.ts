@@ -36,7 +36,8 @@ export function answerCurrentQuestion(state: GameState, answer: Answer): GameSta
   const best = rankedCandidates[0]
   const second = rankedCandidates[1]
   const scoreGap = best && second ? best.score - second.score : 1
-  const dominant = Boolean(best && questionCount >= 3 && best.score >= 0.85 && scoreGap >= 0.12)
+  const confidenceGap = Math.max(0.03, 0.5 / questionCount)
+  const dominant = Boolean(best && questionCount >= 5 && best.score >= 0.85 && scoreGap >= confidenceGap)
   const shouldGuess = dominant || questionCount >= MAX_QUESTIONS
 
   if (shouldGuess && best) {

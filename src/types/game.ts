@@ -14,6 +14,8 @@ export interface Question {
   text: string
   attribute: string
   categories: Category[]
+  kind?: 'attribute' | 'nameBefore'
+  pivotName?: string
 }
 
 export interface RankedCandidate extends Candidate {

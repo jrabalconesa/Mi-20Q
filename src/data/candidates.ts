@@ -1,6 +1,7 @@
 import type { Candidate } from '../types/game'
+import { generatedCandidates } from './generatedCandidates'
 
-export const candidates: Candidate[] = [
+const coreCandidates: Candidate[] = [
   { id: 'elephant', name: 'Elefante', category: 'animal', attributes: { domestic:false, large:true, flies:false, water:false, fourLegs:true, dangerous:true, fur:false, laysEggs:false, carnivore:false, farm:false, swims:true, insect:false } },
   { id: 'dog', name: 'Perro', category: 'animal', attributes: { domestic:true, large:false, flies:false, water:false, fourLegs:true, dangerous:false, fur:true, laysEggs:false, carnivore:true, farm:false, swims:true, insect:false } },
   { id: 'cat', name: 'Gato', category: 'animal', attributes: { domestic:true, large:false, flies:false, water:false, fourLegs:true, dangerous:false, fur:true, laysEggs:false, carnivore:true, farm:false, swims:false, insect:false } },
@@ -65,3 +66,16 @@ export const candidates: Candidate[] = [
   { id: 'rowling', name: 'J. K. Rowling', category: 'person', attributes: { realPerson:true, living:true, historical:false, artist:true, sports:false, scientist:false, politician:false, writer:true, woman:true, europe:true, bornBefore1900:false } },
   { id: 'cleopatra', name: 'Cleopatra', category: 'person', attributes: { realPerson:true, living:false, historical:true, artist:false, sports:false, scientist:false, politician:true, writer:false, woman:true, europe:false, bornBefore1900:true } }
 ]
+
+function normalizedCandidateName(candidate: Candidate): string {
+  return `${candidate.category}:${candidate.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')}`
+}
+
+const seenCandidateNames = new Set<string>()
+
+export const candidates: Candidate[] = [...coreCandidates, ...generatedCandidates].filter(candidate => {
+  const normalized = normalizedCandidateName(candidate)
+  if (seenCandidateNames.has(normalized)) return false
+  seenCandidateNames.add(normalized)
+  return true
+})
