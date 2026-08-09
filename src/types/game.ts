@@ -14,8 +14,6 @@ export interface Question {
   text: string
   attribute: string
   categories: Category[]
-  kind?: 'attribute' | 'nameBefore'
-  pivotName?: string
   openingOrder?: number
   importance?: number
 }

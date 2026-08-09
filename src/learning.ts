@@ -51,7 +51,7 @@ export function createLearningRecord(
   for (const [questionId, answer] of Object.entries(state.answers)) {
     const question = availableQuestions.find(item => item.id === questionId)
     const value = answerToAttribute(answer)
-    if (question && question.kind !== 'nameBefore' && value !== undefined) attributes[question.attribute] = value
+    if (question && value !== undefined) attributes[question.attribute] = value
   }
 
   const normalized = name.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')

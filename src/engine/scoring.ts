@@ -1,5 +1,4 @@
 import type { Answer, AttributeValue, Candidate, Question, RankedCandidate } from '../types/game'
-import { compareCandidateNames } from './nameComparison'
 
 const answerWeights: Record<Answer, number> = {
   yes: 1,
@@ -15,9 +14,6 @@ function normalizeAttribute(value: AttributeValue | undefined): number {
 }
 
 export function expectedValue(candidate: Candidate, question: Question): AttributeValue | undefined {
-  if (question.kind === 'nameBefore' && question.pivotName) {
-    return compareCandidateNames(candidate.name, question.pivotName) <= 0
-  }
   return candidate.attributes[question.attribute]
 }
 
@@ -54,5 +50,5 @@ export function rankCandidates(
 
   return candidates
     .map((candidate, index) => ({ ...candidate, score: weights[index] / totalWeight }))
-    .sort((left, right) => right.score - left.score || compareCandidateNames(left.name, right.name))
+    .sort((left, right) => right.score - left.score)
 }

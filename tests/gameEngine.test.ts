@@ -111,7 +111,7 @@ describe('gameEngine', () => {
     const askedTexts: string[] = []
     while (state.status === 'playing') {
       const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
-      expect(question?.kind).not.toBe('nameBefore')
+      expect(question?.id).not.toContain('name-before')
       if (!question) break
       askedTexts.push(question.text)
       const value = expectedValue(target, question)

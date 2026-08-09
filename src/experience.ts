@@ -49,7 +49,7 @@ export function reinforceCandidate(
   for (const [questionId, answer] of Object.entries(state.answers)) {
     const value = answerValue(answer)
     const question = knowledge.questions.find(item => item.id === questionId)
-    if (value === undefined || !question || question.kind === 'nameBefore') continue
+    if (value === undefined || !question) continue
     const previous = attributes[question.attribute]
     const samples = Math.min((previous?.samples ?? 0) + 1, MAX_SAMPLES)
     const previousSamples = Math.min(previous?.samples ?? 0, MAX_SAMPLES - 1)
