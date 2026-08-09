@@ -89,15 +89,20 @@ describe('gameEngine', () => {
       const knowledge = knowledgeByCategory.get(target.category)
       expect(knowledge).toBeDefined()
       if (!knowledge) continue
+      const enrichedTarget = knowledge.candidates.find(candidate => candidate.id === target.id)
+      expect(enrichedTarget).toBeDefined()
+      if (!enrichedTarget) continue
       let state = createGame(target.category, knowledge)
+      const askedTexts: string[] = []
       while (state.status === 'playing') {
         const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
         expect(question).toBeDefined()
-        const value = question ? expectedValue(target, question) : undefined
+        if (question) askedTexts.push(question.text)
+        const value = question ? expectedValue(enrichedTarget, question) : undefined
         state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown', knowledge)
       }
       expect(state.status).toBe('guessing')
-      expect(state.guessCandidateId).toBe(target.id)
+      expect(state.guessCandidateId, `${target.name}: ${askedTexts.join(' | ')}`).toBe(target.id)
     }
   }, 30_000)
 
@@ -123,4 +128,34 @@ describe('gameEngine', () => {
     expect(askedTexts).toContain('¿Puede superar aproximadamente los 80 km/h corriendo?')
     expect(state.guessCandidateId).toBe(target.id)
   }, 30_000)
+
+  it.each(['París', 'Murcia', 'Cartagena (España)'])(
+    'distingue %s mediante preguntas geográficas naturales',
+    targetName => {
+      const knowledge = knowledgeFor('place')
+      const target = knowledge.candidates.find(candidate => candidate.name === targetName)
+      expect(target).toBeDefined()
+      if (!target) return
+
+      let state = createGame('place', knowledge)
+      const askedTexts: string[] = []
+      while (state.status === 'playing') {
+        const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+        expect(question).toBeDefined()
+        if (!question) break
+        askedTexts.push(question.text)
+        const value = expectedValue(target, question)
+        state = answerCurrentQuestion(
+          state,
+          value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+          knowledge
+        )
+      }
+
+      expect(askedTexts.some(text => /España|Francia|península ibérica|capital de una comunidad|junto al mar/.test(text))).toBe(true)
+      expect(askedTexts.every(text => !/alfab|nombre está antes|nombre está después/i.test(text))).toBe(true)
+      expect(state.guessCandidateId).toBe(target.id)
+    },
+    30_000
+  )
 })

@@ -42,7 +42,7 @@ La opción `base: '/Mi-20Q/'` de Vite corresponde al nombre del repositorio. Si 
 
 ## Algoritmo
 
-El motor mantiene una distribución de probabilidad sobre los candidatos. Cada respuesta aporta evidencia con una pequeña tolerancia a errores y la siguiente pregunta se elige por información mutua, cobertura y probabilidad actual. Todas las preguntas visibles son semánticas y propias de la categoría; no se utilizan comparaciones alfabéticas. El catálogo animal añade perfiles curados para rasgos como familia zoológica, dieta, patrón del pelaje, tamaño y velocidad.
+El motor mantiene una distribución de probabilidad sobre los candidatos. Cada respuesta aporta evidencia con una pequeña tolerancia a errores y la siguiente pregunta se elige por información mutua, cobertura y probabilidad actual. Todas las preguntas visibles son semánticas y propias de la categoría; no se utilizan comparaciones alfabéticas. El catálogo animal añade perfiles curados para rasgos como familia zoológica, dieta, patrón del pelaje, tamaño y velocidad. El catálogo de lugares conserva país, tipo de capital y zonas geográficas de GeoNames para distinguir ciudades mediante preguntas naturales; los nombres ambiguos, como las dos Cartagenas, se desambiguan por país.
 
 Las respuestas disponibles son **Sí**, **No**, **A veces** y **No lo sé**. Una suposición temprana incorrecta descarta ese candidato y la partida continúa. Las partidas acertadas refuerzan localmente las relaciones candidato-pregunta. Si el juego falla al final, solicita la palabra correcta y una pregunta que la diferencie de su última respuesta. El candidato, el historial útil y esa nueva distinción se guardan únicamente en `localStorage` y se integran en partidas posteriores.
 

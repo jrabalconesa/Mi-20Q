@@ -15,8 +15,13 @@ const categoryLoaders: Record<Category, () => Promise<Candidate[]>> = {
     return [...core.coreCandidates, ...generated.generatedCandidates]
   },
   place: async () => {
-    const [core, generated] = await Promise.all([import('./core/place'), import('./generated/place')])
-    return [...core.coreCandidates, ...generated.generatedCandidates]
+    const [core, generated, knowledge] = await Promise.all([
+      import('./core/place'),
+      import('./generated/place'),
+      import('./placeKnowledge')
+    ])
+    return [...core.coreCandidates, ...knowledge.curatedPlaceCandidates, ...generated.generatedCandidates]
+      .map(knowledge.enrichPlaceCandidate)
   },
   person: async () => {
     const [core, generated] = await Promise.all([import('./core/person'), import('./generated/person')])

@@ -18,9 +18,6 @@ from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
 
-from nltk.corpus import wordnet as wn
-
-
 TARGET_PER_CATEGORY = 1000
 
 
@@ -91,6 +88,8 @@ def wordnet_rows(
     target: int = TARGET_PER_CATEGORY,
     excluded_names: set[str] | None = None,
 ) -> list[list[Any]]:
+    from nltk.corpus import wordnet as wn
+
     choices: list[tuple[int, int, str, Any]] = []
     animal_root = wn.synset("animal.n.01")
     human_root = wn.synset("human.n.01")
@@ -223,6 +222,14 @@ def place_rows(cities_zip: Path, country_info: Path) -> list[list[Any]]:
             "southernHemisphere": record["lat"] < 0,
             "easternHemisphere": record["lng"] >= 0,
             "westernHemisphere": record["lng"] < 0,
+            "iberianPeninsula": record["country"] in {"AD", "ES", "GI", "PT"},
+            "inSpain": record["country"] == "ES",
+            "inFrance": record["country"] == "FR",
+            "inItaly": record["country"] == "IT",
+            "inUnitedKingdom": record["country"] == "GB",
+            "regionalCapital": record["feature"].startswith("PPLA"),
+            "northOf45": record["lat"] >= 45,
+            "southOf40": record["lat"] < 40,
         }
         rows.append([f"geonames-{record['id']}", name, attributes])
         if len(rows) == TARGET_PER_CATEGORY:

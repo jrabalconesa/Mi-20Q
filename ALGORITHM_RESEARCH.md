@@ -28,6 +28,8 @@ La aplicación conserva Animal, Objeto, Lugar y Persona/personaje porque el cat�
 
 En animales, los filtros taxonómicos y observables se ponderan por relevancia. Por ejemplo, un posible guepardo se separa mediante mamífero, felino, dieta carnívora, manchas, comparación de tamaño y velocidad, sin preguntar por su posición alfabética.
 
+En lugares, el catálogo conserva del origen GeoNames el país, el tipo de capital y bandas geográficas. Así, ciudades con atributos generales parecidos se distinguen con preguntas sobre España, Francia, la península ibérica, la costa o la capitalidad regional. Las localidades homónimas se representan con su país, en vez de resolver la ambigüedad por el orden del nombre.
+
 ## Enlaces
 
 - https://patentimages.storage.googleapis.com/41/59/17/cfd8c51aa658a2/US20060230008A1.pdf
