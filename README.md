@@ -38,7 +38,9 @@ La opción `base: '/Mi-20Q/'` de Vite corresponde al nombre del repositorio. Si 
 - Cada pregunta declara explícitamente las categorías en las que puede utilizarse.
 - La pantalla inicial no revela los candidatos conocidos y la partida mantiene visible únicamente la categoría activa.
 - La aplicación detecta un despliegue nuevo y ofrece recargarlo sin dejar pestañas antiguas ejecutándose indefinidamente.
-- `tests`: pruebas unitarias.
+- Durante la partida se muestra el historial de preguntas y respuestas, con opción de deshacer la última.
+- Desde la pantalla inicial se puede exportar e importar el conocimiento aprendido en un archivo JSON.
+- El workflow `.github/workflows/deploy-pages.yml` valida y publica `dist` al hacer `push` a `main`.
 
 ## Algoritmo
 
@@ -53,5 +55,5 @@ Consulta [DATA_SOURCES.md](DATA_SOURCES.md) para conocer el origen y las condici
 ## Próximas mejoras
 
 - Añadir un backend y moderación de aportaciones.
-- Permitir exportar, importar y moderar el conocimiento aprendido entre dispositivos.
 - Incorporar un modo de depuración del motor.
+- `tests`: pruebas unitarias.
