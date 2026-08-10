@@ -1,9 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { Answer, Category, GameKnowledge, GameState } from '../types/game'
 import { loadCategoryKnowledge } from '../data/catalog'
-import { answerCurrentQuestion, createGame, resolveGuess } from '../engine/gameEngine'
+import { answerCurrentQuestion, canUndoLastAnswer, createGame, resolveGuess, undoLastAnswer } from '../engine/gameEngine'
 import { applyExperience, readExperience, reinforceCandidate, writeExperience } from '../experience'
 import { buildKnowledge, createLearningRecord, readLearning, writeLearning } from '../learning'
+import { mergeExperienceRecords, mergeLearningRecords } from '../knowledgeTransfer'
 import { addGameResult, readStats, writeStats } from '../stats'
 
 export function useGame() {
@@ -63,16 +64,40 @@ export function useGame() {
     })
   }, [state, knowledge.questions])
 
+  const undo = useCallback(() => setState(current => {
+    if (!current || !canUndoLastAnswer(current)) return current
+    return undoLastAnswer(current, knowledge)
+  }), [knowledge])
+
+  const importKnowledge = useCallback((importedLearning: ReturnType<typeof readLearning>, importedExperience: ReturnType<typeof readExperience>) => {
+    setLearning(current => {
+      const next = mergeLearningRecords(current, importedLearning)
+      writeLearning(next)
+      return next
+    })
+    setExperience(current => {
+      const next = mergeExperienceRecords(current, importedExperience)
+      writeExperience(next)
+      return next
+    })
+  }, [])
+
   return useMemo(() => ({
     state,
     stats,
     knowledge,
     loading,
     learnedCount: learning.length,
+    experienceCount: experience.length,
+    learning,
+    experience,
+    canUndo: state ? canUndoLastAnswer(state) : false,
     start,
     answer: (answer: Answer) => setState(current => current ? answerCurrentQuestion(current, answer, knowledge) : current),
     resolve,
     learn,
+    undo,
+    importKnowledge,
     reset: () => setState(null)
-  }), [state, stats, knowledge, loading, learning.length, start, resolve, learn])
+  }), [state, stats, knowledge, loading, learning, experience, start, resolve, learn, undo, importKnowledge])
 }

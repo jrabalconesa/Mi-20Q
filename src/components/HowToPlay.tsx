@@ -85,6 +85,7 @@ export function HowToPlay() {
                   <div><dt>No lo sé</dt><dd>No conoces la respuesta o la pregunta no resulta aplicable.</dd></div>
                 </dl>
                 <p>Responde pensando en las características habituales de aquello que elegiste. El juego tolera cierta incertidumbre.</p>
+                <p>Puedes revisar las preguntas anteriores durante la partida y, si te equivocaste, usar <strong>Deshacer última</strong>.</p>
               </section>
 
               <section>
@@ -103,6 +104,7 @@ export function HowToPlay() {
               <section>
                 <h3>5. Aprendizaje y privacidad</h3>
                 <p>Lo que enseñes a Mi 20Q se guarda únicamente en este navegador. No se envía a ningún servidor ni se comparte automáticamente con otros dispositivos.</p>
+                <p>Desde la pantalla inicial puedes <strong>exportar</strong> o <strong>importar</strong> ese conocimiento en un archivo JSON para hacer copia de seguridad o usarlo en otro dispositivo.</p>
               </section>
 
               <aside className="how-to-tips">

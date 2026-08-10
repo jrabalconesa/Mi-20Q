@@ -115,3 +115,38 @@ export function getQuestion(questionId: string | null, knowledge: GameKnowledge 
 export function getCandidateName(candidateId: string | null, knowledge: GameKnowledge = builtInKnowledge): string | null {
   return knowledge.candidates.find(candidate => candidate.id === candidateId)?.name ?? null
 }
+
+export function canUndoLastAnswer(state: GameState): boolean {
+  return state.status === 'playing' && state.questionCount > 0 && state.askedQuestionIds.length > 0
+}
+
+export function undoLastAnswer(
+  state: GameState,
+  knowledge: GameKnowledge = builtInKnowledge
+): GameState {
+  if (!canUndoLastAnswer(state)) return state
+
+  const askedQuestionIds = state.askedQuestionIds.slice(0, -1)
+  const lastQuestionId = state.askedQuestionIds.at(-1)
+  if (!lastQuestionId) return state
+
+  const answers = { ...state.answers }
+  delete answers[lastQuestionId]
+
+  const questionsById = questionMap(knowledge)
+  const pool = knowledge.candidates.filter(candidate =>
+    candidate.category === state.category && !state.excludedCandidateIds.includes(candidate.id)
+  )
+  const rankedCandidates = rankCandidates(pool, questionsById, answers)
+
+  return {
+    ...state,
+    askedQuestionIds,
+    answers,
+    rankedCandidates,
+    questionCount: state.questionCount - 1,
+    currentQuestionId: lastQuestionId,
+    guessCandidateId: null,
+    status: 'playing'
+  }
+}

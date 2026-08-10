@@ -2,10 +2,13 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { AnswerButtons } from './components/AnswerButtons'
 import { HowToPlay } from './components/HowToPlay'
+import { KnowledgeTransfer } from './components/KnowledgeTransfer'
+import { QuestionHistory } from './components/QuestionHistory'
 import { getCandidateName, getQuestion } from './engine/gameEngine'
 import { useAppUpdate } from './hooks/useAppUpdate'
 import { useGame } from './hooks/useGame'
 import type { Category } from './types/game'
+import { APP_VERSION } from './version'
 import './styles.css'
 
 const categories: Array<{ id: Category; label: string }> = [
@@ -15,7 +18,6 @@ const categories: Array<{ id: Category; label: string }> = [
   { id: 'person', label: 'Persona o personaje' }
 ]
 
-const APP_VERSION = '0.7.0'
 const brandLogoUrl = `${import.meta.env.BASE_URL}brand/20q-logo.png`
 
 function App() {
@@ -96,6 +98,11 @@ function App() {
                 <div><strong>{game.stats.averageQuestions.toFixed(1)}</strong><span>Media</span></div>
               </section>
             )}
+            <KnowledgeTransfer
+              experience={game.experience}
+              learning={game.learning}
+              onImport={game.importKnowledge}
+            />
             <small className="version">Versión {APP_VERSION}</small>
           </div>
         </section>
@@ -133,6 +140,12 @@ function App() {
 
         {state.status === 'playing' && question && (
           <>
+            <QuestionHistory
+              canUndo={game.canUndo}
+              knowledge={game.knowledge}
+              onUndo={game.undo}
+              state={state}
+            />
             <h2>{question.text}</h2>
             <AnswerButtons onAnswer={game.answer} />
           </>
@@ -140,6 +153,12 @@ function App() {
 
         {state.status === 'guessing' && (
           <>
+            <QuestionHistory
+              canUndo={false}
+              knowledge={game.knowledge}
+              onUndo={game.undo}
+              state={state}
+            />
             <p className="eyebrow">Mi respuesta</p>
             <h2>¿Estabas pensando en {guess}?</h2>
             <div className="answer-grid two">
