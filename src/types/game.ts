@@ -16,6 +16,7 @@ export interface Question {
   categories: Category[]
   openingOrder?: number
   importance?: number
+  exclusiveGroup?: string
 }
 
 export interface RankedCandidate extends Candidate {

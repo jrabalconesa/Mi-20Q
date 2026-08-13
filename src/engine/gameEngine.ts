@@ -65,7 +65,7 @@ export function answerCurrentQuestion(
   }
 
   const categoryQuestions = knowledge.questions.filter(question => question.categories.includes(state.category))
-  const next = selectNextQuestion(categoryQuestions, rankedCandidates, askedQuestionIds)
+  const next = selectNextQuestion(categoryQuestions, rankedCandidates, askedQuestionIds, answers)
 
   return {
     ...state,
@@ -95,7 +95,7 @@ export function resolveGuess(
   )
   const rankedCandidates = rankCandidates(pool, questionsById, state.answers)
   const categoryQuestions = knowledge.questions.filter(question => question.categories.includes(state.category))
-  const next = selectNextQuestion(categoryQuestions, rankedCandidates, state.askedQuestionIds)
+  const next = selectNextQuestion(categoryQuestions, rankedCandidates, state.askedQuestionIds, state.answers)
 
   if (!next) return { ...state, excludedCandidateIds, rankedCandidates, status: 'lost' }
   return {

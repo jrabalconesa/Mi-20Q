@@ -13,28 +13,38 @@ function binaryEntropy(probability: number): number {
   return -probability * Math.log2(probability) - (1 - probability) * Math.log2(1 - probability)
 }
 
-export function selectNextQuestion(
-  questions: Question[],
-  rankedCandidates: RankedCandidate[],
-  askedQuestionIds: string[],
-  answers: Record<string, Answer> = {}
-): Question | null {
-  const available = availableQuestions(questions, askedQuestionIds, answers)
-  const scriptedOpening = available
-    .filter(question => question.openingOrder === askedQuestionIds.length + 1)
-    .sort((left, right) => (left.openingOrder ?? 0) - (right.openingOrder ?? 0))[0]
+export interface QuestionScore {
+  question: Question
+  usefulness: number
+  informationGain: number
+  confirmationBonus: number
+  knownMass: number
+  yesProbability: number
+  scriptedOpening: boolean
+}
+
+function candidatePool(rankedCandidates: RankedCandidate[]): RankedCandidate[] {
   const bestScore = rankedCandidates[0]?.score
   const tiedLeaders = bestScore === undefined
     ? []
     : rankedCandidates.filter(candidate => Math.abs(candidate.score - bestScore) < 0.000_000_001)
-  const top = tiedLeaders.length >= 2
+  return tiedLeaders.length >= 2
     ? tiedLeaders
     : rankedCandidates.slice(0, Math.min(256, rankedCandidates.length))
+}
 
-  if (!available.length || !top.length) return null
-  if (scriptedOpening) return scriptedOpening
+export function rankAvailableQuestions(
+  questions: Question[],
+  rankedCandidates: RankedCandidate[],
+  askedQuestionIds: string[],
+  answers: Record<string, Answer> = {}
+): QuestionScore[] {
+  const available = availableQuestions(questions, askedQuestionIds, answers)
+  const top = candidatePool(rankedCandidates)
+  if (!available.length || !top.length) return []
 
   const totalPosterior = top.reduce((total, candidate) => total + candidate.score, 0) || 1
+  const openingIndex = askedQuestionIds.length + 1
 
   return available
     .map(question => {
@@ -62,7 +72,28 @@ export function selectNextQuestion(
         (total, value, index) => total + (value === undefined ? 0 : top[index].score),
         0
       ) / totalPosterior
-      return { question, usefulness: (informationGain + confirmationBonus) * knownMass * (question.importance ?? 1) }
+      const usefulness = (informationGain + confirmationBonus) * knownMass * (question.importance ?? 1)
+      return {
+        question,
+        usefulness,
+        informationGain,
+        confirmationBonus,
+        knownMass,
+        yesProbability,
+        scriptedOpening: question.openingOrder === openingIndex
+      }
     })
-    .sort((a, b) => b.usefulness - a.usefulness)[0]?.question ?? null
+    .sort((left, right) => right.usefulness - left.usefulness)
+}
+
+export function selectNextQuestion(
+  questions: Question[],
+  rankedCandidates: RankedCandidate[],
+  askedQuestionIds: string[],
+  answers: Record<string, Answer> = {}
+): Question | null {
+  const ranked = rankAvailableQuestions(questions, rankedCandidates, askedQuestionIds, answers)
+  const scriptedOpening = ranked.find(entry => entry.scriptedOpening)
+  if (scriptedOpening) return scriptedOpening.question
+  return ranked[0]?.question ?? null
 }

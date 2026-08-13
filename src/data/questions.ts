@@ -4,6 +4,8 @@ const animal: Category[] = ['animal']
 const object: Category[] = ['object']
 const place: Category[] = ['place']
 const person: Category[] = ['person']
+const placeContinent = 'place-continent'
+const personBirthContinent = 'person-birth-continent'
 
 const semanticQuestions: Question[] = [
   { id: 'animal_domestic', text: '¿Suele vivir con personas?', attribute: 'domestic', categories: animal, importance: 1.3 },
@@ -47,13 +49,13 @@ const semanticQuestions: Question[] = [
   { id: 'place_natural', text: '¿Es un lugar principalmente natural?', attribute: 'natural', categories: place, openingOrder: 1 },
   { id: 'place_urban', text: '¿Es una ciudad o está dentro de una?', attribute: 'urban', categories: place },
   { id: 'place_famous', text: '¿Es conocido internacionalmente?', attribute: 'famous', categories: place },
-  { id: 'place_europe', text: '¿Está en Europa?', attribute: 'europe', categories: place },
+  { id: 'place_europe', text: '¿Está en Europa?', attribute: 'europe', categories: place, exclusiveGroup: placeContinent },
   { id: 'place_coastal', text: '¿Está junto al mar?', attribute: 'coastal', categories: place },
   { id: 'place_mountain', text: '¿Es una zona montañosa?', attribute: 'mountain', categories: place },
   { id: 'place_desert', text: '¿Es un desierto?', attribute: 'desert', categories: place },
   { id: 'place_building', text: '¿Es un edificio o monumento construido?', attribute: 'building', categories: place },
-  { id: 'place_americas', text: '¿Está en América?', attribute: 'americas', categories: place },
-  { id: 'place_asia', text: '¿Está en Asia?', attribute: 'asia', categories: place },
+  { id: 'place_americas', text: '¿Está en América?', attribute: 'americas', categories: place, exclusiveGroup: placeContinent },
+  { id: 'place_asia', text: '¿Está en Asia?', attribute: 'asia', categories: place, exclusiveGroup: placeContinent },
   { id: 'place_ancient_city', text: '¿Es especialmente conocido por su legado de la Antigüedad?', attribute: 'ancientCity', categories: place },
   { id: 'place_iberian', text: '¿Está en la península ibérica?', attribute: 'iberianPeninsula', categories: place, importance: 1.5 },
   { id: 'place_spain', text: '¿Está en España?', attribute: 'inSpain', categories: place, importance: 1.7 },
@@ -73,7 +75,7 @@ const semanticQuestions: Question[] = [
   { id: 'person_politician', text: '¿Es conocido por la política o el liderazgo?', attribute: 'politician', categories: person },
   { id: 'person_writer', text: '¿Es conocido principalmente por escribir?', attribute: 'writer', categories: person },
   { id: 'person_woman', text: '¿Es una mujer?', attribute: 'woman', categories: person },
-  { id: 'person_europe', text: '¿Nació en Europa?', attribute: 'europe', categories: person },
+  { id: 'person_europe', text: '¿Nació en Europa?', attribute: 'europe', categories: person, exclusiveGroup: personBirthContinent },
   { id: 'person_before_1900', text: '¿Nació antes del año 1900?', attribute: 'bornBefore1900', categories: person }
 ]
 
@@ -98,14 +100,14 @@ const expandedSemanticQuestions: Question[] = [
   { id: 'place_large_city', text: '¿Es una ciudad de más de un millón de habitantes?', attribute: 'largeCity', categories: place },
   { id: 'place_mega_city', text: '¿Supera los cinco millones de habitantes?', attribute: 'megaCity', categories: place },
   { id: 'place_capital', text: '¿Es la capital de un país?', attribute: 'capital', categories: place },
-  { id: 'place_africa', text: '¿Está en África?', attribute: 'africa', categories: place },
-  { id: 'place_oceania', text: '¿Está en Oceanía?', attribute: 'oceania', categories: place },
+  { id: 'place_africa', text: '¿Está en África?', attribute: 'africa', categories: place, exclusiveGroup: placeContinent },
+  { id: 'place_oceania', text: '¿Está en Oceanía?', attribute: 'oceania', categories: place, exclusiveGroup: placeContinent },
   { id: 'place_northern', text: '¿Está en el hemisferio norte?', attribute: 'northernHemisphere', categories: place },
   { id: 'place_eastern', text: '¿Está en el hemisferio oriental?', attribute: 'easternHemisphere', categories: place },
 
-  { id: 'person_americas', text: '¿Nació en América?', attribute: 'americas', categories: person },
-  { id: 'person_asia', text: '¿Nació en Asia?', attribute: 'asia', categories: person },
-  { id: 'person_africa', text: '¿Nació en África?', attribute: 'africa', categories: person },
+  { id: 'person_americas', text: '¿Nació en América?', attribute: 'americas', categories: person, exclusiveGroup: personBirthContinent },
+  { id: 'person_asia', text: '¿Nació en Asia?', attribute: 'asia', categories: person, exclusiveGroup: personBirthContinent },
+  { id: 'person_africa', text: '¿Nació en África?', attribute: 'africa', categories: person, exclusiveGroup: personBirthContinent },
   { id: 'person_before_1800', text: '¿Nació antes del año 1800?', attribute: 'bornBefore1800', categories: person },
   { id: 'person_after_1950', text: '¿Nació en 1950 o después?', attribute: 'bornAfter1950', categories: person }
 ]
