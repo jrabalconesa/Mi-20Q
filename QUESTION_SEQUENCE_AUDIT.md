@@ -1,6 +1,6 @@
 # Auditoría de secuencias de preguntas
 
-Generado con `npm run audit:questions` el 2026-08-14T22:43:05.905Z.
+Generado con `npm run audit:questions` el 2026-08-14T22:54:55.386Z.
 
 El informe simula respuestas exactas para candidatos representativos. Si el motor hace una suposición incorrecta antes de 20 preguntas, la simulación responde que no y comprueba que la partida continúe.
 
@@ -8,16 +8,24 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 
 | Categoría | Objetivo | Resultado | Preguntas | Suposiciones | Incidencias |
 | --- | --- | --- | ---: | --- | --- |
+| animal | Ornitorrinco | OK | 9 | Ornitorrinco | Sin incidencias |
 | animal | Toro | OK | 8 | Toro | Sin incidencias |
 | animal | Tigre | OK | 9 | Tigre | Sin incidencias |
 | animal | Tiburón | OK | 10 | Tiburón | Sin incidencias |
-| animal | Delfín | OK | 12 | Delfín | Sin incidencias |
+| animal | Delfín | OK | 9 | Delfín | Sin incidencias |
 | animal | Abeja | OK | 10 | Abeja | Sin incidencias |
 | animal | Águila | OK | 8 | Águila | Sin incidencias |
-| animal | Lobo | OK | 11 | Lobo | Sin incidencias |
-| animal | Cabra | OK | 10 | Cabra | Sin incidencias |
+| animal | Lobo | OK | 8 | Lobo | Sin incidencias |
+| animal | Cabra | OK | 7 | Cabra | Sin incidencias |
 | animal | Pato | OK | 8 | Pato | Sin incidencias |
 | animal | Pulpo | OK | 11 | Pulpo | Sin incidencias |
+| animal | Cigüeña | OK | 8 | Cigüeña | Sin incidencias |
+| animal | Hipopótamo | OK | 8 | Hipopótamo | Sin incidencias |
+| animal | Rinoceronte | OK | 9 | Rinoceronte | Sin incidencias |
+| animal | Jirafa | OK | 8 | Jirafa | Sin incidencias |
+| animal | Cebra | OK | 10 | Cebra | Sin incidencias |
+| animal | Canguro | OK | 13 | Canguro | Sin incidencias |
+| animal | Panda | OK | 11 | Panda | Sin incidencias |
 | object | Cuchara | OK | 13 | Cuchara | Sin incidencias |
 | object | Teléfono móvil | OK | 20 | Teléfono móvil | Sin incidencias |
 | object | Silla | OK | 20 | Silla | Sin incidencias |
@@ -78,6 +86,26 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 
 ## Secuencias
 
+### animal: Ornitorrinco
+
+Estado: won. Preguntas: 9.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> Sí
+2. ¿Es un mamífero? -> Sí
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> No
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Nace de un huevo? -> Sí
+7. ¿Tiene cuatro patas o más? -> Sí
+8. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+9. ¿Es venenoso? -> A veces
+
+**Suposiciones**
+- Tras 9: Ornitorrinco (acierto)
+
+**Incidencias**: Sin incidencias.
+
 ### animal: Toro
 
 Estado: won. Preguntas: 8.
@@ -86,11 +114,11 @@ Estado: won. Preguntas: 8.
 1. ¿Es principalmente carnívoro o depredador? -> No
 2. ¿Es un mamífero? -> Sí
 3. ¿Es un animal doméstico, de granja o mascota común? -> Sí
-4. ¿Es más grande que una caja de zapatos? -> Sí
-5. ¿Es más grande que un perro? -> Sí
-6. ¿Tiene manchas en el pelaje? -> A veces
-7. ¿Es un macho bovino, como un toro? -> Sí
-8. ¿Tiene cornamenta o cuernos visibles? -> Sí
+4. ¿Es más grande que un perro? -> Sí
+5. ¿Tiene cornamenta o cuernos visibles? -> Sí
+6. ¿Es un macho bovino, como un toro? -> Sí
+7. ¿Tiene manchas en el pelaje? -> A veces
+8. ¿Puede ser peligroso para las personas? -> A veces
 
 **Suposiciones**
 - Tras 8: Toro (acierto)
@@ -109,8 +137,8 @@ Estado: won. Preguntas: 9.
 5. ¿Es más grande que una caja de zapatos? -> Sí
 6. ¿Tiene cuatro patas o más? -> Sí
 7. ¿Es más grande que un perro? -> Sí
-8. ¿Tiene rayas? -> Sí
-9. ¿Vive normalmente en España o en la fauna ibérica? -> No
+8. ¿Es un felino? -> Sí
+9. ¿Tiene rayas? -> Sí
 
 **Suposiciones**
 - Tras 9: Tigre (acierto)
@@ -140,7 +168,7 @@ Estado: won. Preguntas: 10.
 
 ### animal: Delfín
 
-Estado: won. Preguntas: 12.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Es principalmente carnívoro o depredador? -> Sí
@@ -152,12 +180,9 @@ Estado: won. Preguntas: 12.
 7. ¿Vive normalmente en España o en la fauna ibérica? -> No
 8. ¿Es más grande que un perro? -> Sí
 9. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
-10. ¿Tiene rayas? -> No lo sé
-11. ¿Tiene manchas en el pelaje? -> No lo sé
-12. ¿Es un felino? -> No lo sé
 
 **Suposiciones**
-- Tras 12: Delfín (acierto)
+- Tras 9: Delfín (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -203,7 +228,7 @@ Estado: won. Preguntas: 8.
 
 ### animal: Lobo
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
 1. ¿Es principalmente carnívoro o depredador? -> Sí
@@ -214,33 +239,27 @@ Estado: won. Preguntas: 11.
 6. ¿Tiene cuatro patas o más? -> Sí
 7. ¿Es más grande que un perro? -> A veces
 8. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
-9. ¿Tiene rayas? -> No lo sé
-10. ¿Tiene manchas en el pelaje? -> No lo sé
-11. ¿Es un felino? -> No lo sé
 
 **Suposiciones**
-- Tras 11: Lobo (acierto)
+- Tras 8: Lobo (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Cabra
 
-Estado: won. Preguntas: 10.
+Estado: won. Preguntas: 7.
 
 **Preguntas**
 1. ¿Es principalmente carnívoro o depredador? -> No
 2. ¿Es un mamífero? -> Sí
 3. ¿Es un animal doméstico, de granja o mascota común? -> Sí
-4. ¿Es más grande que una caja de zapatos? -> No
-5. ¿Tiene cuatro patas o más? -> Sí
-6. ¿Tiene rayas? -> No lo sé
-7. ¿Tiene manchas en el pelaje? -> No lo sé
-8. ¿Es un felino? -> No lo sé
-9. ¿Tiene cornamenta o cuernos visibles? -> Sí
-10. ¿Es más grande que un perro? -> A veces
+4. ¿Es más grande que un perro? -> A veces
+5. ¿Es más grande que una caja de zapatos? -> No
+6. ¿Tiene cuatro patas o más? -> Sí
+7. ¿Tiene cornamenta o cuernos visibles? -> Sí
 
 **Suposiciones**
-- Tras 10: Cabra (acierto)
+- Tras 7: Cabra (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -282,6 +301,150 @@ Estado: won. Preguntas: 11.
 
 **Suposiciones**
 - Tras 11: Pulpo (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Cigüeña
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> Sí
+2. ¿Es un mamífero? -> No
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> No
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Es un ave? -> Sí
+7. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+8. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+
+**Suposiciones**
+- Tras 8: Cigüeña (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Hipopótamo
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> No
+2. ¿Es un mamífero? -> Sí
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> Sí
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Es más grande que un perro? -> Sí
+7. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+8. ¿Tiene pezuñas? -> Sí
+
+**Suposiciones**
+- Tras 8: Hipopótamo (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Rinoceronte
+
+Estado: won. Preguntas: 9.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> No
+2. ¿Es un mamífero? -> Sí
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> Sí
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Es más grande que un perro? -> Sí
+7. ¿Suele desplazarse principalmente por el aire o el agua? -> No
+8. ¿Tiene cuatro patas o más? -> Sí
+9. ¿Tiene cornamenta o cuernos visibles? -> Sí
+
+**Suposiciones**
+- Tras 9: Rinoceronte (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Jirafa
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> No
+2. ¿Es un mamífero? -> Sí
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> No
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Tiene cuatro patas o más? -> Sí
+7. ¿Es más grande que un perro? -> Sí
+8. ¿Tiene manchas en el pelaje? -> Sí
+
+**Suposiciones**
+- Tras 8: Jirafa (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Cebra
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> No
+2. ¿Es un mamífero? -> Sí
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> A veces
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Tiene cuatro patas o más? -> Sí
+7. ¿Es más grande que un perro? -> Sí
+8. ¿Tiene pezuñas? -> Sí
+9. ¿Tiene rayas? -> Sí
+10. ¿Es conocido por un patrón blanco y negro? -> Sí
+
+**Suposiciones**
+- Tras 10: Cebra (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Canguro
+
+Estado: won. Preguntas: 13.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> No
+2. ¿Es un mamífero? -> Sí
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> A veces
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Tiene cuatro patas o más? -> No
+7. ¿Vive normalmente en España o en la fauna ibérica? -> No
+8. ¿Nace de un huevo? -> No
+9. ¿Es más grande que un perro? -> Sí
+10. ¿Suele desplazarse principalmente por el aire o el agua? -> No
+11. ¿Es principalmente nocturno? -> No lo sé
+12. ¿Es un primate? -> No
+13. ¿Es un marsupial? -> Sí
+
+**Suposiciones**
+- Tras 13: Canguro (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Panda
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Es principalmente carnívoro o depredador? -> A veces
+2. ¿Es un mamífero? -> Sí
+3. ¿Es un animal doméstico, de granja o mascota común? -> No
+4. ¿Puede ser peligroso para las personas? -> A veces
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Nace de un huevo? -> No
+7. ¿Vive normalmente en España o en la fauna ibérica? -> No
+8. ¿Es más grande que un perro? -> Sí
+9. ¿Tiene cuatro patas o más? -> Sí
+10. ¿Es conocido por un patrón blanco y negro? -> Sí
+11. ¿Tiene rayas? -> No
+
+**Suposiciones**
+- Tras 11: Panda (acierto)
 
 **Incidencias**: Sin incidencias.
 

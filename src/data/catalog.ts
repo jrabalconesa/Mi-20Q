@@ -8,7 +8,8 @@ const categoryLoaders: Record<Category, () => Promise<Candidate[]>> = {
       import('./generated/animal'),
       import('./animalKnowledge')
     ])
-    return [...core.coreCandidates, ...generated.generatedCandidates].map(knowledge.enrichAnimalCandidate)
+    return [...core.coreCandidates, ...knowledge.curatedAnimalCandidates, ...generated.generatedCandidates]
+      .map(knowledge.enrichAnimalCandidate)
   },
   object: async () => {
     const [core, generated, knowledge] = await Promise.all([

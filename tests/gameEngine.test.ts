@@ -144,6 +144,48 @@ describe('gameEngine', () => {
     expect(state.rankedCandidates.findIndex(candidate => candidate.id === target.id)).toBeLessThan(10)
   }, 30_000)
 
+  it('resuelve ornitorrinco como mamifero oviparo sin cerrar tras una suposicion fallida', () => {
+    const knowledge = knowledgeFor('animal')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Ornitorrinco')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('animal', knowledge)
+    const askedTexts: string[] = []
+    const answersByText = new Map<string, string>()
+
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      const value = answerForTarget(target, state, knowledge)
+      askedTexts.push(question.text)
+      answersByText.set(question.text, value)
+      state = answerCurrentQuestion(state, value, knowledge)
+    }
+
+    while (state.status === 'guessing' && state.guessCandidateId !== target.id && state.questionCount < 20) {
+      state = resolveGuess(state, false, knowledge)
+      expect(state.status, askedTexts.join(' | ')).toBe('playing')
+      while (state.status === 'playing') {
+        const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+        expect(question).toBeDefined()
+        if (!question) break
+        const value = answerForTarget(target, state, knowledge)
+        askedTexts.push(question.text)
+        answersByText.set(question.text, value)
+        state = answerCurrentQuestion(state, value, knowledge)
+      }
+    }
+
+    expect(answersByText.get('¿Es un mamífero?')).toBe('yes')
+    expect(answersByText.get('¿Nace de un huevo?')).toBe('yes')
+    expect(target.attributes.monotreme).toBe(true)
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe(target.id)
+    expect(state.questionCount).toBeLessThanOrEqual(20)
+  }, 30_000)
+
   it('no formula preguntas de objeto al jugar con una persona real como Gandhi', () => {
     const knowledge = knowledgeFor('person')
     const target = knowledge.candidates.find(candidate => candidate.name === 'Mahatma Gandhi')

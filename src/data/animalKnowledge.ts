@@ -1,5 +1,167 @@
 import type { AttributeValue, Candidate } from '../types/game'
 
+export const curatedAnimalCandidates: Candidate[] = [
+  {
+    id: 'curated-animal-platypus',
+    name: 'Ornitorrinco',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      arachnid: false, mollusk: false, crustacean: false, vertebrate: true, invertebrate: false,
+      carnivore: true, domestic: false, farm: false, domesticFarmPet: false, large: false,
+      largerThanShoebox: true, biggerThanDog: false, largerThanLion: false, fourLegs: true,
+      fourOrMoreLegs: true, fur: true, water: true, swims: true, semiAquatic: true,
+      movesByAirOrWater: true, laysEggs: true, oviparous: true, monotreme: true,
+      duckBill: true, livesInSpain: false, dangerous: false, venomous: 0.5, feathers: false,
+      scales: false, hasAntlers: false, stripedCoat: false, spottedCoat: false, nocturnal: 0.5,
+      marsupial: false, primate: false, hoofed: false, trunk: false, longNeck: false,
+      blackWhitePattern: false
+    }
+  },
+  {
+    id: 'curated-animal-stork',
+    name: 'Cigüeña',
+    category: 'animal',
+    attributes: {
+      mammal: false, bird: true, fish: false, reptile: false, amphibian: false, insect: false,
+      arachnid: false, mollusk: false, crustacean: false, vertebrate: true, invertebrate: false,
+      carnivore: true, domesticFarmPet: false, large: false, largerThanShoebox: true,
+      biggerThanDog: false, fourLegs: false, fourOrMoreLegs: false, fur: false, flies: true,
+      movesByAirOrWater: true, laysEggs: true, oviparous: true, livesInSpain: true,
+      dangerous: false, venomous: false, feathers: true, scales: false, hasAntlers: false,
+      stripedCoat: false, spottedCoat: false, blackWhitePattern: true, longNeck: true
+    }
+  },
+  {
+    id: 'curated-animal-hippopotamus',
+    name: 'Hipopótamo',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, invertebrate: false, carnivore: false, domesticFarmPet: false,
+      large: true, largerThanShoebox: true, biggerThanDog: true, largerThanLion: true,
+      fourLegs: true, fourOrMoreLegs: true, fur: false, water: true, swims: true,
+      semiAquatic: true, movesByAirOrWater: true, oviparous: false, livesInSpain: false,
+      dangerous: true, venomous: false, hasAntlers: false, hoofed: true, longNeck: false,
+      trunk: false, marsupial: false, primate: false, blackWhitePattern: false
+    }
+  },
+  {
+    id: 'curated-animal-rhinoceros',
+    name: 'Rinoceronte',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, invertebrate: false, carnivore: false, domesticFarmPet: false,
+      large: true, largerThanShoebox: true, biggerThanDog: true, largerThanLion: true,
+      fourLegs: true, fourOrMoreLegs: true, fur: false, water: false, swims: false,
+      semiAquatic: false, movesByAirOrWater: false, oviparous: false, livesInSpain: false,
+      dangerous: true, venomous: false, hasAntlers: true, hoofed: true, longNeck: false,
+      trunk: false, marsupial: false, primate: false, blackWhitePattern: false
+    }
+  },
+  {
+    id: 'curated-animal-giraffe',
+    name: 'Jirafa',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: false, domesticFarmPet: false, large: true,
+      largerThanShoebox: true, biggerThanDog: true, largerThanLion: true, fourLegs: true,
+      fourOrMoreLegs: true, fur: true, oviparous: false, livesInSpain: false,
+      dangerous: false, venomous: false, hasAntlers: true, hoofed: true, longNeck: true,
+      spottedCoat: true, stripedCoat: false, blackWhitePattern: false
+    }
+  },
+  {
+    id: 'curated-animal-zebra',
+    name: 'Cebra',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: false, domesticFarmPet: false, large: true,
+      largerThanShoebox: true, biggerThanDog: true, fourLegs: true, fourOrMoreLegs: true,
+      fur: true, oviparous: false, livesInSpain: false, dangerous: 0.5, venomous: false,
+      hasAntlers: false, hoofed: true, stripedCoat: true, spottedCoat: false,
+      blackWhitePattern: true, longNeck: false
+    }
+  },
+  {
+    id: 'curated-animal-kangaroo',
+    name: 'Canguro',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: false, domesticFarmPet: false, large: true,
+      largerThanShoebox: true, biggerThanDog: true, fourLegs: false, fourOrMoreLegs: false,
+      fur: true, oviparous: false, livesInSpain: false, dangerous: 0.5, venomous: false,
+      hasAntlers: false, marsupial: true, hoofed: false, blackWhitePattern: false
+    }
+  },
+  {
+    id: 'curated-animal-koala',
+    name: 'Koala',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: false, domesticFarmPet: false, large: false,
+      largerThanShoebox: true, biggerThanDog: false, fourLegs: true, fourOrMoreLegs: true,
+      fur: true, oviparous: false, livesInSpain: false, dangerous: false, venomous: false,
+      hasAntlers: false, marsupial: true, hoofed: false, blackWhitePattern: false
+    }
+  },
+  {
+    id: 'curated-animal-panda',
+    name: 'Panda',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: 0.5, domesticFarmPet: false, large: true,
+      largerThanShoebox: true, biggerThanDog: true, fourLegs: true, fourOrMoreLegs: true,
+      fur: true, oviparous: false, livesInSpain: false, dangerous: 0.5, venomous: false,
+      hasAntlers: false, blackWhitePattern: true, marsupial: false, primate: false
+    }
+  },
+  {
+    id: 'curated-animal-gorilla',
+    name: 'Gorila',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: false, domesticFarmPet: false, large: true,
+      largerThanShoebox: true, biggerThanDog: true, fourLegs: false, fourOrMoreLegs: false,
+      fur: true, oviparous: false, livesInSpain: false, dangerous: 0.5, venomous: false,
+      hasAntlers: false, primate: true, marsupial: false, hoofed: false
+    }
+  },
+  {
+    id: 'curated-animal-camel',
+    name: 'Camello',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: false, domesticFarmPet: true, domestic: true, farm: true,
+      large: true, largerThanShoebox: true, biggerThanDog: true, largerThanLion: true,
+      fourLegs: true, fourOrMoreLegs: true, fur: true, oviparous: false, livesInSpain: false,
+      dangerous: 0.5, venomous: false, hasAntlers: false, hoofed: true, desertAdapted: true,
+      longNeck: true, blackWhitePattern: false
+    }
+  },
+  {
+    id: 'curated-animal-polar-bear',
+    name: 'Oso polar',
+    category: 'animal',
+    attributes: {
+      mammal: true, bird: false, fish: false, reptile: false, amphibian: false, insect: false,
+      vertebrate: true, carnivore: true, domesticFarmPet: false, large: true,
+      largerThanShoebox: true, biggerThanDog: true, largerThanLion: true, fourLegs: true,
+      fourOrMoreLegs: true, fur: true, water: 0.5, swims: true, semiAquatic: 0.5,
+      movesByAirOrWater: true, oviparous: false, livesInSpain: false, dangerous: true,
+      venomous: false, hasAntlers: false, blackWhitePattern: false
+    }
+  }
+]
+
 const profiles: Record<string, Record<string, AttributeValue>> = {
   'guepardo': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, feline: true, carnivore: true, spottedCoat: true, stripedCoat: false, plainCoat: false, largerThanTiger: false, largerThanShoebox: true, veryFastRunner: true, large: false, fourLegs: true, fur: true, dangerous: true, domestic: false, farm: false },
   'leopardo': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, feline: true, carnivore: true, spottedCoat: true, stripedCoat: false, plainCoat: false, largerThanTiger: false, largerThanShoebox: true, veryFastRunner: false, large: false, fourLegs: true, fur: true, dangerous: true, domestic: false, farm: false },
@@ -88,6 +250,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('chara')) return 'Arrendajo'
   if (normalized.includes('chinche')) return 'Chinche'
   if (normalized.includes('chingolo')) return 'Gorrión'
+  if (normalized.includes('ciguena')) return 'Cigüeña'
   if (normalized.includes('cisne')) return 'Cisne'
   if (normalized.includes('cocodrilo')) return 'Cocodrilo'
   if (normalized.includes('colibri')) return 'Colibrí'
@@ -103,6 +266,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('gato')) return 'Gato'
   if (normalized.includes('gaviota')) return 'Gaviota'
   if (normalized.includes('gorrion')) return 'Gorrión'
+  if (normalized.includes('hipopotamo')) return 'Hipopótamo'
   if (normalized.includes('herrerillo')) return 'Herrerillo'
   if (normalized.includes('humano')) return 'Humano'
   if (normalized.includes('jilguero')) return 'Jilguero'
@@ -115,6 +279,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('mosca')) return 'Mosca'
   if (normalized.includes('mosquero')) return 'Mosquero'
   if (normalized.includes('noctuido') || normalized.includes('polilla')) return 'Polilla'
+  if (normalized.includes('ornitorrinco')) return 'Ornitorrinco'
   if (normalized.includes('paloma') || normalized.includes('tortola') || normalized.includes('zenaida')) return 'Paloma'
   if (normalized.includes('pelicano')) return 'Pelícano'
   if (normalized.includes('perro')) return 'Perro'
@@ -125,6 +290,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('rana')) return 'Rana'
   if (normalized.includes('rayadora')) return 'Libélula'
   if (normalized.includes('reinita')) return 'Reinita'
+  if (normalized.includes('rinoceronte')) return 'Rinoceronte'
   if (normalized.includes('sapo')) return 'Sapo'
   if (normalized.includes('serpiente') || normalized.includes('culebra')) return 'Serpiente'
   if (normalized.includes('serreta')) return 'Pato'
@@ -174,6 +340,26 @@ function hasLikelyAntlersOrHorns(name: string): boolean {
   ].some(token => name.includes(token))
 }
 
+function isLikelyHoofed(name: string): boolean {
+  return [
+    'antilope',
+    'bisonte',
+    'bufalo',
+    'caballo',
+    'cabra',
+    'camello',
+    'cebra',
+    'ciervo',
+    'gacela',
+    'hipopotamo',
+    'jirafa',
+    'oveja',
+    'rinoceronte',
+    'toro',
+    'vaca'
+  ].some(token => name.includes(token))
+}
+
 function inferAnimalAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const flies = attributes.flies === true
   const water = attributes.water === true || attributes.aquatic === true
@@ -205,8 +391,10 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
     tangible: true,
     domesticFarmPet: attributes.domesticFarmPet ?? (attributes.domestic === true || attributes.farm === true),
     movesByAirOrWater: attributes.movesByAirOrWater ?? (flies || water || swims),
+    semiAquatic: attributes.semiAquatic ?? (water && mammal ? 0.5 : false),
     fourOrMoreLegs: attributes.fourOrMoreLegs ?? (fourLegs || insect || arachnid || crustacean),
     felineOrCanid: attributes.felineOrCanid ?? (feline || canid),
+    feline: attributes.feline ?? false,
     canid: attributes.canid ?? canid,
     hasLegs: attributes.hasLegs ?? hasLegs,
     oviparous: attributes.oviparous ?? oviparous,
@@ -217,6 +405,17 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
     scales: attributes.scales ?? (fish || reptile),
     fur: attributes.fur ?? mammal,
     hasAntlers: attributes.hasAntlers ?? hasLikelyAntlersOrHorns(name),
+    stripedCoat: attributes.stripedCoat ?? false,
+    spottedCoat: attributes.spottedCoat ?? false,
+    monotreme: attributes.monotreme ?? false,
+    duckBill: attributes.duckBill ?? false,
+    marsupial: attributes.marsupial ?? false,
+    primate: attributes.primate ?? name.includes('humano'),
+    hoofed: attributes.hoofed ?? isLikelyHoofed(name),
+    trunk: attributes.trunk ?? name.includes('elefante'),
+    longNeck: attributes.longNeck ?? (name.includes('jirafa') || name.includes('ciguena')),
+    blackWhitePattern: attributes.blackWhitePattern ?? (name.includes('cebra') || name.includes('pinguino')),
+    veryFastRunner: attributes.veryFastRunner ?? false,
     nocturnal: attributes.nocturnal ?? (name.includes('buho') ? true : undefined)
   }
 }

@@ -79,6 +79,40 @@ describe('catalog', () => {
     expect(octopus?.attributes.vertebrate).toBe(false)
   })
 
+  it('incluye animales populares con atributos discriminatorios', async () => {
+    const animalKnowledge = await loadCategoryKnowledge('animal')
+    const animalNames = animalKnowledge.candidates.map(candidate => candidate.name)
+    const byName = (name: string) => animalKnowledge.candidates.find(candidate => candidate.name === name)
+
+    expect(animalNames).toEqual(expect.arrayContaining([
+      'Ornitorrinco',
+      'Cigüeña',
+      'Hipopótamo',
+      'Rinoceronte',
+      'Jirafa',
+      'Cebra',
+      'Canguro',
+      'Koala',
+      'Panda',
+      'Gorila',
+      'Camello',
+      'Oso polar'
+    ]))
+    expect(animalNames).not.toContain('Cigüeña Blanca')
+    expect(animalNames).not.toContain('Rinoceronte Blanco')
+    expect(byName('Ornitorrinco')?.attributes.mammal).toBe(true)
+    expect(byName('Ornitorrinco')?.attributes.oviparous).toBe(true)
+    expect(byName('Ornitorrinco')?.attributes.monotreme).toBe(true)
+    expect(byName('Ornitorrinco')?.attributes.duckBill).toBe(true)
+    expect(byName('Ornitorrinco')?.attributes.semiAquatic).toBe(true)
+    expect(byName('Cigüeña')?.attributes.bird).toBe(true)
+    expect(byName('Cigüeña')?.attributes.livesInSpain).toBe(true)
+    expect(byName('Hipopótamo')?.attributes.semiAquatic).toBe(true)
+    expect(byName('Rinoceronte')?.attributes.hasAntlers).toBe(true)
+    expect(byName('Jirafa')?.attributes.longNeck).toBe(true)
+    expect(byName('Canguro')?.attributes.marsupial).toBe(true)
+  })
+
   it('valida tamano y duplicados del catalogo base', async () => {
     const categories = ['animal', 'object', 'place', 'person'] as const
     const knowledge = await Promise.all(categories.map(loadCategoryKnowledge))
