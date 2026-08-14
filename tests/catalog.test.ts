@@ -205,6 +205,9 @@ describe('catalog', () => {
       'Juan Pablo II'
     ]))
     expect(placeNames).toContain('San Petersburgo')
+    expect(placeNames).toContain('Ciudad de México')
+    expect(placeNames).toContain('Londres')
+    expect(placeNames).toContain('Moscú')
     expect(personNames).not.toEqual(expect.arrayContaining([
       'Elizabeth I of England',
       'Louis XIV of France',
@@ -218,6 +221,28 @@ describe('catalog', () => {
       'Pope John Paul II'
     ]))
     expect(placeNames).not.toContain('Saint Petersburg')
+    expect(placeNames).not.toContain('Mexico City')
+    expect(placeNames).not.toContain('London')
+  })
+
+  it('refuerza Paris con atributos geograficos discriminatorios', async () => {
+    const placeKnowledge = await loadCategoryKnowledge('place')
+    const paris = placeKnowledge.candidates.find(candidate => candidate.name === 'París')
+    const questionIds = placeKnowledge.questions.map(question => question.id)
+
+    expect(paris?.attributes.capital).toBe(true)
+    expect(paris?.attributes.inFrance).toBe(true)
+    expect(paris?.attributes.europe).toBe(true)
+    expect(paris?.attributes.americas).toBe(false)
+    expect(paris?.attributes.westernHemisphere).toBe(true)
+    expect(paris?.attributes.before1900).toBe(true)
+    expect(placeKnowledge.questions.length).toBeGreaterThanOrEqual(20)
+    expect(questionIds).toEqual(expect.arrayContaining([
+      'place_in_europe',
+      'place_in_americas',
+      'place_in_france',
+      'place_large_city'
+    ]))
   })
 
   it('usa preguntas coherentes con la categoria persona', async () => {

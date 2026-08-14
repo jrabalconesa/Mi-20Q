@@ -34,7 +34,10 @@ export const curatedPlaceCandidates: Candidate[] = [
 const profilesById: Record<string, Record<string, boolean>> = {
   paris: {
     iberianPeninsula: false, inSpain: false, inFrance: true, inItaly: false,
-    inUnitedKingdom: false, regionalCapital: false, northOf45: true, southOf40: false
+    inUnitedKingdom: false, regionalCapital: false, capital: true, largeCity: true,
+    megaCity: true, northOf45: true, southOf40: false, northernHemisphere: true,
+    southernHemisphere: false, easternHemisphere: true, westernHemisphere: true,
+    before1900: true
   },
   rome: {
     iberianPeninsula: false, inSpain: false, inFrance: false, inItaly: true,
@@ -50,6 +53,12 @@ const profilesById: Record<string, Record<string, boolean>> = {
 }
 
 const spanishPlaceNames: Record<string, string> = {
+  'mexico city': 'Ciudad de México',
+  'new york city': 'Nueva York',
+  'london': 'Londres',
+  'moscow': 'Moscú',
+  'beijing': 'Pekín',
+  'cairo': 'El Cairo',
   'saint petersburg': 'San Petersburgo',
   'genoa': 'Génova'
 }

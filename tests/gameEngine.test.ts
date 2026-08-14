@@ -262,6 +262,34 @@ describe('gameEngine', () => {
     expect(state.questionCount).toBeLessThanOrEqual(20)
   }, 30_000)
 
+  it('no se detiene antes de veinte si falla una suposición pensando en París', () => {
+    const knowledge = knowledgeFor('place')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'París')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('place', knowledge)
+    while (state.status === 'playing') {
+      state = answerCurrentQuestion(state, answerForTarget(target, state, knowledge), knowledge)
+    }
+
+    if (state.status === 'guessing' && state.guessCandidateId !== 'paris' && state.questionCount < 20) {
+      state = resolveGuess(state, false, knowledge)
+      expect(state.status).toBe('playing')
+      while (state.status === 'playing') {
+        state = answerCurrentQuestion(state, answerForTarget(target, state, knowledge), knowledge)
+      }
+    }
+
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe('paris')
+    expect(state.questionCount).toBeLessThanOrEqual(20)
+  }, 30_000)
+
+  it.each<Category>(categories)('dispone de al menos veinte preguntas para %s', category => {
+    expect(knowledgeFor(category).questions.length).toBeGreaterThanOrEqual(20)
+  })
+
   it.each(['París', 'Murcia', 'Cartagena (España)'])(
     'distingue %s mediante preguntas geográficas naturales',
     targetName => {

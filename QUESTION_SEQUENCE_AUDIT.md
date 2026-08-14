@@ -1,6 +1,6 @@
 # Auditoría de secuencias de preguntas
 
-Generado con `npm run audit:questions` el 2026-08-14T22:05:37.468Z.
+Generado con `npm run audit:questions` el 2026-08-14T22:18:45.175Z.
 
 El informe simula respuestas exactas para candidatos representativos. Si el motor hace una suposición incorrecta antes de 20 preguntas, la simulación responde que no y comprueba que la partida continúe.
 
@@ -20,12 +20,12 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 | object | Coche | OK | 20 | Coche | Sin incidencias |
 | object | Libro | OK | 20 | Libro | Sin incidencias |
 | object | Guitarra | OK | 8 | Guitarra | Sin incidencias |
-| place | París | OK | 17 | París | Sin incidencias |
-| place | Murcia | OK | 17 | Murcia | Sin incidencias |
-| place | Cartagena (España) | OK | 17 | Cartagena (España) | Sin incidencias |
+| place | París | OK | 12 | París | Sin incidencias |
+| place | Murcia | OK | 20 | Murcia | Sin incidencias |
+| place | Cartagena (España) | OK | 20 | Cartagena (España) | Sin incidencias |
 | place | Monte Everest | OK | 10 | Monte Everest | Sin incidencias |
-| place | Gran Cañón | OK | 9 | Gran Cañón | Sin incidencias |
-| place | Taj Mahal | OK | 17 | Taj Mahal | Sin incidencias |
+| place | Gran Cañón | OK | 12 | Gran Cañón | Sin incidencias |
+| place | Taj Mahal | OK | 20 | Taj Mahal | Sin incidencias |
 | person | Mahatma Gandhi | OK | 19 | Mahatma Gandhi | Sin incidencias |
 | person | Pedro Sánchez | OK | 20 | Pedro Sánchez | Sin incidencias |
 | person | Don Quijote de la Mancha | OK | 8 | Don Quijote de la Mancha | Sin incidencias |
@@ -339,7 +339,7 @@ Estado: won. Preguntas: 8.
 
 ### place: París
 
-Estado: won. Preguntas: 17.
+Estado: won. Preguntas: 12.
 
 **Preguntas**
 1. ¿Está en España? -> No
@@ -347,27 +347,22 @@ Estado: won. Preguntas: 17.
 3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No
-7. ¿Tiene acceso al mar o está junto a la costa? -> No
+6. ¿Tiene acceso al mar o está junto a la costa? -> No
+7. ¿Nació o se originó antes del año 1900? -> Sí
 8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Es una capital? -> No lo sé
-10. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-11. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-12. ¿Es un desierto o zona árida? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es un monumento famoso? -> No
-17. ¿Está asociado principalmente a la religión? -> No
+9. ¿Está en América? -> No
+10. ¿Es una capital? -> Sí
+11. ¿Está en Europa? -> Sí
+12. ¿Está en Francia? -> Sí
 
 **Suposiciones**
-- Tras 17: París (acierto)
+- Tras 12: París (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Murcia
 
-Estado: won. Preguntas: 17.
+Estado: won. Preguntas: 20.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
@@ -375,27 +370,30 @@ Estado: won. Preguntas: 17.
 3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No lo sé
-7. ¿Tiene acceso al mar o está junto a la costa? -> No
+6. ¿Tiene acceso al mar o está junto a la costa? -> No
+7. ¿Nació o se originó antes del año 1900? -> No lo sé
 8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Es una capital? -> No
-10. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-11. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-12. ¿Es un desierto o zona árida? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es un monumento famoso? -> No
-17. ¿Está asociado principalmente a la religión? -> No
+9. ¿Está en América? -> No
+10. ¿Está en Europa? -> Sí
+11. ¿Es una ciudad grande o muy poblada? -> No
+12. ¿Es una capital? -> No
+13. ¿Está en Francia? -> No
+14. ¿Es un monumento famoso? -> No
+15. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+16. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
+17. ¿Es un desierto o zona árida? -> No
+18. ¿Es una elevación natural, como una montaña o volcán? -> No
+19. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+20. ¿Está asociado principalmente a la religión? -> No
 
 **Suposiciones**
-- Tras 17: Murcia (acierto)
+- Tras 20: Murcia (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Cartagena (España)
 
-Estado: won. Preguntas: 17.
+Estado: won. Preguntas: 20.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
@@ -403,21 +401,24 @@ Estado: won. Preguntas: 17.
 3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No lo sé
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+6. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+7. ¿Nació o se originó antes del año 1900? -> No lo sé
 8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Es una capital? -> No
-10. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-11. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-12. ¿Es un desierto o zona árida? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es un monumento famoso? -> No
-17. ¿Está asociado principalmente a la religión? -> No
+9. ¿Está en América? -> No
+10. ¿Está en Europa? -> Sí
+11. ¿Es una ciudad grande o muy poblada? -> No
+12. ¿Es una capital? -> No
+13. ¿Está en Francia? -> No
+14. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+15. ¿Es un monumento famoso? -> No
+16. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
+17. ¿Es un desierto o zona árida? -> No
+18. ¿Es una elevación natural, como una montaña o volcán? -> No
+19. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+20. ¿Está asociado principalmente a la religión? -> No
 
 **Suposiciones**
-- Tras 17: Cartagena (España) (acierto)
+- Tras 20: Cartagena (España) (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -444,7 +445,7 @@ Estado: won. Preguntas: 10.
 
 ### place: Gran Cañón
 
-Estado: won. Preguntas: 9.
+Estado: won. Preguntas: 12.
 
 **Preguntas**
 1. ¿Está en España? -> No lo sé
@@ -455,16 +456,19 @@ Estado: won. Preguntas: 9.
 6. ¿Nació o se originó antes del año 1900? -> No lo sé
 7. ¿Es una capital? -> No lo sé
 8. ¿Es un desierto o zona árida? -> Sí
-9. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+9. ¿Está en Francia? -> No lo sé
+10. ¿Es una ciudad grande o muy poblada? -> No lo sé
+11. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+12. ¿Está en América? -> Sí
 
 **Suposiciones**
-- Tras 9: Gran Cañón (acierto)
+- Tras 12: Gran Cañón (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Taj Mahal
 
-Estado: won. Preguntas: 17.
+Estado: won. Preguntas: 20.
 
 **Preguntas**
 1. ¿Está en España? -> No lo sé
@@ -472,21 +476,24 @@ Estado: won. Preguntas: 17.
 3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No lo sé
-7. ¿Tiene acceso al mar o está junto a la costa? -> No
+6. ¿Tiene acceso al mar o está junto a la costa? -> No
+7. ¿Nació o se originó antes del año 1900? -> No lo sé
 8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
 9. ¿Es una capital? -> No lo sé
-10. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
-11. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-12. ¿Es una elevación natural, como una montaña o volcán? -> No
-13. ¿Es un desierto o zona árida? -> No
-14. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-15. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-16. ¿Es un monumento famoso? -> Sí
-17. ¿Está asociado principalmente a la religión? -> No
+10. ¿Está en Europa? -> No
+11. ¿Está en América? -> No
+12. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+15. ¿Es un desierto o zona árida? -> No
+16. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+17. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
+18. ¿Es una ciudad grande o muy poblada? -> No lo sé
+19. ¿Es un monumento famoso? -> Sí
+20. ¿Está en Francia? -> No lo sé
 
 **Suposiciones**
-- Tras 17: Taj Mahal (acierto)
+- Tras 20: Taj Mahal (acierto)
 
 **Incidencias**: Sin incidencias.
 
