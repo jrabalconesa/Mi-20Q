@@ -33,7 +33,8 @@ const categoryLoaders: Record<Category, () => Promise<Candidate[]>> = {
       import('./generated/person'),
       import('./personKnowledge')
     ])
-    return [...core.coreCandidates, ...generated.generatedCandidates].map(knowledge.enrichPersonCandidate)
+    return [...core.coreCandidates, ...knowledge.curatedPersonCandidates, ...generated.generatedCandidates]
+      .map(knowledge.enrichPersonCandidate)
   }
 }
 

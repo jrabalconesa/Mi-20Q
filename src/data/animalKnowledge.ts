@@ -60,6 +60,82 @@ function normalizedName(name: string): string {
   return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')
 }
 
+function genericAnimalName(name: string, attributes: Record<string, AttributeValue>): string {
+  const normalized = normalizedName(name)
+  if (normalized.includes('panthera tigris')) return 'Tigre'
+  if (normalized.includes('panthera leo')) return 'León'
+  if (normalized.includes('panthera onca')) return 'Jaguar'
+  if (normalized === 'tigre' && attributes.mammal === true) return 'Tigre'
+  if (normalized.includes('tigre') && attributes.insect === true) return 'Insecto'
+  if (normalized.includes('ardilla')) return 'Ardilla'
+  if (normalized.includes('abeja')) return 'Abeja'
+  if (normalized.includes('abejorro')) return 'Abejorro'
+  if (normalized.includes('aguila')) return 'Águila'
+  if (normalized.includes('anade')) return 'Pato'
+  if (normalized.includes('azulejo')) return 'Pájaro azul'
+  if (normalized.includes('ballena')) return 'Ballena'
+  if (normalized.includes('barnacla')) return 'Ganso'
+  if (normalized.includes('bejori')) return 'Lagarto'
+  if (normalized.includes('busardo')) return 'Busardo'
+  if (normalized.includes('caballo')) return 'Caballo'
+  if (normalized.includes('camachuelo')) return 'Camachuelo'
+  if (normalized.includes('carbonero')) return 'Carbonero'
+  if (normalized.includes('cardenal')) return 'Cardenal'
+  if (normalized.includes('carpintero') || normalized.includes('pico ')) return 'Pájaro carpintero'
+  if (normalized.includes('catarina')) return 'Mariquita'
+  if (normalized.includes('cernicalo')) return 'Cernícalo'
+  if (normalized.includes('chara')) return 'Arrendajo'
+  if (normalized.includes('chinche')) return 'Chinche'
+  if (normalized.includes('chingolo')) return 'Gorrión'
+  if (normalized.includes('cisne')) return 'Cisne'
+  if (normalized.includes('cocodrilo')) return 'Cocodrilo'
+  if (normalized.includes('colibri')) return 'Colibrí'
+  if (normalized.includes('conejo')) return 'Conejo'
+  if (normalized.includes('cormoran')) return 'Cormorán'
+  if (normalized.includes('coyote')) return 'Coyote'
+  if (normalized.includes('cuervo') || normalized.includes('corneja')) return 'Cuervo'
+  if (normalized.includes('delfin')) return 'Delfín'
+  if (normalized.includes('elefante')) return 'Elefante'
+  if (normalized.includes('focha')) return 'Focha'
+  if (normalized.includes('gallina') || normalized.includes('guajolote')) return 'Gallina'
+  if (normalized.includes('garceta') || normalized.includes('garza') || normalized.includes('garcilla')) return 'Garza'
+  if (normalized.includes('gato')) return 'Gato'
+  if (normalized.includes('gaviota')) return 'Gaviota'
+  if (normalized.includes('gorrion')) return 'Gorrión'
+  if (normalized.includes('herrerillo')) return 'Herrerillo'
+  if (normalized.includes('humano')) return 'Humano'
+  if (normalized.includes('jilguero')) return 'Jilguero'
+  if (normalized.includes('junco')) return 'Junco'
+  if (normalized.includes('lavandera')) return 'Lavandera'
+  if (normalized.includes('leon')) return 'León'
+  if (normalized.includes('mariposa') || normalized.includes('icaro')) return 'Mariposa'
+  if (normalized.includes('martinete')) return 'Martinete'
+  if (normalized.includes('mirlo')) return 'Mirlo'
+  if (normalized.includes('mosca')) return 'Mosca'
+  if (normalized.includes('mosquero')) return 'Mosquero'
+  if (normalized.includes('noctuido') || normalized.includes('polilla')) return 'Polilla'
+  if (normalized.includes('paloma') || normalized.includes('tortola') || normalized.includes('zenaida')) return 'Paloma'
+  if (normalized.includes('pelicano')) return 'Pelícano'
+  if (normalized.includes('perro')) return 'Perro'
+  if (normalized.includes('petirrojo')) return 'Petirrojo'
+  if (normalized.includes('pigargo')) return 'Águila'
+  if (normalized.includes('pinguino')) return 'Pingüino'
+  if (normalized.includes('pinzon')) return 'Pinzón'
+  if (normalized.includes('rana')) return 'Rana'
+  if (normalized.includes('rayadora')) return 'Libélula'
+  if (normalized.includes('reinita')) return 'Reinita'
+  if (normalized.includes('sapo')) return 'Sapo'
+  if (normalized.includes('serpiente') || normalized.includes('culebra')) return 'Serpiente'
+  if (normalized.includes('serreta')) return 'Pato'
+  if (normalized.includes('sinsonte')) return 'Sinsonte'
+  if (normalized.includes('tiburon')) return 'Tiburón'
+  if (normalized.includes('tortuga')) return 'Tortuga'
+  if (normalized.includes('venado')) return 'Ciervo'
+  if (normalized.includes('zorro')) return 'Zorro'
+  if (normalized.includes('zopilote') || normalized.includes('aura')) return 'Buitre'
+  return name
+}
+
 function inferredProfile(name: string): Record<string, AttributeValue> | undefined {
   if (name.includes('ardilla')) return squirrelProfile
   return undefined
@@ -99,5 +175,5 @@ export function enrichAnimalCandidate(candidate: Candidate): Candidate {
   const name = normalizedName(candidate.name)
   const profile = { ...inferredProfile(name), ...profiles[name] }
   const attributes = { ...candidate.attributes, ...profile }
-  return { ...candidate, attributes: inferAnimalAttributes(name, attributes) }
+  return { ...candidate, name: genericAnimalName(candidate.name, attributes), attributes: inferAnimalAttributes(name, attributes) }
 }

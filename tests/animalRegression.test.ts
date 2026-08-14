@@ -31,7 +31,7 @@ describe('animal regressions', () => {
       universal_larger_shoebox: 'yes'
     })
     const tiger = ranked.find(candidate => candidate.name === 'Tigre')
-    const squirrel = ranked.find(candidate => candidate.name === 'Ardilla gris de las Carolinas')
+    const squirrel = ranked.find(candidate => candidate.name === 'Ardilla')
 
     expect(ranked[0]?.name).not.toContain('Ardilla')
     expect(tiger?.score).toBeGreaterThan(squirrel?.score ?? 0)

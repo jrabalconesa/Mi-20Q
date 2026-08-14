@@ -41,8 +41,31 @@ describe('catalog', () => {
     const candidates = knowledge.flatMap(category => category.candidates)
     const questions = knowledge.flatMap(category => category.questions)
 
-    const issues = validateCatalog(candidates, questions, [...categories], { minCoverage: 0 })
+    const issues = [
+      ...validateCatalog(candidates, questions, ['animal'], { minCandidates: 600, minCoverage: 0 }),
+      ...validateCatalog(candidates, questions, ['object', 'place', 'person'], { minCoverage: 0 })
+    ]
 
     expect(issues).toEqual([])
+  })
+
+  it('normaliza animales a nombres comunes y personas a formas frecuentes en espanol', async () => {
+    const animalKnowledge = await loadCategoryKnowledge('animal')
+    const personKnowledge = await loadCategoryKnowledge('person')
+    const animalNames = animalKnowledge.candidates.map(candidate => candidate.name)
+    const personNames = personKnowledge.candidates.map(candidate => candidate.name)
+
+    expect(animalNames).toContain('Ardilla')
+    expect(animalNames).toContain('Tigre')
+    expect(animalNames).not.toContain('Ardilla gris de las Carolinas')
+    expect(animalNames).not.toContain('Panthera tigris')
+    expect(personNames).toEqual(expect.arrayContaining([
+      'Aristóteles',
+      'Julio César',
+      'Cristóbal Colón',
+      'Pedro Sánchez',
+      'Rafa Nadal',
+      'Rosalía'
+    ]))
   })
 })

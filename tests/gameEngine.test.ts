@@ -73,8 +73,13 @@ describe('gameEngine', () => {
     }
   })
 
-  it.each(categories)('incluye al menos 1.000 candidatos de %s', category => {
-    expect(candidates.filter(candidate => candidate.category === category).length).toBeGreaterThanOrEqual(1_000)
+  it.each([
+    ['animal', 600],
+    ['object', 1_000],
+    ['place', 1_000],
+    ['person', 1_000]
+  ] as const)('incluye suficientes candidatos normalizados de %s', (category, minimum) => {
+    expect(candidates.filter(candidate => candidate.category === category).length).toBeGreaterThanOrEqual(minimum)
   })
 
   it.each(categories)('no contiene nombres duplicados en %s', category => {
