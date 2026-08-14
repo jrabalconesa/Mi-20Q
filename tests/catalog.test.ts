@@ -68,4 +68,25 @@ describe('catalog', () => {
       'Rosalía'
     ]))
   })
+
+  it('incorpora personajes reales del csv y descarta filas sinteticas redundantes', async () => {
+    const personKnowledge = await loadCategoryKnowledge('person')
+    const personNames = personKnowledge.candidates.map(candidate => candidate.name)
+    const fernandoAlonso = personKnowledge.candidates.find(candidate => candidate.name === 'Fernando Alonso')
+    const donQuijote = personKnowledge.candidates.find(candidate => candidate.name === 'Don Quijote de la Mancha')
+
+    expect(personNames).toEqual(expect.arrayContaining([
+      'Julio Iglesias',
+      'Fernando Alonso',
+      'Lope de Vega',
+      'Margarita Salas',
+      'Javier Bardem'
+    ]))
+    expect(personNames).not.toContain('Marta González 280 (Cine y Espectáculo Ref)')
+    expect(personNames).not.toContain('Rafael Nadal')
+    expect(fernandoAlonso?.attributes.sports).toBe(true)
+    expect(fernandoAlonso?.attributes.spanishOrigin).toBe(true)
+    expect(donQuijote?.attributes.realPerson).toBe(false)
+    expect(donQuijote?.attributes.artificialOrFictional).toBe(true)
+  })
 })
