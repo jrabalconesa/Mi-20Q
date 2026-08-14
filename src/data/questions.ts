@@ -48,6 +48,9 @@ export const questions: Question[] = [
   { id: 'object_liquid', text: '¿Es líquido?', attribute: 'liquid', categories: object, phase: 'closing' },
   { id: 'object_cleaning', text: '¿Se usa para limpiar?', attribute: 'cleaning', categories: object, phase: 'closing' },
   { id: 'object_game_equipment', text: '¿Está asociado a un deporte o juego?', attribute: 'gameEquipment', categories: object },
+  { id: 'object_cutlery', text: '¿Es un cubierto o utensilio para comer?', attribute: 'cutlery', categories: object, phase: 'closing', importance: 1.35 },
+  { id: 'object_has_handle', text: '¿Tiene mango o asa para sujetarlo?', attribute: 'hasHandle', categories: object, phase: 'closing', importance: 1.15 },
+  { id: 'object_concave', text: '¿Tiene una parte cóncava para recoger o contener algo?', attribute: 'concave', categories: object, phase: 'closing', importance: 1.25 },
 
   { id: 'person_real', text: '¿Es (o fue) una persona real de carne y hueso?', attribute: 'realPerson', categories: person, phase: 'absolute' },
   { id: 'person_fictional', text: '¿Es un personaje de ficción?', attribute: 'artificialOrFictional', categories: person, phase: 'absolute', skipIf: [{ questionId: 'person_real', answers: ['yes'] }] },

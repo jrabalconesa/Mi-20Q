@@ -168,6 +168,47 @@ describe('gameEngine', () => {
     expect(state.rankedCandidates.findIndex(candidate => candidate.name === 'Mahatma Gandhi')).toBeLessThan(25)
   }, 30_000)
 
+  it('sigue preguntando tras fallar con cuchara antes de agotar las veinte preguntas', () => {
+    const knowledge = knowledgeFor('object')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Cuchara')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('object', knowledge)
+    const askedTexts: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      askedTexts.push(question.text)
+      const value = expectedValue(target, question)
+      state = answerCurrentQuestion(
+        state,
+        value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+        knowledge
+      )
+    }
+
+    while (state.status === 'guessing' && state.guessCandidateId !== 'wn-object-spoon-n-01' && state.questionCount < 20) {
+      state = resolveGuess(state, false, knowledge)
+      expect(state.status, askedTexts.join(' | ')).toBe('playing')
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      askedTexts.push(question.text)
+      const value = expectedValue(target, question)
+      state = answerCurrentQuestion(
+        state,
+        value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+        knowledge
+      )
+    }
+
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe('wn-object-spoon-n-01')
+    expect(state.questionCount).toBeLessThanOrEqual(20)
+  }, 30_000)
+
   it.each(['París', 'Murcia', 'Cartagena (España)'])(
     'distingue %s mediante preguntas geográficas naturales',
     targetName => {

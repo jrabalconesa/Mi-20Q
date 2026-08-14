@@ -7,12 +7,17 @@ describe('catalog', () => {
     const knowledge = await loadCategoryKnowledge('object')
     const guitar = knowledge.candidates.find(candidate => candidate.name === 'Guitarra')
     const phone = knowledge.candidates.find(candidate => candidate.name === 'Teléfono móvil')
+    const spoon = knowledge.candidates.find(candidate => candidate.name === 'Cuchara')
 
     expect(guitar?.attributes.musicalInstrument).toBe(true)
     expect(guitar?.attributes.portable).toBe(true)
     expect(guitar?.attributes.indoors).toBe(true)
     expect(guitar?.attributes.largerThanShoebox).toBe(true)
     expect(phone?.attributes.largerThanShoebox).toBe(false)
+    expect(spoon?.attributes.kitchenFood).toBe(true)
+    expect(spoon?.attributes.cutlery).toBe(true)
+    expect(spoon?.attributes.hasHandle).toBe(true)
+    expect(spoon?.attributes.concave).toBe(true)
   })
 
   it('incluye la pregunta de caja de zapatos para animales y objetos', async () => {
@@ -40,8 +45,12 @@ describe('catalog', () => {
       attribute: 'largerThanShoebox',
       text: '¿Es más grande que una caja de zapatos?'
     }))
+    expect(objectKnowledge.questions).toContainEqual(expect.objectContaining({
+      attribute: 'cutlery',
+      text: '¿Es un cubierto o utensilio para comer?'
+    }))
     expect(animalKnowledge.questions.length).toBeGreaterThan(12)
-    expect(objectKnowledge.questions.length).toBeGreaterThan(11)
+    expect(objectKnowledge.questions.length).toBeGreaterThanOrEqual(20)
     expect(dog?.attributes.largerThanShoebox).toBe(true)
     expect(bee?.attributes.largerThanShoebox).toBe(false)
     expect(cow?.attributes.hasAntlers).toBe(true)

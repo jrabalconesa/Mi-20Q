@@ -24,7 +24,13 @@ const profiles: Record<string, Record<string, AttributeValue>> = {
   'smartphone': { usedDaily: true, electronic: true, portable: true, screen: true, device: true, computer: true, largerThanShoebox: false },
   'tablet': { electronic: true, portable: true, screen: true, device: true, computer: true, largerThanShoebox: false },
   'piano': { musicalInstrument: true, furniture: true, indoors: true, large: true, largerThanShoebox: true },
-  'guitarra': { musicalInstrument: true, portable: true, indoors: true, largerThanShoebox: true }
+  'guitarra': { musicalInstrument: true, portable: true, indoors: true, largerThanShoebox: true },
+  'cuchara': { kitchen: true, kitchenFood: true, cutlery: true, hasHandle: true, concave: true, portable: true, container: false, metalOrPlastic: true, largerThanShoebox: false },
+  'cuchillo': { kitchen: true, kitchenFood: true, cutlery: true, hasHandle: true, concave: false, portable: true, metalOrPlastic: true, largerThanShoebox: false },
+  'tenedor': { kitchen: true, kitchenFood: true, cutlery: true, hasHandle: true, concave: false, portable: true, metalOrPlastic: true, largerThanShoebox: false },
+  'plato': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: false, concave: 0.5, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: 0.5 },
+  'taza': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: true, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: false },
+  'vaso': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: false, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: false }
 }
 
 function normalizedName(name: string): string {
@@ -46,6 +52,9 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
   const cleaningName = ['escoba', 'fregona', 'jabon', 'detergente', 'aspiradora', 'bayeta'].some(token => name.includes(token))
   const liquidName = ['agua', 'aceite', 'leche', 'vino', 'zumo', 'gasolina'].some(token => name.includes(token))
   const edibleName = ['pan', 'queso', 'manzana', 'platano', 'arroz', 'pasta', 'pizza', 'chocolate'].some(token => name.includes(token))
+  const cutleryName = ['cuchara', 'cuchillo', 'tenedor'].some(token => name.includes(token))
+  const handleName = ['cuchara', 'cuchillo', 'tenedor', 'taza', 'sarten', 'martillo', 'taladro', 'paraguas', 'guitarra'].some(token => name.includes(token))
+  const concaveName = ['cuchara', 'taza', 'vaso', 'cuenco', 'bol', 'sarten', 'olla'].some(token => name.includes(token))
 
   const electronic = attributes.electronic ?? (device || machine)
   const portable = attributes.portable ?? (wearable || tool || weapon || musicalInstrument || (container && !vehicle && !furniture))
@@ -69,6 +78,9 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
   const liquid = attributes.liquid ?? liquidName
   const edible = attributes.edible ?? edibleName
   const cleaning = attributes.cleaning ?? cleaningName
+  const cutlery = attributes.cutlery ?? cutleryName
+  const hasHandle = attributes.hasHandle ?? handleName
+  const concave = attributes.concave ?? concaveName
 
   return {
     ...attributes,
@@ -96,7 +108,10 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
     softFlexible,
     liquid,
     edible,
-    cleaning
+    cleaning,
+    cutlery,
+    hasHandle,
+    concave
   }
 }
 
