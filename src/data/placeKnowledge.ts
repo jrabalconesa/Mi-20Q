@@ -49,31 +49,45 @@ const profilesById: Record<string, Record<string, boolean>> = {
   }
 }
 
-function inferPlaceAttributes(attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
+function normalizedName(name: string): string {
+  return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')
+}
+
+function inferPlaceAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const building = attributes.building === true
   const urban = attributes.urban === true
   const natural = attributes.natural === true
+  const normalized = normalizedName(name)
+  const waterName = ['rio ', 'río ', 'lago ', 'mar ', 'oceano ', 'océano ', 'bahia ', 'bahía '].some(token => normalized.includes(token))
+  const religiousName = ['catedral', 'templo', 'mezquita', 'iglesia', 'basilica', 'basílica', 'vaticano', 'meca'].some(token => normalized.includes(token))
 
   return {
     ...attributes,
+    realPlace: attributes.realPlace ?? true,
     artificialOrFictional: attributes.artificialOrFictional ?? (building || urban),
     indoors: attributes.indoors ?? building,
     largerThanShoebox: true,
     digitalOrElectronic: false,
     tangible: true,
     before1900: attributes.before1900 ?? attributes.ancientCity,
+    politicalDivision: attributes.politicalDivision ?? (urban || attributes.capital === true || attributes.regionalCapital === true || attributes.largeCity === true),
     geographicOrBuilt: true,
     westernHemisphere: attributes.westernHemisphere ?? (attributes.americas === true || (attributes.europe === true && attributes.easternHemisphere !== true)),
-    natural: attributes.natural ?? (!building && !urban && natural)
+    natural: attributes.natural ?? (!building && !urban && natural),
+    waterPlace: attributes.waterPlace ?? waterName,
+    elevation: attributes.elevation ?? attributes.mountain,
+    famousMonument: attributes.famousMonument ?? (building && attributes.famous === true),
+    religious: attributes.religious ?? religiousName
   }
 }
 
 export function enrichPlaceCandidate(candidate: Candidate): Candidate {
   const profile = profilesById[candidate.id]
-  if (!profile) return { ...candidate, attributes: inferPlaceAttributes(candidate.attributes) }
+  if (!profile) return { ...candidate, attributes: inferPlaceAttributes(candidate.name, candidate.attributes) }
+  const name = candidate.id === 'geonames-3687238' ? 'Cartagena de Indias (Colombia)' : candidate.name
   return {
     ...candidate,
-    name: candidate.id === 'geonames-3687238' ? 'Cartagena de Indias (Colombia)' : candidate.name,
-    attributes: inferPlaceAttributes({ ...candidate.attributes, ...profile })
+    name,
+    attributes: inferPlaceAttributes(name, { ...candidate.attributes, ...profile })
   }
 }

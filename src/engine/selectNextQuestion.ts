@@ -1,5 +1,6 @@
 import type { Answer, Question, RankedCandidate } from '../types/game'
 import { availableQuestions } from './questionAvailability'
+import { filterQuestionsByPhase } from './questionPhase'
 import { candidateSetEntropy, expectedValue, normalizeAttribute } from './scoring'
 
 function weightedMeanProbability(question: Question, rankedCandidates: RankedCandidate[]): number {
@@ -16,7 +17,11 @@ export function selectNextQuestion(
   askedQuestionIds: string[],
   answers: Record<string, Answer> = {}
 ): Question | null {
-  const available = availableQuestions(questions, askedQuestionIds, answers)
+  const available = filterQuestionsByPhase(
+    availableQuestions(questions, askedQuestionIds, answers),
+    rankedCandidates,
+    askedQuestionIds.length
+  )
   const remainingEntropy = candidateSetEntropy(rankedCandidates)
 
   if (!available.length || !rankedCandidates.length || remainingEntropy <= 0) return null

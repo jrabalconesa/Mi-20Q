@@ -29,8 +29,8 @@ describe('catalog', () => {
       attribute: 'largerThanShoebox',
       text: '¿Es más grande que una caja de zapatos?'
     }))
-    expect(animalKnowledge.questions).toHaveLength(12)
-    expect(objectKnowledge.questions).toHaveLength(11)
+    expect(animalKnowledge.questions.length).toBeGreaterThan(12)
+    expect(objectKnowledge.questions.length).toBeGreaterThan(11)
     expect(dog?.attributes.largerThanShoebox).toBe(true)
     expect(bee?.attributes.largerThanShoebox).toBe(false)
   })

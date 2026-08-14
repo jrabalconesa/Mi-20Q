@@ -145,17 +145,35 @@ function isLikelyCanid(name: string): boolean {
   return ['perro', 'lobo', 'zorro', 'coyote', 'chacal', 'canido', 'canidae'].some(token => name.includes(token))
 }
 
+function isCommonInSpain(name: string): boolean {
+  return [
+    'abeja', 'aguila', 'buho', 'caballo', 'cabra', 'ciervo', 'conejo', 'gallina',
+    'gato', 'gorrion', 'jabali', 'lagarto', 'lobo', 'mariposa', 'oveja', 'perro',
+    'rana', 'sapo', 'serpiente', 'tortuga', 'vaca', 'zorro'
+  ].some(token => name.includes(token))
+}
+
 function inferAnimalAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const flies = attributes.flies === true
   const water = attributes.water === true || attributes.aquatic === true
   const swims = attributes.swims === true
   const insect = attributes.insect === true
   const arachnid = attributes.arachnid === true
+  const mollusk = attributes.mollusk === true
   const crustacean = attributes.crustacean === true
   const fourLegs = attributes.fourLegs === true
   const feline = attributes.feline === true
   const canid = isLikelyCanid(name)
   const large = attributes.large
+  const mammal = attributes.mammal === true
+  const bird = attributes.bird === true
+  const fish = attributes.fish === true
+  const reptile = attributes.reptile === true
+  const amphibian = attributes.amphibian === true
+  const oviparous = attributes.laysEggs === true || bird || fish || reptile || amphibian || insect || arachnid || mollusk || crustacean
+  const hasLegs = fourLegs || bird || amphibian || insect || arachnid || crustacean
+  const biggerThanDog = attributes.biggerThanDog ?? (large === true || attributes.largerThanTiger === true)
+  const venomous = attributes.venomous ?? (name.includes('serpiente') ? 0.5 : (mammal || bird ? false : undefined))
 
   return {
     ...attributes,
@@ -167,7 +185,16 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
     domesticFarmPet: attributes.domesticFarmPet ?? (attributes.domestic === true || attributes.farm === true),
     movesByAirOrWater: attributes.movesByAirOrWater ?? (flies || water || swims),
     fourOrMoreLegs: attributes.fourOrMoreLegs ?? (fourLegs || insect || arachnid || crustacean),
-    felineOrCanid: attributes.felineOrCanid ?? (feline || canid)
+    felineOrCanid: attributes.felineOrCanid ?? (feline || canid),
+    hasLegs: attributes.hasLegs ?? hasLegs,
+    oviparous: attributes.oviparous ?? oviparous,
+    biggerThanDog,
+    livesInSpain: attributes.livesInSpain ?? isCommonInSpain(name),
+    venomous,
+    feathers: attributes.feathers ?? bird,
+    scales: attributes.scales ?? (fish || reptile),
+    fur: attributes.fur ?? mammal,
+    nocturnal: attributes.nocturnal ?? (name.includes('buho') ? true : undefined)
   }
 }
 

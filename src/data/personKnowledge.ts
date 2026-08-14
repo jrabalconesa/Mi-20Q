@@ -97,7 +97,7 @@ function commonSpanishName(name: string): string {
   return spanishCommonNames[normalizedName(name)] ?? name
 }
 
-function inferPersonAttributes(attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
+function inferPersonAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const artist = attributes.artist === true
   const sports = attributes.sports === true
   const writer = attributes.writer === true
@@ -105,6 +105,20 @@ function inferPersonAttributes(attributes: Record<string, AttributeValue>): Reco
   const politician = attributes.politician === true
   const americas = attributes.americas === true
   const europe = attributes.europe === true
+  const spanishOrigin = attributes.spanishOrigin === true
+  const normalized = normalizedName(name)
+  const musicName = [
+    'rosalia', 'caballe', 'iglesias', 'sanz', 'sabina', 'serrat', 'falla', 'bisbal',
+    'aitana', 'flores', 'jurado', 'sesto', 'alboran', 'tangana', 'jackson', 'swift',
+    'madonna', 'beyonce', 'shakira', 'miguel'
+  ].some(token => normalized.includes(token))
+  const screenName = [
+    'cruz', 'almodovar', 'bardem', 'banderas', 'bunuel', 'amenabar', 'segura',
+    'corbero', 'casas', 'paco leon', 'morgan', 'montiel', 'cruise', 'pitt',
+    'streep', 'dicaprio', 'jolie', 'obregon'
+  ].some(token => normalized.includes(token))
+  const pseudonym = ['c. tangana', 'bad bunny', 'madonna', 'shakira', 'beyonce'].some(token => normalized.includes(token))
+  const billionaire = ['amancio ortega', 'elon musk', 'bill gates', 'steve jobs'].some(token => normalized.includes(token))
 
   return {
     ...attributes,
@@ -116,10 +130,19 @@ function inferPersonAttributes(attributes: Record<string, AttributeValue>): Reco
     before1900: attributes.bornBefore1900,
     artEntertainmentSport: attributes.artEntertainmentSport ?? (artist || sports || writer),
     westernHemisphere: attributes.westernHemisphere ?? (americas || europe),
+    spanishOrigin,
+    hispanic: attributes.hispanic ?? (spanishOrigin || normalized.includes('borges') || normalized.includes('cortazar') || normalized.includes('shakira') || normalized.includes('luis miguel') || normalized.includes('bad bunny')),
+    music: attributes.music ?? musicName,
+    screenPerformer: attributes.screenPerformer ?? screenName,
+    politicalPower: attributes.politicalPower ?? politician,
+    worksInGroup: attributes.worksInGroup ?? (sports ? 0.5 : undefined),
+    pseudonym: attributes.pseudonym ?? pseudonym,
+    billionaire: attributes.billionaire ?? billionaire,
     sciencePoliticsLeadership: attributes.sciencePoliticsLeadership ?? (scientist || politician)
   }
 }
 
 export function enrichPersonCandidate(candidate: Candidate): Candidate {
-  return { ...candidate, name: commonSpanishName(candidate.name), attributes: inferPersonAttributes(candidate.attributes) }
+  const name = commonSpanishName(candidate.name)
+  return { ...candidate, name, attributes: inferPersonAttributes(name, candidate.attributes) }
 }

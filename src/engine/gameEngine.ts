@@ -1,9 +1,12 @@
 import { questions } from '../data/questions'
 import type { Answer, Category, GameKnowledge, GameState, Question } from '../types/game'
+import { effectiveCandidateCount } from './questionPhase'
 import { rankCandidates } from './scoring'
 import { selectNextQuestion } from './selectNextQuestion'
 
 const MAX_QUESTIONS = 20
+const MIN_GUESS_QUESTIONS = 6
+const SMALL_EFFECTIVE_SET = 3
 const builtInKnowledge: GameKnowledge = { candidates: [], questions }
 
 function questionMap(knowledge: GameKnowledge): Record<string, Question> {
@@ -48,8 +51,9 @@ export function answerCurrentQuestion(
   const best = rankedCandidates[0]
   const second = rankedCandidates[1]
   const odds = best && second ? best.score / Math.max(second.score, Number.EPSILON) : Number.POSITIVE_INFINITY
-  const dominant = Boolean(best && questionCount >= 6 && best.score >= 0.68 && odds >= 4)
-  const shouldGuess = dominant || questionCount >= MAX_QUESTIONS
+  const dominant = Boolean(best && questionCount >= MIN_GUESS_QUESTIONS && best.score >= 0.68 && odds >= 4)
+  const smallSet = questionCount >= MIN_GUESS_QUESTIONS && effectiveCandidateCount(rankedCandidates) <= SMALL_EFFECTIVE_SET
+  const shouldGuess = dominant || smallSet || questionCount >= MAX_QUESTIONS
 
   if (shouldGuess && best) {
     return {

@@ -31,7 +31,7 @@ function normalizedName(name: string): string {
   return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')
 }
 
-function inferObjectAttributes(attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
+function inferObjectAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const device = attributes.device === true
   const machine = attributes.machine === true
   const vehicle = attributes.vehicle === true
@@ -43,6 +43,9 @@ function inferObjectAttributes(attributes: Record<string, AttributeValue>): Reco
   const container = attributes.container === true
   const gameEquipment = attributes.gameEquipment === true
   const musicalInstrument = attributes.musicalInstrument === true
+  const cleaningName = ['escoba', 'fregona', 'jabon', 'detergente', 'aspiradora', 'bayeta'].some(token => name.includes(token))
+  const liquidName = ['agua', 'aceite', 'leche', 'vino', 'zumo', 'gasolina'].some(token => name.includes(token))
+  const edibleName = ['pan', 'queso', 'manzana', 'platano', 'arroz', 'pasta', 'pizza', 'chocolate'].some(token => name.includes(token))
 
   const electronic = attributes.electronic ?? (device || machine)
   const portable = attributes.portable ?? (wearable || tool || weapon || musicalInstrument || (container && !vehicle && !furniture))
@@ -62,6 +65,10 @@ function inferObjectAttributes(attributes: Record<string, AttributeValue>): Reco
   const storeContainTransport = attributes.storeContainTransport ?? (container || vehicle)
   const kitchenFood = attributes.kitchenFood ?? kitchen
   const metalOrPlastic = attributes.metalOrPlastic ?? (device || machine || vehicle || tool || weapon)
+  const softFlexible = attributes.softFlexible ?? (wearable || name.includes('almohada') || name.includes('toalla'))
+  const liquid = attributes.liquid ?? liquidName
+  const edible = attributes.edible ?? edibleName
+  const cleaning = attributes.cleaning ?? cleaningName
 
   return {
     ...attributes,
@@ -82,12 +89,20 @@ function inferObjectAttributes(attributes: Record<string, AttributeValue>): Reco
     workStudyTool,
     storeContainTransport,
     kitchenFood,
-    metalOrPlastic
+    metalOrPlastic,
+    vehicle,
+    wearable,
+    gameEquipment,
+    softFlexible,
+    liquid,
+    edible,
+    cleaning
   }
 }
 
 export function enrichObjectCandidate(candidate: Candidate): Candidate {
-  const profile = profiles[normalizedName(candidate.name)]
-  const attributes = inferObjectAttributes({ ...candidate.attributes, ...profile })
+  const name = normalizedName(candidate.name)
+  const profile = profiles[name]
+  const attributes = inferObjectAttributes(name, { ...candidate.attributes, ...profile })
   return { ...candidate, attributes }
 }

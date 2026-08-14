@@ -55,7 +55,8 @@ describe('debugInsights', () => {
 
     expect(questionById('culture_western_hemisphere').categories).toContain('person')
     expect(questionIds).not.toContain('culture_western_hemisphere')
-    expect(questionIds).toContain('person_art_entertainment_sport')
+    expect(questionIds).toContain('person_living')
+    expect(questionIds.every(id => questionById(id).phase === 'absolute')).toBe(true)
   })
 
   it('expone umbrales de preparacion de suposicion', () => {

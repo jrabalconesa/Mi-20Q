@@ -123,7 +123,11 @@ function categoryAttributes(category: CsvPersonCategory): Record<string, Attribu
     sports: category === 'Deportes',
     scientist: category === 'Ciencia y Tecnología',
     politician: category === 'Política e Historia',
-    writer: category === 'Literatura'
+    writer: category === 'Literatura',
+    music: category === 'Música',
+    screenPerformer: category === 'Cine y Espectáculo',
+    politicalPower: category === 'Política e Historia',
+    sciencePoliticsLeadership: category === 'Política e Historia' || category === 'Ciencia y Tecnología'
   }
 }
 
@@ -141,6 +145,7 @@ function toCandidate(row: CsvPersonRow): Candidate {
       bornBefore1800: false,
       bornAfter1950: row.epoch === 'Actual',
       spanishOrigin: row.spanishOrigin,
+      hispanic: row.spanishOrigin || row.continent === 'América del Sur' || ['Shakira', 'Luis Miguel', 'Bad Bunny'].includes(row.name),
       ...continentAttributes(row.continent),
       ...categoryAttributes(row.category)
     }

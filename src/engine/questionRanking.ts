@@ -1,5 +1,6 @@
 import type { Answer, Question, RankedCandidate } from '../types/game'
 import { availableQuestions } from './questionAvailability'
+import { filterQuestionsByPhase } from './questionPhase'
 import { candidateSetEntropy, expectedValue, normalizeAttribute } from './scoring'
 
 export interface QuestionScore {
@@ -26,7 +27,11 @@ export function rankAvailableQuestions(
   askedQuestionIds: string[],
   answers: Record<string, Answer> = {}
 ): QuestionScore[] {
-  const available = availableQuestions(questions, askedQuestionIds, answers)
+  const available = filterQuestionsByPhase(
+    availableQuestions(questions, askedQuestionIds, answers),
+    rankedCandidates,
+    askedQuestionIds.length
+  )
   const remainingEntropy = candidateSetEntropy(rankedCandidates)
   if (!available.length || !rankedCandidates.length || remainingEntropy <= 0) return []
 

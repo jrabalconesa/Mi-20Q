@@ -17,6 +17,7 @@ export interface Question {
   openingOrder?: number
   importance?: number
   exclusiveGroup?: string
+  phase?: 'absolute' | 'segment' | 'closing'
 }
 
 export interface RankedCandidate extends Candidate {
