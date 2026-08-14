@@ -29,6 +29,7 @@ export const questions: Question[] = [
   { id: 'animal_canid', text: '¿Es un cánido, como un perro, lobo o zorro?', attribute: 'canid', categories: animal, phase: 'closing', importance: 1.15 },
   { id: 'animal_striped', text: '¿Tiene rayas?', attribute: 'stripedCoat', categories: animal, phase: 'closing', importance: 1.45 },
   { id: 'animal_spotted', text: '¿Tiene manchas en el pelaje?', attribute: 'spottedCoat', categories: animal, phase: 'closing', importance: 1.35 },
+  { id: 'animal_antlers', text: '¿Tiene cornamenta o cuernos visibles?', attribute: 'hasAntlers', categories: animal, phase: 'closing', importance: 1.2 },
   { id: 'animal_venomous', text: '¿Es venenoso?', attribute: 'venomous', categories: animal, phase: 'closing' },
   { id: 'animal_feathers', text: '¿Tiene plumas?', attribute: 'feathers', categories: animal, skipIf: [{ questionId: 'animal_mammal', answers: ['yes'] }] },
   { id: 'animal_scales', text: '¿Tiene escamas?', attribute: 'scales', categories: animal, skipIf: [{ questionId: 'animal_mammal', answers: ['yes'] }] },

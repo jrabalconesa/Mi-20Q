@@ -153,6 +153,25 @@ function isCommonInSpain(name: string): boolean {
   ].some(token => name.includes(token))
 }
 
+function hasLikelyAntlersOrHorns(name: string): boolean {
+  return [
+    'alce',
+    'antilope',
+    'bisonte',
+    'bufalo',
+    'cabra',
+    'carnero',
+    'cervidae',
+    'ciervo',
+    'gacela',
+    'reno',
+    'rinoceronte',
+    'toro',
+    'vaca',
+    'venado'
+  ].some(token => name.includes(token))
+}
+
 function inferAnimalAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const flies = attributes.flies === true
   const water = attributes.water === true || attributes.aquatic === true
@@ -195,6 +214,7 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
     feathers: attributes.feathers ?? bird,
     scales: attributes.scales ?? (fish || reptile),
     fur: attributes.fur ?? mammal,
+    hasAntlers: attributes.hasAntlers ?? hasLikelyAntlersOrHorns(name),
     nocturnal: attributes.nocturnal ?? (name.includes('buho') ? true : undefined)
   }
 }

@@ -20,10 +20,16 @@ describe('catalog', () => {
     const objectKnowledge = await loadCategoryKnowledge('object')
     const dog = animalKnowledge.candidates.find(candidate => candidate.name === 'Perro')
     const bee = animalKnowledge.candidates.find(candidate => candidate.name === 'Abeja')
+    const cow = animalKnowledge.candidates.find(candidate => candidate.name === 'Vaca')
+    const horse = animalKnowledge.candidates.find(candidate => candidate.name === 'Caballo')
 
     expect(animalKnowledge.questions).toContainEqual(expect.objectContaining({
       attribute: 'largerThanShoebox',
       text: '¿Es más grande que una caja de zapatos?'
+    }))
+    expect(animalKnowledge.questions).toContainEqual(expect.objectContaining({
+      attribute: 'hasAntlers',
+      text: '¿Tiene cornamenta o cuernos visibles?'
     }))
     expect(objectKnowledge.questions).toContainEqual(expect.objectContaining({
       attribute: 'largerThanShoebox',
@@ -33,6 +39,8 @@ describe('catalog', () => {
     expect(objectKnowledge.questions.length).toBeGreaterThan(11)
     expect(dog?.attributes.largerThanShoebox).toBe(true)
     expect(bee?.attributes.largerThanShoebox).toBe(false)
+    expect(cow?.attributes.hasAntlers).toBe(true)
+    expect(horse?.attributes.hasAntlers).toBe(false)
   })
 
   it('valida tamano y duplicados del catalogo base', async () => {
