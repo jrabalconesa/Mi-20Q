@@ -198,6 +198,29 @@ describe('gameEngine', () => {
     expect(state.questionCount).toBeLessThanOrEqual(20)
   }, 30_000)
 
+  it('pregunta lo suficiente para distinguir Poseidón de Zeus antes de adivinar', () => {
+    const knowledge = knowledgeFor('person')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Poseidón')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('person', knowledge)
+    const guesses: string[] = []
+    while (state.status === 'playing') {
+      const value = answerForTarget(target, state, knowledge)
+      state = answerCurrentQuestion(state, value, knowledge)
+      if (state.status === 'guessing' && state.guessCandidateId) {
+        const guess = knowledge.candidates.find(candidate => candidate.id === state.guessCandidateId)
+        if (guess) guesses.push(guess.name)
+      }
+    }
+
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe('myth-poseidon')
+    expect(guesses).toEqual(['Poseidón'])
+    expect(state.questionCount).toBeLessThanOrEqual(20)
+  }, 30_000)
+
   it('sigue preguntando tras fallar con cuchara antes de agotar las veinte preguntas', () => {
     const knowledge = knowledgeFor('object')
     const target = knowledge.candidates.find(candidate => candidate.name === 'Cuchara')

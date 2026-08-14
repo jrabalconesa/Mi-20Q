@@ -25,7 +25,24 @@ export const curatedPersonCandidates: Candidate[] = [
   { id: 'spanish-almodovar', name: 'Pedro Almodóvar', category: 'person', attributes: personAttributes({ realPerson: true, historical: false, artist: true, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: false, bornBefore1800: false, bornAfter1950: true }) },
   { id: 'spanish-rosalia', name: 'Rosalía', category: 'person', attributes: personAttributes({ realPerson: true, historical: false, artist: true, sports: false, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: false, bornBefore1800: false, bornAfter1950: true }) },
   { id: 'spanish-aitana-bonmati', name: 'Aitana Bonmatí', category: 'person', attributes: personAttributes({ realPerson: true, historical: false, artist: false, sports: true, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: false, bornBefore1800: false, bornAfter1950: true }) },
-  { id: 'spanish-ana-obregon', name: 'Ana Obregón', category: 'person', attributes: personAttributes({ realPerson: true, historical: false, artist: true, sports: false, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: false, bornBefore1800: false, bornAfter1950: true }) }
+  { id: 'spanish-ana-obregon', name: 'Ana Obregón', category: 'person', attributes: personAttributes({ realPerson: true, historical: false, artist: true, sports: false, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: false, bornBefore1800: false, bornAfter1950: true }) },
+  { id: 'myth-ulises', name: 'Ulises', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, mythicHero: true, legendaryVoyage: true, exceptionalStrength: false, slaysMonster: false, seaAssociation: 0.5, loveBeauty: false }) },
+  { id: 'myth-hercules', name: 'Hércules', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, mythicHero: true, legendaryVoyage: false, exceptionalStrength: true, slaysMonster: true, seaAssociation: false, loveBeauty: false }) },
+  { id: 'myth-zeus', name: 'Zeus', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, olympianLeader: true, mythicHero: false, seaAssociation: false, loveBeauty: false }) },
+  { id: 'myth-poseidon', name: 'Poseidón', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, olympianLeader: false, mythicHero: false, seaAssociation: true, loveBeauty: false }) },
+  { id: 'myth-afrodita', name: 'Afrodita', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, olympianLeader: false, mythicHero: false, seaAssociation: false, loveBeauty: true }) },
+  { id: 'myth-cupido', name: 'Cupido', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, romanMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, loveBeauty: true, wingedMythic: true }) },
+  { id: 'myth-ares', name: 'Ares', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, warAssociation: true }) },
+  { id: 'myth-marte', name: 'Marte', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, romanMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, warAssociation: true }) },
+  { id: 'myth-minotauro', name: 'Minotauro', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, mythicMonster: true }) },
+  { id: 'myth-atenea', name: 'Atenea', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, wisdomAssociation: true }) },
+  { id: 'myth-apolo', name: 'Apolo', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: true, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true }) },
+  { id: 'myth-hades', name: 'Hades', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, religiousSpiritual: true, deity: true, underworldAssociation: true }) },
+  { id: 'myth-medusa', name: 'Medusa', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, mythicMonster: true }) },
+  { id: 'myth-perseo', name: 'Perseo', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, mythicHero: true, legendaryVoyage: false, exceptionalStrength: false, slaysMonster: true }) },
+  { id: 'myth-orion', name: 'Orión', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, mythicHero: true, hunterAssociation: true, constellationAssociation: true }) },
+  { id: 'myth-casiopea', name: 'Casiopea', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: true, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, constellationAssociation: true }) },
+  { id: 'myth-centauro', name: 'Centauro', category: 'person', attributes: personAttributes({ realPerson: false, living: false, historical: true, artist: false, sports: false, scientist: false, politician: false, writer: false, woman: false, europe: true, americas: false, asia: false, africa: false, bornBefore1900: true, bornBefore1800: true, bornAfter1950: false, greekMythology: true, ancientClassical: true, deity: false, mythicMonster: true, halfHumanHalfAnimal: true }) }
 ]
 
 const spanishCommonNames: Record<string, string> = {
@@ -45,6 +62,13 @@ const spanishCommonNames: Record<string, string> = {
   'charlemagne': 'Carlomagno',
   'christopher columbus': 'Cristóbal Colón',
   'cleopatra vii of egypt': 'Cleopatra',
+  'elizabeth i of england': 'Isabel I de Inglaterra',
+  'louis xiv of france': 'Luis XIV de Francia',
+  'xerxes i of persia': 'Jerjes I de Persia',
+  'diogenes of sinope': 'Diógenes de Sinope',
+  'henry viii of england': 'Enrique VIII de Inglaterra',
+  'cyrus the great': 'Ciro el Grande',
+  'darius i of persia': 'Darío I de Persia',
   'galileo galilei': 'Galileo Galilei',
   'herodotus': 'Heródoto',
   'paul of tarsus': 'Pablo de Tarso',
@@ -66,6 +90,8 @@ const spanishCommonNames: Record<string, string> = {
   'marcus aurelius': 'Marco Aurelio',
   'ovid': 'Ovidio',
   'niccolò machiavelli': 'Nicolás Maquiavelo',
+  'nero': 'Nerón',
+  'hypatia of alexandria': 'Hipatia de Alejandría',
   'attila the hun': 'Atila',
   'raphael': 'Rafael Sanzio',
   'saint peter': 'San Pedro',
@@ -78,6 +104,36 @@ const spanishCommonNames: Record<string, string> = {
   'heraclitus': 'Heráclito',
   'gilgamesh': 'Gilgamesh',
   'seneca the younger': 'Séneca',
+  'suleiman the magnificent': 'Solimán el Magnífico',
+  'francis of assisi': 'Francisco de Asís',
+  'zeno of elea': 'Zenón de Elea',
+  'philip ii of macedon': 'Filipo II de Macedonia',
+  'charles v, holy roman emperor': 'Carlos V',
+  'pliny the elder': 'Plinio el Viejo',
+  'peter i of russia': 'Pedro I de Rusia',
+  'saint andrew': 'San Andrés',
+  'saint george': 'San Jorge',
+  'louis xvi of france': 'Luis XVI de Francia',
+  'saint james the great': 'Santiago el Mayor',
+  'pyrrhus of epirus': 'Pirro de Epiro',
+  'queen of sheba': 'Reina de Saba',
+  'richard i of england': 'Ricardo I de Inglaterra',
+  'mary i of scotland': 'María I de Escocia',
+  'darius iii of persia': 'Darío III de Persia',
+  'cato the elder': 'Catón el Viejo',
+  'nicholas ii of russia': 'Nicolás II de Rusia',
+  'vlad iii the impaler': 'Vlad el Empalador',
+  'catherine ii of russia': 'Catalina II de Rusia',
+  'napoleon iii of france': 'Napoleón III de Francia',
+  'pope john paul ii': 'Juan Pablo II',
+  'hero of alexandria': 'Herón de Alejandría',
+  'herod the great': 'Herodes el Grande',
+  'pippin the younger': 'Pipino el Breve',
+  'anaximenes of miletus': 'Anaxímenes de Mileto',
+  'benedict of nursia': 'Benito de Nursia',
+  'elizabeth ii of the united kingdom': 'Isabel II del Reino Unido',
+  'philip ii of spain': 'Felipe II de España',
+  'ivan iv of russia': 'Iván el Terrible',
   'pericles': 'Pericles',
   'sun tzu': 'Sun Tzu',
   'hadrian': 'Adriano',
@@ -119,6 +175,7 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
   ].some(token => normalized.includes(token))
   const pseudonym = ['c. tangana', 'bad bunny', 'madonna', 'shakira', 'beyonce'].some(token => normalized.includes(token))
   const billionaire = ['amancio ortega', 'elon musk', 'bill gates', 'steve jobs'].some(token => normalized.includes(token))
+  const scienceName = ['hipatia'].some(token => normalized.includes(token))
   const living = attributes.living ?? (
     normalized.includes('caballe') ? false :
     attributes.bornAfter1950 === true ? true :
@@ -126,22 +183,41 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
     undefined
   )
   const religiousSpiritual = [
-    'abraham', 'agustin de hipona', 'confucio', 'gandhi', 'jesucristo', 'juan el bautista',
-    'mahoma', 'moises', 'pablo de tarso', 'san pedro', 'santo', 'virgen maria'
+    'abraham', 'afrodita', 'agustin de hipona', 'apolo', 'ares', 'atenea', 'confucio',
+    'cupido', 'gandhi', 'hades', 'hercules', 'jesucristo', 'juan el bautista',
+    'mahoma', 'marte', 'moises', 'pablo de tarso', 'poseidon', 'san pedro',
+    'santo', 'virgen maria', 'zeus'
   ].some(token => normalized.includes(token))
   const ancientClassical = [
     'alejandro magno', 'aristoteles', 'arquimedes', 'ciceron', 'cleopatra', 'euclides',
-    'herodoto', 'hipocrates', 'homero', 'julio cesar', 'marco aurelio', 'ovidio',
-    'pericles', 'platon', 'ptolomeo', 'socrates', 'sofocles', 'tales de mileto', 'virgilio'
+    'hercules', 'herodoto', 'hipatia', 'hipocrates', 'homero', 'julio cesar',
+    'marco aurelio', 'minotauro', 'neron', 'ovidio', 'pericles', 'platon',
+    'poseidon', 'ptolomeo', 'socrates', 'sofocles', 'tales de mileto', 'ulises',
+    'virgilio', 'zeus'
   ].some(token => normalized.includes(token))
   const civicLeader = politician || [
     'adolf suarez', 'barack obama', 'clara campoamor', 'felipe vi', 'gandhi',
     'isabel la catolica', 'pedro sanchez'
   ].some(token => normalized.includes(token))
   const romanWorld = [
-    'agustin de hipona', 'ciceron', 'julio cesar', 'marco antonio', 'marco aurelio',
+    'agustin de hipona', 'ciceron', 'julio cesar', 'marco antonio', 'marco aurelio', 'neron',
     'ovidio', 'pablo de tarso', 'pertinax', 'plutarco', 'seneca', 'trajan', 'virgilio'
   ].some(token => normalized.includes(token))
+  const greekMythology = ['afrodita', 'apolo', 'ares', 'atenea', 'casiopea', 'centauro', 'hades', 'hercules', 'medusa', 'minotauro', 'orion', 'perseo', 'poseidon', 'ulises', 'zeus'].some(token => normalized.includes(token))
+  const romanMythology = ['cupido', 'marte'].some(token => normalized.includes(token))
+  const deity = ['afrodita', 'apolo', 'ares', 'atenea', 'cupido', 'hades', 'marte', 'poseidon', 'zeus'].some(token => normalized.includes(token))
+  const olympianLeader = ['zeus'].some(token => normalized.includes(token))
+  const mythicHero = ['hercules', 'orion', 'perseo', 'ulises'].some(token => normalized.includes(token))
+  const mythicMonster = ['centauro', 'medusa', 'minotauro'].some(token => normalized.includes(token))
+  const legendaryVoyage = ['ulises'].some(token => normalized.includes(token))
+  const exceptionalStrength = ['hercules'].some(token => normalized.includes(token))
+  const slaysMonster = ['hercules', 'perseo'].some(token => normalized.includes(token))
+  const seaAssociation = ['poseidon'].some(token => normalized.includes(token))
+  const loveBeauty = ['afrodita', 'cupido'].some(token => normalized.includes(token))
+  const warAssociation = ['ares', 'marte'].some(token => normalized.includes(token))
+  const constellationAssociation = ['casiopea', 'orion'].some(token => normalized.includes(token))
+  const hunterAssociation = ['orion'].some(token => normalized.includes(token))
+  const halfHumanHalfAnimal = ['centauro'].some(token => normalized.includes(token))
 
   return {
     ...attributes,
@@ -163,11 +239,27 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
     worksInGroup: attributes.worksInGroup ?? (sports ? 0.5 : undefined),
     pseudonym: attributes.pseudonym ?? pseudonym,
     billionaire: attributes.billionaire ?? billionaire,
-    sciencePoliticsLeadership: attributes.sciencePoliticsLeadership ?? (scientist || politician),
+    scientist: attributes.scientist === true || scienceName,
+    sciencePoliticsLeadership: attributes.sciencePoliticsLeadership ?? (scientist || scienceName || politician),
     religiousSpiritual: attributes.religiousSpiritual ?? religiousSpiritual,
     ancientClassical: attributes.ancientClassical ?? ancientClassical,
     civicLeader: attributes.civicLeader ?? civicLeader,
-    romanWorld: attributes.romanWorld ?? romanWorld
+    romanWorld: attributes.romanWorld ?? romanWorld,
+    greekMythology: attributes.greekMythology ?? greekMythology,
+    romanMythology: attributes.romanMythology ?? romanMythology,
+    deity: attributes.deity ?? deity,
+    olympianLeader: attributes.olympianLeader ?? olympianLeader,
+    mythicHero: attributes.mythicHero ?? mythicHero,
+    mythicMonster: attributes.mythicMonster ?? mythicMonster,
+    legendaryVoyage: attributes.legendaryVoyage ?? legendaryVoyage,
+    exceptionalStrength: attributes.exceptionalStrength ?? exceptionalStrength,
+    slaysMonster: attributes.slaysMonster ?? slaysMonster,
+    seaAssociation: attributes.seaAssociation ?? seaAssociation,
+    loveBeauty: attributes.loveBeauty ?? loveBeauty,
+    warAssociation: attributes.warAssociation ?? warAssociation,
+    constellationAssociation: attributes.constellationAssociation ?? constellationAssociation,
+    hunterAssociation: attributes.hunterAssociation ?? hunterAssociation,
+    halfHumanHalfAnimal: attributes.halfHumanHalfAnimal ?? halfHumanHalfAnimal
   }
 }
 

@@ -1,6 +1,6 @@
 # Auditoría de secuencias de preguntas
 
-Generado con `npm run audit:questions` el 2026-08-14T21:45:01.996Z.
+Generado con `npm run audit:questions` el 2026-08-14T22:05:37.468Z.
 
 El informe simula respuestas exactas para candidatos representativos. Si el motor hace una suposición incorrecta antes de 20 preguntas, la simulación responde que no y comprueba que la partida continúe.
 
@@ -11,10 +11,10 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 | animal | Toro | OK | 6 | Toro | Sin incidencias |
 | animal | Tigre | OK | 9 | Tigre | Sin incidencias |
 | animal | Tiburón | OK | 10 | Tiburón | Sin incidencias |
-| animal | Delfín | OK | 9 | Delfín | Sin incidencias |
+| animal | Delfín | OK | 10 | Delfín | Sin incidencias |
 | animal | Abeja | OK | 10 | Abeja | Sin incidencias |
 | animal | Águila | OK | 8 | Águila | Sin incidencias |
-| object | Cuchara | OK | 11 | Cuchara | Sin incidencias |
+| object | Cuchara | OK | 12 | Cuchara | Sin incidencias |
 | object | Teléfono móvil | OK | 20 | Teléfono móvil | Sin incidencias |
 | object | Silla | OK | 20 | Silla | Sin incidencias |
 | object | Coche | OK | 20 | Coche | Sin incidencias |
@@ -28,11 +28,27 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 | place | Taj Mahal | OK | 17 | Taj Mahal | Sin incidencias |
 | person | Mahatma Gandhi | OK | 19 | Mahatma Gandhi | Sin incidencias |
 | person | Pedro Sánchez | OK | 20 | Pedro Sánchez | Sin incidencias |
-| person | Don Quijote de la Mancha | OK | 6 | Don Quijote de la Mancha | Sin incidencias |
+| person | Don Quijote de la Mancha | OK | 8 | Don Quijote de la Mancha | Sin incidencias |
 | person | Fernando Alonso | OK | 20 | Fernando Alonso | Sin incidencias |
 | person | Rosalía | OK | 20 | Rosalía | Sin incidencias |
 | person | Julio César | OK | 20 | Julio César | Sin incidencias |
-| person | Elon Musk | OK | 10 | Elon Musk | Sin incidencias |
+| person | Elon Musk | OK | 11 | Elon Musk | Sin incidencias |
+| person | Hipatia de Alejandría | OK | 20 | Hipatia de Alejandría | Sin incidencias |
+| person | Zeus | OK | 9 | Zeus | Sin incidencias |
+| person | Poseidón | OK | 11 | Poseidón | Sin incidencias |
+| person | Afrodita | OK | 9 | Afrodita | Sin incidencias |
+| person | Hércules | OK | 8 | Hércules | Sin incidencias |
+| person | Ulises | OK | 9 | Ulises | Sin incidencias |
+| person | Cupido | OK | 10 | Cupido | Sin incidencias |
+| person | Ares | OK | 10 | Ares | Sin incidencias |
+| person | Marte | OK | 8 | Marte | Sin incidencias |
+| person | Minotauro | OK | 11 | Minotauro | Sin incidencias |
+| person | Atenea | OK | 9 | Atenea | Sin incidencias |
+| person | Medusa | OK | 10 | Medusa | Sin incidencias |
+| person | Perseo | OK | 8 | Perseo | Sin incidencias |
+| person | Orión | OK | 8 | Orión | Sin incidencias |
+| person | Casiopea | OK | 11 | Casiopea | Sin incidencias |
+| person | Centauro | OK | 10 | Centauro | Sin incidencias |
 
 ## Secuencias
 
@@ -96,7 +112,7 @@ Estado: won. Preguntas: 10.
 
 ### animal: Delfín
 
-Estado: won. Preguntas: 9.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Es principalmente carnívoro o depredador? -> Sí
@@ -108,9 +124,10 @@ Estado: won. Preguntas: 9.
 7. ¿Vive normalmente en España o en la fauna ibérica? -> No
 8. ¿Es más grande que un perro? -> Sí
 9. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+10. ¿Tiene rayas? -> No lo sé
 
 **Suposiciones**
-- Tras 9: Delfín (acierto)
+- Tras 10: Delfín (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -156,7 +173,7 @@ Estado: won. Preguntas: 8.
 
 ### object: Cuchara
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 12.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
@@ -170,9 +187,10 @@ Estado: won. Preguntas: 11.
 9. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
 10. ¿Está hecho principalmente de metal o plástico? -> Sí
 11. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> Sí
+12. ¿Tiene una parte cóncava para recoger o contener algo? -> Sí
 
 **Suposiciones**
-- Tras 11: Cuchara (acierto)
+- Tras 12: Cuchara (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -535,18 +553,20 @@ Estado: won. Preguntas: 20.
 
 ### person: Don Quijote de la Mancha
 
-Estado: won. Preguntas: 6.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
 2. ¿Es de origen español? -> Sí
-3. ¿Es un personaje de ficción? -> Sí
-4. ¿Es (o fue) una persona real de carne y hueso? -> No
-5. ¿Pertenece al ámbito hispanohablante? -> Sí
-6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+6. ¿Pertenece a la mitología griega? -> No
+7. ¿Pertenece al ámbito hispanohablante? -> Sí
+8. ¿Es conocido principalmente por escribir? -> Sí
 
 **Suposiciones**
-- Tras 6: Don Quijote de la Mancha (acierto)
+- Tras 8: Don Quijote de la Mancha (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -557,24 +577,24 @@ Estado: won. Preguntas: 20.
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
 2. ¿Es de origen español? -> Sí
-3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-4. ¿Es conocido principalmente por el deporte? -> Sí
-5. ¿Se asocia normalmente a un equipo, grupo o banda? -> A veces
-6. ¿Es una persona o personaje de género femenino? -> No
-7. ¿Pertenece al ámbito hispanohablante? -> Sí
-8. ¿Es conocido principalmente por la música? -> No
-9. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
-10. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
-11. ¿Está asociado a Roma o al Imperio romano? -> No
-12. ¿Es conocido principalmente por escribir? -> No
-13. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
-14. ¿Pertenece a la Antigüedad clásica? -> No
-15. ¿Nació después de 1950? -> Sí
-16. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> Sí
-17. ¿Usa o usó un seudónimo o nombre artístico? -> No
-18. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-19. ¿Nació o se originó antes del año 1900? -> No
-20. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> No
+3. ¿Es un personaje de ficción? -> No
+4. ¿Es (o fue) una persona real de carne y hueso? -> Sí
+5. ¿Es conocido principalmente por el deporte? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> A veces
+7. ¿Es una persona o personaje de género femenino? -> No
+8. ¿Pertenece al ámbito hispanohablante? -> Sí
+9. ¿Es conocido principalmente por la música? -> No
+10. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
+11. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+12. ¿Está asociado a Roma o al Imperio romano? -> No
+13. ¿Es conocido principalmente por escribir? -> No
+14. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
+15. ¿Pertenece a la Antigüedad clásica? -> No
+16. ¿Nació después de 1950? -> Sí
+17. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> Sí
+18. ¿Usa o usó un seudónimo o nombre artístico? -> No
+19. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+20. ¿Nació o se originó antes del año 1900? -> No
 
 **Suposiciones**
 - Tras 20: Fernando Alonso (acierto)
@@ -602,8 +622,8 @@ Estado: won. Preguntas: 20.
 14. ¿Es conocido principalmente por escribir? -> No
 15. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
 16. ¿Está asociado a Roma o al Imperio romano? -> No
-17. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
-18. ¿Pertenece a la Antigüedad clásica? -> No
+17. ¿Pertenece a la Antigüedad clásica? -> No
+18. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
 19. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
 20. ¿Nació o se originó antes del año 1900? -> No
 
@@ -645,7 +665,7 @@ Estado: won. Preguntas: 20.
 
 ### person: Elon Musk
 
-Estado: won. Preguntas: 10.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
@@ -658,8 +678,346 @@ Estado: won. Preguntas: 10.
 8. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
 9. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
 10. ¿Nació después de 1950? -> Sí
+11. ¿Es conocido por ser multimillonario? -> Sí
 
 **Suposiciones**
-- Tras 10: Elon Musk (acierto)
+- Tras 11: Elon Musk (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Hipatia de Alejandría
+
+Estado: won. Preguntas: 20.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
+4. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
+5. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+6. ¿Está asociado principalmente a Asia? -> No
+7. ¿Es una persona o personaje de género femenino? -> Sí
+8. ¿Nació después de 1950? -> No
+9. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+10. ¿Nació o se originó antes del año 1900? -> Sí
+11. ¿Es conocido principalmente por escribir? -> No
+12. ¿Es una figura histórica? -> Sí
+13. ¿Pertenece al ámbito hispanohablante? -> No
+14. ¿Es conocido principalmente por la música? -> No
+15. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
+16. ¿Es conocido principalmente por el deporte? -> No
+17. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+18. ¿Pertenece a la Antigüedad clásica? -> Sí
+19. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+20. ¿Tuvo o tiene poder político formal? -> No
+
+**Suposiciones**
+- Tras 20: Hipatia de Alejandría (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Zeus
+
+Estado: won. Preguntas: 9.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> No
+9. ¿Es el dios principal del Olimpo? -> Sí
+
+**Suposiciones**
+- Tras 9: Zeus (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Poseidón
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> No
+9. ¿Es el dios principal del Olimpo? -> No
+10. ¿Está asociado principalmente a la guerra? -> No
+11. ¿Está asociado principalmente al mar? -> Sí
+
+**Suposiciones**
+- Tras 11: Poseidón (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Afrodita
+
+Estado: won. Preguntas: 9.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> Sí
+9. ¿Está asociado al amor o la belleza? -> Sí
+
+**Suposiciones**
+- Tras 9: Afrodita (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Hércules
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> Sí
+7. ¿Es conocido por vencer a un monstruo mitológico? -> Sí
+8. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> Sí
+
+**Suposiciones**
+- Tras 8: Hércules (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Ulises
+
+Estado: won. Preguntas: 9.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> Sí
+7. ¿Es conocido por vencer a un monstruo mitológico? -> No
+8. ¿Es famoso por un largo viaje legendario? -> Sí
+9. ¿Está asociado principalmente al mar? -> A veces
+
+**Suposiciones**
+- Tras 9: Ulises (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Cupido
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+7. ¿Pertenece a la mitología griega? -> No
+8. ¿Está asociado principalmente a la guerra? -> No
+9. ¿Pertenece a la mitología romana? -> Sí
+10. ¿Está asociado al amor o la belleza? -> Sí
+
+**Suposiciones**
+- Tras 10: Cupido (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Ares
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> No
+9. ¿Es el dios principal del Olimpo? -> No
+10. ¿Está asociado principalmente a la guerra? -> Sí
+
+**Suposiciones**
+- Tras 10: Ares (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Marte
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+7. ¿Pertenece a la mitología griega? -> No
+8. ¿Está asociado principalmente a la guerra? -> Sí
+
+**Suposiciones**
+- Tras 8: Marte (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Minotauro
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> No
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+9. ¿Es una persona o personaje de género femenino? -> No
+10. ¿Es mitad humano y mitad animal? -> No
+11. ¿Es una criatura monstruosa de la mitología? -> Sí
+
+**Suposiciones**
+- Tras 11: Minotauro (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Atenea
+
+Estado: won. Preguntas: 9.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> Sí
+6. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> Sí
+9. ¿Está asociado al amor o la belleza? -> No
+
+**Suposiciones**
+- Tras 9: Atenea (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Medusa
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> No
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+9. ¿Es una persona o personaje de género femenino? -> Sí
+10. ¿Es una criatura monstruosa de la mitología? -> Sí
+
+**Suposiciones**
+- Tras 10: Medusa (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Perseo
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> Sí
+7. ¿Es conocido por vencer a un monstruo mitológico? -> Sí
+8. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
+
+**Suposiciones**
+- Tras 8: Perseo (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Orión
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> Sí
+7. ¿Es conocido por vencer a un monstruo mitológico? -> No
+8. ¿Es famoso por un largo viaje legendario? -> No
+
+**Suposiciones**
+- Tras 8: Orión (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Casiopea
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> No
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+9. ¿Es una persona o personaje de género femenino? -> Sí
+10. ¿Es una criatura monstruosa de la mitología? -> No
+11. ¿También da nombre a una constelación? -> Sí
+
+**Suposiciones**
+- Tras 11: Casiopea (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Centauro
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Sigue con vida? -> No
+2. ¿Es de origen español? -> No
+3. ¿Es (o fue) una persona real de carne y hueso? -> No
+4. ¿Es un personaje de ficción? -> Sí
+5. ¿Es un dios o una diosa? -> No
+6. ¿Es un héroe o semidiós de la mitología? -> No
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
+9. ¿Es una persona o personaje de género femenino? -> No
+10. ¿Es mitad humano y mitad animal? -> Sí
+
+**Suposiciones**
+- Tras 10: Centauro (acierto)
 
 **Incidencias**: Sin incidencias.

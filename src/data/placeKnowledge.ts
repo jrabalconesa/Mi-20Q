@@ -49,6 +49,11 @@ const profilesById: Record<string, Record<string, boolean>> = {
   }
 }
 
+const spanishPlaceNames: Record<string, string> = {
+  'saint petersburg': 'San Petersburgo',
+  'genoa': 'Génova'
+}
+
 function normalizedName(name: string): string {
   return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')
 }
@@ -83,8 +88,13 @@ function inferPlaceAttributes(name: string, attributes: Record<string, Attribute
 
 export function enrichPlaceCandidate(candidate: Candidate): Candidate {
   const profile = profilesById[candidate.id]
-  if (!profile) return { ...candidate, attributes: inferPlaceAttributes(candidate.name, candidate.attributes) }
-  const name = candidate.id === 'geonames-3687238' ? 'Cartagena de Indias (Colombia)' : candidate.name
+  if (!profile) {
+    const name = spanishPlaceNames[normalizedName(candidate.name)] ?? candidate.name
+    return { ...candidate, name, attributes: inferPlaceAttributes(name, candidate.attributes) }
+  }
+  const name = candidate.id === 'geonames-3687238'
+    ? 'Cartagena de Indias (Colombia)'
+    : spanishPlaceNames[normalizedName(candidate.name)] ?? candidate.name
   return {
     ...candidate,
     name,

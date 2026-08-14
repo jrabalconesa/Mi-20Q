@@ -124,6 +124,102 @@ describe('catalog', () => {
     expect(rosalia?.attributes.living).toBe(true)
   })
 
+  it('incluye figuras antiguas y mitologicas frecuentes en espanol', async () => {
+    const personKnowledge = await loadCategoryKnowledge('person')
+    const names = personKnowledge.candidates.map(candidate => candidate.name)
+    const byName = (name: string) => personKnowledge.candidates.find(candidate => candidate.name === name)
+
+    expect(names).toEqual(expect.arrayContaining([
+      'Atila',
+      'Aníbal Barca',
+      'Homero',
+      'Ulises',
+      'Hércules',
+      'Nerón',
+      'Séneca',
+      'Cleopatra',
+      'Hipatia de Alejandría',
+      'Zeus',
+      'Poseidón',
+      'Afrodita',
+      'Cupido',
+      'Ares',
+      'Marte',
+      'Minotauro',
+      'Atenea',
+      'Apolo',
+      'Hades',
+      'Medusa',
+      'Perseo',
+      'Orión',
+      'Casiopea',
+      'Centauro'
+    ]))
+    expect(names).not.toContain('Nero')
+    expect(names).not.toContain('Hypatia of Alexandria')
+    expect(byName('Zeus')?.attributes.greekMythology).toBe(true)
+    expect(byName('Zeus')?.attributes.deity).toBe(true)
+    expect(byName('Zeus')?.attributes.olympianLeader).toBe(true)
+    expect(byName('Hércules')?.attributes.mythicHero).toBe(true)
+    expect(byName('Hércules')?.attributes.exceptionalStrength).toBe(true)
+    expect(byName('Poseidón')?.attributes.seaAssociation).toBe(true)
+    expect(byName('Poseidón')?.attributes.olympianLeader).toBe(false)
+    expect(byName('Afrodita')?.attributes.woman).toBe(true)
+    expect(byName('Afrodita')?.attributes.loveBeauty).toBe(true)
+    expect(byName('Cupido')?.attributes.romanMythology).toBe(true)
+    expect(byName('Cupido')?.attributes.loveBeauty).toBe(true)
+    expect(byName('Ares')?.attributes.warAssociation).toBe(true)
+    expect(byName('Marte')?.attributes.romanMythology).toBe(true)
+    expect(byName('Minotauro')?.attributes.mythicMonster).toBe(true)
+    expect(byName('Medusa')?.attributes.mythicMonster).toBe(true)
+    expect(byName('Perseo')?.attributes.mythicHero).toBe(true)
+    expect(byName('Perseo')?.attributes.slaysMonster).toBe(true)
+    expect(byName('Ulises')?.attributes.legendaryVoyage).toBe(true)
+    expect(byName('Orión')?.attributes.constellationAssociation).toBe(true)
+    expect(byName('Orión')?.attributes.hunterAssociation).toBe(true)
+    expect(byName('Casiopea')?.attributes.woman).toBe(true)
+    expect(byName('Casiopea')?.attributes.constellationAssociation).toBe(true)
+    expect(byName('Centauro')?.attributes.halfHumanHalfAnimal).toBe(true)
+    expect(byName('Nerón')?.attributes.romanWorld).toBe(true)
+    expect(byName('Hipatia de Alejandría')?.attributes.scientist).toBe(true)
+  })
+
+  it('traduce nombres frecuentes de personas y lugares al uso habitual en espanol', async () => {
+    const [personKnowledge, placeKnowledge] = await Promise.all([
+      loadCategoryKnowledge('person'),
+      loadCategoryKnowledge('place')
+    ])
+    const personNames = personKnowledge.candidates.map(candidate => candidate.name)
+    const placeNames = placeKnowledge.candidates.map(candidate => candidate.name)
+
+    expect(personNames).toEqual(expect.arrayContaining([
+      'Isabel I de Inglaterra',
+      'Luis XIV de Francia',
+      'Jerjes I de Persia',
+      'Diógenes de Sinope',
+      'Enrique VIII de Inglaterra',
+      'Ciro el Grande',
+      'Solimán el Magnífico',
+      'Francisco de Asís',
+      'Carlos V',
+      'Juan Pablo II'
+    ]))
+    expect(placeNames).toContain('San Petersburgo')
+    expect(personNames).not.toEqual(expect.arrayContaining([
+      'Elizabeth I of England',
+      'Louis XIV of France',
+      'Xerxes I of Persia',
+      'Diogenes of Sinope',
+      'Henry VIII of England',
+      'Cyrus the Great',
+      'Suleiman the Magnificent',
+      'Francis of Assisi',
+      'Charles V, Holy Roman Emperor',
+      'Pope John Paul II'
+    ]))
+    expect(placeNames).not.toContain('Saint Petersburg')
+  })
+
   it('usa preguntas coherentes con la categoria persona', async () => {
     const personKnowledge = await loadCategoryKnowledge('person')
     const personQuestionIds = personKnowledge.questions.map(question => question.id)

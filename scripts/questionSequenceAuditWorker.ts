@@ -10,7 +10,7 @@ const sampleTargets: Record<Category, string[]> = {
   animal: ['Toro', 'Tigre', 'Tiburón', 'Delfín', 'Abeja', 'Águila'],
   object: ['Cuchara', 'Teléfono móvil', 'Silla', 'Coche', 'Libro', 'Guitarra'],
   place: ['París', 'Murcia', 'Cartagena (España)', 'Monte Everest', 'Gran Cañón', 'Taj Mahal'],
-  person: ['Mahatma Gandhi', 'Pedro Sánchez', 'Don Quijote de la Mancha', 'Fernando Alonso', 'Rosalía', 'Julio César', 'Elon Musk']
+  person: ['Mahatma Gandhi', 'Pedro Sánchez', 'Don Quijote de la Mancha', 'Fernando Alonso', 'Rosalía', 'Julio César', 'Elon Musk', 'Hipatia de Alejandría', 'Zeus', 'Poseidón', 'Afrodita', 'Hércules', 'Ulises', 'Cupido', 'Ares', 'Marte', 'Minotauro', 'Atenea', 'Medusa', 'Perseo', 'Orión', 'Casiopea', 'Centauro']
 }
 
 interface AskedStep {

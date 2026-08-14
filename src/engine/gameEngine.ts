@@ -1,7 +1,7 @@
 import { questions } from '../data/questions'
 import type { Answer, Category, GameKnowledge, GameState, Question } from '../types/game'
 import { effectiveCandidateCount } from './questionPhase'
-import { rankCandidates } from './scoring'
+import { expectedValue, normalizeAttribute, rankCandidates } from './scoring'
 import { selectNextQuestion } from './selectNextQuestion'
 
 const MAX_QUESTIONS = 20
@@ -11,6 +11,13 @@ const builtInKnowledge: GameKnowledge = { candidates: [], questions }
 
 function questionMap(knowledge: GameKnowledge): Record<string, Question> {
   return Object.fromEntries(knowledge.questions.map(question => [question.id, question]))
+}
+
+function distinguishesLeaders(question: Question | null, best: GameState['rankedCandidates'][number] | undefined, second: GameState['rankedCandidates'][number] | undefined): boolean {
+  if (!question || !best || !second) return false
+  const bestExpected = normalizeAttribute(expectedValue(best, question))
+  const secondExpected = normalizeAttribute(expectedValue(second, question))
+  return Math.abs(bestExpected - secondExpected) >= 0.35
 }
 
 export function createGame(category: Category, knowledge: GameKnowledge = builtInKnowledge): GameState {
@@ -53,7 +60,10 @@ export function answerCurrentQuestion(
   const odds = best && second ? best.score / Math.max(second.score, Number.EPSILON) : Number.POSITIVE_INFINITY
   const dominant = Boolean(best && questionCount >= MIN_GUESS_QUESTIONS && best.score >= 0.68 && odds >= 4)
   const smallSet = questionCount >= MIN_GUESS_QUESTIONS && effectiveCandidateCount(rankedCandidates) <= SMALL_EFFECTIVE_SET
-  const shouldGuess = dominant || smallSet || questionCount >= MAX_QUESTIONS
+  const categoryQuestions = knowledge.questions.filter(question => question.categories.includes(state.category))
+  const next = selectNextQuestion(categoryQuestions, rankedCandidates, askedQuestionIds, answers)
+  const canAskDiscriminatingQuestion = questionCount < MAX_QUESTIONS && distinguishesLeaders(next, best, second)
+  const shouldGuess = (dominant || smallSet || questionCount >= MAX_QUESTIONS) && !canAskDiscriminatingQuestion
 
   if (shouldGuess && best) {
     return {
@@ -67,9 +77,6 @@ export function answerCurrentQuestion(
       status: 'guessing'
     }
   }
-
-  const categoryQuestions = knowledge.questions.filter(question => question.categories.includes(state.category))
-  const next = selectNextQuestion(categoryQuestions, rankedCandidates, askedQuestionIds, answers)
 
   return {
     ...state,
