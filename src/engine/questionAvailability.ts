@@ -9,6 +9,7 @@ export function shouldAskQuestion(
   questionsById: Record<string, Question>,
   answers: Record<string, Answer>
 ): boolean {
+  if (question.askIf?.some(condition => !condition.answers.includes(answers[condition.questionId]))) return false
   if (question.skipIf?.some(condition => condition.answers.includes(answers[condition.questionId]))) return false
   if (!question.exclusiveGroup) return true
 

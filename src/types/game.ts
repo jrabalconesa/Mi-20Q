@@ -17,6 +17,7 @@ export interface Question {
   openingOrder?: number
   importance?: number
   exclusiveGroup?: string
+  askIf?: Array<{ questionId: string; answers: Answer[] }>
   skipIf?: Array<{ questionId: string; answers: Answer[] }>
   phase?: 'absolute' | 'segment' | 'closing'
 }

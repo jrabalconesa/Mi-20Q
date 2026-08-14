@@ -28,6 +28,66 @@ export const curatedPlaceCandidates: Candidate[] = [
       iberianPeninsula: true, inSpain: true, inFrance: false, inItaly: false,
       inUnitedKingdom: false, northOf45: false, southOf40: true, coastal: true
     }
+  },
+  {
+    id: 'curated-place-madrid',
+    name: 'Madrid',
+    category: 'place',
+    attributes: {
+      natural: false, urban: true, famous: true, largeCity: true, megaCity: false,
+      capital: true, regionalCapital: true, mountain: false, desert: false, building: false,
+      europe: true, americas: false, asia: false, africa: false, oceania: false,
+      northernHemisphere: true, southernHemisphere: false,
+      easternHemisphere: false, westernHemisphere: true,
+      iberianPeninsula: true, inSpain: true, inFrance: false, inItaly: false,
+      inUnitedKingdom: false, northOf45: false, southOf40: true, coastal: false,
+      before1900: true
+    }
+  },
+  {
+    id: 'curated-place-barcelona',
+    name: 'Barcelona',
+    category: 'place',
+    attributes: {
+      natural: false, urban: true, famous: true, largeCity: true, megaCity: false,
+      capital: false, regionalCapital: true, mountain: false, desert: false, building: false,
+      europe: true, americas: false, asia: false, africa: false, oceania: false,
+      northernHemisphere: true, southernHemisphere: false,
+      easternHemisphere: true, westernHemisphere: true,
+      iberianPeninsula: true, inSpain: true, inFrance: false, inItaly: false,
+      inUnitedKingdom: false, northOf45: false, southOf40: false, coastal: true,
+      before1900: true
+    }
+  },
+  {
+    id: 'curated-place-amazonas',
+    name: 'Río Amazonas',
+    category: 'place',
+    attributes: {
+      natural: true, urban: false, famous: true, largeCity: false, megaCity: false,
+      capital: false, regionalCapital: false, mountain: false, desert: false, building: false,
+      europe: false, americas: true, asia: false, africa: false, oceania: false,
+      northernHemisphere: false, southernHemisphere: true,
+      easternHemisphere: false, westernHemisphere: true,
+      iberianPeninsula: false, inSpain: false, inFrance: false, inItaly: false,
+      inUnitedKingdom: false, northOf45: false, southOf40: true, coastal: false,
+      waterPlace: true, politicalDivision: false, geographicOrBuilt: true
+    }
+  },
+  {
+    id: 'curated-place-nilo',
+    name: 'Río Nilo',
+    category: 'place',
+    attributes: {
+      natural: true, urban: false, famous: true, largeCity: false, megaCity: false,
+      capital: false, regionalCapital: false, mountain: false, desert: false, building: false,
+      europe: false, americas: false, asia: false, africa: true, oceania: false,
+      northernHemisphere: true, southernHemisphere: false,
+      easternHemisphere: true, westernHemisphere: false,
+      iberianPeninsula: false, inSpain: false, inFrance: false, inItaly: false,
+      inUnitedKingdom: false, northOf45: false, southOf40: true, coastal: false,
+      waterPlace: true, politicalDivision: false, geographicOrBuilt: true
+    }
   }
 ]
 

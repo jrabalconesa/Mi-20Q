@@ -149,9 +149,9 @@ function isLikelyCanid(name: string): boolean {
 
 function isCommonInSpain(name: string): boolean {
   return [
-    'abeja', 'aguila', 'buho', 'caballo', 'cabra', 'ciervo', 'conejo', 'gallina',
+    'abeja', 'aguila', 'buho', 'caballo', 'cabra', 'cerdo', 'ciervo', 'conejo', 'gallina',
     'gato', 'gorrion', 'jabali', 'lagarto', 'lobo', 'mariposa', 'oveja', 'perro',
-    'rana', 'sapo', 'serpiente', 'tortuga', 'vaca', 'zorro'
+    'pato', 'rana', 'sapo', 'serpiente', 'toro', 'tortuga', 'vaca', 'zorro'
   ].some(token => name.includes(token))
 }
 

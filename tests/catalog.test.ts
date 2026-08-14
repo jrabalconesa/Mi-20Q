@@ -8,6 +8,11 @@ describe('catalog', () => {
     const guitar = knowledge.candidates.find(candidate => candidate.name === 'Guitarra')
     const phone = knowledge.candidates.find(candidate => candidate.name === 'Teléfono móvil')
     const spoon = knowledge.candidates.find(candidate => candidate.name === 'Cuchara')
+    const lamp = knowledge.candidates.find(candidate => candidate.name === 'Lámpara')
+    const bottle = knowledge.candidates.find(candidate => candidate.name === 'Botella')
+    const ball = knowledge.candidates.find(candidate => candidate.name === 'Balón')
+    const backpack = knowledge.candidates.find(candidate => candidate.name === 'Mochila')
+    const toothbrush = knowledge.candidates.find(candidate => candidate.name === 'Cepillo de dientes')
 
     expect(guitar?.attributes.musicalInstrument).toBe(true)
     expect(guitar?.attributes.portable).toBe(true)
@@ -18,6 +23,11 @@ describe('catalog', () => {
     expect(spoon?.attributes.cutlery).toBe(true)
     expect(spoon?.attributes.hasHandle).toBe(true)
     expect(spoon?.attributes.concave).toBe(true)
+    expect(lamp?.attributes.screen).toBe(false)
+    expect(bottle?.attributes.storeContainTransport).toBe(true)
+    expect(ball?.attributes.gameEquipment).toBe(true)
+    expect(backpack?.attributes.wearable).toBe(true)
+    expect(toothbrush?.attributes.cleaning).toBe(true)
   })
 
   it('incluye la pregunta de caja de zapatos para animales y objetos', async () => {
@@ -28,6 +38,9 @@ describe('catalog', () => {
     const cow = animalKnowledge.candidates.find(candidate => candidate.name === 'Vaca')
     const horse = animalKnowledge.candidates.find(candidate => candidate.name === 'Caballo')
     const bull = animalKnowledge.candidates.find(candidate => candidate.name === 'Toro')
+    const goat = animalKnowledge.candidates.find(candidate => candidate.name === 'Cabra')
+    const duck = animalKnowledge.candidates.find(candidate => candidate.name === 'Pato')
+    const octopus = animalKnowledge.candidates.find(candidate => candidate.name === 'Pulpo')
 
     expect(animalKnowledge.questions).toContainEqual(expect.objectContaining({
       attribute: 'largerThanShoebox',
@@ -57,7 +70,13 @@ describe('catalog', () => {
     expect(cow?.attributes.maleBovine).toBe(false)
     expect(bull?.attributes.hasAntlers).toBe(true)
     expect(bull?.attributes.maleBovine).toBe(true)
+    expect(bull?.attributes.livesInSpain).toBe(true)
     expect(horse?.attributes.hasAntlers).toBe(false)
+    expect(goat?.attributes.hasAntlers).toBe(true)
+    expect(duck?.attributes.bird).toBe(true)
+    expect(duck?.attributes.feathers).toBe(true)
+    expect(octopus?.attributes.invertebrate).toBe(true)
+    expect(octopus?.attributes.vertebrate).toBe(false)
   })
 
   it('valida tamano y duplicados del catalogo base', async () => {
@@ -208,6 +227,12 @@ describe('catalog', () => {
     expect(placeNames).toContain('Ciudad de México')
     expect(placeNames).toContain('Londres')
     expect(placeNames).toContain('Moscú')
+    expect(placeNames).toEqual(expect.arrayContaining([
+      'Madrid',
+      'Barcelona',
+      'Río Amazonas',
+      'Río Nilo'
+    ]))
     expect(personNames).not.toEqual(expect.arrayContaining([
       'Elizabeth I of England',
       'Louis XIV of France',
@@ -243,6 +268,28 @@ describe('catalog', () => {
       'place_in_france',
       'place_large_city'
     ]))
+  })
+
+  it('incluye nuevos elementos curados con atributos discriminatorios', async () => {
+    const [animalKnowledge, objectKnowledge, personKnowledge, placeKnowledge] = await Promise.all([
+      loadCategoryKnowledge('animal'),
+      loadCategoryKnowledge('object'),
+      loadCategoryKnowledge('person'),
+      loadCategoryKnowledge('place')
+    ])
+    const byName = <T extends { name: string }>(items: T[], name: string) => items.find(item => item.name === name)
+
+    expect(byName(animalKnowledge.candidates, 'Lobo')?.attributes.canid).toBe(true)
+    expect(byName(animalKnowledge.candidates, 'Oveja')?.attributes.farm).toBe(true)
+    expect(byName(animalKnowledge.candidates, 'Cerdo')?.attributes.hasAntlers).toBe(false)
+    expect(byName(objectKnowledge.candidates, 'Llave')?.attributes.workStudyTool).toBe(true)
+    expect(byName(placeKnowledge.candidates, 'Madrid')?.attributes.capital).toBe(true)
+    expect(byName(placeKnowledge.candidates, 'Barcelona')?.attributes.coastal).toBe(true)
+    expect(byName(placeKnowledge.candidates, 'Río Amazonas')?.attributes.waterPlace).toBe(true)
+    expect(byName(placeKnowledge.candidates, 'Río Nilo')?.attributes.africa).toBe(true)
+    expect(byName(personKnowledge.candidates, 'Sherlock Holmes')?.attributes.detective).toBe(true)
+    expect(byName(personKnowledge.candidates, 'Harry Potter')?.attributes.magicalCharacter).toBe(true)
+    expect(byName(personKnowledge.candidates, 'Mafalda')?.attributes.comicCharacter).toBe(true)
   })
 
   it('usa preguntas coherentes con la categoria persona', async () => {

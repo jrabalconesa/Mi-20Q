@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { questions as appQuestions } from '../src/data/questions'
 import { availableQuestions } from '../src/engine/questionAvailability'
 import type { Question } from '../src/types/game'
 
@@ -72,5 +73,46 @@ describe('availableQuestions', () => {
     const available = availableQuestions(animalKindQuestions, ['animal_mammal'], { animal_mammal: 'yes' })
 
     expect(available.map(question => question.id)).toEqual(['animal_fur'])
+  })
+
+  it('solo activa una pregunta condicionada cuando la respuesta previa encaja', () => {
+    const conditionalQuestions: Question[] = [
+      { id: 'place_political', text: '¿Es una ciudad?', attribute: 'politicalDivision', categories: ['place'] },
+      {
+        id: 'place_capital',
+        text: '¿Es una capital?',
+        attribute: 'capital',
+        categories: ['place'],
+        askIf: [{ questionId: 'place_political', answers: ['yes'] }]
+      }
+    ]
+
+    expect(availableQuestions(conditionalQuestions, ['place_political'], { place_political: 'no' }).map(question => question.id)).toEqual([])
+    expect(availableQuestions(conditionalQuestions, ['place_political'], { place_political: 'yes' }).map(question => question.id)).toEqual(['place_capital'])
+  })
+
+  it('evita preguntas de mamifero tras descartar que sea mamifero', () => {
+    const available = availableQuestions(appQuestions.filter(question => question.categories.includes('animal')), ['animal_mammal'], { animal_mammal: 'no' })
+    const ids = available.map(question => question.id)
+
+    expect(ids).not.toEqual(expect.arrayContaining([
+      'animal_feline',
+      'animal_canid',
+      'animal_antlers',
+      'animal_male_bovine'
+    ]))
+  })
+
+  it('evita preguntas urbanas cuando un lugar no es division politica', () => {
+    const available = availableQuestions(appQuestions.filter(question => question.categories.includes('place')), ['place_political_division'], { place_political_division: 'no' })
+    const ids = available.map(question => question.id)
+
+    expect(ids).not.toEqual(expect.arrayContaining(['place_capital', 'place_large_city']))
+  })
+
+  it('evita preguntar si es cubierto cuando no esta relacionado con cocina o alimentacion', () => {
+    const available = availableQuestions(appQuestions.filter(question => question.categories.includes('object')), ['object_kitchen_food'], { object_kitchen_food: 'no' })
+
+    expect(available.map(question => question.id)).not.toContain('object_cutlery')
   })
 })
