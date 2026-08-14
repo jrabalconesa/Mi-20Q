@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { FormEvent } from 'react'
 import { AnswerButtons } from './components/AnswerButtons'
 import { HowToPlay } from './components/HowToPlay'
 import { QuestionHistory } from './components/QuestionHistory'
@@ -23,27 +22,14 @@ function App() {
   const game = useGame()
   const state = game.state
   const [selectedCategory, setSelectedCategory] = useState<Category>('animal')
-  const [thoughtName, setThoughtName] = useState('')
-  const [distinguishingQuestion, setDistinguishingQuestion] = useState('')
-  const [learnedAnswer, setLearnedAnswer] = useState(true)
-  const [savedLearning, setSavedLearning] = useState(false)
   const updateAvailable = useAppUpdate()
   const activeCategoryLabel = categories.find(category => category.id === state?.category)?.label
 
-  const clearLearningForm = () => {
-    setThoughtName('')
-    setDistinguishingQuestion('')
-    setLearnedAnswer(true)
-    setSavedLearning(false)
-  }
-
   const startGame = () => {
-    clearLearningForm()
     game.start(selectedCategory)
   }
 
   const resetGame = () => {
-    clearLearningForm()
     game.reset()
   }
 
@@ -100,13 +86,6 @@ function App() {
   const question = getQuestion(state.currentQuestionId, game.knowledge)
   const guess = getCandidateName(state.guessCandidateId, game.knowledge)
 
-  const saveLearning = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (!thoughtName.trim() || !distinguishingQuestion.trim()) return
-    game.learn(thoughtName, distinguishingQuestion, learnedAnswer)
-    setSavedLearning(true)
-  }
-
   return (
     <main className="shell">
       {updateNotice}
@@ -158,44 +137,9 @@ function App() {
         {(state.status === 'won' || state.status === 'lost') && (
           <>
             <p className="eyebrow">{state.status === 'won' ? '¡Acerté!' : 'No lo conseguí'}</p>
-            <h2>{state.status === 'won' ? `Era ${guess}.` : 'Ayúdame a aprender.'}</h2>
+            <h2>{state.status === 'won' ? `Era ${guess}.` : 'Esta vez no lo he acertado.'}</h2>
             <p>He utilizado {state.questionCount} preguntas.</p>
-            {state.status === 'lost' && !savedLearning && (
-              <form className="learning-form" onSubmit={saveLearning}>
-                <label>
-                  ¿En qué estabas pensando?
-                  <input
-                    autoComplete="off"
-                    maxLength={80}
-                    onChange={event => setThoughtName(event.target.value)}
-                    placeholder="Por ejemplo: ornitorrinco"
-                    required
-                    value={thoughtName}
-                  />
-                </label>
-                <label>
-                  Escribe una pregunta que lo diferencie de «{guess}»
-                  <input
-                    autoComplete="off"
-                    maxLength={160}
-                    onChange={event => setDistinguishingQuestion(event.target.value)}
-                    placeholder="¿Pone huevos?"
-                    required
-                    value={distinguishingQuestion}
-                  />
-                </label>
-                <fieldset>
-                  <legend>Para «{thoughtName || 'tu respuesta'}», la respuesta es:</legend>
-                  <div className="learning-choice">
-                    <button aria-pressed={learnedAnswer} className={learnedAnswer ? 'selected' : 'secondary'} onClick={() => setLearnedAnswer(true)} type="button">Sí</button>
-                    <button aria-pressed={!learnedAnswer} className={!learnedAnswer ? 'selected' : 'secondary'} onClick={() => setLearnedAnswer(false)} type="button">No</button>
-                  </div>
-                </fieldset>
-                <small>Se guardará solo en este navegador. La respuesta para «{guess}» se aprenderá como la contraria.</small>
-                <button type="submit">Guardar aprendizaje</button>
-              </form>
-            )}
-            {savedLearning && <p className="learning-success" role="status">¡Aprendido! Lo tendré en cuenta en la próxima partida.</p>}
+            {state.status === 'lost' && <p>La partida queda registrada en las estadísticas locales, pero ya no guardo preguntas manuales en el navegador.</p>}
             <button className="play-again" onClick={resetGame}>Jugar otra vez</button>
           </>
         )}

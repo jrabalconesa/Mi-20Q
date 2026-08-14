@@ -284,23 +284,6 @@ h2 {
 .answer-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .answer-grid.two button:last-child { background: linear-gradient(135deg, var(--orange-700), #9f2d00); }
 
-.learning-form { display: grid; gap: 1rem; margin: 1.5rem 0; }
-.learning-form label { display: grid; gap: 0.45rem; color: var(--blue-950); font-weight: 750; }
-.learning-form input {
-  width: 100%;
-  border: 1px solid #b8c8e6;
-  border-radius: 12px;
-  padding: 0.85rem 0.95rem;
-  color: var(--ink);
-  background: white;
-  font: inherit;
-}
-.learning-form input:focus-visible { outline: 3px solid var(--orange-500); outline-offset: 2px; }
-.learning-form fieldset { border: 0; margin: 0; padding: 0; }
-.learning-form legend { margin-bottom: 0.55rem; color: var(--muted); }
-.learning-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
-.learning-form small { color: var(--muted); line-height: 1.45; }
-.learning-success { border-radius: 12px; padding: 0.9rem; background: var(--blue-100); color: var(--blue-950); font-weight: 750; }
 .play-again { margin-top: 0.75rem; }
 
 .question-history {

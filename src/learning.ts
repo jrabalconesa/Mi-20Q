@@ -55,6 +55,14 @@ export function writeLearning(records: LearningRecord[], storage: Pick<Storage, 
   }
 }
 
+export function clearLearning(storage: Pick<Storage, 'removeItem'> = localStorage): void {
+  try {
+    storage.removeItem(STORAGE_KEY)
+  } catch {
+    // La limpieza es opcional si el navegador bloquea el almacenamiento.
+  }
+}
+
 function answerToAttribute(answer: Answer): number | boolean | undefined {
   if (answer === 'yes') return SMOOTHED_YES
   if (answer === 'no') return SMOOTHED_NO

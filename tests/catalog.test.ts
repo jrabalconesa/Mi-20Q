@@ -105,4 +105,18 @@ describe('catalog', () => {
     expect(donQuijote?.attributes.realPerson).toBe(false)
     expect(donQuijote?.attributes.artificialOrFictional).toBe(true)
   })
+
+  it('usa preguntas coherentes con la categoria persona', async () => {
+    const personKnowledge = await loadCategoryKnowledge('person')
+    const personQuestionIds = personKnowledge.questions.map(question => question.id)
+
+    expect(personQuestionIds).toContain('person_fictional')
+    expect(personQuestionIds).not.toEqual(expect.arrayContaining([
+      'universal_indoors',
+      'universal_larger_shoebox',
+      'universal_digital_electronic',
+      'universal_tangible',
+      'universal_artificial_or_fictional'
+    ]))
+  })
 })

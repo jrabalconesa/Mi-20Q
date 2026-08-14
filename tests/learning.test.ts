@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildKnowledge, createLearningRecord, readLearning } from '../src/learning'
+import { buildKnowledge, clearLearning, createLearningRecord, readLearning } from '../src/learning'
 import { createGame } from '../src/engine/gameEngine'
 import { coreCandidates } from '../src/data/candidates'
 import { questions } from '../src/data/questions'
@@ -27,6 +27,14 @@ describe('aprendizaje local', () => {
 
   it('descarta datos locales corruptos', () => {
     expect(readLearning({ getItem: () => '{' })).toEqual([])
+  })
+
+  it('elimina el aprendizaje manual guardado en el navegador', () => {
+    const removedKeys: string[] = []
+
+    clearLearning({ removeItem: key => removedKeys.push(key) })
+
+    expect(removedKeys).toEqual(['20q:learning:v1'])
   })
 
   it('normaliza preguntas aprendidas y omite las redundantes con el catalogo base', () => {

@@ -34,8 +34,12 @@ describe('HowToPlay', () => {
     expect(document.querySelector('[role="dialog"]')).toBeNull()
 
     act(() => openButton?.click())
-    expect(document.querySelector('[role="dialog"]')?.textContent).toContain('Cómo jugar a Mi 20Q')
-    expect(document.querySelector('[role="dialog"]')?.textContent).toContain('No lo sé')
+    const dialogText = document.querySelector('[role="dialog"]')?.textContent
+    expect(dialogText).toContain('Cómo jugar a Mi 20Q')
+    expect(dialogText).toContain('No lo sé')
+    expect(dialogText).toContain('respuestas fallidas sirven para mejorar el catálogo')
+    expect(dialogText).not.toContain('exportar')
+    expect(dialogText).not.toContain('importar')
 
     act(() => document.querySelector<HTMLButtonElement>('.how-to-done')?.click())
     expect(document.querySelector('[role="dialog"]')).toBeNull()

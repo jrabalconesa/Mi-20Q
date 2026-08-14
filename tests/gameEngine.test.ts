@@ -138,6 +138,36 @@ describe('gameEngine', () => {
     expect(state.rankedCandidates.findIndex(candidate => candidate.id === target.id)).toBeLessThan(10)
   }, 30_000)
 
+  it('no formula preguntas de objeto al jugar con una persona real como Gandhi', () => {
+    const knowledge = knowledgeFor('person')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Mahatma Gandhi')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('person', knowledge)
+    const askedTexts: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      askedTexts.push(question.text)
+      const value = expectedValue(target, question)
+      state = answerCurrentQuestion(
+        state,
+        value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+        knowledge
+      )
+    }
+
+    expect(askedTexts).not.toEqual(expect.arrayContaining([
+      '¿Se puede encontrar normalmente en interiores o dentro de una casa?',
+      '¿Es más grande que una caja de zapatos?',
+      '¿Se interactúa con ello principalmente de forma digital o electrónica?',
+      '¿Existe de forma física y tangible?'
+    ]))
+    expect(state.rankedCandidates.findIndex(candidate => candidate.name === 'Mahatma Gandhi')).toBeLessThan(25)
+  }, 30_000)
+
   it.each(['París', 'Murcia', 'Cartagena (España)'])(
     'distingue %s mediante preguntas geográficas naturales',
     targetName => {

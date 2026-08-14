@@ -96,15 +96,12 @@ export function HowToPlay() {
 
               <section>
                 <h3>4. Si Mi 20Q no acierta</h3>
-                <p>Puedes ayudar al juego indicando en qué pensabas, una pregunta que lo diferencie de su última propuesta y si la respuesta es <strong>Sí</strong> o <strong>No</strong> para tu opción.</p>
-                <p className="how-to-example"><strong>Ejemplo:</strong> «¿Pone huevos?» — Sí, para «ornitorrinco».</p>
-                <p>La respuesta correspondiente a la suposición incorrecta se aprenderá como la contraria.</p>
+                <p>La partida termina y puedes volver a jugar con otra opción. Las respuestas fallidas sirven para mejorar el catálogo en futuras versiones del juego.</p>
               </section>
 
               <section>
-                <h3>5. Aprendizaje y privacidad</h3>
-                <p>Lo que enseñes a Mi 20Q se guarda únicamente en este navegador. No se envía a ningún servidor ni se comparte automáticamente con otros dispositivos.</p>
-                <p>Desde la pantalla inicial puedes <strong>exportar</strong> o <strong>importar</strong> ese conocimiento en un archivo JSON para hacer copia de seguridad o usarlo en otro dispositivo.</p>
+                <h3>5. Datos locales</h3>
+                <p>Mi 20Q guarda estadísticas y refuerzos automáticos de partidas acertadas únicamente en este navegador. No se envían a ningún servidor ni se comparten automáticamente con otros dispositivos.</p>
               </section>
 
               <aside className="how-to-tips">

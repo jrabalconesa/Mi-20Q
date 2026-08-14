@@ -1,7 +1,6 @@
 import type { Category, Question } from '../types/game'
 
-const allCategories: Category[] = ['animal', 'object', 'place', 'person']
-const nonAnimal: Category[] = ['object', 'place', 'person']
+const objectOrPlace: Category[] = ['object', 'place']
 const animal: Category[] = ['animal']
 const object: Category[] = ['object']
 const place: Category[] = ['place']
@@ -9,11 +8,11 @@ const person: Category[] = ['person']
 const culture: Category[] = ['place', 'person']
 
 export const questions: Question[] = [
-  { id: 'universal_artificial_or_fictional', text: '¿Es un objeto o personaje de ficción / creado por el ser humano?', attribute: 'artificialOrFictional', categories: nonAnimal, phase: 'absolute' },
-  { id: 'universal_indoors', text: '¿Se puede encontrar normalmente en interiores o dentro de una casa?', attribute: 'indoors', categories: nonAnimal },
-  { id: 'universal_larger_shoebox', text: '¿Es más grande que una caja de zapatos?', attribute: 'largerThanShoebox', categories: allCategories },
-  { id: 'universal_digital_electronic', text: '¿Se interactúa con ello principalmente de forma digital o electrónica?', attribute: 'digitalOrElectronic', categories: nonAnimal },
-  { id: 'universal_tangible', text: '¿Existe de forma física y tangible?', attribute: 'tangible', categories: nonAnimal, phase: 'absolute' },
+  { id: 'universal_artificial_or_fictional', text: '¿Es un objeto o lugar de ficción / creado por el ser humano?', attribute: 'artificialOrFictional', categories: objectOrPlace, phase: 'absolute' },
+  { id: 'universal_indoors', text: '¿Se puede encontrar normalmente en interiores o dentro de una casa?', attribute: 'indoors', categories: objectOrPlace },
+  { id: 'universal_larger_shoebox', text: '¿Es más grande que una caja de zapatos?', attribute: 'largerThanShoebox', categories: ['animal', 'object'] },
+  { id: 'universal_digital_electronic', text: '¿Se interactúa con ello principalmente de forma digital o electrónica?', attribute: 'digitalOrElectronic', categories: objectOrPlace },
+  { id: 'universal_tangible', text: '¿Existe de forma física y tangible?', attribute: 'tangible', categories: objectOrPlace, phase: 'absolute' },
 
   { id: 'animal_mammal', text: '¿Es un mamífero?', attribute: 'mammal', categories: animal, phase: 'absolute' },
   { id: 'animal_carnivore_predator', text: '¿Es principalmente carnívoro o depredador?', attribute: 'carnivore', categories: animal, phase: 'absolute' },
@@ -51,6 +50,7 @@ export const questions: Question[] = [
   { id: 'object_game_equipment', text: '¿Está asociado a un deporte o juego?', attribute: 'gameEquipment', categories: object },
 
   { id: 'person_real', text: '¿Es (o fue) una persona real de carne y hueso?', attribute: 'realPerson', categories: person, phase: 'absolute' },
+  { id: 'person_fictional', text: '¿Es un personaje de ficción?', attribute: 'artificialOrFictional', categories: person, phase: 'absolute', skipIf: [{ questionId: 'person_real', answers: ['yes'] }] },
   { id: 'person_living', text: '¿Sigue con vida?', attribute: 'living', categories: person, phase: 'absolute' },
   { id: 'person_spanish_origin', text: '¿Es de origen español?', attribute: 'spanishOrigin', categories: person, phase: 'absolute' },
   { id: 'culture_before_1900', text: '¿Nació o se originó antes del año 1900?', attribute: 'before1900', categories: culture },
