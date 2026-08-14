@@ -11,8 +11,12 @@ const categoryLoaders: Record<Category, () => Promise<Candidate[]>> = {
     return [...core.coreCandidates, ...generated.generatedCandidates].map(knowledge.enrichAnimalCandidate)
   },
   object: async () => {
-    const [core, generated] = await Promise.all([import('./core/object'), import('./generated/object')])
-    return [...core.coreCandidates, ...generated.generatedCandidates]
+    const [core, generated, knowledge] = await Promise.all([
+      import('./core/object'),
+      import('./generated/object'),
+      import('./objectKnowledge')
+    ])
+    return [...core.coreCandidates, ...generated.generatedCandidates].map(knowledge.enrichObjectCandidate)
   },
   place: async () => {
     const [core, generated, knowledge] = await Promise.all([
