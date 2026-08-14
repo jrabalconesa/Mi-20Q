@@ -21,6 +21,12 @@ function knowledgeFor(category: Category): GameKnowledge {
   return knowledge
 }
 
+function answerForTarget(target: Candidate, state: ReturnType<typeof createGame>, knowledge: GameKnowledge) {
+  const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+  const value = question ? expectedValue(target, question) : undefined
+  return value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown'
+}
+
 describe('gameEngine', () => {
   it('crea una partida con una pregunta inicial', () => {
     const state = createGame('animal', knowledgeFor('animal'))
@@ -166,6 +172,30 @@ describe('gameEngine', () => {
       '¿Existe de forma física y tangible?'
     ]))
     expect(state.rankedCandidates.findIndex(candidate => candidate.name === 'Mahatma Gandhi')).toBeLessThan(25)
+  }, 30_000)
+
+  it('no cierra antes de veinte si falla una suposición pensando en Pedro Sánchez', () => {
+    const knowledge = knowledgeFor('person')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Pedro Sánchez')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('person', knowledge)
+    while (state.status === 'playing') {
+      const value = answerForTarget(target, state, knowledge)
+      state = answerCurrentQuestion(state, value, knowledge)
+    }
+
+    while (state.status === 'guessing' && state.guessCandidateId !== 'spanish-pedro-sanchez' && state.questionCount < 20) {
+      state = resolveGuess(state, false, knowledge)
+      expect(state.status).toBe('playing')
+      const value = answerForTarget(target, state, knowledge)
+      state = answerCurrentQuestion(state, value, knowledge)
+    }
+
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe('spanish-pedro-sanchez')
+    expect(state.questionCount).toBeLessThanOrEqual(20)
   }, 30_000)
 
   it('sigue preguntando tras fallar con cuchara antes de agotar las veinte preguntas', () => {

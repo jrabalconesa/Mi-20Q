@@ -119,15 +119,40 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
   ].some(token => normalized.includes(token))
   const pseudonym = ['c. tangana', 'bad bunny', 'madonna', 'shakira', 'beyonce'].some(token => normalized.includes(token))
   const billionaire = ['amancio ortega', 'elon musk', 'bill gates', 'steve jobs'].some(token => normalized.includes(token))
+  const living = attributes.living ?? (
+    normalized.includes('caballe') ? false :
+    attributes.bornAfter1950 === true ? true :
+    attributes.bornBefore1900 === true ? false :
+    undefined
+  )
+  const religiousSpiritual = [
+    'abraham', 'agustin de hipona', 'confucio', 'gandhi', 'jesucristo', 'juan el bautista',
+    'mahoma', 'moises', 'pablo de tarso', 'san pedro', 'santo', 'virgen maria'
+  ].some(token => normalized.includes(token))
+  const ancientClassical = [
+    'alejandro magno', 'aristoteles', 'arquimedes', 'ciceron', 'cleopatra', 'euclides',
+    'herodoto', 'hipocrates', 'homero', 'julio cesar', 'marco aurelio', 'ovidio',
+    'pericles', 'platon', 'ptolomeo', 'socrates', 'sofocles', 'tales de mileto', 'virgilio'
+  ].some(token => normalized.includes(token))
+  const civicLeader = politician || [
+    'adolf suarez', 'barack obama', 'clara campoamor', 'felipe vi', 'gandhi',
+    'isabel la catolica', 'pedro sanchez'
+  ].some(token => normalized.includes(token))
+  const romanWorld = [
+    'agustin de hipona', 'ciceron', 'julio cesar', 'marco antonio', 'marco aurelio',
+    'ovidio', 'pablo de tarso', 'pertinax', 'plutarco', 'seneca', 'trajan', 'virgilio'
+  ].some(token => normalized.includes(token))
 
   return {
     ...attributes,
     artificialOrFictional: attributes.realPerson === false,
+    living,
     indoors: 0.5,
     largerThanShoebox: true,
     digitalOrElectronic: false,
     tangible: attributes.realPerson ?? true,
     before1900: attributes.bornBefore1900,
+    historical: attributes.historical ?? attributes.bornBefore1900,
     artEntertainmentSport: attributes.artEntertainmentSport ?? (artist || sports || writer),
     westernHemisphere: attributes.westernHemisphere ?? (americas || europe),
     spanishOrigin,
@@ -138,7 +163,11 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
     worksInGroup: attributes.worksInGroup ?? (sports ? 0.5 : undefined),
     pseudonym: attributes.pseudonym ?? pseudonym,
     billionaire: attributes.billionaire ?? billionaire,
-    sciencePoliticsLeadership: attributes.sciencePoliticsLeadership ?? (scientist || politician)
+    sciencePoliticsLeadership: attributes.sciencePoliticsLeadership ?? (scientist || politician),
+    religiousSpiritual: attributes.religiousSpiritual ?? religiousSpiritual,
+    ancientClassical: attributes.ancientClassical ?? ancientClassical,
+    civicLeader: attributes.civicLeader ?? civicLeader,
+    romanWorld: attributes.romanWorld ?? romanWorld
   }
 }
 

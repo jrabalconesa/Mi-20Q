@@ -16,6 +16,7 @@ npm run dev
 ```bash
 npm run test
 npm run build
+npm run audit:questions
 ```
 
 ## Publicación en GitHub Pages
@@ -40,6 +41,7 @@ La opción `base: '/Mi-20Q/'` de Vite corresponde al nombre del repositorio. Si 
 - La aplicación detecta un despliegue nuevo y ofrece recargarlo sin dejar pestañas antiguas ejecutándose indefinidamente.
 - Durante la partida se muestra el historial de preguntas y respuestas, con opción de deshacer la última.
 - El workflow `.github/workflows/deploy-pages.yml` valida y publica `dist` al hacer `push` a `main`.
+- `npm run audit:questions` genera `QUESTION_SEQUENCE_AUDIT.md` con partidas simuladas por categoría para revisar la secuencia real de preguntas y las suposiciones del motor.
 
 ## Algoritmo
 

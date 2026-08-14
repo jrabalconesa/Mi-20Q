@@ -99,6 +99,9 @@ describe('catalog', () => {
     const personNames = personKnowledge.candidates.map(candidate => candidate.name)
     const fernandoAlonso = personKnowledge.candidates.find(candidate => candidate.name === 'Fernando Alonso')
     const donQuijote = personKnowledge.candidates.find(candidate => candidate.name === 'Don Quijote de la Mancha')
+    const gandhi = personKnowledge.candidates.find(candidate => candidate.name === 'Mahatma Gandhi')
+    const julioCesar = personKnowledge.candidates.find(candidate => candidate.name === 'Julio César')
+    const rosalia = personKnowledge.candidates.find(candidate => candidate.name === 'Rosalía')
 
     expect(personNames).toEqual(expect.arrayContaining([
       'Julio Iglesias',
@@ -113,6 +116,12 @@ describe('catalog', () => {
     expect(fernandoAlonso?.attributes.spanishOrigin).toBe(true)
     expect(donQuijote?.attributes.realPerson).toBe(false)
     expect(donQuijote?.attributes.artificialOrFictional).toBe(true)
+    expect(gandhi?.attributes.asia).toBe(true)
+    expect(gandhi?.attributes.religiousSpiritual).toBe(true)
+    expect(gandhi?.attributes.civicLeader).toBe(true)
+    expect(julioCesar?.attributes.ancientClassical).toBe(true)
+    expect(julioCesar?.attributes.romanWorld).toBe(true)
+    expect(rosalia?.attributes.living).toBe(true)
   })
 
   it('usa preguntas coherentes con la categoria persona', async () => {

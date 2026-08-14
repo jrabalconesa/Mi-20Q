@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "audit:questions": "node --experimental-strip-types --loader ./scripts/tsExtensionLoader.mjs scripts/questionSequenceAuditWorker.ts"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
