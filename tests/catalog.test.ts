@@ -22,6 +22,7 @@ describe('catalog', () => {
     const bee = animalKnowledge.candidates.find(candidate => candidate.name === 'Abeja')
     const cow = animalKnowledge.candidates.find(candidate => candidate.name === 'Vaca')
     const horse = animalKnowledge.candidates.find(candidate => candidate.name === 'Caballo')
+    const bull = animalKnowledge.candidates.find(candidate => candidate.name === 'Toro')
 
     expect(animalKnowledge.questions).toContainEqual(expect.objectContaining({
       attribute: 'largerThanShoebox',
@@ -30,6 +31,10 @@ describe('catalog', () => {
     expect(animalKnowledge.questions).toContainEqual(expect.objectContaining({
       attribute: 'hasAntlers',
       text: '¿Tiene cornamenta o cuernos visibles?'
+    }))
+    expect(animalKnowledge.questions).toContainEqual(expect.objectContaining({
+      attribute: 'maleBovine',
+      text: '¿Es un macho bovino, como un toro?'
     }))
     expect(objectKnowledge.questions).toContainEqual(expect.objectContaining({
       attribute: 'largerThanShoebox',
@@ -40,6 +45,9 @@ describe('catalog', () => {
     expect(dog?.attributes.largerThanShoebox).toBe(true)
     expect(bee?.attributes.largerThanShoebox).toBe(false)
     expect(cow?.attributes.hasAntlers).toBe(true)
+    expect(cow?.attributes.maleBovine).toBe(false)
+    expect(bull?.attributes.hasAntlers).toBe(true)
+    expect(bull?.attributes.maleBovine).toBe(true)
     expect(horse?.attributes.hasAntlers).toBe(false)
   })
 

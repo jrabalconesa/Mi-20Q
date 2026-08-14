@@ -28,4 +28,24 @@ describe('aprendizaje local', () => {
   it('descarta datos locales corruptos', () => {
     expect(readLearning({ getItem: () => '{' })).toEqual([])
   })
+
+  it('normaliza preguntas aprendidas y omite las redundantes con el catalogo base', () => {
+    const baseKnowledge = { candidates: coreCandidates, questions }
+    const malformed = {
+      id: 'learned-animal-ciervo',
+      name: 'Ciervo',
+      category: 'animal' as const,
+      attributes: { animal_mammal: true },
+      distinguishingQuestion: '¿Tiene una gran cornamenta)?',
+      learnedAnswer: true,
+      guessedCandidateId: 'cow',
+      createdAt: '2026-01-01'
+    }
+    const records = readLearning({ getItem: () => JSON.stringify([malformed]) })
+    const knowledge = buildKnowledge(records, baseKnowledge)
+
+    expect(records[0]?.distinguishingQuestion).toBe('¿Tiene una gran cornamenta?')
+    expect(knowledge.candidates).toContainEqual(expect.objectContaining({ id: malformed.id }))
+    expect(knowledge.questions).not.toContainEqual(expect.objectContaining({ id: `question:${malformed.id}` }))
+  })
 })

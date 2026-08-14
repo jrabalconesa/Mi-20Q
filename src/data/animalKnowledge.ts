@@ -19,7 +19,8 @@ const profiles: Record<string, Record<string, AttributeValue>> = {
   'cocodrilo': { mammal: false, bird: false, fish: false, reptile: true, amphibian: false, carnivore: true, fourLegs: true, fur: false, water: 0.5, swims: true, largerThanShoebox: true },
   'oso': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, feline: false, carnivore: 0.5, spottedCoat: false, stripedCoat: false, largerThanTiger: 0.5, largerThanShoebox: true, veryFastRunner: false },
   'perro': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, feline: false, carnivore: 0.5, spottedCoat: 0.5, stripedCoat: false, largerThanTiger: false, largerThanShoebox: true, veryFastRunner: false },
-  'vaca': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: true, fur: true, largerThanShoebox: true },
+  'vaca': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: true, fur: true, largerThanShoebox: true, domestic: true, farm: true, maleBovine: false },
+  'toro': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: true, fur: true, largerThanShoebox: true, domestic: true, farm: true, dangerous: 0.5, biggerThanDog: true, largerThanLion: true, spottedCoat: 0.5, stripedCoat: false, hasAntlers: true, maleBovine: true },
   'pinguino': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: true, fourLegs: false, fur: false, flies: false, swims: true, laysEggs: true, largerThanShoebox: true },
   'conejo': { mammal: true, bird: false, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: true, fur: true, largerThanShoebox: 0.5 },
   'gallina': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: false, fur: false, laysEggs: true, largerThanShoebox: 0.5 },
@@ -130,6 +131,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('sinsonte')) return 'Sinsonte'
   if (normalized.includes('tiburon')) return 'Tiburón'
   if (normalized.includes('tortuga')) return 'Tortuga'
+  if (normalized.includes('toro') && attributes.amphibian !== true) return 'Toro'
   if (normalized.includes('venado')) return 'Ciervo'
   if (normalized.includes('zorro')) return 'Zorro'
   if (normalized.includes('zopilote') || normalized.includes('aura')) return 'Buitre'

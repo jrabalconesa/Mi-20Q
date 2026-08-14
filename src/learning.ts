@@ -16,10 +16,32 @@ function isLearningRecord(value: unknown): value is LearningRecord {
     && typeof record.guessedCandidateId === 'string'
 }
 
+function sanitizeQuestion(text: string): string {
+  return text.trim().replace(/\s*\)+\s*\?*$/, '?').replace(/\?*$/, '?')
+}
+
+function normalizedText(text: string): string {
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')
+}
+
+function isCoveredByBuiltInQuestion(record: LearningRecord): boolean {
+  const question = normalizedText(record.distinguishingQuestion)
+  return record.category === 'animal' && (
+    question.includes('cornamenta') ||
+    question.includes('cuerno') ||
+    question.includes('asta')
+  )
+}
+
 export function readLearning(storage: Pick<Storage, 'getItem'> = localStorage): LearningRecord[] {
   try {
     const parsed: unknown = JSON.parse(storage.getItem(STORAGE_KEY) ?? '[]')
-    return Array.isArray(parsed) ? parsed.filter(isLearningRecord).slice(0, 250) : []
+    return Array.isArray(parsed)
+      ? parsed.filter(isLearningRecord).slice(0, 250).map(record => ({
+        ...record,
+        distinguishingQuestion: sanitizeQuestion(record.distinguishingQuestion)
+      }))
+      : []
   } catch {
     return []
   }
@@ -61,7 +83,7 @@ export function createLearningRecord(
     name: name.trim(),
     category: state.category,
     attributes,
-    distinguishingQuestion: distinguishingQuestion.trim().replace(/\?*$/, '?'),
+    distinguishingQuestion: sanitizeQuestion(distinguishingQuestion),
     learnedAnswer,
     guessedCandidateId: state.guessCandidateId ?? '',
     createdAt: now
@@ -82,18 +104,24 @@ export function buildKnowledge(
   for (const record of records) {
     if (!categories.has(record.category)) continue
     const attribute = `learned:${record.id}`
+    const isCovered = isCoveredByBuiltInQuestion(record)
     const existing = candidatesById.get(record.id)
     candidatesById.set(record.id, {
       id: record.id,
       name: record.name,
       category: record.category,
-      attributes: { ...existing?.attributes, ...record.attributes, [attribute]: record.learnedAnswer }
+      attributes: {
+        ...existing?.attributes,
+        ...record.attributes,
+        ...(isCovered ? {} : { [attribute]: record.learnedAnswer })
+      }
     })
     const guessed = candidatesById.get(record.guessedCandidateId)
+    if (isCovered) continue
     if (guessed) guessed.attributes[attribute] = !record.learnedAnswer
     customQuestions.push({
       id: `question:${record.id}`,
-      text: record.distinguishingQuestion,
+      text: sanitizeQuestion(record.distinguishingQuestion),
       attribute,
       categories: [record.category],
       phase: 'closing' as const
