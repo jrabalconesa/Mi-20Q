@@ -132,7 +132,7 @@ describe('gameEngine', () => {
       state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown', knowledge)
     }
 
-    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Pertenece a la familia de los felinos o cánidos?')
+    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Es un felino?')
     expect(askedTexts).toContain('¿Es principalmente carnívoro o depredador?')
     expect(askedTexts).toContain('¿Tiene cuatro patas o más?')
     expect(state.rankedCandidates.findIndex(candidate => candidate.id === target.id)).toBeLessThan(10)

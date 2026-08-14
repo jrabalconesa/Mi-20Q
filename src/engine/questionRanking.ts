@@ -39,7 +39,7 @@ export function rankAvailableQuestions(
     .map(question => {
       const yesProbability = weightedMeanProbability(question, rankedCandidates)
       const distanceToHalf = Math.abs(yesProbability - 0.5)
-      const usefulness = remainingEntropy * (1 - distanceToHalf * 2)
+      const usefulness = remainingEntropy * (1 - distanceToHalf * 2) * (question.importance ?? 1)
       return {
         question,
         usefulness,

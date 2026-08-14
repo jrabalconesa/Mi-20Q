@@ -186,6 +186,7 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
     movesByAirOrWater: attributes.movesByAirOrWater ?? (flies || water || swims),
     fourOrMoreLegs: attributes.fourOrMoreLegs ?? (fourLegs || insect || arachnid || crustacean),
     felineOrCanid: attributes.felineOrCanid ?? (feline || canid),
+    canid: attributes.canid ?? canid,
     hasLegs: attributes.hasLegs ?? hasLegs,
     oviparous: attributes.oviparous ?? oviparous,
     biggerThanDog,

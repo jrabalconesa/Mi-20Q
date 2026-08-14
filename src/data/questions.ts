@@ -1,6 +1,7 @@
 import type { Category, Question } from '../types/game'
 
 const allCategories: Category[] = ['animal', 'object', 'place', 'person']
+const nonAnimal: Category[] = ['object', 'place', 'person']
 const animal: Category[] = ['animal']
 const object: Category[] = ['object']
 const place: Category[] = ['place']
@@ -8,28 +9,30 @@ const person: Category[] = ['person']
 const culture: Category[] = ['place', 'person']
 
 export const questions: Question[] = [
-  { id: 'universal_artificial_or_fictional', text: '¿Es un objeto o personaje de ficción / creado por el ser humano?', attribute: 'artificialOrFictional', categories: allCategories, phase: 'absolute' },
-  { id: 'universal_indoors', text: '¿Se puede encontrar normalmente en interiores o dentro de una casa?', attribute: 'indoors', categories: allCategories },
+  { id: 'universal_artificial_or_fictional', text: '¿Es un objeto o personaje de ficción / creado por el ser humano?', attribute: 'artificialOrFictional', categories: nonAnimal, phase: 'absolute' },
+  { id: 'universal_indoors', text: '¿Se puede encontrar normalmente en interiores o dentro de una casa?', attribute: 'indoors', categories: nonAnimal },
   { id: 'universal_larger_shoebox', text: '¿Es más grande que una caja de zapatos?', attribute: 'largerThanShoebox', categories: allCategories },
-  { id: 'universal_digital_electronic', text: '¿Se interactúa con ello principalmente de forma digital o electrónica?', attribute: 'digitalOrElectronic', categories: allCategories },
-  { id: 'universal_tangible', text: '¿Existe de forma física y tangible?', attribute: 'tangible', categories: allCategories, phase: 'absolute' },
+  { id: 'universal_digital_electronic', text: '¿Se interactúa con ello principalmente de forma digital o electrónica?', attribute: 'digitalOrElectronic', categories: nonAnimal },
+  { id: 'universal_tangible', text: '¿Existe de forma física y tangible?', attribute: 'tangible', categories: nonAnimal, phase: 'absolute' },
 
-  { id: 'animal_vertebrate', text: '¿Es un animal vertebrado?', attribute: 'vertebrate', categories: animal, phase: 'absolute' },
   { id: 'animal_mammal', text: '¿Es un mamífero?', attribute: 'mammal', categories: animal, phase: 'absolute' },
-  { id: 'animal_domestic_farm_pet', text: '¿Es un animal doméstico, de granja o mascota común?', attribute: 'domesticFarmPet', categories: animal, phase: 'absolute' },
-  { id: 'animal_air_or_water', text: '¿Suele desplazarse principalmente por el aire o el agua?', attribute: 'movesByAirOrWater', categories: animal },
   { id: 'animal_carnivore_predator', text: '¿Es principalmente carnívoro o depredador?', attribute: 'carnivore', categories: animal, phase: 'absolute' },
-  { id: 'animal_four_or_more_legs', text: '¿Tiene cuatro patas o más?', attribute: 'fourOrMoreLegs', categories: animal },
-  { id: 'animal_feline_or_canid', text: '¿Pertenece a la familia de los felinos o cánidos?', attribute: 'felineOrCanid', categories: animal, phase: 'closing' },
-  { id: 'animal_has_legs', text: '¿Tiene patas?', attribute: 'hasLegs', categories: animal },
-  { id: 'animal_oviparous', text: '¿Nace de un huevo?', attribute: 'oviparous', categories: animal },
+  { id: 'animal_domestic_farm_pet', text: '¿Es un animal doméstico, de granja o mascota común?', attribute: 'domesticFarmPet', categories: animal, phase: 'absolute' },
   { id: 'animal_bigger_than_dog', text: '¿Es más grande que un perro?', attribute: 'biggerThanDog', categories: animal },
+  { id: 'animal_air_or_water', text: '¿Suele desplazarse principalmente por el aire o el agua?', attribute: 'movesByAirOrWater', categories: animal },
+  { id: 'animal_four_or_more_legs', text: '¿Tiene cuatro patas o más?', attribute: 'fourOrMoreLegs', categories: animal },
+  { id: 'animal_vertebrate', text: '¿Es un animal vertebrado?', attribute: 'vertebrate', categories: animal, skipIf: [{ questionId: 'animal_mammal', answers: ['yes'] }] },
+  { id: 'animal_dangerous', text: '¿Puede ser peligroso para las personas?', attribute: 'dangerous', categories: animal },
+  { id: 'animal_oviparous', text: '¿Nace de un huevo?', attribute: 'oviparous', categories: animal },
   { id: 'animal_lives_in_spain', text: '¿Vive normalmente en España o en la fauna ibérica?', attribute: 'livesInSpain', categories: animal },
+  { id: 'animal_feline', text: '¿Es un felino?', attribute: 'feline', categories: animal, phase: 'closing', importance: 1.25 },
+  { id: 'animal_canid', text: '¿Es un cánido, como un perro, lobo o zorro?', attribute: 'canid', categories: animal, phase: 'closing', importance: 1.15 },
+  { id: 'animal_striped', text: '¿Tiene rayas?', attribute: 'stripedCoat', categories: animal, phase: 'closing', importance: 1.45 },
+  { id: 'animal_spotted', text: '¿Tiene manchas en el pelaje?', attribute: 'spottedCoat', categories: animal, phase: 'closing', importance: 1.35 },
   { id: 'animal_venomous', text: '¿Es venenoso?', attribute: 'venomous', categories: animal, phase: 'closing' },
-  { id: 'animal_fur', text: '¿Tiene pelo o pelaje?', attribute: 'fur', categories: animal },
-  { id: 'animal_feathers', text: '¿Tiene plumas?', attribute: 'feathers', categories: animal },
-  { id: 'animal_scales', text: '¿Tiene escamas?', attribute: 'scales', categories: animal },
-  { id: 'animal_nocturnal', text: '¿Es principalmente nocturno?', attribute: 'nocturnal', categories: animal, phase: 'closing' },
+  { id: 'animal_feathers', text: '¿Tiene plumas?', attribute: 'feathers', categories: animal, skipIf: [{ questionId: 'animal_mammal', answers: ['yes'] }] },
+  { id: 'animal_scales', text: '¿Tiene escamas?', attribute: 'scales', categories: animal, skipIf: [{ questionId: 'animal_mammal', answers: ['yes'] }] },
+  { id: 'animal_nocturnal', text: '¿Es principalmente nocturno?', attribute: 'nocturnal', categories: animal, phase: 'closing', importance: 0.75 },
 
   { id: 'object_moving_mechanical_electronic', text: '¿Tiene partes móviles, mecánicas o electrónicas?', attribute: 'movingMechanicalElectronic', categories: object, phase: 'absolute' },
   { id: 'object_work_study_tool', text: '¿Se utiliza principalmente como una herramienta de trabajo o estudio?', attribute: 'workStudyTool', categories: object },

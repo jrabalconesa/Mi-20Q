@@ -4,7 +4,6 @@ import { loadCategoryKnowledge } from '../data/catalog'
 import { answerCurrentQuestion, canUndoLastAnswer, createGame, resolveGuess, undoLastAnswer } from '../engine/gameEngine'
 import { applyExperience, readExperience, reinforceCandidate, writeExperience } from '../experience'
 import { buildKnowledge, createLearningRecord, readLearning, writeLearning } from '../learning'
-import { mergeExperienceRecords, mergeLearningRecords } from '../knowledgeTransfer'
 import { addGameResult, readStats, writeStats } from '../stats'
 
 export function useGame() {
@@ -69,19 +68,6 @@ export function useGame() {
     return undoLastAnswer(current, knowledge)
   }), [knowledge])
 
-  const importKnowledge = useCallback((importedLearning: ReturnType<typeof readLearning>, importedExperience: ReturnType<typeof readExperience>) => {
-    setLearning(current => {
-      const next = mergeLearningRecords(current, importedLearning)
-      writeLearning(next)
-      return next
-    })
-    setExperience(current => {
-      const next = mergeExperienceRecords(current, importedExperience)
-      writeExperience(next)
-      return next
-    })
-  }, [])
-
   return useMemo(() => ({
     state,
     stats,
@@ -97,7 +83,6 @@ export function useGame() {
     resolve,
     learn,
     undo,
-    importKnowledge,
     reset: () => setState(null)
-  }), [state, stats, knowledge, loading, learning, experience, start, resolve, learn, undo, importKnowledge])
+  }), [state, stats, knowledge, loading, learning, experience, start, resolve, learn, undo])
 }

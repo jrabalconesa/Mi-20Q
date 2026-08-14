@@ -2,7 +2,6 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { AnswerButtons } from './components/AnswerButtons'
 import { HowToPlay } from './components/HowToPlay'
-import { KnowledgeTransfer } from './components/KnowledgeTransfer'
 import { QuestionHistory } from './components/QuestionHistory'
 import { getCandidateName, getQuestion } from './engine/gameEngine'
 import { useAppUpdate } from './hooks/useAppUpdate'
@@ -91,18 +90,6 @@ function App() {
               {game.loading ? 'Preparando preguntas…' : 'Comenzar partida'}
             </button>
             <HowToPlay />
-            {game.stats.games > 0 && (
-              <section className="stats" aria-label="Estadísticas de juego">
-                <div><strong>{game.stats.games}</strong><span>Partidas</span></div>
-                <div><strong>{game.stats.wins}</strong><span>Aciertos</span></div>
-                <div><strong>{game.stats.averageQuestions.toFixed(1)}</strong><span>Media</span></div>
-              </section>
-            )}
-            <KnowledgeTransfer
-              experience={game.experience}
-              learning={game.learning}
-              onImport={game.importKnowledge}
-            />
             <small className="version">Versión {APP_VERSION}</small>
           </div>
         </section>

@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { loadCategoryKnowledge } from '../src/data/catalog'
 import { questions } from '../src/data/questions'
 import { availableQuestions } from '../src/engine/questionAvailability'
-import { rankCandidates } from '../src/engine/scoring'
+import { expectedValue, rankCandidates } from '../src/engine/scoring'
+import { answerCurrentQuestion, createGame } from '../src/engine/gameEngine'
 
 describe('animal regressions', () => {
   it('no vuelve a preguntar por otras clases animales tras confirmar mamifero', () => {
@@ -53,5 +54,33 @@ describe('animal regressions', () => {
 
     expect(shark?.score).toBeGreaterThan(dolphin?.score ?? 0)
     expect(ranked.findIndex(candidate => candidate.name === 'Tiburón')).toBeLessThan(5)
+  })
+
+  it('usa rasgos discriminatorios para llegar antes a tigre', async () => {
+    const knowledge = await loadCategoryKnowledge('animal')
+    const tiger = knowledge.candidates.find(candidate => candidate.name === 'Tigre')
+    expect(tiger).toBeDefined()
+    if (!tiger) return
+
+    let state = createGame('animal', knowledge)
+    const askedTexts: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      askedTexts.push(question.text)
+      const value = expectedValue(tiger, question)
+      state = answerCurrentQuestion(
+        state,
+        value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+        knowledge
+      )
+    }
+
+    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Tiene rayas?')
+    expect(askedTexts).not.toContain('¿Existe de forma física y tangible?')
+    expect(askedTexts).not.toContain('¿Es un objeto o personaje de ficción / creado por el ser humano?')
+    expect(state.rankedCandidates.findIndex(candidate => candidate.name === 'Tigre')).toBeLessThan(5)
+    expect(state.questionCount).toBeLessThanOrEqual(9)
   })
 })

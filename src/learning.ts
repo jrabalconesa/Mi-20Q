@@ -95,7 +95,8 @@ export function buildKnowledge(
       id: `question:${record.id}`,
       text: record.distinguishingQuestion,
       attribute,
-      categories: [record.category]
+      categories: [record.category],
+      phase: 'closing' as const
     })
   }
 
