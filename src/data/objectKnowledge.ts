@@ -1,30 +1,30 @@
 import type { AttributeValue, Candidate } from '../types/game'
 
 const profiles: Record<string, Record<string, AttributeValue>> = {
-  'telefono movil': { usedDaily: true, electronic: true, portable: true, indoors: true, screen: true, device: true },
-  'ordenador portatil': { usedDaily: true, electronic: true, portable: true, indoors: true, screen: true, computer: true, device: true },
-  'silla': { usedDaily: true, furniture: true, indoors: true, large: true, sitOn: true },
-  'libro': { usedDaily: true, portable: true, indoors: true },
-  'frigorifico': { usedDaily: true, electronic: true, kitchen: true, indoors: true, large: true, machine: true },
-  'televisor': { usedDaily: true, electronic: true, indoors: true, large: true, screen: true, device: true },
-  'reloj de pulsera': { usedDaily: true, wearable: true, portable: true, tellsTime: true },
-  'bicicleta': { vehicle: true, outdoors: true, large: true, gameEquipment: true },
-  'coche': { usedDaily: true, electronic: true, vehicle: true, outdoors: true, large: true },
-  'automovil': { usedDaily: true, electronic: true, vehicle: true, outdoors: true, large: true, container: true },
-  'martillo': { tool: true, portable: true, indoors: true },
-  'taladro': { tool: true, electronic: true, portable: true, device: true, machine: true },
-  'mesa': { usedDaily: true, furniture: true, indoors: true, large: true },
-  'horno': { kitchen: true, electronic: true, indoors: true, large: true, machine: true },
-  'sarten': { kitchen: true, portable: true, indoors: true, container: true },
-  'gafas': { usedDaily: true, wearable: true, portable: true },
-  'camara de fotos': { electronic: true, portable: true, screen: true, device: true },
-  'auriculares': { usedDaily: true, electronic: true, wearable: true, portable: true, device: true },
-  'cama': { furniture: true, indoors: true, large: true, sitOn: true },
-  'microondas': { kitchen: true, electronic: true, device: true, machine: true, indoors: true },
-  'smartphone': { usedDaily: true, electronic: true, portable: true, screen: true, device: true, computer: true },
-  'tablet': { electronic: true, portable: true, screen: true, device: true, computer: true },
-  'piano': { musicalInstrument: true, furniture: true, indoors: true, large: true },
-  'guitarra': { musicalInstrument: true, portable: true, indoors: true }
+  'telefono movil': { usedDaily: true, electronic: true, portable: true, indoors: true, screen: true, device: true, largerThanShoebox: false },
+  'ordenador portatil': { usedDaily: true, electronic: true, portable: true, indoors: true, screen: true, computer: true, device: true, largerThanShoebox: true },
+  'silla': { usedDaily: true, furniture: true, indoors: true, large: true, sitOn: true, largerThanShoebox: true },
+  'libro': { usedDaily: true, portable: true, indoors: true, largerThanShoebox: false },
+  'frigorifico': { usedDaily: true, electronic: true, kitchen: true, indoors: true, large: true, machine: true, largerThanShoebox: true },
+  'televisor': { usedDaily: true, electronic: true, indoors: true, large: true, screen: true, device: true, largerThanShoebox: true },
+  'reloj de pulsera': { usedDaily: true, wearable: true, portable: true, tellsTime: true, largerThanShoebox: false },
+  'bicicleta': { vehicle: true, outdoors: true, large: true, gameEquipment: true, largerThanShoebox: true },
+  'coche': { usedDaily: true, electronic: true, vehicle: true, outdoors: true, large: true, largerThanShoebox: true },
+  'automovil': { usedDaily: true, electronic: true, vehicle: true, outdoors: true, large: true, container: true, largerThanShoebox: true },
+  'martillo': { tool: true, portable: true, indoors: true, largerThanShoebox: false },
+  'taladro': { tool: true, electronic: true, portable: true, device: true, machine: true, largerThanShoebox: false },
+  'mesa': { usedDaily: true, furniture: true, indoors: true, large: true, largerThanShoebox: true },
+  'horno': { kitchen: true, electronic: true, indoors: true, large: true, machine: true, largerThanShoebox: true },
+  'sarten': { kitchen: true, portable: true, indoors: true, container: true, largerThanShoebox: false },
+  'gafas': { usedDaily: true, wearable: true, portable: true, largerThanShoebox: false },
+  'camara de fotos': { electronic: true, portable: true, screen: true, device: true, largerThanShoebox: false },
+  'auriculares': { usedDaily: true, electronic: true, wearable: true, portable: true, device: true, largerThanShoebox: false },
+  'cama': { furniture: true, indoors: true, large: true, sitOn: true, largerThanShoebox: true },
+  'microondas': { kitchen: true, electronic: true, device: true, machine: true, indoors: true, largerThanShoebox: true },
+  'smartphone': { usedDaily: true, electronic: true, portable: true, screen: true, device: true, computer: true, largerThanShoebox: false },
+  'tablet': { electronic: true, portable: true, screen: true, device: true, computer: true, largerThanShoebox: false },
+  'piano': { musicalInstrument: true, furniture: true, indoors: true, large: true, largerThanShoebox: true },
+  'guitarra': { musicalInstrument: true, portable: true, indoors: true, largerThanShoebox: true }
 }
 
 function normalizedName(name: string): string {
@@ -55,6 +55,7 @@ function inferObjectAttributes(attributes: Record<string, AttributeValue>): Reco
   const computer = attributes.computer ?? (device && portable)
   const sitOn = attributes.sitOn ?? (furniture && attributes.sitOn === undefined ? false : attributes.sitOn)
   const usedDaily = attributes.usedDaily ?? (wearable || kitchen || furniture || device)
+  const largerThanShoebox = attributes.largerThanShoebox ?? (large || vehicle || furniture || machine)
 
   return {
     ...attributes,
@@ -66,7 +67,8 @@ function inferObjectAttributes(attributes: Record<string, AttributeValue>): Reco
     screen,
     computer,
     sitOn,
-    usedDaily
+    usedDaily,
+    largerThanShoebox
   }
 }
 

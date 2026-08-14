@@ -4,11 +4,13 @@ const animal: Category[] = ['animal']
 const object: Category[] = ['object']
 const place: Category[] = ['place']
 const person: Category[] = ['person']
+const animalKind = 'animal-kind'
 const placeContinent = 'place-continent'
 const personBirthContinent = 'person-birth-continent'
 
 const semanticQuestions: Question[] = [
   { id: 'animal_domestic', text: '¿Suele vivir con personas?', attribute: 'domestic', categories: animal, importance: 1.3 },
+  { id: 'animal_larger_shoebox', text: '¿Es más grande que una caja de zapatos?', attribute: 'largerThanShoebox', categories: animal, importance: 1.35 },
   { id: 'animal_large', text: '¿Es más grande que una persona?', attribute: 'large', categories: animal, importance: 1.25 },
   { id: 'animal_flies', text: '¿Puede volar?', attribute: 'flies', categories: animal, importance: 1.3 },
   { id: 'animal_water', text: '¿Vive principalmente en el agua?', attribute: 'water', categories: animal, importance: 1.3 },
@@ -25,12 +27,13 @@ const semanticQuestions: Question[] = [
   { id: 'animal_fast_runner', text: '¿Puede superar aproximadamente los 80 km/h corriendo?', attribute: 'veryFastRunner', categories: animal, importance: 1.5 },
   { id: 'animal_farm', text: '¿Lo encontrarías normalmente en una granja?', attribute: 'farm', categories: animal, openingOrder: 1 },
   { id: 'animal_swims', text: '¿Suele nadar o se desenvuelve bien en el agua?', attribute: 'swims', categories: animal, importance: 1.5 },
-  { id: 'animal_insect', text: '¿Es un insecto?', attribute: 'insect', categories: animal },
+  { id: 'animal_insect', text: '¿Es un insecto?', attribute: 'insect', categories: animal, exclusiveGroup: animalKind },
   { id: 'animal_nocturnal', text: '¿Es principalmente nocturno?', attribute: 'nocturnal', categories: animal },
   { id: 'animal_colorful_wings', text: '¿Destaca por tener alas de colores?', attribute: 'colorfulWings', categories: animal },
   { id: 'animal_ridden', text: '¿Se utiliza habitualmente para montar?', attribute: 'ridden', categories: animal },
 
   { id: 'object_daily', text: '¿Se usa habitualmente a diario?', attribute: 'usedDaily', categories: object, openingOrder: 1 },
+  { id: 'object_larger_shoebox', text: '¿Es más grande que una caja de zapatos?', attribute: 'largerThanShoebox', categories: object, importance: 1.35 },
   { id: 'object_electronic', text: '¿Es electrónico?', attribute: 'electronic', categories: object },
   { id: 'object_portable', text: '¿Se puede transportar fácilmente con una mano?', attribute: 'portable', categories: object },
   { id: 'object_indoors', text: '¿Se encuentra normalmente en interiores?', attribute: 'indoors', categories: object },
@@ -80,14 +83,14 @@ const semanticQuestions: Question[] = [
 ]
 
 const expandedSemanticQuestions: Question[] = [
-  { id: 'animal_mammal', text: '¿Es un mamífero?', attribute: 'mammal', categories: animal, importance: 1.2 },
-  { id: 'animal_bird', text: '¿Es un ave?', attribute: 'bird', categories: animal, importance: 1.1 },
-  { id: 'animal_fish', text: '¿Es un pez?', attribute: 'fish', categories: animal },
-  { id: 'animal_reptile', text: '¿Es un reptil?', attribute: 'reptile', categories: animal },
-  { id: 'animal_amphibian', text: '¿Es un anfibio?', attribute: 'amphibian', categories: animal },
-  { id: 'animal_arachnid', text: '¿Es un arácnido?', attribute: 'arachnid', categories: animal },
-  { id: 'animal_mollusk', text: '¿Es un molusco?', attribute: 'mollusk', categories: animal },
-  { id: 'animal_crustacean', text: '¿Es un crustáceo?', attribute: 'crustacean', categories: animal },
+  { id: 'animal_mammal', text: '¿Es un mamífero?', attribute: 'mammal', categories: animal, importance: 1.2, exclusiveGroup: animalKind },
+  { id: 'animal_bird', text: '¿Es un ave?', attribute: 'bird', categories: animal, importance: 1.1, exclusiveGroup: animalKind },
+  { id: 'animal_fish', text: '¿Es un pez?', attribute: 'fish', categories: animal, exclusiveGroup: animalKind },
+  { id: 'animal_reptile', text: '¿Es un reptil?', attribute: 'reptile', categories: animal, exclusiveGroup: animalKind },
+  { id: 'animal_amphibian', text: '¿Es un anfibio?', attribute: 'amphibian', categories: animal, exclusiveGroup: animalKind },
+  { id: 'animal_arachnid', text: '¿Es un arácnido?', attribute: 'arachnid', categories: animal, exclusiveGroup: animalKind },
+  { id: 'animal_mollusk', text: '¿Es un molusco?', attribute: 'mollusk', categories: animal, exclusiveGroup: animalKind },
+  { id: 'animal_crustacean', text: '¿Es un crustáceo?', attribute: 'crustacean', categories: animal, exclusiveGroup: animalKind },
   { id: 'animal_vertebrate', text: '¿Es un animal vertebrado?', attribute: 'vertebrate', categories: animal },
 
   { id: 'object_device', text: '¿Es un dispositivo o aparato?', attribute: 'device', categories: object },

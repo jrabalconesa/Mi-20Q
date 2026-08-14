@@ -25,6 +25,36 @@ const questions: Question[] = [
   }
 ]
 
+const animalKindQuestions: Question[] = [
+  {
+    id: 'animal_mammal',
+    text: '¿Es un mamífero?',
+    attribute: 'mammal',
+    categories: ['animal'],
+    exclusiveGroup: 'animal-kind'
+  },
+  {
+    id: 'animal_bird',
+    text: '¿Es un ave?',
+    attribute: 'bird',
+    categories: ['animal'],
+    exclusiveGroup: 'animal-kind'
+  },
+  {
+    id: 'animal_mollusk',
+    text: '¿Es un molusco?',
+    attribute: 'mollusk',
+    categories: ['animal'],
+    exclusiveGroup: 'animal-kind'
+  },
+  {
+    id: 'animal_fur',
+    text: '¿Tiene pelo o pelaje?',
+    attribute: 'fur',
+    categories: ['animal']
+  }
+]
+
 describe('availableQuestions', () => {
   it('descarta el resto de continentes tras una respuesta afirmativa', () => {
     const available = availableQuestions(questions, ['person_europe'], { person_europe: 'yes' })
@@ -36,5 +66,11 @@ describe('availableQuestions', () => {
     const available = availableQuestions(questions, ['person_europe'], { person_europe: 'no' })
 
     expect(available.map(question => question.id)).toEqual(['person_asia', 'person_artist'])
+  })
+
+  it('descarta otras clases animales tras una respuesta afirmativa', () => {
+    const available = availableQuestions(animalKindQuestions, ['animal_mammal'], { animal_mammal: 'yes' })
+
+    expect(available.map(question => question.id)).toEqual(['animal_fur'])
   })
 })
