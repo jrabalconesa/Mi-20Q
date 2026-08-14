@@ -3,6 +3,7 @@ node_modules/
 dist/
 coverage/
 tmp/
+outputs/
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
