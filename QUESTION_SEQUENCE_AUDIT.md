@@ -1,6 +1,6 @@
 # Auditoría de secuencias de preguntas
 
-Generado con `npm run audit:questions` el 2026-08-14T22:31:44.198Z.
+Generado con `npm run audit:questions` el 2026-08-14T22:43:05.905Z.
 
 El informe simula respuestas exactas para candidatos representativos. Si el motor hace una suposición incorrecta antes de 20 preguntas, la simulación responde que no y comprueba que la partida continúe.
 
@@ -29,16 +29,26 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 | object | Botella | OK | 13 | Botella | Sin incidencias |
 | object | Balón | OK | 20 | Balón | Sin incidencias |
 | object | Mochila | OK | 17 | Mochila | Sin incidencias |
-| place | París | OK | 12 | París | Sin incidencias |
-| place | Murcia | OK | 20 | Murcia | Sin incidencias |
+| place | París | OK | 16 | París | Sin incidencias |
+| place | Murcia | OK | 18 | Murcia | Sin incidencias |
 | place | Cartagena (España) | OK | 20 | Cartagena (España) | Sin incidencias |
-| place | Madrid | OK | 10 | Madrid | Sin incidencias |
-| place | Barcelona | OK | 11 | Barcelona | Sin incidencias |
+| place | Madrid | OK | 16 | Madrid | Sin incidencias |
+| place | Barcelona | OK | 20 | Barcelona | Sin incidencias |
+| place | Sevilla | OK | 14 | Sevilla | Sin incidencias |
+| place | Valencia | OK | 20 | Valencia | Sin incidencias |
+| place | Zaragoza | OK | 20 | Zaragoza | Sin incidencias |
+| place | Bilbao | OK | 15 | Bilbao | Sin incidencias |
+| place | Las Palmas de Gran Canaria | OK | 17 | Las Palmas de Gran Canaria | Sin incidencias |
+| place | Santa Cruz de Tenerife | OK | 17 | Santa Cruz de Tenerife | Sin incidencias |
+| place | Ceuta | OK | 17 | Ceuta | Sin incidencias |
+| place | Melilla | OK | 17 | Melilla | Sin incidencias |
+| place | Islas Canarias | OK | 8 | Islas Canarias | Sin incidencias |
+| place | Islas Baleares | OK | 8 | Islas Baleares | Sin incidencias |
 | place | Río Amazonas | OK | 10 | Río Amazonas | Sin incidencias |
 | place | Río Nilo | OK | 8 | Río Nilo | Sin incidencias |
 | place | Monte Everest | OK | 11 | Monte Everest | Sin incidencias |
 | place | Gran Cañón | OK | 10 | Gran Cañón | Sin incidencias |
-| place | Taj Mahal | OK | 20 | Taj Mahal | Sin incidencias |
+| place | Taj Mahal | OK | 18 | Taj Mahal | Sin incidencias |
 | person | Mahatma Gandhi | OK | 19 | Mahatma Gandhi | Sin incidencias |
 | person | Pedro Sánchez | OK | 20 | Pedro Sánchez | Sin incidencias |
 | person | Don Quijote de la Mancha | OK | 11 | Don Quijote de la Mancha | Sin incidencias |
@@ -589,7 +599,7 @@ Estado: won. Preguntas: 17.
 
 ### place: París
 
-Estado: won. Preguntas: 12.
+Estado: won. Preguntas: 16.
 
 **Preguntas**
 1. ¿Está en España? -> No
@@ -603,41 +613,43 @@ Estado: won. Preguntas: 12.
 9. ¿Está en América? -> No
 10. ¿Es una capital? -> Sí
 11. ¿Está en Europa? -> Sí
-12. ¿Está en Francia? -> Sí
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Está en Francia? -> Sí
 
 **Suposiciones**
-- Tras 12: París (acierto)
+- Tras 16: París (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Murcia
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 18.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
-2. ¿Es una ciudad, país o división política? -> Sí
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Tiene acceso al mar o está junto a la costa? -> No
-7. ¿Nació o se originó antes del año 1900? -> No lo sé
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Está en Europa? -> Sí
-10. ¿Es una capital? -> No
-11. ¿Está en América? -> No
-12. ¿Es una ciudad grande o muy poblada? -> No
-13. ¿Es un monumento famoso? -> No
-14. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-15. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-16. ¿Es un desierto o zona árida? -> No
-17. ¿Es una elevación natural, como una montaña o volcán? -> No
-18. ¿Está asociado principalmente a la religión? -> No
-19. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-20. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> No
+8. ¿Está en Europa? -> Sí
+9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+10. ¿Está en la isla de Tenerife? -> No lo sé
+11. ¿Está en la isla de Gran Canaria? -> No lo sé
+12. ¿Es capital de una comunidad autónoma? -> Sí
+13. ¿Es una ciudad grande o muy poblada? -> Sí
+14. ¿Está en Andalucía? -> No
+15. ¿Está en la Región de Murcia? -> Sí
+16. ¿Es una capital? -> No
+17. ¿Es capital de provincia? -> Sí
+18. ¿Es una ciudad autónoma? -> No
 
 **Suposiciones**
-- Tras 20: Murcia (acierto)
+- Tras 18: Murcia (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -647,25 +659,25 @@ Estado: won. Preguntas: 20.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
-2. ¿Es una ciudad, país o división política? -> Sí
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-7. ¿Nació o se originó antes del año 1900? -> No lo sé
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Está en América? -> No
-10. ¿Está en Europa? -> Sí
-11. ¿Es una ciudad grande o muy poblada? -> No
-12. ¿Es una capital? -> No
-13. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-14. ¿Es un monumento famoso? -> No
-15. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-16. ¿Es un desierto o zona árida? -> No
-17. ¿Es una elevación natural, como una montaña o volcán? -> No
-18. ¿Está asociado principalmente a la religión? -> No
-19. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-20. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Está en Europa? -> Sí
+9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+10. ¿Está en la isla de Tenerife? -> No lo sé
+11. ¿Está en la isla de Gran Canaria? -> No lo sé
+12. ¿Está en Andalucía? -> No
+13. ¿Está en Galicia? -> No
+14. ¿Está en el País Vasco? -> No
+15. ¿Es capital de una comunidad autónoma? -> No
+16. ¿Es capital de provincia? -> No
+17. ¿Está en la Región de Murcia? -> Sí
+18. ¿Es una ciudad autónoma? -> No
+19. ¿Es una isla o un archipiélago? -> No
+20. ¿Es una ciudad grande o muy poblada? -> No
 
 **Suposiciones**
 - Tras 20: Cartagena (España) (acierto)
@@ -674,44 +686,322 @@ Estado: won. Preguntas: 20.
 
 ### place: Madrid
 
-Estado: won. Preguntas: 10.
+Estado: won. Preguntas: 16.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
-2. ¿Es una ciudad, país o división política? -> Sí
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Tiene acceso al mar o está junto a la costa? -> No
-7. ¿Nació o se originó antes del año 1900? -> Sí
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Está en Europa? -> Sí
-10. ¿Es una ciudad grande o muy poblada? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> No
+8. ¿Está en Europa? -> Sí
+9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+10. ¿Está en la isla de Tenerife? -> No lo sé
+11. ¿Está en la isla de Gran Canaria? -> No lo sé
+12. ¿Es capital de una comunidad autónoma? -> Sí
+13. ¿Es una ciudad grande o muy poblada? -> Sí
+14. ¿Está en Andalucía? -> No
+15. ¿Está en la Región de Murcia? -> No
+16. ¿Está en la Comunidad de Madrid? -> Sí
 
 **Suposiciones**
-- Tras 10: Madrid (acierto)
+- Tras 16: Madrid (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Barcelona
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 20.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
-2. ¿Es una ciudad, país o división política? -> Sí
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-7. ¿Nació o se originó antes del año 1900? -> Sí
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Nació o se originó antes del año 1900? -> Sí
 9. ¿Está en Europa? -> Sí
-10. ¿Es una ciudad grande o muy poblada? -> Sí
-11. ¿Es una capital? -> No
+10. ¿Es una capital? -> No
+11. ¿Está en América? -> No
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Es capital de una comunidad autónoma? -> Sí
+17. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+18. ¿Está en la isla de Tenerife? -> No lo sé
+19. ¿Está en la isla de Gran Canaria? -> No lo sé
+20. ¿Está en la Comunidad Valenciana? -> No
 
 **Suposiciones**
-- Tras 11: Barcelona (acierto)
+- Tras 20: Barcelona (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Sevilla
+
+Estado: won. Preguntas: 14.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> No
+8. ¿Está en Europa? -> Sí
+9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+10. ¿Está en la isla de Tenerife? -> No lo sé
+11. ¿Está en la isla de Gran Canaria? -> No lo sé
+12. ¿Es capital de una comunidad autónoma? -> Sí
+13. ¿Es una ciudad grande o muy poblada? -> Sí
+14. ¿Está en Andalucía? -> Sí
+
+**Suposiciones**
+- Tras 14: Sevilla (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Valencia
+
+Estado: won. Preguntas: 20.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Nació o se originó antes del año 1900? -> Sí
+9. ¿Está en Europa? -> Sí
+10. ¿Es una capital? -> No
+11. ¿Está en América? -> No
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Es capital de una comunidad autónoma? -> Sí
+17. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+18. ¿Está en la isla de Tenerife? -> No lo sé
+19. ¿Está en la isla de Gran Canaria? -> No lo sé
+20. ¿Está en la Comunidad Valenciana? -> Sí
+
+**Suposiciones**
+- Tras 20: Valencia (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Zaragoza
+
+Estado: won. Preguntas: 20.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+7. ¿Tiene acceso al mar o está junto a la costa? -> No
+8. ¿Nació o se originó antes del año 1900? -> Sí
+9. ¿Está en Europa? -> Sí
+10. ¿Es una capital? -> No
+11. ¿Está en América? -> No
+12. ¿Es una elevación natural, como una montaña o volcán? -> No
+13. ¿Es un desierto o zona árida? -> No
+14. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+17. ¿Está en la isla de Tenerife? -> No lo sé
+18. ¿Está en la isla de Gran Canaria? -> No lo sé
+19. ¿Está en Aragón? -> Sí
+20. ¿Es capital de una comunidad autónoma? -> Sí
+
+**Suposiciones**
+- Tras 20: Zaragoza (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Bilbao
+
+Estado: won. Preguntas: 15.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Está en Europa? -> Sí
+9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
+10. ¿Está en la isla de Tenerife? -> No lo sé
+11. ¿Está en la isla de Gran Canaria? -> No lo sé
+12. ¿Está en Andalucía? -> No
+13. ¿Está en Galicia? -> No
+14. ¿Está en el País Vasco? -> Sí
+15. ¿Es capital de una comunidad autónoma? -> No
+
+**Suposiciones**
+- Tras 15: Bilbao (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Las Palmas de Gran Canaria
+
+Estado: won. Preguntas: 17.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Está en Europa? -> No
+9. ¿Está en América? -> No
+10. ¿Nació o se originó antes del año 1900? -> Sí
+11. ¿Es una capital? -> No
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Es capital de provincia? -> Sí
+17. ¿Está en la isla de Tenerife? -> No
+
+**Suposiciones**
+- Tras 17: Las Palmas de Gran Canaria (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Santa Cruz de Tenerife
+
+Estado: won. Preguntas: 17.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Está en Europa? -> No
+9. ¿Está en América? -> No
+10. ¿Nació o se originó antes del año 1900? -> Sí
+11. ¿Es una capital? -> No
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Es capital de provincia? -> Sí
+17. ¿Está en la isla de Tenerife? -> Sí
+
+**Suposiciones**
+- Tras 17: Santa Cruz de Tenerife (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Ceuta
+
+Estado: won. Preguntas: 17.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Está en Europa? -> No
+9. ¿Está en América? -> No
+10. ¿Nació o se originó antes del año 1900? -> Sí
+11. ¿Es una capital? -> No
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Es capital de provincia? -> No
+17. ¿Está junto al estrecho de Gibraltar? -> Sí
+
+**Suposiciones**
+- Tras 17: Ceuta (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Melilla
+
+Estado: won. Preguntas: 17.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Está en Europa? -> No
+9. ¿Está en América? -> No
+10. ¿Nació o se originó antes del año 1900? -> Sí
+11. ¿Es una capital? -> No
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Es capital de provincia? -> No
+17. ¿Está junto al estrecho de Gibraltar? -> No
+
+**Suposiciones**
+- Tras 17: Melilla (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Islas Canarias
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Está en Europa? -> No
+8. ¿Está en América? -> No
+
+**Suposiciones**
+- Tras 8: Islas Canarias (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Islas Baleares
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Es un lugar real? -> Sí
+5. ¿Existe de forma física y tangible? -> Sí
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+7. ¿Está en Europa? -> Sí
+8. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+
+**Suposiciones**
+- Tras 8: Islas Baleares (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -761,8 +1051,8 @@ Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Está en España? -> No lo sé
-2. ¿Es una ciudad, país o división política? -> No
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
+3. ¿Es una ciudad, país o división política? -> No
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
 6. ¿Nació o se originó antes del año 1900? -> No lo sé
@@ -783,8 +1073,8 @@ Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Está en España? -> No lo sé
-2. ¿Es una ciudad, país o división política? -> No
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
+3. ¿Es una ciudad, país o división política? -> No
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
 6. ¿Nació o se originó antes del año 1900? -> No lo sé
@@ -800,12 +1090,12 @@ Estado: won. Preguntas: 10.
 
 ### place: Taj Mahal
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 18.
 
 **Preguntas**
 1. ¿Está en España? -> No lo sé
-2. ¿Es una ciudad, país o división política? -> Sí
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Es una ciudad, país o división política? -> Sí
 4. ¿Es un lugar real? -> Sí
 5. ¿Existe de forma física y tangible? -> Sí
 6. ¿Tiene acceso al mar o está junto a la costa? -> No
@@ -814,18 +1104,16 @@ Estado: won. Preguntas: 20.
 9. ¿Es una capital? -> No lo sé
 10. ¿Está en Europa? -> No
 11. ¿Está en América? -> No
-12. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
-13. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-14. ¿Es una elevación natural, como una montaña o volcán? -> No
-15. ¿Es un desierto o zona árida? -> No
-16. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-17. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-18. ¿Es una ciudad grande o muy poblada? -> No lo sé
-19. ¿Es un monumento famoso? -> Sí
-20. ¿Está asociado principalmente a la religión? -> No
+12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
+13. ¿Es una elevación natural, como una montaña o volcán? -> No
+14. ¿Es un desierto o zona árida? -> No
+15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
+16. ¿Es una ciudad grande o muy poblada? -> No lo sé
+17. ¿Es un monumento famoso? -> Sí
+18. ¿Está asociado principalmente a la religión? -> No
 
 **Suposiciones**
-- Tras 20: Taj Mahal (acierto)
+- Tras 18: Taj Mahal (acierto)
 
 **Incidencias**: Sin incidencias.
 

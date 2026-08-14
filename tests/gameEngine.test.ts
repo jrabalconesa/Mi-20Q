@@ -286,6 +286,42 @@ describe('gameEngine', () => {
     expect(state.questionCount).toBeLessThanOrEqual(20)
   }, 30_000)
 
+  it('discrimina Murcia sin preguntas de objeto ni suposiciones extranjeras finales', () => {
+    const knowledge = knowledgeFor('place')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Murcia')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('place', knowledge)
+    const askedTexts: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      askedTexts.push(question.text)
+      state = answerCurrentQuestion(state, answerForTarget(target, state, knowledge), knowledge)
+    }
+
+    while (state.status === 'guessing' && state.guessCandidateId !== target.id && state.questionCount < 20) {
+      state = resolveGuess(state, false, knowledge)
+      expect(state.status).toBe('playing')
+      while (state.status === 'playing') {
+        const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+        expect(question).toBeDefined()
+        if (!question) break
+        askedTexts.push(question.text)
+        state = answerCurrentQuestion(state, answerForTarget(target, state, knowledge), knowledge)
+      }
+    }
+
+    expect(askedTexts.join(' | ')).not.toMatch(/interiores|casa|digital|electrónica/i)
+    expect(askedTexts).toContain('¿Está en España?')
+    expect(askedTexts).toContain('¿Está en la Región de Murcia?')
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe(target.id)
+    expect(state.questionCount).toBeLessThanOrEqual(20)
+  }, 30_000)
+
   it.each<Category>(categories)('dispone de al menos veinte preguntas para %s', category => {
     expect(knowledgeFor(category).questions.length).toBeGreaterThanOrEqual(20)
   })

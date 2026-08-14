@@ -270,6 +270,93 @@ describe('catalog', () => {
     ]))
   })
 
+  it('incluye capitales provinciales españolas y territorios singulares con atributos utiles', async () => {
+    const placeKnowledge = await loadCategoryKnowledge('place')
+    const placeNames = placeKnowledge.candidates.map(candidate => candidate.name)
+    const byName = (name: string) => placeKnowledge.candidates.find(candidate => candidate.name === name)
+
+    expect(placeNames).toEqual(expect.arrayContaining([
+      'A Coruña',
+      'Albacete',
+      'Alicante',
+      'Almería',
+      'Ávila',
+      'Badajoz',
+      'Barcelona',
+      'Bilbao',
+      'Burgos',
+      'Cáceres',
+      'Cádiz',
+      'Castellón de la Plana',
+      'Ciudad Real',
+      'Córdoba',
+      'Cuenca',
+      'Girona',
+      'Granada',
+      'Guadalajara',
+      'Huelva',
+      'Huesca',
+      'Jaén',
+      'Las Palmas de Gran Canaria',
+      'León',
+      'Lleida',
+      'Logroño',
+      'Lugo',
+      'Madrid',
+      'Málaga',
+      'Murcia',
+      'Ourense',
+      'Oviedo',
+      'Palencia',
+      'Palma',
+      'Pamplona',
+      'Pontevedra',
+      'Salamanca',
+      'San Sebastián',
+      'Santa Cruz de Tenerife',
+      'Santander',
+      'Segovia',
+      'Sevilla',
+      'Soria',
+      'Tarragona',
+      'Teruel',
+      'Toledo',
+      'Valencia',
+      'Valladolid',
+      'Vitoria-Gasteiz',
+      'Zamora',
+      'Zaragoza',
+      'Ceuta',
+      'Melilla',
+      'Islas Canarias',
+      'Islas Baleares'
+    ]))
+    expect(byName('Murcia')?.attributes.inSpain).toBe(true)
+    expect(byName('Murcia')?.attributes.inMurciaRegion).toBe(true)
+    expect(byName('Murcia')?.attributes.provinceCapital).toBe(true)
+    expect(byName('Murcia')?.attributes.autonomousCommunityCapital).toBe(true)
+    expect(byName('Murcia')?.attributes.coastal).toBe(false)
+    expect(byName('Londres')?.attributes.inSpain).toBe(false)
+    expect(byName('Ceuta')?.attributes.autonomousCity).toBe(true)
+    expect(byName('Melilla')?.attributes.africa).toBe(true)
+    expect(byName('Islas Canarias')?.attributes.archipelago).toBe(true)
+    expect(byName('Islas Baleares')?.attributes.islandOrArchipelago).toBe(true)
+
+    const questionIds = placeKnowledge.questions.map(question => question.id)
+    expect(questionIds).toEqual(expect.arrayContaining([
+      'place_province_capital',
+      'place_autonomous_community_capital',
+      'place_in_murcia_region',
+      'place_in_canary_islands',
+      'place_in_balearic_islands',
+      'place_in_ceuta_melilla'
+    ]))
+    expect(questionIds).not.toEqual(expect.arrayContaining([
+      'universal_indoors',
+      'universal_digital_electronic'
+    ]))
+  })
+
   it('incluye nuevos elementos curados con atributos discriminatorios', async () => {
     const [animalKnowledge, objectKnowledge, personKnowledge, placeKnowledge] = await Promise.all([
       loadCategoryKnowledge('animal'),
