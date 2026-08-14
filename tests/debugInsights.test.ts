@@ -17,13 +17,13 @@ const candidates: Candidate[] = [
     id: 'europe_artist',
     name: 'Artista europea',
     category: 'person',
-    attributes: { realPerson: true, europe: true, asia: false, artist: true }
+    attributes: { realPerson: true, westernHemisphere: true, artEntertainmentSport: true }
   },
   {
-    id: 'asia_artist',
-    name: 'Artista asiatica',
+    id: 'scientist',
+    name: 'Cientifica',
     category: 'person',
-    attributes: { realPerson: true, europe: false, asia: true, artist: true }
+    attributes: { realPerson: true, westernHemisphere: false, sciencePoliticsLeadership: true }
   }
 ]
 
@@ -49,13 +49,13 @@ function stateWithAnswers(answers: Record<string, 'yes'>): GameState {
 }
 
 describe('debugInsights', () => {
-  it('respeta grupos exclusivos al listar preguntas recomendadas', () => {
-    const snapshot = buildDebugSnapshot(stateWithAnswers({ person_europe: 'yes' }), knowledge, 5, 20)
+  it('omite preguntas ya respondidas al listar preguntas recomendadas', () => {
+    const snapshot = buildDebugSnapshot(stateWithAnswers({ culture_western_hemisphere: 'yes' }), knowledge, 5, 20)
     const questionIds = snapshot.questionScores.map(score => score.question.id)
 
-    expect(questionById('person_asia').exclusiveGroup).toBe('person-birth-continent')
-    expect(questionIds).not.toContain('person_asia')
-    expect(questionIds).toContain('person_artist')
+    expect(questionById('culture_western_hemisphere').categories).toContain('person')
+    expect(questionIds).not.toContain('culture_western_hemisphere')
+    expect(questionIds).toContain('person_art_entertainment_sport')
   })
 
   it('expone umbrales de preparacion de suposicion', () => {

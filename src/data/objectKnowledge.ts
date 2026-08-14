@@ -56,9 +56,17 @@ function inferObjectAttributes(attributes: Record<string, AttributeValue>): Reco
   const sitOn = attributes.sitOn ?? (furniture && attributes.sitOn === undefined ? false : attributes.sitOn)
   const usedDaily = attributes.usedDaily ?? (wearable || kitchen || furniture || device)
   const largerThanShoebox = attributes.largerThanShoebox ?? (large || vehicle || furniture || machine)
+  const digitalOrElectronic = attributes.digitalOrElectronic ?? (electronic === true || device || screen === true || computer === true)
+  const movingMechanicalElectronic = attributes.movingMechanicalElectronic ?? (electronic === true || device || machine || vehicle)
+  const workStudyTool = attributes.workStudyTool ?? (tool || computer === true || attributes.screen === true)
+  const storeContainTransport = attributes.storeContainTransport ?? (container || vehicle)
+  const kitchenFood = attributes.kitchenFood ?? kitchen
+  const metalOrPlastic = attributes.metalOrPlastic ?? (device || machine || vehicle || tool || weapon)
 
   return {
     ...attributes,
+    artificialOrFictional: true,
+    tangible: true,
     electronic,
     portable,
     outdoors,
@@ -68,7 +76,13 @@ function inferObjectAttributes(attributes: Record<string, AttributeValue>): Reco
     computer,
     sitOn,
     usedDaily,
-    largerThanShoebox
+    largerThanShoebox,
+    digitalOrElectronic,
+    movingMechanicalElectronic,
+    workStudyTool,
+    storeContainTransport,
+    kitchenFood,
+    metalOrPlastic
   }
 }
 

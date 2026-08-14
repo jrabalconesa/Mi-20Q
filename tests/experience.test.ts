@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { coreCandidates } from '../src/data/candidates'
 import { questions } from '../src/data/questions'
+import { SMOOTHED_NO } from '../src/engine/scoring'
 import { applyExperience, readExperience, reinforceCandidate } from '../src/experience'
 import { createGame } from '../src/engine/gameEngine'
 
@@ -11,14 +12,14 @@ describe('adaptación por experiencia', () => {
       ...createGame('animal', knowledge),
       status: 'won' as const,
       guessCandidateId: 'dog',
-      answers: { animal_domestic: 'no' as const }
+      answers: { animal_domestic_farm_pet: 'no' as const }
     }
     const experiences = reinforceCandidate([], state, knowledge)
     const adapted = applyExperience(knowledge, experiences)
     const dog = adapted.candidates.find(candidate => candidate.id === 'dog')
 
-    expect(experiences[0].attributes.domestic).toEqual({ mean: 0, samples: 1 })
-    expect(dog?.attributes.domestic).toBe(0.75)
+    expect(experiences[0].attributes.domesticFarmPet).toEqual({ mean: SMOOTHED_NO, samples: 1 })
+    expect(dog?.attributes.domesticFarmPet).toBeCloseTo(0.38)
   })
 
   it('tolera almacenamiento corrupto', () => {

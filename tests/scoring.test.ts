@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { scoreAnswer } from '../src/engine/scoring'
+import { SMOOTHED_NO, scoreAnswer } from '../src/engine/scoring'
 import type { Candidate, Question } from '../src/types/game'
 
 const candidate: Candidate = {
@@ -22,7 +22,7 @@ describe('scoreAnswer', () => {
   })
 
   it('penaliza una respuesta opuesta', () => {
-    expect(scoreAnswer(candidate, question, 'no')).toBe(0)
+    expect(scoreAnswer(candidate, question, 'no')).toBeCloseTo(SMOOTHED_NO * 2)
   })
 
   it('trata no sé como respuesta neutral', () => {

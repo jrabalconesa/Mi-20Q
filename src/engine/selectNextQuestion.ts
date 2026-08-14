@@ -1,16 +1,13 @@
 import type { Answer, Question, RankedCandidate } from '../types/game'
 import { availableQuestions } from './questionAvailability'
-import { expectedValue } from './scoring'
+import { candidateSetEntropy, expectedValue, normalizeAttribute } from './scoring'
 
-function asProbability(value: boolean | number | undefined): number {
-  if (typeof value === 'boolean') return value ? 1 : 0
-  if (typeof value === 'number') return Math.max(0, Math.min(1, value))
-  return 0.5
-}
-
-function binaryEntropy(probability: number): number {
-  if (probability <= 0 || probability >= 1) return 0
-  return -probability * Math.log2(probability) - (1 - probability) * Math.log2(1 - probability)
+function weightedMeanProbability(question: Question, rankedCandidates: RankedCandidate[]): number {
+  const totalPosterior = rankedCandidates.reduce((total, candidate) => total + candidate.score, 0) || 1
+  return rankedCandidates.reduce(
+    (total, candidate) => total + normalizeAttribute(expectedValue(candidate, question)) * candidate.score,
+    0
+  ) / totalPosterior
 }
 
 export function selectNextQuestion(
@@ -20,49 +17,19 @@ export function selectNextQuestion(
   answers: Record<string, Answer> = {}
 ): Question | null {
   const available = availableQuestions(questions, askedQuestionIds, answers)
-  const scriptedOpening = available
-    .filter(question => question.openingOrder === askedQuestionIds.length + 1)
-    .sort((left, right) => (left.openingOrder ?? 0) - (right.openingOrder ?? 0))[0]
-  const bestScore = rankedCandidates[0]?.score
-  const tiedLeaders = bestScore === undefined
-    ? []
-    : rankedCandidates.filter(candidate => Math.abs(candidate.score - bestScore) < 0.000_000_001)
-  const top = tiedLeaders.length >= 2
-    ? tiedLeaders
-    : rankedCandidates.slice(0, Math.min(256, rankedCandidates.length))
+  const remainingEntropy = candidateSetEntropy(rankedCandidates)
 
-  if (!available.length || !top.length) return null
-  if (scriptedOpening) return scriptedOpening
-
-  const totalPosterior = top.reduce((total, candidate) => total + candidate.score, 0) || 1
+  if (!available.length || !rankedCandidates.length || remainingEntropy <= 0) return null
 
   return available
     .map(question => {
-      const rawValues = top.map(candidate => expectedValue(candidate, question))
-      const values = rawValues.map(asProbability)
-      const yesProbability = values.reduce(
-        (total, value, index) => total + value * top[index].score,
-        0
-      ) / totalPosterior
-      const expectedNoise = values.reduce(
-        (total, value, index) => total + binaryEntropy(value) * top[index].score,
-        0
-      ) / totalPosterior
-      const informationGain = Math.max(0, binaryEntropy(yesProbability) - expectedNoise)
-      const leaderValue = values[0] ?? 0.5
-      const othersWeight = Math.max(totalPosterior - top[0].score, Number.EPSILON)
-      const othersValue = values.slice(1).reduce(
-        (total, value, index) => total + value * top[index + 1].score,
-        0
-      ) / othersWeight
-      const confirmationBonus = askedQuestionIds.length >= 4 && askedQuestionIds.length % 4 === 0
-        ? Math.abs(leaderValue - othersValue) * 0.18
-        : 0
-      const knownMass = rawValues.reduce<number>(
-        (total, value, index) => total + (value === undefined ? 0 : top[index].score),
-        0
-      ) / totalPosterior
-      return { question, usefulness: (informationGain + confirmationBonus) * knownMass * (question.importance ?? 1) }
+      const meanProbability = weightedMeanProbability(question, rankedCandidates)
+      const distanceToHalf = Math.abs(meanProbability - 0.5)
+      return { question, distanceToHalf, entropyScore: remainingEntropy * (1 - distanceToHalf * 2) }
     })
-    .sort((a, b) => b.usefulness - a.usefulness)[0]?.question ?? null
+    .sort((left, right) =>
+      left.distanceToHalf - right.distanceToHalf ||
+      right.entropyScore - left.entropyScore ||
+      left.question.id.localeCompare(right.question.id)
+    )[0]?.question ?? null
 }

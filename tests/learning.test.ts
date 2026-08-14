@@ -3,6 +3,7 @@ import { buildKnowledge, createLearningRecord, readLearning } from '../src/learn
 import { createGame } from '../src/engine/gameEngine'
 import { coreCandidates } from '../src/data/candidates'
 import { questions } from '../src/data/questions'
+import { SMOOTHED_YES } from '../src/engine/scoring'
 
 describe('aprendizaje local', () => {
   it('convierte una derrota en un candidato y una pregunta diferenciadora', () => {
@@ -12,14 +13,14 @@ describe('aprendizaje local', () => {
       ...base,
       status: 'lost' as const,
       guessCandidateId: 'elephant',
-      answers: { animal_eggs: 'yes' as const }
+      answers: { animal_mammal: 'yes' as const }
     }
     const record = createLearningRecord(lost, 'Ornitorrinco', '¿Es un mamífero que pone huevos', true, '2026-01-01')
     const knowledge = buildKnowledge([record], baseKnowledge)
     const learned = knowledge.candidates.find(candidate => candidate.id === record.id)
 
     expect(record.distinguishingQuestion).toBe('¿Es un mamífero que pone huevos?')
-    expect(learned?.attributes.laysEggs).toBe(true)
+    expect(learned?.attributes.mammal).toBe(SMOOTHED_YES)
     expect(knowledge.questions).toContainEqual(expect.objectContaining({ id: `question:${record.id}` }))
     expect(knowledge.candidates.find(candidate => candidate.id === 'elephant')?.attributes[`learned:${record.id}`]).toBe(false)
   })

@@ -1,4 +1,4 @@
-import type { Candidate } from '../types/game'
+import type { AttributeValue, Candidate } from '../types/game'
 
 export const curatedPlaceCandidates: Candidate[] = [
   {
@@ -49,12 +49,31 @@ const profilesById: Record<string, Record<string, boolean>> = {
   }
 }
 
+function inferPlaceAttributes(attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
+  const building = attributes.building === true
+  const urban = attributes.urban === true
+  const natural = attributes.natural === true
+
+  return {
+    ...attributes,
+    artificialOrFictional: attributes.artificialOrFictional ?? (building || urban),
+    indoors: attributes.indoors ?? building,
+    largerThanShoebox: true,
+    digitalOrElectronic: false,
+    tangible: true,
+    before1900: attributes.before1900 ?? attributes.ancientCity,
+    geographicOrBuilt: true,
+    westernHemisphere: attributes.westernHemisphere ?? (attributes.americas === true || (attributes.europe === true && attributes.easternHemisphere !== true)),
+    natural: attributes.natural ?? (!building && !urban && natural)
+  }
+}
+
 export function enrichPlaceCandidate(candidate: Candidate): Candidate {
   const profile = profilesById[candidate.id]
-  if (!profile) return candidate
+  if (!profile) return { ...candidate, attributes: inferPlaceAttributes(candidate.attributes) }
   return {
     ...candidate,
     name: candidate.id === 'geonames-3687238' ? 'Cartagena de Indias (Colombia)' : candidate.name,
-    attributes: { ...candidate.attributes, ...profile }
+    attributes: inferPlaceAttributes({ ...candidate.attributes, ...profile })
   }
 }

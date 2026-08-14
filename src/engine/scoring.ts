@@ -1,15 +1,23 @@
 import type { Answer, AttributeValue, Candidate, Question, RankedCandidate } from '../types/game'
 
 const answerWeights: Record<Answer, number> = {
-  yes: 1,
-  no: 0,
+  yes: 0.98,
+  no: 0.02,
   sometimes: 0.5,
   unknown: 0.5
 }
 
-function normalizeAttribute(value: AttributeValue | undefined): number {
-  if (typeof value === 'boolean') return value ? 1 : 0
-  if (typeof value === 'number') return Math.max(0, Math.min(1, value))
+export const SMOOTHED_NO = 0.02
+export const SMOOTHED_YES = 0.98
+export const SMOOTHED_SOMETIMES = 0.5
+
+function clampProbability(value: number): number {
+  return Math.max(SMOOTHED_NO, Math.min(SMOOTHED_YES, value))
+}
+
+export function normalizeAttribute(value: AttributeValue | undefined): number {
+  if (typeof value === 'boolean') return value ? SMOOTHED_YES : SMOOTHED_NO
+  if (typeof value === 'number') return clampProbability(value)
   return 0.5
 }
 
@@ -26,12 +34,16 @@ export function scoreAnswer(candidate: Candidate, question: Question, answer: An
 
 export function answerLikelihood(candidate: Candidate, question: Question, answer: Answer): number {
   if (answer === 'unknown') return 1
-  const rawExpected = expectedValue(candidate, question)
-  if (rawExpected === undefined) return 0.72
-  const expected = normalizeAttribute(rawExpected)
-  if (answer === 'yes') return 0.06 + expected * 0.9
-  if (answer === 'no') return 0.06 + (1 - expected) * 0.9
-  return 0.18 + (1 - Math.abs(expected - 0.5) * 2) * 0.76
+  const expected = normalizeAttribute(expectedValue(candidate, question))
+  const actual = answerWeights[answer]
+  return clampProbability(1 - Math.abs(expected - actual))
+}
+
+export function candidateSetEntropy(rankedCandidates: RankedCandidate[]): number {
+  return rankedCandidates.reduce((entropy, candidate) => {
+    if (candidate.score <= 0) return entropy
+    return entropy - candidate.score * Math.log2(candidate.score)
+  }, 0)
 }
 
 export function rankCandidates(

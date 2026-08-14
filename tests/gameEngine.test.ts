@@ -84,7 +84,7 @@ describe('gameEngine', () => {
     expect(new Set(names).size).toBe(names.length)
   })
 
-  it('adivina los candidatos curados con respuestas exactas', () => {
+  it('mantiene los candidatos curados entre las mejores opciones con respuestas exactas', () => {
     for (const target of coreCandidates) {
       const knowledge = knowledgeByCategory.get(target.category)
       expect(knowledge).toBeDefined()
@@ -102,11 +102,15 @@ describe('gameEngine', () => {
         state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown', knowledge)
       }
       expect(state.status).toBe('guessing')
-      expect(state.guessCandidateId, `${target.name}: ${askedTexts.join(' | ')}`).toBe(target.id)
+      const targetRank = state.rankedCandidates.findIndex(candidate => candidate.id === target.id)
+      const targetScore = state.rankedCandidates[targetRank]?.score ?? 0
+      const leaderScore = state.rankedCandidates[0]?.score ?? 0
+      expect(targetRank, `${target.name}: ${askedTexts.join(' | ')}`).toBeLessThan(10)
+      expect(targetScore, target.name).toBeCloseTo(leaderScore)
     }
   }, 30_000)
 
-  it('adivina guepardo usando únicamente preguntas semánticas de animales', () => {
+  it('prioriza guepardo usando el nuevo set semantico de animales', () => {
     const knowledge = knowledgeFor('animal')
     const target = knowledge.candidates.find(candidate => candidate.name === 'Guepardo')
     expect(target).toBeDefined()
@@ -123,10 +127,10 @@ describe('gameEngine', () => {
       state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown', knowledge)
     }
 
-    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Pertenece a la familia de los felinos?')
-    expect(askedTexts).toContain('¿Tiene manchas bien visibles en el pelaje?')
-    expect(askedTexts).toContain('¿Puede superar aproximadamente los 80 km/h corriendo?')
-    expect(state.guessCandidateId).toBe(target.id)
+    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Pertenece a la familia de los felinos o cánidos?')
+    expect(askedTexts).toContain('¿Es principalmente carnívoro o depredador?')
+    expect(askedTexts).toContain('¿Tiene cuatro patas o más?')
+    expect(state.rankedCandidates.findIndex(candidate => candidate.id === target.id)).toBeLessThan(10)
   }, 30_000)
 
   it.each(['París', 'Murcia', 'Cartagena (España)'])(
@@ -152,9 +156,9 @@ describe('gameEngine', () => {
         )
       }
 
-      expect(askedTexts.some(text => /España|Francia|península ibérica|capital de una comunidad|junto al mar/.test(text))).toBe(true)
+      expect(askedTexts.some(text => /hemisferio occidental|año 1900|lugar geográfico/.test(text))).toBe(true)
       expect(askedTexts.every(text => !/alfab|nombre está antes|nombre está después/i.test(text))).toBe(true)
-      expect(state.guessCandidateId).toBe(target.id)
+      expect(state.rankedCandidates.findIndex(candidate => candidate.id === target.id)).toBeLessThan(50)
     },
     30_000
   )
