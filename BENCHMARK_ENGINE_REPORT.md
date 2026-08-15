@@ -1,6 +1,6 @@
 # Benchmark del motor 20Q
 
-Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-08-15T12:54:18.075Z.
+Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-08-15T13:03:46.528Z.
 
 La muestra usa una semilla fija para escoger 50 candidatos repartidos entre animal, objeto, lugar y persona. Cada partida responde con los atributos reales del candidato objetivo y se corta en 20 turnos de interacción.
 
@@ -39,12 +39,12 @@ La muestra usa una semilla fija para escoger 50 candidatos repartidos entre anim
 | place | Ribeirão Preto | guessing | 3 | 20 | no alcanzada | Fortaleza | Río Amazonas, São Paulo, Ciudad de México, Lima, Bogotá... (+12) |
 | place | Osogbo | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
 | animal | Grillo doméstico tropical | guessing | 4 | 20 | no alcanzada | Avispón de cara blanca | Abeja, Mariposa, Mariquita, Abejorro, Libélula... (+11) |
-| person | Decius | guessing | 7 | 20 | no alcanzada | Pericles | Carlos I de España, Felipe II, Adolfo Suárez, Alejandro Magno, Adolf Hitler... (+8) |
+| person | Decius | guessing | 7 | 20 | no alcanzada | Adriano | Carlos I de España, Felipe II, Alejandro Magno, Adolf Hitler, Carlomagno... (+8) |
 | place | Situbondo | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
 | animal | Cucarachero de Carolina | guessing | 4 | 20 | no alcanzada | Cuervo | Pingüino, Garza, Zorzal Americano, Paloma, Cardenal... (+11) |
 | person | J. M. W. Turner | guessing | 8 | 20 | no alcanzada | Rafael Sanzio | Pablo Picasso, Diego Velázquez, Francisco de Goya, Salvador Dalí, Apolo... (+7) |
 | place | Shangqiu | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| person | Artaxerxes I of Persia | guessing | 6 | 20 | no alcanzada | Valerian | Aníbal Barca, Tutankamón, Ramesses II, Akhenaten, Khufu... (+9) |
+| person | Artaxerxes I of Persia | guessing | 7 | 20 | no alcanzada | Ramesses I | Aníbal Barca, Tutankamón, Ramesses II, Akhenaten, Khufu... (+8) |
 | place | Haiphong | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
 | place | Jiaozhou | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
 | object | Infravivienda | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |

@@ -14,6 +14,7 @@ export interface QuestionScore {
   currentEntropy: number
   expectedEntropy: number
   knownMass: number
+  realCoverage: number
   yesProbability: number
   noProbability: number
   discriminatedCandidateMass: number
@@ -55,6 +56,7 @@ export function calculateQuestionInformationGain(
       currentEntropy: 0,
       expectedEntropy: 0,
       knownMass: 0,
+      realCoverage: 0,
       yesProbability: 0,
       noProbability: 0,
       discriminatedCandidateMass: 0
@@ -64,14 +66,20 @@ export function calculateQuestionInformationGain(
   const currentWeights = activeCandidates.map(candidate => candidate.score)
   const currentEntropy = entropyFromWeights(currentWeights)
   const knownCandidates = activeCandidates.filter(candidate => expectedValue(candidate, question) !== undefined)
+  const booleanKnownCandidates = activeCandidates.filter(candidate => {
+    const value = expectedValue(candidate, question)
+    return value === true || value === false
+  })
   const knownTotal = totalScore(knownCandidates)
   const knownMass = knownTotal / activeTotal
-  if (knownMass < MIN_ATTRIBUTE_COVERAGE) {
+  const realCoverage = booleanKnownCandidates.length / activeCandidates.length
+  if (realCoverage < MIN_ATTRIBUTE_COVERAGE || knownTotal <= 0) {
     return {
       informationGain: 0,
       currentEntropy,
       expectedEntropy: currentEntropy,
       knownMass,
+      realCoverage,
       yesProbability: 0,
       noProbability: 0,
       discriminatedCandidateMass: 0
@@ -91,7 +99,7 @@ export function calculateQuestionInformationGain(
   const expectedEntropy = yesProbability * yesEntropy + noProbability * noEntropy
   const knownEntropy = entropyFromWeights(knownCandidates.map(candidate => candidate.score))
   const knownInformationGain = Math.max(0, knownEntropy - expectedEntropy)
-  const informationGain = knownInformationGain * knownMass
+  const informationGain = knownInformationGain * knownMass * realCoverage
   const discriminatedCandidateMass = Math.min(sumWeights(yesWeights), sumWeights(noWeights)) / activeTotal
 
   return {
@@ -99,6 +107,7 @@ export function calculateQuestionInformationGain(
     currentEntropy,
     expectedEntropy: Math.max(0, currentEntropy - informationGain),
     knownMass,
+    realCoverage,
     yesProbability,
     noProbability,
     discriminatedCandidateMass
@@ -106,7 +115,7 @@ export function calculateQuestionInformationGain(
 }
 
 function isDiscriminatingQuestion(metrics: Omit<QuestionScore, 'question' | 'usefulness' | 'scriptedOpening'>): boolean {
-  return metrics.knownMass >= MIN_ATTRIBUTE_COVERAGE &&
+  return metrics.realCoverage >= MIN_ATTRIBUTE_COVERAGE &&
     metrics.informationGain > MIN_INFORMATION_GAIN &&
     metrics.discriminatedCandidateMass >= MIN_DISCRIMINATED_CANDIDATE_MASS
 }

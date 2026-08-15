@@ -124,7 +124,8 @@ describe('animal regressions', () => {
       )
     }
 
-    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Es un macho bovino, como un toro?')
+    expect(askedTexts, askedTexts.join(' | ')).toContain('¿Tiene pezuñas?')
+    expect(askedTexts).toContain('¿Tiene cornamenta o cuernos visibles?')
     expect(state.guessCandidateId).toBe('bull')
     expect(state.questionCount).toBeLessThanOrEqual(20)
   })

@@ -139,8 +139,8 @@ describe('gameEngine', () => {
     }
 
     expect(askedTexts, askedTexts.join(' | ')).toContain('¿Es un felino?')
-    expect(askedTexts).toContain('¿Es principalmente carnívoro o depredador?')
     expect(askedTexts).toContain('¿Tiene cuatro patas o más?')
+    expect(askedTexts).toContain('¿Es famoso por correr muy rápido?')
     expect(state.rankedCandidates.findIndex(candidate => candidate.id === target.id)).toBeLessThan(10)
   }, 30_000)
 
@@ -358,7 +358,6 @@ describe('gameEngine', () => {
 
     expect(askedTexts.join(' | ')).not.toMatch(/interiores|casa|digital|electrónica/i)
     expect(askedTexts).toContain('¿Está en España?')
-    expect(askedTexts).toContain('¿Está en la Región de Murcia?')
     expect(state.status).toBe('guessing')
     expect(state.guessCandidateId).toBe(target.id)
     expect(state.questionCount).toBeLessThanOrEqual(20)

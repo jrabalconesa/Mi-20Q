@@ -83,11 +83,25 @@ function lowCoverageCandidates(): RankedCandidate[] {
   })
 }
 
+function partialCoverageCandidates(): RankedCandidate[] {
+  return Array.from({ length: 10 }, (_, index) => {
+    const attributes: RankedCandidate['attributes'] = index < 4 ? { partialCoverage: index < 2 } : {}
+    return {
+      id: `partial-coverage-object-${index}`,
+      name: `Objeto con cobertura parcial ${index}`,
+      category: 'object',
+      score: 0.1,
+      attributes
+    }
+  })
+}
+
 describe('calculateQuestionInformationGain', () => {
   it('calcula alta ganancia para una pregunta que divide el subconjunto activo', () => {
     const metrics = calculateQuestionInformationGain(splitQuestion, activeCandidates)
 
     expect(metrics.currentEntropy).toBeCloseTo(2)
+    expect(metrics.realCoverage).toBe(1)
     expect(metrics.yesProbability).toBeCloseTo(0.5)
     expect(metrics.noProbability).toBeCloseTo(0.5)
     expect(metrics.informationGain).toBeGreaterThan(0.8)
@@ -150,8 +164,37 @@ describe('calculateQuestionInformationGain', () => {
     const ranked = rankAvailableQuestions([lowCoverageQuestion], lowCoverageCandidates(), [], {})
 
     expect(metrics.knownMass).toBeCloseTo(0.2)
+    expect(metrics.realCoverage).toBeCloseTo(0.2)
     expect(metrics.informationGain).toBe(0)
     expect(metrics.expectedEntropy).toBeCloseTo(metrics.currentEntropy)
     expect(ranked).toEqual([])
+  })
+
+  it('multiplica la ganancia de informacion por la cobertura real del atributo', () => {
+    const partialCoverageQuestion: Question = {
+      id: 'partial_coverage',
+      text: '¿Tiene un atributo con muchos datos faltantes?',
+      attribute: 'partialCoverage',
+      categories: ['object']
+    }
+
+    const fullCoverageQuestion: Question = {
+      id: 'full_coverage',
+      text: '¿Tiene un atributo completo?',
+      attribute: 'fullCoverage',
+      categories: ['object']
+    }
+
+    const fullCoverageCandidates = partialCoverageCandidates().map(candidate => ({
+      ...candidate,
+      attributes: { fullCoverage: Number(candidate.id.split('-').at(-1)) < 5 }
+    }))
+    const partialMetrics = calculateQuestionInformationGain(partialCoverageQuestion, partialCoverageCandidates())
+    const fullMetrics = calculateQuestionInformationGain(fullCoverageQuestion, fullCoverageCandidates)
+
+    expect(partialMetrics.realCoverage).toBeCloseTo(0.4)
+    expect(partialMetrics.knownMass).toBeCloseTo(0.4)
+    expect(partialMetrics.informationGain).toBeGreaterThan(0)
+    expect(partialMetrics.informationGain).toBeLessThan(fullMetrics.informationGain * 0.25)
   })
 })
