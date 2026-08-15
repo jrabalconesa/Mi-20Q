@@ -3,7 +3,7 @@ import { loadCategoryKnowledge } from '../src/data/catalog'
 import { questions } from '../src/data/questions'
 import { availableQuestions } from '../src/engine/questionAvailability'
 import { expectedValue, rankCandidates } from '../src/engine/scoring'
-import { answerCurrentQuestion, createGame } from '../src/engine/gameEngine'
+import { answerCurrentQuestion, createGame, resolveGuess } from '../src/engine/gameEngine'
 
 describe('animal regressions', () => {
   it('no vuelve a preguntar por otras clases animales tras confirmar mamifero', () => {
@@ -155,5 +155,38 @@ describe('animal regressions', () => {
     expect(askedTexts).not.toContain('¿Es un objeto o personaje de ficción / creado por el ser humano?')
     expect(state.rankedCandidates.findIndex(candidate => candidate.name === 'Tigre')).toBeLessThan(5)
     expect(state.questionCount).toBeLessThanOrEqual(12)
+  })
+
+  it('sigue proponiendo candidatos tras fallar con gorrion pensando en buho', async () => {
+    const knowledge = await loadCategoryKnowledge('animal')
+    const owl = knowledge.candidates.find(candidate => candidate.name === 'Búho')
+    const sparrow = knowledge.candidates.find(candidate => candidate.name === 'Gorrión')
+    expect(owl).toBeDefined()
+    expect(sparrow).toBeDefined()
+    if (!owl || !sparrow) return
+
+    const narrowedKnowledge = {
+      candidates: [sparrow, owl],
+      questions: knowledge.questions
+    }
+    const state = {
+      ...createGame('animal', narrowedKnowledge),
+      askedQuestionIds: knowledge.questions.map(question => question.id),
+      currentQuestionId: null,
+      guessCandidateId: sparrow.id,
+      rankedCandidates: [
+        { ...sparrow, score: 0.6 },
+        { ...owl, score: 0.4 }
+      ],
+      questionCount: 11,
+      status: 'guessing' as const
+    }
+
+    const next = resolveGuess(state, false, narrowedKnowledge)
+
+    expect(next.status).toBe('guessing')
+    expect(next.excludedCandidateIds).toContain(sparrow.id)
+    expect(next.guessCandidateId).toBe(owl.id)
+    expect(next.questionCount).toBe(11)
   })
 })

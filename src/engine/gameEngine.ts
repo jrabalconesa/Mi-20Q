@@ -20,6 +20,22 @@ function distinguishesLeaders(question: Question | null, best: GameState['ranked
   return Math.abs(bestExpected - secondExpected) >= 0.35
 }
 
+function nextGuessState(
+  state: GameState,
+  excludedCandidateIds: string[],
+  rankedCandidates: GameState['rankedCandidates']
+): GameState {
+  const nextCandidate = rankedCandidates.find(candidate => !excludedCandidateIds.includes(candidate.id))
+  return {
+    ...state,
+    excludedCandidateIds,
+    rankedCandidates,
+    currentQuestionId: null,
+    guessCandidateId: nextCandidate?.id ?? null,
+    status: nextCandidate ? 'guessing' : 'lost'
+  }
+}
+
 export function createGame(category: Category, knowledge: GameKnowledge = builtInKnowledge): GameState {
   const questionsById = questionMap(knowledge)
   const pool = knowledge.candidates.filter(candidate => candidate.category === category)
@@ -108,7 +124,7 @@ export function resolveGuess(
   const categoryQuestions = knowledge.questions.filter(question => question.categories.includes(state.category))
   const next = selectNextQuestion(categoryQuestions, rankedCandidates, state.askedQuestionIds, state.answers)
 
-  if (!next) return { ...state, excludedCandidateIds, rankedCandidates, status: 'lost' }
+  if (!next) return nextGuessState(state, excludedCandidateIds, rankedCandidates)
   return {
     ...state,
     excludedCandidateIds,
