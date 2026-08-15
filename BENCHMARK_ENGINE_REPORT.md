@@ -1,6 +1,6 @@
 # Benchmark del motor 20Q
 
-Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-08-15T12:50:47.467Z.
+Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-08-15T12:54:18.075Z.
 
 La muestra usa una semilla fija para escoger 50 candidatos repartidos entre animal, objeto, lugar y persona. Cada partida responde con los atributos reales del candidato objetivo y se corta en 20 turnos de interacción.
 

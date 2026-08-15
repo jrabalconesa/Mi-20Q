@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { loadCategoryKnowledge } from '../src/data/catalog'
 import { answerCurrentQuestion, createGame, getCandidateName, getQuestion, resolveGuess } from '../src/engine/gameEngine'
 import { expectedValue } from '../src/engine/scoring'
-import type { Answer, Candidate, Category, GameKnowledge, GameState } from '../src/types/game'
+import type { Answer, AttributeValue, Candidate, Category, GameKnowledge, GameState } from '../src/types/game'
 
 const categories: Category[] = ['animal', 'object', 'place', 'person']
 const benchmarkSize = 50
@@ -44,13 +44,19 @@ function shuffled<T>(items: T[], random: () => number): T[] {
   return result
 }
 
+function answerForAttributeValue(value: AttributeValue | undefined): Answer {
+  if (value === true) return 'yes'
+  if (value === false) return 'no'
+  if (value === undefined) return 'unknown'
+  if (value >= 0.75) return 'yes'
+  if (value <= 0.25) return 'no'
+  return 'sometimes'
+}
+
 function answerForTarget(target: Candidate, state: GameState, knowledge: GameKnowledge): Answer {
   const question = getQuestion(state.currentQuestionId, knowledge)
   const value = question ? expectedValue(target, question) : undefined
-  if (value === true) return 'yes'
-  if (value === false) return 'no'
-  if (value === 0.5) return 'sometimes'
-  return 'unknown'
+  return answerForAttributeValue(value)
 }
 
 function leaderScore(state: GameState): number {
@@ -199,6 +205,17 @@ function buildBenchmarkReport(
 }
 
 describe('benchmarkEngine', () => {
+  it('responde con la verdad exacta del atributo objetivo', () => {
+    expect(answerForAttributeValue(true)).toBe('yes')
+    expect(answerForAttributeValue(false)).toBe('no')
+    expect(answerForAttributeValue(undefined)).toBe('unknown')
+    expect(answerForAttributeValue(0.9)).toBe('yes')
+    expect(answerForAttributeValue(0.75)).toBe('yes')
+    expect(answerForAttributeValue(0.5)).toBe('sometimes')
+    expect(answerForAttributeValue(0.25)).toBe('no')
+    expect(answerForAttributeValue(0.1)).toBe('no')
+  })
+
   it('simula 50 partidas aleatorias y reporta exito y certeza', async () => {
     const sample = await buildBenchmarkSample()
     const results = sample.map(({ category, target, knowledge }) => simulateTarget(category, target, knowledge))
