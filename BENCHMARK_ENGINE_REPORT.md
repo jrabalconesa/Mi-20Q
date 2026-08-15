@@ -1,6 +1,6 @@
 # Benchmark del motor 20Q
 
-Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-08-15T13:03:46.528Z.
+Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-08-15T13:16:49.857Z.
 
 La muestra usa una semilla fija para escoger 50 candidatos repartidos entre animal, objeto, lugar y persona. Cada partida responde con los atributos reales del candidato objetivo y se corta en 20 turnos de interacción.
 
@@ -27,7 +27,7 @@ La muestra usa una semilla fija para escoger 50 candidatos repartidos entre anim
 | object | Punta | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
 | person | Joseph Conrad | guessing | 9 | 20 | no alcanzada | Aristófanes | William Shakespeare, Miguel de Cervantes, Federico García Lorca, Jorge Luis Borges, Julio Cortázar... (+6) |
 | place | Zhuzhou | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| person | Saint Christopher | guessing | 11 | 20 | no alcanzada | Strabo | Gautama Buddha, Solomon, Laozi, Heráclito, Avicenna... (+4) |
+| person | Saint Christopher | guessing | 10 | 20 | no alcanzada | Elijah | Gautama Buddha, Heródoto, Tales de Mileto, Solomon, Laozi... (+5) |
 | animal | Galápago de Bosque | guessing | 6 | 20 | no alcanzada | Elaphe obsoleta | Lagarto, Abaniquillo pardo del Caribe, Abaniquillo verde del noreste, Caimán del Mississippi, Iguana verde... (+9) |
 | animal | Psittaciformes | guessing | 4 | 20 | no alcanzada | Cuervo | Pingüino, Garza, Zorzal Americano, Paloma, Cardenal... (+11) |
 | place | Xining | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
@@ -52,7 +52,7 @@ La muestra usa una semilla fija para escoger 50 candidatos repartidos entre anim
 | animal | Correlimos Común | guessing | 4 | 20 | no alcanzada | Cuervo | Pingüino, Garza, Zorzal Americano, Paloma, Cardenal... (+11) |
 | object | Mesa de cartas | guessing | 7 | 20 | no alcanzada | Trono | Silla, Mesa, Cama, Escritorio, Mobiliario... (+8) |
 | object | Bien comercial | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| person | Thomas the Apostle | guessing | 11 | 20 | no alcanzada | Strabo | Gautama Buddha, Solomon, Laozi, Heráclito, Avicenna... (+4) |
+| person | Thomas the Apostle | guessing | 10 | 20 | no alcanzada | Elijah | Gautama Buddha, Heródoto, Tales de Mileto, Solomon, Laozi... (+5) |
 | object | Quiosco | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
 | object | Tabernáculo | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
 | person | John Calvin | guessing | 10 | 20 | no alcanzada | Tomás de Aquino | Leonardo da Vinci, Pitágoras, Cristóbal Colón, Martin Luther, Karl Marx... (+5) |

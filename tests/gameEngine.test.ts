@@ -105,14 +105,13 @@ describe('gameEngine', () => {
       if (!enrichedTarget) continue
       let state = createGame(target.category, knowledge)
       const askedTexts: string[] = []
-      while (state.status === 'playing') {
+      while (state.status === 'playing' && state.questionCount < 20) {
         const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
         expect(question).toBeDefined()
         if (question) askedTexts.push(question.text)
-        const value = question ? expectedValue(enrichedTarget, question) : undefined
-        state = answerCurrentQuestion(state, value === true ? 'yes' : value === false ? 'no' : 'unknown', knowledge)
+        state = answerCurrentQuestion(state, answerForTarget(enrichedTarget, state, knowledge), knowledge)
       }
-      expect(state.status).toBe('guessing')
+      expect(state.status, `${target.name}: ${askedTexts.join(' | ')}`).toBe('guessing')
       const targetRank = state.rankedCandidates.findIndex(candidate => candidate.id === target.id)
       const targetScore = state.rankedCandidates[targetRank]?.score ?? 0
       const leaderScore = state.rankedCandidates[0]?.score ?? 0

@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import type { Candidate, Question } from '../types/game'
 import {
-  MISSING_ATTRIBUTE_LIKELIHOOD,
+  MISSING_ATTRIBUTE_NO_LIKELIHOOD,
+  MISSING_ATTRIBUTE_YES_LIKELIHOOD,
   STRONG_MATCH_LIKELIHOOD,
   STRONG_MISMATCH_LIKELIHOOD,
   UNKNOWN_ANSWER_LIKELIHOOD,
@@ -84,11 +85,11 @@ describe('scoring', () => {
 
     expect(answerLikelihood(dog, hasFurQuestion, 'yes')).toBe(STRONG_MATCH_LIKELIHOOD)
     expect(answerLikelihood(eagle, hasFurQuestion, 'yes')).toBe(STRONG_MISMATCH_LIKELIHOOD)
-    expect(answerLikelihood(missingAttributeCandidate, hasFurQuestion, 'yes')).toBe(MISSING_ATTRIBUTE_LIKELIHOOD)
+    expect(answerLikelihood(missingAttributeCandidate, hasFurQuestion, 'yes')).toBe(MISSING_ATTRIBUTE_YES_LIKELIHOOD)
 
     expect(answerLikelihood(dog, hasFurQuestion, 'no')).toBe(STRONG_MISMATCH_LIKELIHOOD)
     expect(answerLikelihood(eagle, hasFurQuestion, 'no')).toBe(STRONG_MATCH_LIKELIHOOD)
-    expect(answerLikelihood(missingAttributeCandidate, hasFurQuestion, 'no')).toBe(MISSING_ATTRIBUTE_LIKELIHOOD)
+    expect(answerLikelihood(missingAttributeCandidate, hasFurQuestion, 'no')).toBe(MISSING_ATTRIBUTE_NO_LIKELIHOOD)
 
     expect(answerLikelihood(dog, hasFurQuestion, 'unknown')).toBe(UNKNOWN_ANSWER_LIKELIHOOD)
     expect(answerLikelihood(eagle, hasFurQuestion, 'unknown')).toBe(UNKNOWN_ANSWER_LIKELIHOOD)

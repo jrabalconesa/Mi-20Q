@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
-  MISSING_ATTRIBUTE_LIKELIHOOD,
+  MISSING_ATTRIBUTE_NO_LIKELIHOOD,
+  MISSING_ATTRIBUTE_YES_LIKELIHOOD,
   STRONG_MATCH_LIKELIHOOD,
   STRONG_MISMATCH_LIKELIHOOD,
   UNKNOWN_ANSWER_LIKELIHOOD,
@@ -28,7 +29,8 @@ describe('scoreAnswer', () => {
   it('expone la matriz de verosimilitud bayesiana solicitada', () => {
     expect(STRONG_MATCH_LIKELIHOOD).toBe(0.95)
     expect(STRONG_MISMATCH_LIKELIHOOD).toBe(0.05)
-    expect(MISSING_ATTRIBUTE_LIKELIHOOD).toBe(0.3)
+    expect(MISSING_ATTRIBUTE_YES_LIKELIHOOD).toBe(0.5)
+    expect(MISSING_ATTRIBUTE_NO_LIKELIHOOD).toBe(0.85)
     expect(UNKNOWN_ANSWER_LIKELIHOOD).toBe(0.5)
   })
 
@@ -56,14 +58,14 @@ describe('scoreAnswer', () => {
     expect(scoreAnswer(candidate, question, 'unknown')).toBe(0.5)
   })
 
-  it('trata atributos sin dato como penalización suave para sí y no', () => {
+  it('trata atributos sin dato como neutros para sí y compatibles con no', () => {
     const missingAttributeCandidate: Candidate = {
       ...candidate,
       attributes: {}
     }
 
-    expect(answerLikelihood(missingAttributeCandidate, question, 'yes')).toBe(MISSING_ATTRIBUTE_LIKELIHOOD)
-    expect(answerLikelihood(missingAttributeCandidate, question, 'no')).toBe(MISSING_ATTRIBUTE_LIKELIHOOD)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'yes')).toBe(MISSING_ATTRIBUTE_YES_LIKELIHOOD)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'no')).toBe(MISSING_ATTRIBUTE_NO_LIKELIHOOD)
     expect(answerLikelihood(missingAttributeCandidate, question, 'sometimes')).toBe(0.5)
     expect(answerLikelihood(missingAttributeCandidate, question, 'unknown')).toBe(UNKNOWN_ANSWER_LIKELIHOOD)
   })

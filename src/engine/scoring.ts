@@ -5,7 +5,8 @@ export const SMOOTHED_YES = 0.98
 export const SMOOTHED_SOMETIMES = 0.5
 export const STRONG_MATCH_LIKELIHOOD = 0.95
 export const STRONG_MISMATCH_LIKELIHOOD = 0.05
-export const MISSING_ATTRIBUTE_LIKELIHOOD = 0.3
+export const MISSING_ATTRIBUTE_YES_LIKELIHOOD = 0.5
+export const MISSING_ATTRIBUTE_NO_LIKELIHOOD = 0.85
 export const UNKNOWN_ANSWER_LIKELIHOOD = 0.5
 
 function clampProbability(value: number): number {
@@ -40,7 +41,9 @@ export function answerLikelihood(candidate: Candidate, question: Question, answe
   const expectedAttribute = expectedValue(candidate, question)
   if (expectedAttribute === undefined) return answer === 'sometimes'
     ? SMOOTHED_SOMETIMES
-    : MISSING_ATTRIBUTE_LIKELIHOOD
+    : answer === 'yes'
+      ? MISSING_ATTRIBUTE_YES_LIKELIHOOD
+      : MISSING_ATTRIBUTE_NO_LIKELIHOOD
 
   const expectedProbability = normalizeAttribute(expectedAttribute)
   if (answer === 'sometimes') {
