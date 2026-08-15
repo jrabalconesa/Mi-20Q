@@ -65,21 +65,42 @@ export function candidateSetEntropy(rankedCandidates: RankedCandidate[]): number
   }, 0)
 }
 
+function normalizePosteriorScores(scores: number[]): number[] {
+  const totalScore = scores.reduce((total, score) => total + score, 0)
+  if (totalScore <= 0) return scores.map(() => 0)
+  return scores.map(score => score / totalScore)
+}
+
+function uniformPrior(candidateCount: number): number[] {
+  if (candidateCount <= 0) return []
+  return Array.from({ length: candidateCount }, () => 1 / candidateCount)
+}
+
+function applyBayesianAnswerUpdate(
+  priorScores: number[],
+  candidates: Candidate[],
+  question: Question,
+  answer: Answer
+): number[] {
+  if (answer === 'unknown') return priorScores
+
+  const posteriorNumerators = candidates.map((candidate, index) =>
+    answerLikelihood(candidate, question, answer) * priorScores[index]
+  )
+  return normalizePosteriorScores(posteriorNumerators)
+}
+
 export function rankCandidates(
   candidates: Candidate[],
   questionsById: Record<string, Question>,
   answers: Record<string, Answer>
 ): RankedCandidate[] {
-  const evidence = Object.entries(answers).filter(([, answer]) => answer !== 'unknown')
-  const logScores = candidates.map(candidate => evidence.reduce((total, [questionId, answer]) => {
+  const posteriorScores = Object.entries(answers).reduce((scores, [questionId, answer]) => {
     const question = questionsById[questionId]
-    return question ? total + Math.log(answerLikelihood(candidate, question, answer)) : total
-  }, 0))
-  const bestLogScore = Math.max(...logScores, 0)
-  const weights = logScores.map(score => Math.exp(score - bestLogScore))
-  const totalWeight = weights.reduce((total, weight) => total + weight, 0) || 1
+    return question ? applyBayesianAnswerUpdate(scores, candidates, question, answer) : scores
+  }, uniformPrior(candidates.length))
 
   return candidates
-    .map((candidate, index) => ({ ...candidate, score: weights[index] / totalWeight }))
+    .map((candidate, index) => ({ ...candidate, score: posteriorScores[index] ?? 0 }))
     .sort((left, right) => right.score - left.score)
 }
