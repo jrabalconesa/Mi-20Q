@@ -1,6 +1,6 @@
 # Auditoría de secuencias de preguntas
 
-Generado con `npm run audit:questions` el 2026-08-15T12:10:02.878Z.
+Generado con `npm run audit:questions` el 2026-08-15T12:15:22.272Z.
 
 El informe simula respuestas exactas para candidatos representativos. Si el motor hace una suposición incorrecta antes de 20 preguntas, la simulación responde que no y comprueba que la partida continúe.
 
@@ -37,7 +37,7 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 | object | Lámpara | OK | 10 | Lámpara | Sin incidencias |
 | object | Llave | OK | 11 | Llave | Sin incidencias |
 | object | Botella | OK | 10 | Botella | Sin incidencias |
-| object | Balón | OK | 8 | Balón | Sin incidencias |
+| object | Balón | OK | 9 | Balón | Sin incidencias |
 | object | Mochila | OK | 6 | Mochila | Sin incidencias |
 | place | París | OK | 5 | París | Sin incidencias |
 | place | Murcia | OK | 13 | Murcia | Sin incidencias |
@@ -669,7 +669,7 @@ Estado: won. Preguntas: 10.
 
 ### object: Balón
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
@@ -680,9 +680,10 @@ Estado: won. Preguntas: 8.
 6. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
 7. ¿Está hecho principalmente de metal o plástico? -> No
 8. ¿Está asociado a un deporte o juego? -> Sí
+9. ¿Tiene una parte cóncava para recoger o contener algo? -> No
 
 **Suposiciones**
-- Tras 8: Balón (acierto)
+- Tras 9: Balón (acierto)
 
 **Incidencias**: Sin incidencias.
 

@@ -30,11 +30,25 @@ const profiles: Record<string, Record<string, AttributeValue>> = {
   'tenedor': { kitchen: true, kitchenFood: true, cutlery: true, hasHandle: true, concave: false, portable: true, metalOrPlastic: true, largerThanShoebox: false },
   'plato': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: false, concave: 0.5, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: 0.5 },
   'taza': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: true, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: false },
-  'vaso': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: false, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: false }
+  'vaso': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: false, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: false },
+  'copa': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: true, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: false },
+  'jarra': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: true, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: 0.5 },
+  'jarro': { kitchen: true, kitchenFood: true, cutlery: false, hasHandle: true, concave: true, portable: true, container: true, metalOrPlastic: false, largerThanShoebox: 0.5 },
+  'embudo': { kitchen: true, kitchenFood: 0.5, cutlery: false, hasHandle: false, concave: true, portable: true, container: false, tool: true, metalOrPlastic: 0.5, largerThanShoebox: false }
 }
 
 function normalizedName(name: string): string {
   return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es')
+}
+
+function genericObjectName(name: string, id: string): string {
+  const normalized = normalizedName(name)
+  if (normalized.includes('botella')) return 'Botella'
+  if (normalized === 'jarro' || normalized.includes('jarra')) return 'Jarra'
+  if (normalized === 'vaso') return 'Vaso'
+  if (normalized === 'embudo') return 'Embudo'
+  if (normalized === 'copa' && id !== 'wn-object-crown-n-05') return 'Copa'
+  return name
 }
 
 function inferObjectAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
@@ -116,8 +130,9 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
 }
 
 export function enrichObjectCandidate(candidate: Candidate): Candidate {
-  const name = normalizedName(candidate.name)
+  const genericName = genericObjectName(candidate.name, candidate.id)
+  const name = normalizedName(genericName)
   const profile = profiles[name]
   const attributes = inferObjectAttributes(name, { ...candidate.attributes, ...profile })
-  return { ...candidate, attributes }
+  return { ...candidate, name: genericName, attributes }
 }
