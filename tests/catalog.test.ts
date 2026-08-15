@@ -13,6 +13,11 @@ describe('catalog', () => {
     const ball = knowledge.candidates.find(candidate => candidate.name === 'Balón')
     const backpack = knowledge.candidates.find(candidate => candidate.name === 'Mochila')
     const toothbrush = knowledge.candidates.find(candidate => candidate.name === 'Cepillo de dientes')
+    const blender = knowledge.candidates.find(candidate => candidate.name === 'Batidora')
+    const foodChopper = knowledge.candidates.find(candidate => candidate.name === 'Picadora')
+    const microwave = knowledge.candidates.find(candidate => candidate.name === 'Microondas')
+    const washingMachine = knowledge.candidates.find(candidate => candidate.name === 'Lavadora')
+    const vacuumCleaner = knowledge.candidates.find(candidate => candidate.name === 'Aspiradora')
 
     expect(guitar?.attributes.musicalInstrument).toBe(true)
     expect(guitar?.attributes.portable).toBe(true)
@@ -28,6 +33,13 @@ describe('catalog', () => {
     expect(ball?.attributes.gameEquipment).toBe(true)
     expect(backpack?.attributes.wearable).toBe(true)
     expect(toothbrush?.attributes.cleaning).toBe(true)
+    expect(blender?.attributes.kitchenFood).toBe(true)
+    expect(blender?.attributes.machine).toBe(true)
+    expect(foodChopper?.attributes.kitchenFood).toBe(true)
+    expect(foodChopper?.attributes.tool).toBe(true)
+    expect(microwave?.attributes.kitchenFood).toBe(true)
+    expect(washingMachine?.attributes.cleaning).toBe(true)
+    expect(vacuumCleaner?.attributes.cleaning).toBe(true)
   })
 
   it('incluye la pregunta de caja de zapatos para animales y objetos', async () => {
