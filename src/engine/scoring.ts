@@ -1,16 +1,12 @@
 import type { Answer, AttributeValue, Candidate, Question, RankedCandidate } from '../types/game'
 
-export const ANSWER_EVIDENCE_WEIGHTS: Record<Answer, number> = {
-  yes: 1,
-  no: -1,
-  sometimes: 0.4,
-  unknown: 0,
-}
-
 export const SMOOTHED_NO = 0.02
 export const SMOOTHED_YES = 0.98
 export const SMOOTHED_SOMETIMES = 0.5
-const STRONG_EVIDENCE_SCALE = 0.45 / (SMOOTHED_YES * 2 - 1)
+export const STRONG_MATCH_LIKELIHOOD = 0.95
+export const STRONG_MISMATCH_LIKELIHOOD = 0.05
+export const MISSING_ATTRIBUTE_LIKELIHOOD = 0.3
+export const UNKNOWN_ANSWER_LIKELIHOOD = 0.5
 
 function clampProbability(value: number): number {
   return Math.max(SMOOTHED_NO, Math.min(SMOOTHED_YES, value))
@@ -34,28 +30,30 @@ export function answerToAttributeProbability(answer: Answer): number | undefined
   return 0.7
 }
 
-function probabilityToEvidence(value: number): number {
-  return value * 2 - 1
-}
-
 export function scoreAnswer(candidate: Candidate, question: Question, answer: Answer): number {
   if (answer === 'unknown') return 0.5
   return answerLikelihood(candidate, question, answer)
 }
 
 export function answerLikelihood(candidate: Candidate, question: Question, answer: Answer): number {
-  if (answer === 'unknown') return 1
+  if (answer === 'unknown') return UNKNOWN_ANSWER_LIKELIHOOD
   const expectedAttribute = expectedValue(candidate, question)
-  if (expectedAttribute === undefined) return 1
+  if (expectedAttribute === undefined) return answer === 'sometimes'
+    ? SMOOTHED_SOMETIMES
+    : MISSING_ATTRIBUTE_LIKELIHOOD
 
   const expectedProbability = normalizeAttribute(expectedAttribute)
   if (answer === 'sometimes') {
     return clampProbability(0.72 + (1 - Math.abs(expectedProbability - SMOOTHED_SOMETIMES) * 2) * 0.18)
   }
 
-  const expected = probabilityToEvidence(expectedProbability)
-  const actual = ANSWER_EVIDENCE_WEIGHTS[answer]
-  return clampProbability(0.5 + expected * actual * STRONG_EVIDENCE_SCALE)
+  if (typeof expectedAttribute === 'boolean') {
+    const matchesAnswer = answer === 'yes' ? expectedAttribute : !expectedAttribute
+    return matchesAnswer ? STRONG_MATCH_LIKELIHOOD : STRONG_MISMATCH_LIKELIHOOD
+  }
+
+  if (answer === 'yes') return expectedProbability
+  return 1 - expectedProbability
 }
 
 export function candidateSetEntropy(rankedCandidates: RankedCandidate[]): number {
@@ -82,8 +80,6 @@ function applyBayesianAnswerUpdate(
   question: Question,
   answer: Answer
 ): number[] {
-  if (answer === 'unknown') return priorScores
-
   const posteriorNumerators = candidates.map((candidate, index) =>
     answerLikelihood(candidate, question, answer) * priorScores[index]
   )

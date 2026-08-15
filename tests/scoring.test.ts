@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { ANSWER_EVIDENCE_WEIGHTS, answerLikelihood, answerToAttributeProbability, scoreAnswer } from '../src/engine/scoring'
+import {
+  MISSING_ATTRIBUTE_LIKELIHOOD,
+  STRONG_MATCH_LIKELIHOOD,
+  STRONG_MISMATCH_LIKELIHOOD,
+  UNKNOWN_ANSWER_LIKELIHOOD,
+  answerLikelihood,
+  answerToAttributeProbability,
+  scoreAnswer
+} from '../src/engine/scoring'
 import type { Candidate, Question } from '../src/types/game'
 
 const candidate: Candidate = {
@@ -17,13 +25,11 @@ const question: Question = {
 }
 
 describe('scoreAnswer', () => {
-  it('expone la matriz de evidencia bayesiana solicitada', () => {
-    expect(ANSWER_EVIDENCE_WEIGHTS).toEqual({
-      yes: 1,
-      no: -1,
-      sometimes: 0.4,
-      unknown: 0,
-    })
+  it('expone la matriz de verosimilitud bayesiana solicitada', () => {
+    expect(STRONG_MATCH_LIKELIHOOD).toBe(0.95)
+    expect(STRONG_MISMATCH_LIKELIHOOD).toBe(0.05)
+    expect(MISSING_ATTRIBUTE_LIKELIHOOD).toBe(0.3)
+    expect(UNKNOWN_ANSWER_LIKELIHOOD).toBe(0.5)
   })
 
   it('convierte respuestas con evidencia a probabilidades aprendibles', () => {
@@ -50,14 +56,15 @@ describe('scoreAnswer', () => {
     expect(scoreAnswer(candidate, question, 'unknown')).toBe(0.5)
   })
 
-  it('trata atributos sin dato como evidencia neutra para cualquier respuesta', () => {
+  it('trata atributos sin dato como penalización suave para sí y no', () => {
     const missingAttributeCandidate: Candidate = {
       ...candidate,
       attributes: {}
     }
 
-    expect(answerLikelihood(missingAttributeCandidate, question, 'yes')).toBe(1)
-    expect(answerLikelihood(missingAttributeCandidate, question, 'no')).toBe(1)
-    expect(answerLikelihood(missingAttributeCandidate, question, 'sometimes')).toBe(1)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'yes')).toBe(MISSING_ATTRIBUTE_LIKELIHOOD)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'no')).toBe(MISSING_ATTRIBUTE_LIKELIHOOD)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'sometimes')).toBe(0.5)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'unknown')).toBe(UNKNOWN_ANSWER_LIKELIHOOD)
   })
 })
