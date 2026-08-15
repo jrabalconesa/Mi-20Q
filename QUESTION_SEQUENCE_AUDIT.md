@@ -1,6 +1,6 @@
 # Auditoría de secuencias de preguntas
 
-Generado con `npm run audit:questions` el 2026-08-14T22:54:55.386Z.
+Generado con `npm run audit:questions` el 2026-08-15T12:10:02.878Z.
 
 El informe simula respuestas exactas para candidatos representativos. Si el motor hace una suposición incorrecta antes de 20 preguntas, la simulación responde que no y comprueba que la partida continúe.
 
@@ -8,258 +8,278 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 
 | Categoría | Objetivo | Resultado | Preguntas | Suposiciones | Incidencias |
 | --- | --- | --- | ---: | --- | --- |
-| animal | Ornitorrinco | OK | 9 | Ornitorrinco | Sin incidencias |
-| animal | Toro | OK | 8 | Toro | Sin incidencias |
-| animal | Tigre | OK | 9 | Tigre | Sin incidencias |
-| animal | Tiburón | OK | 10 | Tiburón | Sin incidencias |
-| animal | Delfín | OK | 9 | Delfín | Sin incidencias |
-| animal | Abeja | OK | 10 | Abeja | Sin incidencias |
-| animal | Águila | OK | 8 | Águila | Sin incidencias |
-| animal | Lobo | OK | 8 | Lobo | Sin incidencias |
-| animal | Cabra | OK | 7 | Cabra | Sin incidencias |
+| animal | Ornitorrinco | OK | 8 | Ornitorrinco | Sin incidencias |
+| animal | Toro | OK | 7 | Toro | Sin incidencias |
+| animal | Tigre | OK | 12 | Tigre | Sin incidencias |
+| animal | Tiburón | OK | 8 | Tiburón | Sin incidencias |
+| animal | Delfín | OK | 6 | Ballena (fallo), Delfín | Hace una o más suposiciones incorrectas antes del final. |
+| animal | Abeja | OK | 4 | Abeja | Sin incidencias |
+| animal | Águila | OK | 10 | Águila | Sin incidencias |
+| animal | Búho | OK | 9 | Búho | Sin incidencias |
+| animal | Lobo | OK | 11 | Lobo | Sin incidencias |
+| animal | Cabra | OK | 9 | Cabra | Sin incidencias |
 | animal | Pato | OK | 8 | Pato | Sin incidencias |
-| animal | Pulpo | OK | 11 | Pulpo | Sin incidencias |
-| animal | Cigüeña | OK | 8 | Cigüeña | Sin incidencias |
-| animal | Hipopótamo | OK | 8 | Hipopótamo | Sin incidencias |
-| animal | Rinoceronte | OK | 9 | Rinoceronte | Sin incidencias |
+| animal | Ganso | OK | 8 | Ganso | Sin incidencias |
+| animal | Pulpo | OK | 10 | Pulpo | Sin incidencias |
+| animal | Cigüeña | OK | 10 | Cigüeña | Sin incidencias |
+| animal | Hipopótamo | OK | 11 | Hipopótamo | Sin incidencias |
+| animal | Rinoceronte | OK | 8 | Rinoceronte | Sin incidencias |
 | animal | Jirafa | OK | 8 | Jirafa | Sin incidencias |
-| animal | Cebra | OK | 10 | Cebra | Sin incidencias |
-| animal | Canguro | OK | 13 | Canguro | Sin incidencias |
-| animal | Panda | OK | 11 | Panda | Sin incidencias |
-| object | Cuchara | OK | 13 | Cuchara | Sin incidencias |
-| object | Teléfono móvil | OK | 20 | Teléfono móvil | Sin incidencias |
-| object | Silla | OK | 20 | Silla | Sin incidencias |
-| object | Coche | OK | 20 | Coche | Sin incidencias |
-| object | Libro | OK | 20 | Libro | Sin incidencias |
-| object | Guitarra | OK | 8 | Guitarra | Sin incidencias |
-| object | Lámpara | OK | 20 | Lámpara | Sin incidencias |
-| object | Llave | OK | 20 | Llave | Sin incidencias |
-| object | Botella | OK | 13 | Botella | Sin incidencias |
-| object | Balón | OK | 20 | Balón | Sin incidencias |
-| object | Mochila | OK | 17 | Mochila | Sin incidencias |
-| place | París | OK | 16 | París | Sin incidencias |
-| place | Murcia | OK | 18 | Murcia | Sin incidencias |
-| place | Cartagena (España) | OK | 20 | Cartagena (España) | Sin incidencias |
-| place | Madrid | OK | 16 | Madrid | Sin incidencias |
-| place | Barcelona | OK | 20 | Barcelona | Sin incidencias |
-| place | Sevilla | OK | 14 | Sevilla | Sin incidencias |
-| place | Valencia | OK | 20 | Valencia | Sin incidencias |
-| place | Zaragoza | OK | 20 | Zaragoza | Sin incidencias |
-| place | Bilbao | OK | 15 | Bilbao | Sin incidencias |
-| place | Las Palmas de Gran Canaria | OK | 17 | Las Palmas de Gran Canaria | Sin incidencias |
-| place | Santa Cruz de Tenerife | OK | 17 | Santa Cruz de Tenerife | Sin incidencias |
-| place | Ceuta | OK | 17 | Ceuta | Sin incidencias |
-| place | Melilla | OK | 17 | Melilla | Sin incidencias |
-| place | Islas Canarias | OK | 8 | Islas Canarias | Sin incidencias |
+| animal | Cebra | OK | 12 | Cebra | Sin incidencias |
+| animal | Canguro | OK | 6 | Ballena (fallo), Delfín (fallo), Canguro | Hace una o más suposiciones incorrectas antes del final. |
+| animal | Panda | OK | 14 | Panda | Sin incidencias |
+| object | Cuchara | OK | 10 | Cuchara | Sin incidencias |
+| object | Teléfono móvil | OK | 6 | Teléfono móvil | Sin incidencias |
+| object | Silla | OK | 7 | Silla | Sin incidencias |
+| object | Coche | OK | 6 | Coche | Sin incidencias |
+| object | Libro | OK | 12 | Libro | Sin incidencias |
+| object | Guitarra | OK | 6 | Guitarra | Sin incidencias |
+| object | Lámpara | OK | 10 | Lámpara | Sin incidencias |
+| object | Llave | OK | 11 | Llave | Sin incidencias |
+| object | Botella | OK | 10 | Botella | Sin incidencias |
+| object | Balón | OK | 8 | Balón | Sin incidencias |
+| object | Mochila | OK | 6 | Mochila | Sin incidencias |
+| place | París | OK | 5 | París | Sin incidencias |
+| place | Murcia | OK | 13 | Murcia | Sin incidencias |
+| place | Cartagena (España) | OK | 11 | Cartagena (España) | Sin incidencias |
+| place | Madrid | OK | 14 | Madrid | Sin incidencias |
+| place | Barcelona | OK | 6 | Barcelona | Sin incidencias |
+| place | Sevilla | OK | 8 | Córdoba (fallo), Granada (fallo), Jaén (fallo), Sevilla | Hace una o más suposiciones incorrectas antes del final. |
+| place | Valencia | OK | 6 | Alicante (fallo), Castellón de la Plana (fallo), Valencia | Hace una o más suposiciones incorrectas antes del final. |
+| place | Zaragoza | OK | 8 | Huesca (fallo), Teruel (fallo), Zaragoza | Hace una o más suposiciones incorrectas antes del final. |
+| place | Bilbao | OK | 10 | Bilbao | Sin incidencias |
+| place | Las Palmas de Gran Canaria | OK | 11 | Las Palmas de Gran Canaria | Sin incidencias |
+| place | Santa Cruz de Tenerife | OK | 11 | Santa Cruz de Tenerife | Sin incidencias |
+| place | Ceuta | OK | 11 | Ceuta | Sin incidencias |
+| place | Melilla | OK | 11 | Melilla | Sin incidencias |
+| place | Islas Canarias | OK | 10 | Islas Canarias | Sin incidencias |
 | place | Islas Baleares | OK | 8 | Islas Baleares | Sin incidencias |
-| place | Río Amazonas | OK | 10 | Río Amazonas | Sin incidencias |
-| place | Río Nilo | OK | 8 | Río Nilo | Sin incidencias |
-| place | Monte Everest | OK | 11 | Monte Everest | Sin incidencias |
-| place | Gran Cañón | OK | 10 | Gran Cañón | Sin incidencias |
-| place | Taj Mahal | OK | 18 | Taj Mahal | Sin incidencias |
-| person | Mahatma Gandhi | OK | 19 | Mahatma Gandhi | Sin incidencias |
-| person | Pedro Sánchez | OK | 20 | Pedro Sánchez | Sin incidencias |
-| person | Don Quijote de la Mancha | OK | 11 | Don Quijote de la Mancha | Sin incidencias |
-| person | Fernando Alonso | OK | 20 | Fernando Alonso | Sin incidencias |
-| person | Rosalía | OK | 20 | Rosalía | Sin incidencias |
-| person | Julio César | OK | 20 | Julio César | Sin incidencias |
+| place | Río Amazonas | OK | 3 | Nueva York (fallo), Machu Picchu (fallo), Gran Cañón (fallo), Río Amazonas | Hace una o más suposiciones incorrectas antes del final. |
+| place | Río Nilo | OK | 3 | Playa (fallo), Bosque (fallo), Desierto del Sáhara (fallo), Monte Everest (fallo), Taj Mahal (fallo), Río Nilo | Hace una o más suposiciones incorrectas antes del final. |
+| place | Monte Everest | OK | 3 | Playa (fallo), Bosque (fallo), Desierto del Sáhara (fallo), Monte Everest | Hace una o más suposiciones incorrectas antes del final. |
+| place | Gran Cañón | OK | 3 | Nueva York (fallo), Machu Picchu (fallo), Gran Cañón | Hace una o más suposiciones incorrectas antes del final. |
+| place | Taj Mahal | OK | 3 | Playa (fallo), Bosque (fallo), Desierto del Sáhara (fallo), Monte Everest (fallo), Taj Mahal | Hace una o más suposiciones incorrectas antes del final. |
+| person | Mahatma Gandhi | OK | 10 | Mahatma Gandhi | Sin incidencias |
+| person | Pedro Sánchez | OK | 8 | Pedro Sánchez | Sin incidencias |
+| person | Don Quijote de la Mancha | OK | 7 | Don Quijote de la Mancha | Sin incidencias |
+| person | Fernando Alonso | OK | 7 | Fernando Alonso | Sin incidencias |
+| person | Rosalía | OK | 11 | Rosalía | Sin incidencias |
+| person | Julio César | OK | 8 | Julio César | Sin incidencias |
 | person | Elon Musk | OK | 10 | Elon Musk | Sin incidencias |
-| person | Hipatia de Alejandría | OK | 20 | Hipatia de Alejandría | Sin incidencias |
-| person | Zeus | OK | 12 | Zeus | Sin incidencias |
-| person | Poseidón | OK | 14 | Poseidón | Sin incidencias |
-| person | Afrodita | OK | 12 | Afrodita | Sin incidencias |
-| person | Hércules | OK | 11 | Hércules | Sin incidencias |
-| person | Ulises | OK | 12 | Ulises | Sin incidencias |
-| person | Cupido | OK | 13 | Cupido | Sin incidencias |
-| person | Ares | OK | 13 | Ares | Sin incidencias |
-| person | Marte | OK | 11 | Marte | Sin incidencias |
-| person | Minotauro | OK | 14 | Minotauro | Sin incidencias |
-| person | Atenea | OK | 12 | Atenea | Sin incidencias |
-| person | Medusa | OK | 13 | Medusa | Sin incidencias |
-| person | Perseo | OK | 11 | Perseo | Sin incidencias |
-| person | Orión | OK | 11 | Orión | Sin incidencias |
-| person | Casiopea | OK | 14 | Casiopea | Sin incidencias |
-| person | Centauro | OK | 13 | Centauro | Sin incidencias |
-| person | Sherlock Holmes | OK | 8 | Sherlock Holmes | Sin incidencias |
-| person | Harry Potter | OK | 6 | Harry Potter | Sin incidencias |
-| person | Mafalda | OK | 6 | Mafalda | Sin incidencias |
+| person | Hipatia de Alejandría | OK | 10 | Hipatia de Alejandría | Sin incidencias |
+| person | Zeus | OK | 9 | Zeus | Sin incidencias |
+| person | Poseidón | OK | 11 | Poseidón | Sin incidencias |
+| person | Afrodita | OK | 9 | Afrodita | Sin incidencias |
+| person | Hércules | OK | 10 | Hércules | Sin incidencias |
+| person | Ulises | OK | 11 | Ulises | Sin incidencias |
+| person | Cupido | OK | 10 | Cupido | Sin incidencias |
+| person | Ares | OK | 10 | Ares | Sin incidencias |
+| person | Marte | OK | 8 | Marte | Sin incidencias |
+| person | Minotauro | OK | 9 | Minotauro | Sin incidencias |
+| person | Atenea | OK | 9 | Atenea | Sin incidencias |
+| person | Medusa | OK | 10 | Minotauro (fallo), Medusa | Hace una o más suposiciones incorrectas antes del final. |
+| person | Perseo | OK | 9 | Perseo | Sin incidencias |
+| person | Orión | OK | 10 | Orión | Sin incidencias |
+| person | Casiopea | OK | 11 | Casiopea | Sin incidencias |
+| person | Centauro | OK | 11 | Minotauro (fallo), Centauro | Hace una o más suposiciones incorrectas antes del final. |
+| person | Sherlock Holmes | OK | 9 | Sherlock Holmes | Sin incidencias |
+| person | Harry Potter | OK | 10 | Harry Potter | Sin incidencias |
+| person | Mafalda | OK | 9 | Mafalda | Sin incidencias |
 
 ## Secuencias
 
 ### animal: Ornitorrinco
 
-Estado: won. Preguntas: 9.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> No
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Nace de un huevo? -> Sí
-7. ¿Tiene cuatro patas o más? -> Sí
-8. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
-9. ¿Es venenoso? -> A veces
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> Sí
+5. ¿Tiene cuatro patas o más? -> Sí
+6. ¿Es un mamífero que pone huevos? -> Sí
+7. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+8. ¿Tiene un pico parecido al de un pato? -> Sí
 
 **Suposiciones**
-- Tras 9: Ornitorrinco (acierto)
+- Tras 8: Ornitorrinco (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Toro
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 7.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> Sí
-4. ¿Es más grande que un perro? -> Sí
-5. ¿Tiene cornamenta o cuernos visibles? -> Sí
-6. ¿Es un macho bovino, como un toro? -> Sí
-7. ¿Tiene manchas en el pelaje? -> A veces
-8. ¿Puede ser peligroso para las personas? -> A veces
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> Sí
+3. ¿Es principalmente carnívoro o depredador? -> No
+4. ¿Tiene cuatro patas o más? -> Sí
+5. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+6. ¿Tiene cornamenta o cuernos visibles? -> Sí
+7. ¿Es un macho bovino, como un toro? -> Sí
 
 **Suposiciones**
-- Tras 8: Toro (acierto)
+- Tras 7: Toro (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Tigre
 
-Estado: won. Preguntas: 9.
+Estado: won. Preguntas: 12.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> Sí
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Tiene cuatro patas o más? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> No
+5. ¿Tiene cuatro patas o más? -> Sí
+6. ¿Es principalmente carnívoro o depredador? -> Sí
 7. ¿Es más grande que un perro? -> Sí
-8. ¿Es un felino? -> Sí
-9. ¿Tiene rayas? -> Sí
+8. ¿Suele desplazarse principalmente por el aire o el agua? -> No
+9. ¿Vive normalmente en España o en la fauna ibérica? -> No
+10. ¿Puede ser peligroso para las personas? -> Sí
+11. ¿Es un felino? -> Sí
+12. ¿Tiene rayas? -> Sí
 
 **Suposiciones**
-- Tras 9: Tigre (acierto)
+- Tras 12: Tigre (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Tiburón
 
-Estado: won. Preguntas: 10.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> No
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> Sí
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Es un ave? -> No
-7. ¿Tiene cuatro patas o más? -> No
-8. ¿Tiene escamas? -> Sí
-9. ¿Es un reptil? -> No
-10. ¿Es más grande que un perro? -> Sí
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> No
+3. ¿Tiene cuatro patas o más? -> No
+4. ¿Tiene escamas? -> Sí
+5. ¿Es un reptil? -> No
+6. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+7. ¿Es más grande que un perro? -> Sí
+8. ¿Nace de un huevo? -> Sí
 
 **Suposiciones**
-- Tras 10: Tiburón (acierto)
+- Tras 8: Tiburón (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Delfín
 
-Estado: won. Preguntas: 9.
+Estado: won. Preguntas: 6.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> No
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Nace de un huevo? -> No
-7. ¿Vive normalmente en España o en la fauna ibérica? -> No
-8. ¿Es más grande que un perro? -> Sí
-9. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> No
+5. ¿Tiene cuatro patas o más? -> No
+6. ¿Es un cánido, como un perro, lobo o zorro? -> No
 
 **Suposiciones**
-- Tras 9: Delfín (acierto)
+- Tras 6: Ballena (fallo)
+- Tras 6: Delfín (acierto)
 
-**Incidencias**: Sin incidencias.
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
 
 ### animal: Abeja
 
-Estado: won. Preguntas: 10.
+Estado: won. Preguntas: 4.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> No
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Es más grande que una caja de zapatos? -> No
-5. ¿Puede ser peligroso para las personas? -> No
-6. ¿Es un ave? -> No
-7. ¿Es un insecto? -> Sí
-8. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
-9. ¿Es un animal vertebrado? -> No lo sé
-10. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> No
+3. ¿Tiene cuatro patas o más? -> Sí
+4. ¿Es un insecto? -> Sí
 
 **Suposiciones**
-- Tras 10: Abeja (acierto)
+- Tras 4: Abeja (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Águila
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> No
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> Sí
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Es un ave? -> Sí
-7. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
-8. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> Sí
+3. ¿Tiene plumas? -> Sí
+4. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+5. ¿Es principalmente carnívoro o depredador? -> Sí
+6. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+7. ¿Puede ser peligroso para las personas? -> Sí
+8. ¿Es más grande que una caja de zapatos? -> Sí
+9. ¿Es principalmente nocturno? -> No
+10. ¿Es conocido por un patrón blanco y negro? -> No
 
 **Suposiciones**
-- Tras 8: Águila (acierto)
+- Tras 10: Águila (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Búho
+
+Estado: won. Preguntas: 9.
+
+**Preguntas**
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> Sí
+3. ¿Tiene plumas? -> Sí
+4. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+5. ¿Es principalmente carnívoro o depredador? -> Sí
+6. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+7. ¿Puede ser peligroso para las personas? -> Sí
+8. ¿Es más grande que una caja de zapatos? -> A veces
+9. ¿Es principalmente nocturno? -> Sí
+
+**Suposiciones**
+- Tras 9: Búho (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Lobo
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> Sí
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Tiene cuatro patas o más? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> No
+5. ¿Tiene cuatro patas o más? -> Sí
+6. ¿Es principalmente carnívoro o depredador? -> Sí
 7. ¿Es más grande que un perro? -> A veces
 8. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+9. ¿Puede ser peligroso para las personas? -> Sí
+10. ¿Suele desplazarse principalmente por el aire o el agua? -> No
+11. ¿Es un cánido, como un perro, lobo o zorro? -> Sí
 
 **Suposiciones**
-- Tras 8: Lobo (acierto)
+- Tras 11: Lobo (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Cabra
 
-Estado: won. Preguntas: 7.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> Sí
-4. ¿Es más grande que un perro? -> A veces
-5. ¿Es más grande que una caja de zapatos? -> No
-6. ¿Tiene cuatro patas o más? -> Sí
-7. ¿Tiene cornamenta o cuernos visibles? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> Sí
+3. ¿Es principalmente carnívoro o depredador? -> No
+4. ¿Tiene cuatro patas o más? -> Sí
+5. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+6. ¿Tiene cornamenta o cuernos visibles? -> Sí
+7. ¿Es un macho bovino, como un toro? -> No
+8. ¿Es más grande que una caja de zapatos? -> No
+9. ¿Tiene pezuñas? -> Sí
 
 **Suposiciones**
-- Tras 7: Cabra (acierto)
+- Tras 9: Cabra (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -268,97 +288,119 @@ Estado: won. Preguntas: 7.
 Estado: won. Preguntas: 8.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> No
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Es más grande que una caja de zapatos? -> No
-5. ¿Puede ser peligroso para las personas? -> No
-6. ¿Es un ave? -> Sí
-7. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
-8. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> Sí
+3. ¿Tiene plumas? -> Sí
+4. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+5. ¿Es principalmente carnívoro o depredador? -> No
+6. ¿Es un animal doméstico, de granja o mascota común? -> No
+7. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+8. ¿Es más grande que una caja de zapatos? -> No
 
 **Suposiciones**
 - Tras 8: Pato (acierto)
 
 **Incidencias**: Sin incidencias.
 
-### animal: Pulpo
+### animal: Ganso
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> No
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> No
-5. ¿Es más grande que una caja de zapatos? -> No
-6. ¿Es un ave? -> No
-7. ¿Tiene cuatro patas o más? -> No
-8. ¿Tiene escamas? -> No
-9. ¿Es un animal vertebrado? -> No
-10. ¿Nace de un huevo? -> Sí
-11. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> Sí
+3. ¿Tiene plumas? -> Sí
+4. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+5. ¿Es principalmente carnívoro o depredador? -> No
+6. ¿Es un animal doméstico, de granja o mascota común? -> No
+7. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+8. ¿Es más grande que una caja de zapatos? -> Sí
 
 **Suposiciones**
-- Tras 11: Pulpo (acierto)
+- Tras 8: Ganso (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### animal: Pulpo
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> No
+3. ¿Tiene cuatro patas o más? -> No
+4. ¿Tiene escamas? -> No
+5. ¿Nace de un huevo? -> Sí
+6. ¿Es un animal vertebrado? -> No
+7. ¿Es un insecto? -> No
+8. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+9. ¿Vive normalmente en España o en la fauna ibérica? -> No
+10. ¿Es más grande que una caja de zapatos? -> No
+
+**Suposiciones**
+- Tras 10: Pulpo (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Cigüeña
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> Sí
-2. ¿Es un mamífero? -> No
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> No
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Es un ave? -> Sí
-7. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
-8. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+1. ¿Es un mamífero? -> No
+2. ¿Es un ave? -> Sí
+3. ¿Tiene plumas? -> Sí
+4. ¿Vive normalmente en España o en la fauna ibérica? -> Sí
+5. ¿Es principalmente carnívoro o depredador? -> Sí
+6. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+7. ¿Puede ser peligroso para las personas? -> No
+8. ¿Es más grande que una caja de zapatos? -> Sí
+9. ¿Tiene el cuello muy largo? -> Sí
+10. ¿Es conocido por un patrón blanco y negro? -> Sí
 
 **Suposiciones**
-- Tras 8: Cigüeña (acierto)
+- Tras 10: Cigüeña (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Hipopótamo
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> Sí
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Es más grande que un perro? -> Sí
-7. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
-8. ¿Tiene pezuñas? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> No
+5. ¿Tiene cuatro patas o más? -> Sí
+6. ¿Es principalmente carnívoro o depredador? -> No
+7. ¿Es más grande que un perro? -> Sí
+8. ¿Suele desplazarse principalmente por el aire o el agua? -> Sí
+9. ¿Tiene trompa? -> No
+10. ¿Pasa mucho tiempo en el agua aunque también viva en tierra? -> Sí
+11. ¿Tiene pezuñas? -> Sí
 
 **Suposiciones**
-- Tras 8: Hipopótamo (acierto)
+- Tras 11: Hipopótamo (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Rinoceronte
 
-Estado: won. Preguntas: 9.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> Sí
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Es más grande que un perro? -> Sí
-7. ¿Suele desplazarse principalmente por el aire o el agua? -> No
-8. ¿Tiene cuatro patas o más? -> Sí
-9. ¿Tiene cornamenta o cuernos visibles? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> Sí
+4. ¿Tiene pezuñas? -> Sí
+5. ¿Vive normalmente en España o en la fauna ibérica? -> No
+6. ¿Tiene cuatro patas o más? -> Sí
+7. ¿Tiene manchas en el pelaje? -> No
+8. ¿Es más grande que un perro? -> Sí
 
 **Suposiciones**
-- Tras 9: Rinoceronte (acierto)
+- Tras 8: Rinoceronte (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -367,14 +409,14 @@ Estado: won. Preguntas: 9.
 Estado: won. Preguntas: 8.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> No
-5. ¿Es más grande que una caja de zapatos? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> Sí
+4. ¿Tiene pezuñas? -> Sí
+5. ¿Vive normalmente en España o en la fauna ibérica? -> No
 6. ¿Tiene cuatro patas o más? -> Sí
-7. ¿Es más grande que un perro? -> Sí
-8. ¿Tiene manchas en el pelaje? -> Sí
+7. ¿Tiene manchas en el pelaje? -> Sí
+8. ¿Tiene el cuello muy largo? -> Sí
 
 **Suposiciones**
 - Tras 8: Jirafa (acierto)
@@ -383,769 +425,577 @@ Estado: won. Preguntas: 8.
 
 ### animal: Cebra
 
-Estado: won. Preguntas: 10.
+Estado: won. Preguntas: 12.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> A veces
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Tiene cuatro patas o más? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> No
+5. ¿Tiene cuatro patas o más? -> Sí
+6. ¿Es principalmente carnívoro o depredador? -> No
 7. ¿Es más grande que un perro? -> Sí
-8. ¿Tiene pezuñas? -> Sí
-9. ¿Tiene rayas? -> Sí
-10. ¿Es conocido por un patrón blanco y negro? -> Sí
+8. ¿Suele desplazarse principalmente por el aire o el agua? -> No
+9. ¿Vive normalmente en España o en la fauna ibérica? -> No
+10. ¿Puede ser peligroso para las personas? -> A veces
+11. ¿Tiene rayas? -> Sí
+12. ¿Tiene pezuñas? -> Sí
 
 **Suposiciones**
-- Tras 10: Cebra (acierto)
+- Tras 12: Cebra (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### animal: Canguro
 
-Estado: won. Preguntas: 13.
+Estado: won. Preguntas: 6.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> No
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> A veces
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Tiene cuatro patas o más? -> No
-7. ¿Vive normalmente en España o en la fauna ibérica? -> No
-8. ¿Nace de un huevo? -> No
-9. ¿Es más grande que un perro? -> Sí
-10. ¿Suele desplazarse principalmente por el aire o el agua? -> No
-11. ¿Es principalmente nocturno? -> No lo sé
-12. ¿Es un primate? -> No
-13. ¿Es un marsupial? -> Sí
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> No
+5. ¿Tiene cuatro patas o más? -> No
+6. ¿Es un cánido, como un perro, lobo o zorro? -> No
 
 **Suposiciones**
-- Tras 13: Canguro (acierto)
+- Tras 6: Ballena (fallo)
+- Tras 6: Delfín (fallo)
+- Tras 6: Canguro (acierto)
 
-**Incidencias**: Sin incidencias.
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
 
 ### animal: Panda
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 14.
 
 **Preguntas**
-1. ¿Es principalmente carnívoro o depredador? -> A veces
-2. ¿Es un mamífero? -> Sí
-3. ¿Es un animal doméstico, de granja o mascota común? -> No
-4. ¿Puede ser peligroso para las personas? -> A veces
-5. ¿Es más grande que una caja de zapatos? -> Sí
-6. ¿Nace de un huevo? -> No
-7. ¿Vive normalmente en España o en la fauna ibérica? -> No
-8. ¿Es más grande que un perro? -> Sí
-9. ¿Tiene cuatro patas o más? -> Sí
-10. ¿Es conocido por un patrón blanco y negro? -> Sí
-11. ¿Tiene rayas? -> No
+1. ¿Es un mamífero? -> Sí
+2. ¿Es un animal doméstico, de granja o mascota común? -> No
+3. ¿Tiene cornamenta o cuernos visibles? -> No
+4. ¿Nace de un huevo? -> No
+5. ¿Tiene cuatro patas o más? -> Sí
+6. ¿Es principalmente carnívoro o depredador? -> A veces
+7. ¿Es más grande que un perro? -> Sí
+8. ¿Suele desplazarse principalmente por el aire o el agua? -> No
+9. ¿Vive normalmente en España o en la fauna ibérica? -> No
+10. ¿Puede ser peligroso para las personas? -> A veces
+11. ¿Es un felino? -> No
+12. ¿Tiene rayas? -> No
+13. ¿Es conocido por un patrón blanco y negro? -> Sí
+14. ¿Tiene pezuñas? -> No
 
 **Suposiciones**
-- Tras 11: Panda (acierto)
+- Tras 14: Panda (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Cuchara
 
-Estado: won. Preguntas: 13.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
-7. ¿Su función principal es almacenar, contener o transportar cosas? -> No
-8. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
-9. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
-10. ¿Está hecho principalmente de metal o plástico? -> Sí
-11. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> Sí
-12. ¿Tiene una parte cóncava para recoger o contener algo? -> Sí
-13. ¿Es un cubierto o utensilio para comer? -> Sí
+3. ¿Es flexible o blando? -> No
+4. ¿Su función principal es almacenar, contener o transportar cosas? -> No
+5. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
+6. ¿Tiene mango o asa para sujetarlo? -> Sí
+7. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> Sí
+8. ¿Es un cubierto o utensilio para comer? -> Sí
+9. ¿Tiene una parte cóncava para recoger o contener algo? -> Sí
+10. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
 
 **Suposiciones**
-- Tras 13: Cuchara (acierto)
+- Tras 10: Cuchara (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Teléfono móvil
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 6.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> Sí
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> Sí
-7. ¿Es más grande que una caja de zapatos? -> No
-8. ¿Tiene pantalla? -> Sí
-9. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
-10. ¿Tiene mango o asa para sujetarlo? -> No
-11. ¿Tiene una parte cóncava para recoger o contener algo? -> No
-12. ¿Es un mueble? -> No
-13. ¿Es flexible o blando? -> No
-14. ¿Su función principal es almacenar, contener o transportar cosas? -> No
-15. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> Sí
-16. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
-17. ¿Es un vehículo o medio de transporte? -> No
-18. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
-19. ¿Está hecho principalmente de metal o plástico? -> Sí
-20. ¿Se usa para limpiar? -> No
+3. ¿Tiene pantalla? -> Sí
+4. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> Sí
+5. ¿Es más grande que una caja de zapatos? -> No
+6. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
 
 **Suposiciones**
-- Tras 20: Teléfono móvil (acierto)
+- Tras 6: Teléfono móvil (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Silla
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 7.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> No
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
-7. ¿Es más grande que una caja de zapatos? -> Sí
-8. ¿Está hecho principalmente de metal o plástico? -> No
-9. ¿Es un mueble? -> Sí
-10. ¿Tiene una parte cóncava para recoger o contener algo? -> No
-11. ¿Tiene pantalla? -> No
-12. ¿Tiene mango o asa para sujetarlo? -> No
-13. ¿Está asociado a un deporte o juego? -> No
-14. ¿Su función principal es almacenar, contener o transportar cosas? -> No
-15. ¿Es flexible o blando? -> No
-16. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-17. ¿Es líquido? -> No
-18. ¿Se usa para limpiar? -> No
-19. ¿Es un vehículo o medio de transporte? -> No
-20. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
+3. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
+4. ¿Es un mueble? -> Sí
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Su función principal es almacenar, contener o transportar cosas? -> No
+7. ¿Es flexible o blando? -> No
 
 **Suposiciones**
-- Tras 20: Silla (acierto)
+- Tras 7: Silla (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Coche
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 6.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> Sí
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> No
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Es más grande que una caja de zapatos? -> Sí
-7. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> Sí
-8. ¿Su función principal es almacenar, contener o transportar cosas? -> Sí
-9. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-10. ¿Tiene pantalla? -> No
-11. ¿Está asociado a un deporte o juego? -> No
-12. ¿Es líquido? -> No
-13. ¿Tiene una parte cóncava para recoger o contener algo? -> No
-14. ¿Tiene mango o asa para sujetarlo? -> No
-15. ¿Es un vehículo o medio de transporte? -> Sí
-16. ¿Es un mueble? -> No
-17. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
-18. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
-19. ¿Está hecho principalmente de metal o plástico? -> Sí
-20. ¿Es flexible o blando? -> No
+3. ¿Tiene pantalla? -> No
+4. ¿Su función principal es almacenar, contener o transportar cosas? -> Sí
+5. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> Sí
+6. ¿Es un vehículo o medio de transporte? -> Sí
 
 **Suposiciones**
-- Tras 20: Coche (acierto)
+- Tras 6: Coche (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Libro
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 12.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
-7. ¿Su función principal es almacenar, contener o transportar cosas? -> No
-8. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
-9. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
+3. ¿Es flexible o blando? -> No
+4. ¿Su función principal es almacenar, contener o transportar cosas? -> No
+5. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
+6. ¿Tiene mango o asa para sujetarlo? -> No
+7. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
+8. ¿Es más grande que una caja de zapatos? -> No
+9. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
 10. ¿Está hecho principalmente de metal o plástico? -> No
-11. ¿Es más grande que una caja de zapatos? -> No
-12. ¿Está asociado a un deporte o juego? -> No
-13. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
-14. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-15. ¿Es un vehículo o medio de transporte? -> No
-16. ¿Es flexible o blando? -> No
-17. ¿Tiene mango o asa para sujetarlo? -> No
-18. ¿Es un mueble? -> No
-19. ¿Tiene una parte cóncava para recoger o contener algo? -> No
-20. ¿Tiene pantalla? -> No
+11. ¿Está asociado a un deporte o juego? -> No
+12. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
 
 **Suposiciones**
-- Tras 20: Libro (acierto)
+- Tras 12: Libro (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Guitarra
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 6.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> Sí
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> Sí
-7. ¿Es más grande que una caja de zapatos? -> Sí
-8. ¿Tiene mango o asa para sujetarlo? -> Sí
+3. ¿Tiene pantalla? -> Sí
+4. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> Sí
+5. ¿Es más grande que una caja de zapatos? -> Sí
+6. ¿Tiene mango o asa para sujetarlo? -> Sí
 
 **Suposiciones**
-- Tras 8: Guitarra (acierto)
+- Tras 6: Guitarra (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Lámpara
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> Sí
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> A veces
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Es más grande que una caja de zapatos? -> No
+3. ¿Tiene pantalla? -> No
+4. ¿Es más grande que una caja de zapatos? -> No
+5. ¿Está hecho principalmente de metal o plástico? -> Sí
+6. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
 7. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> Sí
-8. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
-9. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
-10. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
-11. ¿Está hecho principalmente de metal o plástico? -> Sí
-12. ¿Su función principal es almacenar, contener o transportar cosas? -> No
-13. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
-14. ¿Es un vehículo o medio de transporte? -> No
-15. ¿Está asociado a un deporte o juego? -> No
-16. ¿Tiene pantalla? -> No
-17. ¿Es un mueble? -> A veces
-18. ¿Tiene mango o asa para sujetarlo? -> No
-19. ¿Tiene una parte cóncava para recoger o contener algo? -> No
-20. ¿Es flexible o blando? -> No
+8. ¿Su función principal es almacenar, contener o transportar cosas? -> No
+9. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
+10. ¿Es un mueble? -> A veces
 
 **Suposiciones**
-- Tras 20: Lámpara (acierto)
+- Tras 10: Lámpara (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Llave
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
+3. ¿Es flexible o blando? -> No
+4. ¿Su función principal es almacenar, contener o transportar cosas? -> No
+5. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
 6. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
-7. ¿Su función principal es almacenar, contener o transportar cosas? -> No
-8. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-9. ¿Está hecho principalmente de metal o plástico? -> Sí
-10. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> Sí
-11. ¿Tiene pantalla? -> No
-12. ¿Tiene mango o asa para sujetarlo? -> No
-13. ¿Tiene una parte cóncava para recoger o contener algo? -> No
-14. ¿Es flexible o blando? -> No
-15. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-16. ¿Es un mueble? -> No
-17. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
-18. ¿Está asociado a un deporte o juego? -> No
-19. ¿Es líquido? -> No
-20. ¿Se usa para limpiar? -> No
+7. ¿Está hecho principalmente de metal o plástico? -> Sí
+8. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> Sí
+9. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
+10. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
+11. ¿Tiene mango o asa para sujetarlo? -> No
 
 **Suposiciones**
-- Tras 20: Llave (acierto)
+- Tras 11: Llave (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Botella
 
-Estado: won. Preguntas: 13.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
-7. ¿Su función principal es almacenar, contener o transportar cosas? -> Sí
-8. ¿Tiene una parte cóncava para recoger o contener algo? -> Sí
-9. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> Sí
-10. ¿Tiene mango o asa para sujetarlo? -> No
-11. ¿Está hecho principalmente de metal o plástico? -> A veces
-12. ¿Es más grande que una caja de zapatos? -> No
-13. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
+3. ¿Es flexible o blando? -> No
+4. ¿Su función principal es almacenar, contener o transportar cosas? -> Sí
+5. ¿Tiene una parte cóncava para recoger o contener algo? -> Sí
+6. ¿Tiene mango o asa para sujetarlo? -> No
+7. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> Sí
+8. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> Sí
+9. ¿Está hecho principalmente de metal o plástico? -> A veces
+10. ¿Es más grande que una caja de zapatos? -> No
 
 **Suposiciones**
-- Tras 13: Botella (acierto)
+- Tras 10: Botella (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Balón
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
-7. ¿Su función principal es almacenar, contener o transportar cosas? -> No
-8. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-9. ¿Está hecho principalmente de metal o plástico? -> No
-10. ¿Está asociado a un deporte o juego? -> Sí
-11. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
-12. ¿Es más grande que una caja de zapatos? -> No
-13. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
-14. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-15. ¿Es un vehículo o medio de transporte? -> No
-16. ¿Es flexible o blando? -> A veces
-17. ¿Tiene una parte cóncava para recoger o contener algo? -> No
-18. ¿Tiene mango o asa para sujetarlo? -> No
-19. ¿Tiene pantalla? -> No
-20. ¿Es un mueble? -> No
+3. ¿Es flexible o blando? -> A veces
+4. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> No
+5. ¿Su función principal es almacenar, contener o transportar cosas? -> No
+6. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
+7. ¿Está hecho principalmente de metal o plástico? -> No
+8. ¿Está asociado a un deporte o juego? -> Sí
 
 **Suposiciones**
-- Tras 20: Balón (acierto)
+- Tras 8: Balón (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### object: Mochila
 
-Estado: won. Preguntas: 17.
+Estado: won. Preguntas: 6.
 
 **Preguntas**
 1. ¿Tiene partes móviles, mecánicas o electrónicas? -> No
 2. ¿Se puede llevar fácilmente en la mano o en un bolsillo? -> Sí
-3. ¿Es comestible? -> No
-4. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> Sí
-7. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
-8. ¿Su función principal es almacenar, contener o transportar cosas? -> Sí
-9. ¿Se utiliza principalmente en la cocina o está relacionado con la alimentación? -> No
-10. ¿Está hecho principalmente de metal o plástico? -> No
-11. ¿Está asociado a un deporte o juego? -> No
-12. ¿Es más grande que una caja de zapatos? -> No
-13. ¿Se utiliza principalmente como una herramienta de trabajo o estudio? -> No
-14. ¿Es un vehículo o medio de transporte? -> No
-15. ¿Se interactúa con ello principalmente de forma digital o electrónica? -> No
-16. ¿Es flexible o blando? -> Sí
-17. ¿Tiene mango o asa para sujetarlo? -> Sí
+3. ¿Es flexible o blando? -> Sí
+4. ¿Es comestible? -> No
+5. ¿Es algo que las personas visten, calzan o llevan puesto en el cuerpo? -> Sí
+6. ¿Se puede encontrar normalmente en interiores o dentro de una casa? -> No
 
 **Suposiciones**
-- Tras 17: Mochila (acierto)
+- Tras 6: Mochila (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: París
 
-Estado: won. Preguntas: 16.
+Estado: won. Preguntas: 5.
 
 **Preguntas**
 1. ¿Está en España? -> No
-2. ¿Es una ciudad, país o división política? -> Sí
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Tiene acceso al mar o está junto a la costa? -> No
-7. ¿Nació o se originó antes del año 1900? -> Sí
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Está en América? -> No
-10. ¿Es una capital? -> Sí
-11. ¿Está en Europa? -> Sí
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Está en Francia? -> Sí
+2. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+3. ¿Está en América? -> No
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Francia? -> Sí
 
 **Suposiciones**
-- Tras 16: París (acierto)
+- Tras 5: París (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Murcia
 
-Estado: won. Preguntas: 18.
+Estado: won. Preguntas: 13.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
 2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Castilla y León? -> No
+6. ¿Está en Andalucía? -> No
 7. ¿Tiene acceso al mar o está junto a la costa? -> No
-8. ¿Está en Europa? -> Sí
-9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-10. ¿Está en la isla de Tenerife? -> No lo sé
-11. ¿Está en la isla de Gran Canaria? -> No lo sé
-12. ¿Es capital de una comunidad autónoma? -> Sí
-13. ¿Es una ciudad grande o muy poblada? -> Sí
-14. ¿Está en Andalucía? -> No
-15. ¿Está en la Región de Murcia? -> Sí
-16. ¿Es una capital? -> No
-17. ¿Es capital de provincia? -> Sí
-18. ¿Es una ciudad autónoma? -> No
+8. ¿Está en América? -> No
+9. ¿Está en Castilla-La Mancha? -> No
+10. ¿Está en Galicia? -> No
+11. ¿Está en Extremadura? -> No
+12. ¿Está en el País Vasco? -> No
+13. ¿Está en la Región de Murcia? -> Sí
 
 **Suposiciones**
-- Tras 18: Murcia (acierto)
+- Tras 13: Murcia (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Cartagena (España)
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
 2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Castilla y León? -> No
+6. ¿Está en Andalucía? -> No
 7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Está en Europa? -> Sí
-9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-10. ¿Está en la isla de Tenerife? -> No lo sé
-11. ¿Está en la isla de Gran Canaria? -> No lo sé
-12. ¿Está en Andalucía? -> No
-13. ¿Está en Galicia? -> No
-14. ¿Está en el País Vasco? -> No
-15. ¿Es capital de una comunidad autónoma? -> No
-16. ¿Es capital de provincia? -> No
-17. ¿Está en la Región de Murcia? -> Sí
-18. ¿Es una ciudad autónoma? -> No
-19. ¿Es una isla o un archipiélago? -> No
-20. ¿Es una ciudad grande o muy poblada? -> No
+8. ¿Está en América? -> No
+9. ¿Está en Galicia? -> No
+10. ¿Está en el País Vasco? -> No
+11. ¿Está en la Región de Murcia? -> Sí
 
 **Suposiciones**
-- Tras 20: Cartagena (España) (acierto)
+- Tras 11: Cartagena (España) (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### place: Madrid
-
-Estado: won. Preguntas: 16.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-7. ¿Tiene acceso al mar o está junto a la costa? -> No
-8. ¿Está en Europa? -> Sí
-9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-10. ¿Está en la isla de Tenerife? -> No lo sé
-11. ¿Está en la isla de Gran Canaria? -> No lo sé
-12. ¿Es capital de una comunidad autónoma? -> Sí
-13. ¿Es una ciudad grande o muy poblada? -> Sí
-14. ¿Está en Andalucía? -> No
-15. ¿Está en la Región de Murcia? -> No
-16. ¿Está en la Comunidad de Madrid? -> Sí
-
-**Suposiciones**
-- Tras 16: Madrid (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Barcelona
-
-Estado: won. Preguntas: 20.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Nació o se originó antes del año 1900? -> Sí
-9. ¿Está en Europa? -> Sí
-10. ¿Es una capital? -> No
-11. ¿Está en América? -> No
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es capital de una comunidad autónoma? -> Sí
-17. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-18. ¿Está en la isla de Tenerife? -> No lo sé
-19. ¿Está en la isla de Gran Canaria? -> No lo sé
-20. ¿Está en la Comunidad Valenciana? -> No
-
-**Suposiciones**
-- Tras 20: Barcelona (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Sevilla
 
 Estado: won. Preguntas: 14.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
 2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Castilla y León? -> No
+6. ¿Está en Andalucía? -> No
 7. ¿Tiene acceso al mar o está junto a la costa? -> No
-8. ¿Está en Europa? -> Sí
-9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-10. ¿Está en la isla de Tenerife? -> No lo sé
-11. ¿Está en la isla de Gran Canaria? -> No lo sé
-12. ¿Es capital de una comunidad autónoma? -> Sí
-13. ¿Es una ciudad grande o muy poblada? -> Sí
-14. ¿Está en Andalucía? -> Sí
+8. ¿Está en América? -> No
+9. ¿Está en Castilla-La Mancha? -> No
+10. ¿Está en Galicia? -> No
+11. ¿Está en Extremadura? -> No
+12. ¿Está en el País Vasco? -> No
+13. ¿Está en la Región de Murcia? -> No
+14. ¿Está en la Comunidad de Madrid? -> Sí
 
 **Suposiciones**
-- Tras 14: Sevilla (acierto)
+- Tras 14: Madrid (acierto)
 
 **Incidencias**: Sin incidencias.
 
-### place: Valencia
+### place: Barcelona
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 6.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
 2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Nació o se originó antes del año 1900? -> Sí
-9. ¿Está en Europa? -> Sí
-10. ¿Es una capital? -> No
-11. ¿Está en América? -> No
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es capital de una comunidad autónoma? -> Sí
-17. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-18. ¿Está en la isla de Tenerife? -> No lo sé
-19. ¿Está en la isla de Gran Canaria? -> No lo sé
-20. ¿Está en la Comunidad Valenciana? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Cataluña? -> Sí
+6. ¿Tiene acceso al mar o está junto a la costa? -> Sí
 
 **Suposiciones**
-- Tras 20: Valencia (acierto)
+- Tras 6: Barcelona (acierto)
 
 **Incidencias**: Sin incidencias.
 
-### place: Zaragoza
-
-Estado: won. Preguntas: 20.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
-7. ¿Tiene acceso al mar o está junto a la costa? -> No
-8. ¿Nació o se originó antes del año 1900? -> Sí
-9. ¿Está en Europa? -> Sí
-10. ¿Es una capital? -> No
-11. ¿Está en América? -> No
-12. ¿Es una elevación natural, como una montaña o volcán? -> No
-13. ¿Es un desierto o zona árida? -> No
-14. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-17. ¿Está en la isla de Tenerife? -> No lo sé
-18. ¿Está en la isla de Gran Canaria? -> No lo sé
-19. ¿Está en Aragón? -> Sí
-20. ¿Es capital de una comunidad autónoma? -> Sí
-
-**Suposiciones**
-- Tras 20: Zaragoza (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Bilbao
-
-Estado: won. Preguntas: 15.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Está en Europa? -> Sí
-9. ¿Está junto al estrecho de Gibraltar? -> No lo sé
-10. ¿Está en la isla de Tenerife? -> No lo sé
-11. ¿Está en la isla de Gran Canaria? -> No lo sé
-12. ¿Está en Andalucía? -> No
-13. ¿Está en Galicia? -> No
-14. ¿Está en el País Vasco? -> Sí
-15. ¿Es capital de una comunidad autónoma? -> No
-
-**Suposiciones**
-- Tras 15: Bilbao (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Las Palmas de Gran Canaria
-
-Estado: won. Preguntas: 17.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Está en Europa? -> No
-9. ¿Está en América? -> No
-10. ¿Nació o se originó antes del año 1900? -> Sí
-11. ¿Es una capital? -> No
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es capital de provincia? -> Sí
-17. ¿Está en la isla de Tenerife? -> No
-
-**Suposiciones**
-- Tras 17: Las Palmas de Gran Canaria (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Santa Cruz de Tenerife
-
-Estado: won. Preguntas: 17.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Está en Europa? -> No
-9. ¿Está en América? -> No
-10. ¿Nació o se originó antes del año 1900? -> Sí
-11. ¿Es una capital? -> No
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es capital de provincia? -> Sí
-17. ¿Está en la isla de Tenerife? -> Sí
-
-**Suposiciones**
-- Tras 17: Santa Cruz de Tenerife (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Ceuta
-
-Estado: won. Preguntas: 17.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Está en Europa? -> No
-9. ¿Está en América? -> No
-10. ¿Nació o se originó antes del año 1900? -> Sí
-11. ¿Es una capital? -> No
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es capital de provincia? -> No
-17. ¿Está junto al estrecho de Gibraltar? -> Sí
-
-**Suposiciones**
-- Tras 17: Ceuta (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Melilla
-
-Estado: won. Preguntas: 17.
-
-**Preguntas**
-1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
-8. ¿Está en Europa? -> No
-9. ¿Está en América? -> No
-10. ¿Nació o se originó antes del año 1900? -> Sí
-11. ¿Es una capital? -> No
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es capital de provincia? -> No
-17. ¿Está junto al estrecho de Gibraltar? -> No
-
-**Suposiciones**
-- Tras 17: Melilla (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Islas Canarias
+### place: Sevilla
 
 Estado: won. Preguntas: 8.
 
 **Preguntas**
 1. ¿Está en España? -> Sí
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-7. ¿Está en Europa? -> No
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Castilla y León? -> No
+6. ¿Está en Andalucía? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> No
 8. ¿Está en América? -> No
 
 **Suposiciones**
-- Tras 8: Islas Canarias (acierto)
+- Tras 8: Córdoba (fallo)
+- Tras 8: Granada (fallo)
+- Tras 8: Jaén (fallo)
+- Tras 8: Sevilla (acierto)
+
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
+
+### place: Valencia
+
+Estado: won. Preguntas: 6.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Cataluña? -> No
+6. ¿Está en la Comunidad Valenciana? -> Sí
+
+**Suposiciones**
+- Tras 6: Alicante (fallo)
+- Tras 6: Castellón de la Plana (fallo)
+- Tras 6: Valencia (acierto)
+
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
+
+### place: Zaragoza
+
+Estado: won. Preguntas: 8.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Cataluña? -> No
+6. ¿Está en la Comunidad Valenciana? -> No
+7. ¿Tiene acceso al mar o está junto a la costa? -> No
+8. ¿Está en Aragón? -> Sí
+
+**Suposiciones**
+- Tras 8: Huesca (fallo)
+- Tras 8: Teruel (fallo)
+- Tras 8: Zaragoza (acierto)
+
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
+
+### place: Bilbao
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> Sí
+5. ¿Está en Castilla y León? -> No
+6. ¿Está en Andalucía? -> No
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Está en América? -> No
+9. ¿Está en Galicia? -> No
+10. ¿Está en el País Vasco? -> Sí
+
+**Suposiciones**
+- Tras 10: Bilbao (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Las Palmas de Gran Canaria
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> No
+5. ¿Es una ciudad, país o división política? -> Sí
+6. ¿Es una ciudad grande o muy poblada? -> Sí
+7. ¿Está en América? -> No
+8. ¿Es una capital? -> No
+9. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+10. ¿Está en la isla de Tenerife? -> No
+11. ¿Es capital de una comunidad autónoma? -> Sí
+
+**Suposiciones**
+- Tras 11: Las Palmas de Gran Canaria (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Santa Cruz de Tenerife
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> No
+5. ¿Es una ciudad, país o división política? -> Sí
+6. ¿Es una ciudad grande o muy poblada? -> Sí
+7. ¿Está en América? -> No
+8. ¿Es una capital? -> No
+9. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+10. ¿Está en la isla de Tenerife? -> Sí
+11. ¿Es capital de una comunidad autónoma? -> Sí
+
+**Suposiciones**
+- Tras 11: Santa Cruz de Tenerife (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Ceuta
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> No
+5. ¿Es una ciudad, país o división política? -> Sí
+6. ¿Es una ciudad grande o muy poblada? -> No
+7. ¿Está en América? -> No
+8. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+9. ¿Es una capital? -> No
+10. ¿Es una ciudad autónoma? -> Sí
+11. ¿Está junto al estrecho de Gibraltar? -> Sí
+
+**Suposiciones**
+- Tras 11: Ceuta (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Melilla
+
+Estado: won. Preguntas: 11.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Está en Europa? -> No
+5. ¿Es una ciudad, país o división política? -> Sí
+6. ¿Es una ciudad grande o muy poblada? -> No
+7. ¿Está en América? -> No
+8. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+9. ¿Es una capital? -> No
+10. ¿Es una ciudad autónoma? -> Sí
+11. ¿Está junto al estrecho de Gibraltar? -> No
+
+**Suposiciones**
+- Tras 11: Melilla (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### place: Islas Canarias
+
+Estado: won. Preguntas: 10.
+
+**Preguntas**
+1. ¿Está en España? -> Sí
+2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
+3. ¿Es una ciudad, país o división política? -> Sí
+4. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+5. ¿Es capital de provincia? -> No
+6. ¿Está en América? -> No
+7. ¿Está en Europa? -> No
+8. ¿Es una isla o un archipiélago? -> Sí
+9. ¿Es una capital? -> No
+10. ¿Es una ciudad grande o muy poblada? -> No
+
+**Suposiciones**
+- Tras 10: Islas Canarias (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -1157,11 +1007,11 @@ Estado: won. Preguntas: 8.
 1. ¿Está en España? -> Sí
 2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
 3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
-7. ¿Está en Europa? -> Sí
-8. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+4. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+5. ¿Es una ciudad grande o muy poblada? -> No
+6. ¿Está en Europa? -> Sí
+7. ¿Tiene acceso al mar o está junto a la costa? -> Sí
+8. ¿Es capital de provincia? -> No
 
 **Suposiciones**
 - Tras 8: Islas Baleares (acierto)
@@ -1170,289 +1020,205 @@ Estado: won. Preguntas: 8.
 
 ### place: Río Amazonas
 
-Estado: won. Preguntas: 10.
+Estado: won. Preguntas: 3.
 
 **Preguntas**
 1. ¿Está en España? -> No
-2. ¿Es una ciudad, país o división política? -> No
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No lo sé
-7. ¿Es principalmente agua, como un río, lago, mar u océano? -> Sí
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-9. ¿Está en América? -> Sí
-10. ¿Es un desierto o zona árida? -> No
+2. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+3. ¿Está en América? -> Sí
 
 **Suposiciones**
-- Tras 10: Río Amazonas (acierto)
+- Tras 3: Nueva York (fallo)
+- Tras 3: Machu Picchu (fallo)
+- Tras 3: Gran Cañón (fallo)
+- Tras 3: Río Amazonas (acierto)
 
-**Incidencias**: Sin incidencias.
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
 
 ### place: Río Nilo
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 3.
 
 **Preguntas**
 1. ¿Está en España? -> No
-2. ¿Es una ciudad, país o división política? -> No
-3. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No lo sé
-7. ¿Es principalmente agua, como un río, lago, mar u océano? -> Sí
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+2. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+3. ¿Está en Europa? -> No
 
 **Suposiciones**
-- Tras 8: Río Nilo (acierto)
+- Tras 3: Playa (fallo)
+- Tras 3: Bosque (fallo)
+- Tras 3: Desierto del Sáhara (fallo)
+- Tras 3: Monte Everest (fallo)
+- Tras 3: Taj Mahal (fallo)
+- Tras 3: Río Nilo (acierto)
 
-**Incidencias**: Sin incidencias.
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
 
 ### place: Monte Everest
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 3.
 
 **Preguntas**
 1. ¿Está en España? -> No lo sé
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
-3. ¿Es una ciudad, país o división política? -> No
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No lo sé
-7. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
-8. ¿Tiene acceso al mar o está junto a la costa? -> No
-9. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-10. ¿Es un desierto o zona árida? -> No
-11. ¿Es una elevación natural, como una montaña o volcán? -> Sí
+2. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+3. ¿Está en Europa? -> No
 
 **Suposiciones**
-- Tras 11: Monte Everest (acierto)
+- Tras 3: Playa (fallo)
+- Tras 3: Bosque (fallo)
+- Tras 3: Desierto del Sáhara (fallo)
+- Tras 3: Monte Everest (acierto)
 
-**Incidencias**: Sin incidencias.
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
 
 ### place: Gran Cañón
+
+Estado: won. Preguntas: 3.
+
+**Preguntas**
+1. ¿Está en España? -> No lo sé
+2. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+3. ¿Está en América? -> Sí
+
+**Suposiciones**
+- Tras 3: Nueva York (fallo)
+- Tras 3: Machu Picchu (fallo)
+- Tras 3: Gran Cañón (acierto)
+
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
+
+### place: Taj Mahal
+
+Estado: won. Preguntas: 3.
+
+**Preguntas**
+1. ¿Está en España? -> No lo sé
+2. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+3. ¿Está en Europa? -> No
+
+**Suposiciones**
+- Tras 3: Playa (fallo)
+- Tras 3: Bosque (fallo)
+- Tras 3: Desierto del Sáhara (fallo)
+- Tras 3: Monte Everest (fallo)
+- Tras 3: Taj Mahal (acierto)
+
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
+
+### person: Mahatma Gandhi
 
 Estado: won. Preguntas: 10.
 
 **Preguntas**
-1. ¿Está en España? -> No lo sé
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> No
-3. ¿Es una ciudad, país o división política? -> No
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No lo sé
-7. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-8. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-9. ¿Es un desierto o zona árida? -> Sí
-10. ¿Está en América? -> Sí
-
-**Suposiciones**
-- Tras 10: Gran Cañón (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### place: Taj Mahal
-
-Estado: won. Preguntas: 18.
-
-**Preguntas**
-1. ¿Está en España? -> No lo sé
-2. ¿Es un objeto o lugar de ficción / creado por el ser humano? -> Sí
-3. ¿Es una ciudad, país o división política? -> Sí
-4. ¿Es un lugar real? -> Sí
-5. ¿Existe de forma física y tangible? -> Sí
-6. ¿Tiene acceso al mar o está junto a la costa? -> No
-7. ¿Nació o se originó antes del año 1900? -> No lo sé
-8. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
-9. ¿Es una capital? -> No lo sé
-10. ¿Está en Europa? -> No
-11. ¿Está en América? -> No
-12. ¿Es principalmente agua, como un río, lago, mar u océano? -> No
-13. ¿Es una elevación natural, como una montaña o volcán? -> No
-14. ¿Es un desierto o zona árida? -> No
-15. ¿Es un lugar geográfico o una estructura construida por el hombre? -> Sí
-16. ¿Es una ciudad grande o muy poblada? -> No lo sé
-17. ¿Es un monumento famoso? -> Sí
-18. ¿Está asociado principalmente a la religión? -> No
-
-**Suposiciones**
-- Tras 18: Taj Mahal (acierto)
-
-**Incidencias**: Sin incidencias.
-
-### person: Mahatma Gandhi
-
-Estado: won. Preguntas: 19.
-
-**Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-4. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> No
-5. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
-6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
-7. ¿Está asociado principalmente a Asia? -> Sí
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
+4. ¿Está asociado principalmente a Asia? -> Sí
+5. ¿Tuvo o tiene poder político formal? -> No
+6. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> No
+7. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 8. ¿Es una persona o personaje de género femenino? -> No
-9. ¿Es una figura histórica? -> Sí
-10. ¿Es conocido principalmente por escribir? -> No
-11. ¿Nació o se originó antes del año 1900? -> Sí
-12. ¿Nació después de 1950? -> No
-13. ¿Es conocido principalmente por la música? -> No
-14. ¿Pertenece al ámbito hispanohablante? -> No
-15. ¿Es conocido principalmente por el deporte? -> No
-16. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
-17. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-18. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> Sí
-19. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
+9. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> Sí
+10. ¿Está asociado a Roma o al Imperio romano? -> No
 
 **Suposiciones**
-- Tras 19: Mahatma Gandhi (acierto)
+- Tras 10: Mahatma Gandhi (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Pedro Sánchez
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
 2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-4. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
-5. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
-6. ¿Nació o se originó antes del año 1900? -> No
-7. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-8. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
-9. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-10. ¿Nació después de 1950? -> Sí
-11. ¿Tuvo o tiene poder político formal? -> Sí
-12. ¿Pertenece al ámbito hispanohablante? -> No
-13. ¿Es una persona o personaje de género femenino? -> No
-14. ¿Está asociado a Roma o al Imperio romano? -> No
-15. ¿Pertenece a la Antigüedad clásica? -> No
-16. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
-17. ¿Es una figura histórica? -> No
-18. ¿Está asociado principalmente a Asia? -> No
-19. ¿Es conocido por ser multimillonario? -> No
-20. ¿Es conocido principalmente por el deporte? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+4. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
+5. ¿Nació o se originó antes del año 1900? -> No
+6. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+7. ¿Nació después de 1950? -> Sí
+8. ¿Tuvo o tiene poder político formal? -> Sí
 
 **Suposiciones**
-- Tras 20: Pedro Sánchez (acierto)
+- Tras 8: Pedro Sánchez (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Don Quijote de la Mancha
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 7.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> Sí
-3. ¿Es un personaje de ficción? -> Sí
-4. ¿Es (o fue) una persona real de carne y hueso? -> No
-5. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-6. ¿Está asociado a la magia? -> No lo sé
-7. ¿Es conocido como detective? -> No lo sé
-8. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-9. ¿Pertenece a la mitología griega? -> No
-10. ¿Es conocido principalmente por escribir? -> Sí
-11. ¿Pertenece al ámbito hispanohablante? -> Sí
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> Sí
+4. ¿Es de origen español? -> Sí
+5. ¿Pertenece al ámbito hispanohablante? -> Sí
+6. ¿Es un personaje de ficción? -> Sí
+7. ¿Es (o fue) una persona real de carne y hueso? -> No
 
 **Suposiciones**
-- Tras 11: Don Quijote de la Mancha (acierto)
+- Tras 7: Don Quijote de la Mancha (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Fernando Alonso
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 7.
 
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
 2. ¿Es de origen español? -> Sí
-3. ¿Es un personaje de ficción? -> No
-4. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-5. ¿Es conocido principalmente por el deporte? -> Sí
-6. ¿Se asocia normalmente a un equipo, grupo o banda? -> A veces
-7. ¿Es una persona o personaje de género femenino? -> No
-8. ¿Pertenece al ámbito hispanohablante? -> Sí
-9. ¿Es conocido principalmente por la música? -> No
-10. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
-11. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
-12. ¿Está asociado a Roma o al Imperio romano? -> No
-13. ¿Es conocido principalmente por escribir? -> No
-14. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
-15. ¿Pertenece a la Antigüedad clásica? -> No
-16. ¿Nació después de 1950? -> Sí
-17. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> Sí
-18. ¿Usa o usó un seudónimo o nombre artístico? -> No
-19. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-20. ¿Nació o se originó antes del año 1900? -> No
+3. ¿Pertenece al ámbito hispanohablante? -> Sí
+4. ¿Es conocido principalmente por el deporte? -> Sí
+5. ¿Es una persona o personaje de género femenino? -> No
+6. ¿Es conocido principalmente por la música? -> No
+7. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
 
 **Suposiciones**
-- Tras 20: Fernando Alonso (acierto)
+- Tras 7: Fernando Alonso (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Rosalía
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
 2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-4. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> Sí
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> Sí
+4. ¿Es conocido principalmente por escribir? -> No
 5. ¿Nació después de 1950? -> Sí
 6. ¿Es una persona o personaje de género femenino? -> Sí
-7. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-8. ¿Es conocido principalmente por la música? -> Sí
-9. ¿Usa o usó un seudónimo o nombre artístico? -> No
-10. ¿Es conocido principalmente por el deporte? -> No
-11. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
-12. ¿Pertenece al ámbito hispanohablante? -> No
-13. ¿Es conocido principalmente por escribir? -> No
-14. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
-15. ¿Está asociado a Roma o al Imperio romano? -> No
-16. ¿Pertenece a la Antigüedad clásica? -> No
-17. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
-18. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-19. ¿Nació o se originó antes del año 1900? -> No
-20. ¿Está asociado principalmente a Asia? -> No
+7. ¿Es conocido principalmente por la música? -> Sí
+8. ¿Usa o usó un seudónimo o nombre artístico? -> No
+9. ¿Es conocido principalmente por el deporte? -> No
+10. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
+11. ¿Pertenece al ámbito hispanohablante? -> No
 
 **Suposiciones**
-- Tras 20: Rosalía (acierto)
+- Tras 11: Rosalía (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Julio César
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-4. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
-5. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
-6. ¿Es una figura histórica? -> Sí
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
+3. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> Sí
+4. ¿Tuvo o tiene poder político formal? -> Sí
+5. ¿Es una figura histórica? -> Sí
+6. ¿Está asociado a Roma o al Imperio romano? -> Sí
 7. ¿Es una persona o personaje de género femenino? -> No
-8. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
-9. ¿Está asociado principalmente a Asia? -> No
-10. ¿Nació o se originó antes del año 1900? -> Sí
-11. ¿Nació después de 1950? -> No
-12. ¿Pertenece al ámbito hispanohablante? -> No
-13. ¿Es conocido principalmente por escribir? -> No
-14. ¿Es conocido principalmente por la música? -> No
-15. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
-16. ¿Es conocido principalmente por el deporte? -> No
-17. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-18. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
-19. ¿Está asociado a Roma o al Imperio romano? -> Sí
-20. ¿Pertenece a la Antigüedad clásica? -> Sí
+8. ¿Pertenece a la Antigüedad clásica? -> Sí
 
 **Suposiciones**
-- Tras 20: Julio César (acierto)
+- Tras 8: Julio César (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -1463,13 +1229,13 @@ Estado: won. Preguntas: 10.
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
 2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-4. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
-5. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+4. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+5. ¿Es un personaje de ficción? -> No
 6. ¿Nació o se originó antes del año 1900? -> No
-7. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-8. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
-9. ¿Nació después de 1950? -> Sí
+7. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
+8. ¿Nació después de 1950? -> Sí
+9. ¿Es una persona o personaje de género femenino? -> No
 10. ¿Es conocido por ser multimillonario? -> Sí
 
 **Suposiciones**
@@ -1479,435 +1245,396 @@ Estado: won. Preguntas: 10.
 
 ### person: Hipatia de Alejandría
 
-Estado: won. Preguntas: 20.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> Sí
-4. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+4. ¿Es un personaje de ficción? -> No
 5. ¿Se encuentra o se originó en el hemisferio occidental (ej. América, Europa Occidental)? -> No
 6. ¿Está asociado principalmente a Asia? -> No
 7. ¿Es una persona o personaje de género femenino? -> Sí
-8. ¿Nació después de 1950? -> No
-9. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
-10. ¿Es una figura histórica? -> Sí
-11. ¿Es conocido principalmente por escribir? -> No
-12. ¿Nació o se originó antes del año 1900? -> Sí
-13. ¿Pertenece al ámbito hispanohablante? -> No
-14. ¿Es conocido principalmente por la música? -> No
-15. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
-16. ¿Es conocido principalmente por el deporte? -> No
-17. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-18. ¿Pertenece a la Antigüedad clásica? -> Sí
-19. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
-20. ¿Tuvo o tiene poder político formal? -> No
+8. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
+9. ¿Pertenece a la Antigüedad clásica? -> Sí
+10. ¿Tuvo o tiene poder político formal? -> No
 
 **Suposiciones**
-- Tras 20: Hipatia de Alejandría (acierto)
+- Tras 10: Hipatia de Alejandría (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Zeus
 
-Estado: won. Preguntas: 12.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> Sí
-6. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-7. ¿Está asociado a la magia? -> No lo sé
-8. ¿Es conocido como detective? -> No lo sé
-9. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-10. ¿Pertenece a la mitología griega? -> Sí
-11. ¿Es una persona o personaje de género femenino? -> No
-12. ¿Es el dios principal del Olimpo? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> Sí
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> No
+9. ¿Es el dios principal del Olimpo? -> Sí
 
 **Suposiciones**
-- Tras 12: Zeus (acierto)
+- Tras 9: Zeus (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Poseidón
 
-Estado: won. Preguntas: 14.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> Sí
-6. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-7. ¿Está asociado a la magia? -> No lo sé
-8. ¿Es conocido como detective? -> No lo sé
-9. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-10. ¿Pertenece a la mitología griega? -> Sí
-11. ¿Es una persona o personaje de género femenino? -> No
-12. ¿Es el dios principal del Olimpo? -> No
-13. ¿Está asociado principalmente a la guerra? -> No
-14. ¿Está asociado principalmente al mar? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> Sí
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> No
+9. ¿Es el dios principal del Olimpo? -> No
+10. ¿Está asociado principalmente a la guerra? -> No
+11. ¿Está asociado principalmente al mar? -> Sí
 
 **Suposiciones**
-- Tras 14: Poseidón (acierto)
+- Tras 11: Poseidón (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Afrodita
 
-Estado: won. Preguntas: 12.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> Sí
-6. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-7. ¿Está asociado a la magia? -> No lo sé
-8. ¿Es conocido como detective? -> No lo sé
-9. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-10. ¿Pertenece a la mitología griega? -> Sí
-11. ¿Es una persona o personaje de género femenino? -> Sí
-12. ¿Está asociado al amor o la belleza? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> Sí
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> Sí
+9. ¿Está asociado al amor o la belleza? -> Sí
 
 **Suposiciones**
-- Tras 12: Afrodita (acierto)
+- Tras 9: Afrodita (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Hércules
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> Sí
-7. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-8. ¿Está asociado a la magia? -> No lo sé
-9. ¿Es conocido como detective? -> No lo sé
-10. ¿Es conocido por vencer a un monstruo mitológico? -> Sí
-11. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> Sí
+8. ¿Es conocido por vencer a un monstruo mitológico? -> Sí
+9. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> Sí
+10. ¿Destaca por una fuerza extraordinaria? -> Sí
 
 **Suposiciones**
-- Tras 11: Hércules (acierto)
+- Tras 10: Hércules (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Ulises
 
-Estado: won. Preguntas: 12.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> Sí
-7. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-8. ¿Está asociado a la magia? -> No lo sé
-9. ¿Es conocido como detective? -> No lo sé
-10. ¿Es conocido por vencer a un monstruo mitológico? -> No
-11. ¿Es famoso por un largo viaje legendario? -> Sí
-12. ¿Está asociado principalmente al mar? -> A veces
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> Sí
+8. ¿Es conocido por vencer a un monstruo mitológico? -> No
+9. ¿Es famoso por un largo viaje legendario? -> Sí
+10. ¿También da nombre a una constelación? -> No
+11. ¿Está asociado principalmente al mar? -> A veces
 
 **Suposiciones**
-- Tras 12: Ulises (acierto)
+- Tras 11: Ulises (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Cupido
 
-Estado: won. Preguntas: 13.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> Sí
-6. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-7. ¿Está asociado a la magia? -> No lo sé
-8. ¿Es conocido como detective? -> No lo sé
-9. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-10. ¿Pertenece a la mitología griega? -> No
-11. ¿Está asociado principalmente a la guerra? -> No
-12. ¿Pertenece a la mitología romana? -> Sí
-13. ¿Está asociado al amor o la belleza? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> Sí
+7. ¿Pertenece a la mitología griega? -> No
+8. ¿Está asociado principalmente a la guerra? -> No
+9. ¿Pertenece a la mitología romana? -> Sí
+10. ¿Está asociado al amor o la belleza? -> Sí
 
 **Suposiciones**
-- Tras 13: Cupido (acierto)
+- Tras 10: Cupido (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Ares
 
-Estado: won. Preguntas: 13.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> Sí
-6. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-7. ¿Está asociado a la magia? -> No lo sé
-8. ¿Es conocido como detective? -> No lo sé
-9. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-10. ¿Pertenece a la mitología griega? -> Sí
-11. ¿Es una persona o personaje de género femenino? -> No
-12. ¿Es el dios principal del Olimpo? -> No
-13. ¿Está asociado principalmente a la guerra? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> Sí
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> No
+9. ¿Es el dios principal del Olimpo? -> No
+10. ¿Está asociado principalmente a la guerra? -> Sí
 
 **Suposiciones**
-- Tras 13: Ares (acierto)
+- Tras 10: Ares (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Marte
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 8.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> Sí
-6. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-7. ¿Está asociado a la magia? -> No lo sé
-8. ¿Es conocido como detective? -> No lo sé
-9. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-10. ¿Pertenece a la mitología griega? -> No
-11. ¿Está asociado principalmente a la guerra? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> Sí
+7. ¿Pertenece a la mitología griega? -> No
+8. ¿Está asociado principalmente a la guerra? -> Sí
 
 **Suposiciones**
-- Tras 11: Marte (acierto)
+- Tras 8: Marte (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Minotauro
 
-Estado: won. Preguntas: 14.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> No
-7. ¿Pertenece a la mitología griega? -> Sí
-8. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-9. ¿Está asociado a la magia? -> No lo sé
-10. ¿Es conocido como detective? -> No lo sé
-11. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-12. ¿Es una persona o personaje de género femenino? -> No
-13. ¿Es mitad humano y mitad animal? -> No
-14. ¿Es una criatura monstruosa de la mitología? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> No
+8. ¿Pertenece a la mitología griega? -> Sí
+9. ¿Es una criatura monstruosa de la mitología? -> Sí
 
 **Suposiciones**
-- Tras 14: Minotauro (acierto)
+- Tras 9: Minotauro (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Atenea
 
-Estado: won. Preguntas: 12.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> Sí
-6. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-7. ¿Está asociado a la magia? -> No lo sé
-8. ¿Es conocido como detective? -> No lo sé
-9. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-10. ¿Pertenece a la mitología griega? -> Sí
-11. ¿Es una persona o personaje de género femenino? -> Sí
-12. ¿Está asociado al amor o la belleza? -> No
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> Sí
+7. ¿Pertenece a la mitología griega? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> Sí
+9. ¿Está asociado al amor o la belleza? -> No
 
 **Suposiciones**
-- Tras 12: Atenea (acierto)
+- Tras 9: Atenea (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Medusa
 
-Estado: won. Preguntas: 13.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> No
-7. ¿Pertenece a la mitología griega? -> Sí
-8. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-9. ¿Está asociado a la magia? -> No lo sé
-10. ¿Es conocido como detective? -> No lo sé
-11. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-12. ¿Es una persona o personaje de género femenino? -> Sí
-13. ¿Es una criatura monstruosa de la mitología? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> No
+8. ¿Pertenece a la mitología griega? -> Sí
+9. ¿Es una criatura monstruosa de la mitología? -> Sí
+10. ¿Es mitad humano y mitad animal? -> No
 
 **Suposiciones**
-- Tras 13: Medusa (acierto)
+- Tras 9: Minotauro (fallo)
+- Tras 10: Medusa (acierto)
 
-**Incidencias**: Sin incidencias.
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
 
 ### person: Perseo
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> Sí
-7. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-8. ¿Está asociado a la magia? -> No lo sé
-9. ¿Es conocido como detective? -> No lo sé
-10. ¿Es conocido por vencer a un monstruo mitológico? -> Sí
-11. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> Sí
+8. ¿Es conocido por vencer a un monstruo mitológico? -> Sí
+9. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
 
 **Suposiciones**
-- Tras 11: Perseo (acierto)
+- Tras 9: Perseo (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Orión
 
-Estado: won. Preguntas: 11.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> Sí
-7. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-8. ¿Está asociado a la magia? -> No lo sé
-9. ¿Es conocido como detective? -> No lo sé
-10. ¿Es conocido por vencer a un monstruo mitológico? -> No
-11. ¿Es famoso por un largo viaje legendario? -> No
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> Sí
+8. ¿Es conocido por vencer a un monstruo mitológico? -> No
+9. ¿Es famoso por un largo viaje legendario? -> No
+10. ¿Está asociado a la caza? -> Sí
 
 **Suposiciones**
-- Tras 11: Orión (acierto)
+- Tras 10: Orión (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Casiopea
 
-Estado: won. Preguntas: 14.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> No
-7. ¿Pertenece a la mitología griega? -> Sí
-8. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-9. ¿Está asociado a la magia? -> No lo sé
-10. ¿Es conocido como detective? -> No lo sé
-11. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-12. ¿Es una persona o personaje de género femenino? -> Sí
-13. ¿Es una criatura monstruosa de la mitología? -> No
-14. ¿También da nombre a una constelación? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> No
+8. ¿Pertenece a la mitología griega? -> Sí
+9. ¿Es una criatura monstruosa de la mitología? -> No
+10. ¿También da nombre a una constelación? -> Sí
+11. ¿Es una persona o personaje de género femenino? -> Sí
 
 **Suposiciones**
-- Tras 14: Casiopea (acierto)
+- Tras 11: Casiopea (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Centauro
 
-Estado: won. Preguntas: 13.
+Estado: won. Preguntas: 11.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> No
-7. ¿Pertenece a la mitología griega? -> Sí
-8. ¿Es un personaje de cómic o tira cómica? -> No lo sé
-9. ¿Está asociado a la magia? -> No lo sé
-10. ¿Es conocido como detective? -> No lo sé
-11. ¿Se asocia normalmente a un equipo, grupo o banda? -> No lo sé
-12. ¿Es una persona o personaje de género femenino? -> No
-13. ¿Es mitad humano y mitad animal? -> Sí
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> No
+8. ¿Pertenece a la mitología griega? -> Sí
+9. ¿Es una criatura monstruosa de la mitología? -> Sí
+10. ¿Es mitad humano y mitad animal? -> Sí
+11. ¿Es una persona o personaje de género femenino? -> No
 
 **Suposiciones**
-- Tras 13: Centauro (acierto)
+- Tras 9: Minotauro (fallo)
+- Tras 11: Centauro (acierto)
 
-**Incidencias**: Sin incidencias.
+**Incidencias**: Hace una o más suposiciones incorrectas antes del final..
 
 ### person: Sherlock Holmes
 
-Estado: won. Preguntas: 8.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Sigue con vida? -> No
-2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
+2. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es un dios o una diosa? -> No
-6. ¿Es un héroe o semidiós de la mitología? -> No
-7. ¿Pertenece a la mitología griega? -> No
-8. ¿Es una figura histórica? -> No
+5. ¿Es (o fue) una persona real de carne y hueso? -> No
+6. ¿Es un dios o una diosa? -> No
+7. ¿Es un héroe o semidiós de la mitología? -> No
+8. ¿Pertenece a la mitología griega? -> No
+9. ¿Es una figura histórica? -> No
 
 **Suposiciones**
-- Tras 8: Sherlock Holmes (acierto)
+- Tras 9: Sherlock Holmes (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Harry Potter
 
-Estado: won. Preguntas: 6.
+Estado: won. Preguntas: 10.
 
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
 2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
-4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es una persona o personaje de género femenino? -> No
-6. ¿Aparece principalmente en cine, televisión o espectáculos? -> Sí
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+4. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+5. ¿Es un personaje de ficción? -> Sí
+6. ¿Es (o fue) una persona real de carne y hueso? -> No
+7. ¿Pertenece a la mitología griega? -> No
+8. ¿Aparece principalmente en cine, televisión o espectáculos? -> Sí
+9. ¿Nació después de 1950? -> Sí
+10. ¿Es una persona o personaje de género femenino? -> No
 
 **Suposiciones**
-- Tras 6: Harry Potter (acierto)
+- Tras 10: Harry Potter (acierto)
 
 **Incidencias**: Sin incidencias.
 
 ### person: Mafalda
 
-Estado: won. Preguntas: 6.
+Estado: won. Preguntas: 9.
 
 **Preguntas**
 1. ¿Sigue con vida? -> Sí
 2. ¿Es de origen español? -> No
-3. ¿Es (o fue) una persona real de carne y hueso? -> No
-4. ¿Es un personaje de ficción? -> Sí
-5. ¿Es una persona o personaje de género femenino? -> Sí
-6. ¿Es conocido como detective? -> No lo sé
+3. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+4. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
+5. ¿Es un personaje de ficción? -> Sí
+6. ¿Es (o fue) una persona real de carne y hueso? -> No
+7. ¿Pertenece a la mitología griega? -> No
+8. ¿Aparece principalmente en cine, televisión o espectáculos? -> No
+9. ¿Pertenece al ámbito hispanohablante? -> Sí
 
 **Suposiciones**
-- Tras 6: Mafalda (acierto)
+- Tras 9: Mafalda (acierto)
 
 **Incidencias**: Sin incidencias.

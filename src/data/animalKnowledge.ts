@@ -190,7 +190,9 @@ const profiles: Record<string, Record<string, AttributeValue>> = {
   'mariposa': { mammal: false, bird: false, fish: false, reptile: false, amphibian: false, insect: true, largerThanShoebox: false },
   'rana': { mammal: false, bird: false, fish: false, reptile: false, amphibian: true, carnivore: true, fourLegs: true, largerThanShoebox: false },
   'serpiente': { mammal: false, bird: false, fish: false, reptile: true, amphibian: false, carnivore: true, fourLegs: false, largerThanShoebox: 0.5 },
-  'buho': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: true, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: 0.5 }
+  'buho': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: true, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: 0.5, nocturnal: true, feathers: true, swims: false, water: false, blackWhitePattern: false },
+  'pato': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: false, feathers: true, swims: true, water: true, domestic: 0.5, farm: 0.5, livesInSpain: true, blackWhitePattern: false },
+  'ganso': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: true, feathers: true, swims: true, water: true, domestic: 0.5, farm: 0.5, livesInSpain: true, blackWhitePattern: false }
 }
 
 const squirrelProfile: Record<string, AttributeValue> = {
@@ -281,6 +283,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('noctuido') || normalized.includes('polilla')) return 'Polilla'
   if (normalized.includes('ornitorrinco')) return 'Ornitorrinco'
   if (normalized.includes('paloma') || normalized.includes('tortola') || normalized.includes('zenaida')) return 'Paloma'
+  if (normalized.includes('pato')) return 'Pato'
   if (normalized.includes('pelicano')) return 'Pelícano'
   if (normalized.includes('perro')) return 'Perro'
   if (normalized.includes('petirrojo')) return 'Petirrojo'
@@ -301,11 +304,16 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('venado')) return 'Ciervo'
   if (normalized.includes('zorro')) return 'Zorro'
   if (normalized.includes('zopilote') || normalized.includes('aura')) return 'Buitre'
+  if (normalized.includes('buho') || normalized.includes('carabo')) return 'Búho'
+  if (normalized.includes('ganso')) return 'Ganso'
   return name
 }
 
 function inferredProfile(name: string): Record<string, AttributeValue> | undefined {
   if (name.includes('ardilla')) return squirrelProfile
+  if (name.includes('anade') || name.includes('pato') || name.includes('serreta')) return profiles.pato
+  if (name.includes('barnacla') || name.includes('ganso')) return profiles.ganso
+  if (name.includes('buho') || name.includes('carabo')) return profiles.buho
   return undefined
 }
 

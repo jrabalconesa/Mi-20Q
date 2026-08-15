@@ -112,6 +112,16 @@ describe('catalog', () => {
     ]))
     expect(animalNames).not.toContain('Cigüeña Blanca')
     expect(animalNames).not.toContain('Rinoceronte Blanco')
+    expect(animalNames.filter(name => name === 'Pato')).toHaveLength(1)
+    expect(animalNames.filter(name => name === 'Búho')).toHaveLength(1)
+    expect(animalNames.filter(name => name === 'Ganso')).toHaveLength(1)
+    expect(animalNames).not.toEqual(expect.arrayContaining([
+      'Pato Criollo',
+      'Pato Joyuyo',
+      'Búho Americano',
+      'Cárabo Norteamericano',
+      'Ganso del Nilo'
+    ]))
     expect(byName('Ornitorrinco')?.attributes.mammal).toBe(true)
     expect(byName('Ornitorrinco')?.attributes.oviparous).toBe(true)
     expect(byName('Ornitorrinco')?.attributes.monotreme).toBe(true)
