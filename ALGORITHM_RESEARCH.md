@@ -5,7 +5,7 @@
 - La solicitud de patente estadounidense **US 2006/0230008 A1**, de Robin Burgener, describe una matriz bidireccional de objetos por preguntas. Las respuestas priorizan objetos y los objetos mejor clasificados priorizan preguntas. También indica que los candidatos se ponderan, no se eliminan rígidamente, para tolerar percepciones y respuestas inconsistentes.
 - La misma solicitud describe dos criterios de selección: buscar una división Sí/No cercana al 50/50 y, periódicamente, elegir una pregunta que confirme o descarte al candidato líder.
 - El recorrido y las preguntas frecuentes oficiales de 20Q describen la clasificación inicial Animal/Vegetal/Mineral/Otro, las respuestas graduadas, las suposiciones intermedias, que «No lo sé» no aporta evidencia y el aprendizaje posterior a la partida.
-- La documentación oficial del juguete confirma la versión compacta de cuatro respuestas: Sí, No, A veces y No lo sé; después de un fallo puede formular cinco preguntas adicionales.
+- La interfaz del juego usa cuatro respuestas: Sí, No, A veces y No lo sé. La respuesta neutral no altera el posterior.
 
 ## Evidencia académica complementaria
 
@@ -15,7 +15,7 @@
 ## Traducción al motor de esta aplicación
 
 1. Cada candidato mantiene una probabilidad posterior.
-2. Sí, No y A veces se convierten en verosimilitudes con un suelo de ruido; «No lo sé» no altera el posterior.
+2. Sí, No y A veces se convierten en verosimilitudes con una matriz de evidencia; «No lo sé» no altera el posterior.
 3. Una pregunta se valora por información mutua: entropía de su respuesta menos la ambigüedad esperada de sus celdas candidato-pregunta.
 4. Periódicamente se añade un bono a preguntas que separan al líder del resto.
 5. Las preguntas visibles deben describir propiedades reales del dominio. No se emplean cortes alfabéticos: cuando faltan atributos, el motor prefiere reconocer la incertidumbre y aprender antes que romper la experiencia con una búsqueda por nombre.

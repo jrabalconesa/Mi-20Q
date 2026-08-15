@@ -1,14 +1,11 @@
 import type { Answer, CandidateExperience, GameKnowledge, GameState } from './types/game'
-import { SMOOTHED_NO, SMOOTHED_SOMETIMES, SMOOTHED_YES } from './engine/scoring'
+import { answerToAttributeProbability } from './engine/scoring'
 
 const STORAGE_KEY = '20q:experience:v1'
 const MAX_SAMPLES = 50
 
 function answerValue(answer: Answer): number | undefined {
-  if (answer === 'yes') return SMOOTHED_YES
-  if (answer === 'no') return SMOOTHED_NO
-  if (answer === 'sometimes') return SMOOTHED_SOMETIMES
-  return undefined
+  return answerToAttributeProbability(answer)
 }
 
 function isExperience(value: unknown): value is CandidateExperience {

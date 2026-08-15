@@ -1,5 +1,5 @@
 import { questions as builtInQuestions } from './data/questions'
-import { SMOOTHED_NO, SMOOTHED_SOMETIMES, SMOOTHED_YES } from './engine/scoring'
+import { answerToAttributeProbability } from './engine/scoring'
 import type { Answer, Candidate, GameKnowledge, GameState, LearningRecord, Question } from './types/game'
 
 const STORAGE_KEY = '20q:learning:v1'
@@ -64,10 +64,7 @@ export function clearLearning(storage: Pick<Storage, 'removeItem'> = localStorag
 }
 
 function answerToAttribute(answer: Answer): number | boolean | undefined {
-  if (answer === 'yes') return SMOOTHED_YES
-  if (answer === 'no') return SMOOTHED_NO
-  if (answer === 'sometimes') return SMOOTHED_SOMETIMES
-  return undefined
+  return answerToAttributeProbability(answer)
 }
 
 export function createLearningRecord(

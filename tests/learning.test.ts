@@ -3,7 +3,7 @@ import { buildKnowledge, clearLearning, createLearningRecord, readLearning } fro
 import { createGame } from '../src/engine/gameEngine'
 import { coreCandidates } from '../src/data/candidates'
 import { questions } from '../src/data/questions'
-import { SMOOTHED_YES } from '../src/engine/scoring'
+import { answerToAttributeProbability } from '../src/engine/scoring'
 
 describe('aprendizaje local', () => {
   it('convierte una derrota en un candidato y una pregunta diferenciadora', () => {
@@ -20,7 +20,7 @@ describe('aprendizaje local', () => {
     const learned = knowledge.candidates.find(candidate => candidate.id === record.id)
 
     expect(record.distinguishingQuestion).toBe('¿Es un mamífero que pone huevos?')
-    expect(learned?.attributes.mammal).toBe(SMOOTHED_YES)
+    expect(learned?.attributes.mammal).toBe(answerToAttributeProbability('yes'))
     expect(knowledge.questions).toContainEqual(expect.objectContaining({ id: `question:${record.id}` }))
     expect(knowledge.candidates.find(candidate => candidate.id === 'elephant')?.attributes[`learned:${record.id}`]).toBe(false)
   })

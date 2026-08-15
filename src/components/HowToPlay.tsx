@@ -79,9 +79,9 @@ export function HowToPlay() {
                 <h3>2. Responde a las preguntas</h3>
                 <p>Mi 20Q intentará descubrir en qué estás pensando mediante un máximo de veinte preguntas.</p>
                 <dl className="answer-guide">
-                  <div><dt>Sí</dt><dd>La afirmación es correcta.</dd></div>
-                  <div><dt>No</dt><dd>La afirmación es incorrecta.</dd></div>
-                  <div><dt>A veces</dt><dd>Depende del caso o solo se cumple parcialmente.</dd></div>
+                  <div><dt>Sí</dt><dd>La afirmación encaja claramente.</dd></div>
+                  <div><dt>No</dt><dd>La afirmación no encaja claramente.</dd></div>
+                  <div><dt>A veces</dt><dd>La afirmación solo se cumple parcialmente o depende del caso.</dd></div>
                   <div><dt>No lo sé</dt><dd>No conoces la respuesta o la pregunta no resulta aplicable.</dd></div>
                 </dl>
                 <p>Responde pensando en las características habituales de aquello que elegiste. El juego tolera cierta incertidumbre.</p>
