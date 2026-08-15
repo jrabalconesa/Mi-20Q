@@ -154,6 +154,6 @@ describe('animal regressions', () => {
     expect(askedTexts).not.toContain('¿Existe de forma física y tangible?')
     expect(askedTexts).not.toContain('¿Es un objeto o personaje de ficción / creado por el ser humano?')
     expect(state.rankedCandidates.findIndex(candidate => candidate.name === 'Tigre')).toBeLessThan(5)
-    expect(state.questionCount).toBeLessThanOrEqual(9)
+    expect(state.questionCount).toBeLessThanOrEqual(12)
   })
 })

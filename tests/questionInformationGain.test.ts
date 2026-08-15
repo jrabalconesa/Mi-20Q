@@ -23,6 +23,12 @@ const rareQuestion: Question = {
   categories: ['object']
 }
 
+const absoluteCommonQuestion: Question = {
+  ...commonQuestion,
+  id: 'is_tangible_absolute',
+  phase: 'absolute'
+}
+
 const activeCandidates: RankedCandidate[] = [
   {
     id: 'red_ball',
@@ -54,6 +60,29 @@ const activeCandidates: RankedCandidate[] = [
   }
 ]
 
+function rareSplitCandidates(count: number): RankedCandidate[] {
+  return Array.from({ length: count }, (_, index) => ({
+    id: `object-${index}`,
+    name: `Objeto ${index}`,
+    category: 'object',
+    score: 1 / count,
+    attributes: { rare: index === 0 }
+  }))
+}
+
+function lowCoverageCandidates(): RankedCandidate[] {
+  return Array.from({ length: 10 }, (_, index) => {
+    const attributes: RankedCandidate['attributes'] = index < 2 ? { lowCoverage: index === 0 } : {}
+    return {
+      id: `coverage-object-${index}`,
+      name: `Objeto con cobertura ${index}`,
+      category: 'object',
+      score: 0.1,
+      attributes
+    }
+  })
+}
+
 describe('calculateQuestionInformationGain', () => {
   it('calcula alta ganancia para una pregunta que divide el subconjunto activo', () => {
     const metrics = calculateQuestionInformationGain(splitQuestion, activeCandidates)
@@ -82,5 +111,47 @@ describe('calculateQuestionInformationGain', () => {
     expect(ranked[0].question.id).toBe('is_red')
     expect(ranked.map(score => score.question.id)).not.toContain('is_fragile')
     expect(ranked[0].informationGain).toBeGreaterThan(0.8)
+  })
+
+  it('descarta preguntas absolutas sin ganancia de informacion suficiente', () => {
+    const ranked = rankAvailableQuestions(
+      [absoluteCommonQuestion, splitQuestion],
+      activeCandidates,
+      [],
+      {}
+    )
+
+    expect(ranked.map(score => score.question.id)).toEqual(['is_red'])
+  })
+
+  it('descarta preguntas que discriminan menos del 5% de candidatos activos', () => {
+    const rareHighImportanceQuestion: Question = {
+      id: 'rare_high_importance',
+      text: '¿Tiene un rasgo extremadamente raro?',
+      attribute: 'rare',
+      categories: ['object'],
+      importance: 100
+    }
+
+    const ranked = rankAvailableQuestions([rareHighImportanceQuestion], rareSplitCandidates(100), [], {})
+
+    expect(ranked).toEqual([])
+  })
+
+  it('no calcula ganancia para atributos con cobertura menor al 30%', () => {
+    const lowCoverageQuestion: Question = {
+      id: 'low_coverage',
+      text: '¿Tiene un atributo con pocos datos?',
+      attribute: 'lowCoverage',
+      categories: ['object']
+    }
+
+    const metrics = calculateQuestionInformationGain(lowCoverageQuestion, lowCoverageCandidates())
+    const ranked = rankAvailableQuestions([lowCoverageQuestion], lowCoverageCandidates(), [], {})
+
+    expect(metrics.knownMass).toBeCloseTo(0.2)
+    expect(metrics.informationGain).toBe(0)
+    expect(metrics.expectedEntropy).toBeCloseTo(metrics.currentEntropy)
+    expect(ranked).toEqual([])
   })
 })

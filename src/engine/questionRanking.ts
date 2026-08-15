@@ -3,6 +3,10 @@ import { availableQuestions } from './questionAvailability'
 import { filterQuestionsByPhase } from './questionPhase'
 import { expectedValue, normalizeAttribute } from './scoring'
 
+export const MIN_INFORMATION_GAIN = 0.01
+export const MIN_DISCRIMINATED_CANDIDATE_MASS = 0.05
+export const MIN_ATTRIBUTE_COVERAGE = 0.3
+
 export interface QuestionScore {
   question: Question
   usefulness: number
@@ -12,6 +16,7 @@ export interface QuestionScore {
   knownMass: number
   yesProbability: number
   noProbability: number
+  discriminatedCandidateMass: number
   scriptedOpening: boolean
 }
 
@@ -51,51 +56,63 @@ export function calculateQuestionInformationGain(
       expectedEntropy: 0,
       knownMass: 0,
       yesProbability: 0,
-      noProbability: 0
+      noProbability: 0,
+      discriminatedCandidateMass: 0
     }
   }
 
   const currentWeights = activeCandidates.map(candidate => candidate.score)
   const currentEntropy = entropyFromWeights(currentWeights)
-  const yesWeights = activeCandidates.map(candidate =>
+  const knownCandidates = activeCandidates.filter(candidate => expectedValue(candidate, question) !== undefined)
+  const knownTotal = totalScore(knownCandidates)
+  const knownMass = knownTotal / activeTotal
+  if (knownMass < MIN_ATTRIBUTE_COVERAGE) {
+    return {
+      informationGain: 0,
+      currentEntropy,
+      expectedEntropy: currentEntropy,
+      knownMass,
+      yesProbability: 0,
+      noProbability: 0,
+      discriminatedCandidateMass: 0
+    }
+  }
+
+  const yesWeights = knownCandidates.map(candidate =>
     candidate.score * normalizeAttribute(expectedValue(candidate, question))
   )
-  const noWeights = activeCandidates.map(candidate =>
+  const noWeights = knownCandidates.map(candidate =>
     candidate.score * (1 - normalizeAttribute(expectedValue(candidate, question)))
   )
-  const yesProbability = sumWeights(yesWeights) / activeTotal
-  const noProbability = sumWeights(noWeights) / activeTotal
+  const yesProbability = sumWeights(yesWeights) / knownTotal
+  const noProbability = sumWeights(noWeights) / knownTotal
   const yesEntropy = entropyFromWeights(yesWeights)
   const noEntropy = entropyFromWeights(noWeights)
   const expectedEntropy = yesProbability * yesEntropy + noProbability * noEntropy
-  const knownMass = activeCandidates.reduce((total, candidate) =>
-    expectedValue(candidate, question) === undefined ? total : total + candidate.score,
-  0) / activeTotal
+  const knownEntropy = entropyFromWeights(knownCandidates.map(candidate => candidate.score))
+  const knownInformationGain = Math.max(0, knownEntropy - expectedEntropy)
+  const informationGain = knownInformationGain * knownMass
+  const discriminatedCandidateMass = Math.min(sumWeights(yesWeights), sumWeights(noWeights)) / activeTotal
 
   return {
-    informationGain: Math.max(0, currentEntropy - expectedEntropy),
+    informationGain,
     currentEntropy,
-    expectedEntropy,
+    expectedEntropy: Math.max(0, currentEntropy - informationGain),
     knownMass,
     yesProbability,
-    noProbability
+    noProbability,
+    discriminatedCandidateMass
   }
 }
 
-export function rankAvailableQuestions(
-  questions: Question[],
-  rankedCandidates: RankedCandidate[],
-  askedQuestionIds: string[],
-  answers: Record<string, Answer> = {}
-): QuestionScore[] {
-  const available = filterQuestionsByPhase(
-    availableQuestions(questions, askedQuestionIds, answers),
-    rankedCandidates,
-    askedQuestionIds.length
-  )
-  if (!available.length || !rankedCandidates.length) return []
+function isDiscriminatingQuestion(metrics: Omit<QuestionScore, 'question' | 'usefulness' | 'scriptedOpening'>): boolean {
+  return metrics.knownMass >= MIN_ATTRIBUTE_COVERAGE &&
+    metrics.informationGain > MIN_INFORMATION_GAIN &&
+    metrics.discriminatedCandidateMass >= MIN_DISCRIMINATED_CANDIDATE_MASS
+}
 
-  return available
+function scoreQuestions(questions: Question[], rankedCandidates: RankedCandidate[]): QuestionScore[] {
+  return questions
     .map(question => {
       const metrics = calculateQuestionInformationGain(question, rankedCandidates)
       return {
@@ -105,11 +122,32 @@ export function rankAvailableQuestions(
         scriptedOpening: false
       }
     })
+    .filter(score => isDiscriminatingQuestion(score))
     .sort((left, right) =>
       right.usefulness - left.usefulness ||
       right.informationGain - left.informationGain ||
       left.question.id.localeCompare(right.question.id)
     )
+}
+
+export function rankAvailableQuestions(
+  questions: Question[],
+  rankedCandidates: RankedCandidate[],
+  askedQuestionIds: string[],
+  answers: Record<string, Answer> = {}
+): QuestionScore[] {
+  const available = availableQuestions(questions, askedQuestionIds, answers)
+  const phaseFiltered = filterQuestionsByPhase(
+    available,
+    rankedCandidates,
+    askedQuestionIds.length
+  )
+  if (!phaseFiltered.length || !rankedCandidates.length) return []
+
+  const ranked = scoreQuestions(phaseFiltered, rankedCandidates)
+  return ranked.length || phaseFiltered.length === available.length
+    ? ranked
+    : scoreQuestions(available, rankedCandidates)
 }
 
 export function selectNextQuestion(

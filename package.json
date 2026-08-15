@@ -9,7 +9,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",
-    "audit:questions": "node --experimental-strip-types --loader ./scripts/tsExtensionLoader.mjs scripts/questionSequenceAuditWorker.ts"
+    "audit:questions": "node --experimental-strip-types --loader ./scripts/tsExtensionLoader.mjs scripts/questionSequenceAuditWorker.ts",
+    "audit:attributes": "node --experimental-strip-types --loader ./scripts/tsExtensionLoader.mjs scripts/attributeCoverageAudit.ts"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",

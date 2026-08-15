@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { questions } from '../src/data/questions'
 import { buildDebugSnapshot, getGuessReadiness } from '../src/engine/debugInsights'
+import { MIN_DISCRIMINATED_CANDIDATE_MASS, MIN_INFORMATION_GAIN } from '../src/engine/questionRanking'
 import { rankCandidates } from '../src/engine/scoring'
 import type { Candidate, GameKnowledge, GameState, Question } from '../src/types/game'
 
@@ -55,8 +56,10 @@ describe('debugInsights', () => {
 
     expect(questionById('culture_western_hemisphere').categories).toContain('person')
     expect(questionIds).not.toContain('culture_western_hemisphere')
-    expect(questionIds).toContain('person_living')
-    expect(questionIds.every(id => questionById(id).phase === 'absolute')).toBe(true)
+    expect(snapshot.questionScores.every(score => score.informationGain > MIN_INFORMATION_GAIN)).toBe(true)
+    expect(snapshot.questionScores.every(score =>
+      score.discriminatedCandidateMass >= MIN_DISCRIMINATED_CANDIDATE_MASS
+    )).toBe(true)
   })
 
   it('expone umbrales de preparacion de suposicion', () => {

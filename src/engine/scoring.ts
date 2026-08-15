@@ -16,14 +16,15 @@ function clampProbability(value: number): number {
   return Math.max(SMOOTHED_NO, Math.min(SMOOTHED_YES, value))
 }
 
-export function normalizeAttribute(value: AttributeValue | undefined): number {
+export function normalizeAttribute(value: AttributeValue | null | undefined): number {
   if (typeof value === 'boolean') return value ? SMOOTHED_YES : SMOOTHED_NO
   if (typeof value === 'number') return clampProbability(value)
   return 0.5
 }
 
 export function expectedValue(candidate: Candidate, question: Question): AttributeValue | undefined {
-  return candidate.attributes[question.attribute]
+  const value = candidate.attributes[question.attribute] as AttributeValue | null | undefined
+  return value === null ? undefined : value
 }
 
 export function answerToAttributeProbability(answer: Answer): number | undefined {
@@ -44,7 +45,10 @@ export function scoreAnswer(candidate: Candidate, question: Question, answer: An
 
 export function answerLikelihood(candidate: Candidate, question: Question, answer: Answer): number {
   if (answer === 'unknown') return 1
-  const expectedProbability = normalizeAttribute(expectedValue(candidate, question))
+  const expectedAttribute = expectedValue(candidate, question)
+  if (expectedAttribute === undefined) return 1
+
+  const expectedProbability = normalizeAttribute(expectedAttribute)
   if (answer === 'sometimes') {
     return clampProbability(0.72 + (1 - Math.abs(expectedProbability - SMOOTHED_SOMETIMES) * 2) * 0.18)
   }

@@ -49,4 +49,15 @@ describe('scoreAnswer', () => {
   it('trata no sé como respuesta neutral', () => {
     expect(scoreAnswer(candidate, question, 'unknown')).toBe(0.5)
   })
+
+  it('trata atributos sin dato como evidencia neutra para cualquier respuesta', () => {
+    const missingAttributeCandidate: Candidate = {
+      ...candidate,
+      attributes: {}
+    }
+
+    expect(answerLikelihood(missingAttributeCandidate, question, 'yes')).toBe(1)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'no')).toBe(1)
+    expect(answerLikelihood(missingAttributeCandidate, question, 'sometimes')).toBe(1)
+  })
 })
