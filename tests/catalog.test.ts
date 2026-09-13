@@ -96,6 +96,7 @@ describe('catalog', () => {
     expect(animalKnowledge.questions.length).toBeGreaterThan(12)
     expect(objectKnowledge.questions.length).toBeGreaterThanOrEqual(20)
     expect(dog?.attributes.largerThanShoebox).toBe(true)
+    expect(dog?.attributes.movesByAirOrWater).toBe(false)
     expect(bee?.attributes.largerThanShoebox).toBe(false)
     expect(cow?.attributes.hasAntlers).toBe(true)
     expect(cow?.attributes.maleBovine).toBe(false)

@@ -222,4 +222,31 @@ describe('animal regressions', () => {
     expect(next.guessCandidateId).toBe(owl.id)
     expect(next.questionCount).toBe(11)
   })
+
+  it('resuelve perro sin preguntar por fauna iberica ni desplazamiento acuatico', async () => {
+    const knowledge = await loadCategoryKnowledge('animal')
+    const dog = knowledge.candidates.find(candidate => candidate.name === 'Perro')
+    expect(dog).toBeDefined()
+    if (!dog) return
+
+    let state = createGame('animal', knowledge)
+    const askedTexts: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      askedTexts.push(question.text)
+      const value = expectedValue(dog, question)
+      state = answerCurrentQuestion(
+        state,
+        value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+        knowledge
+      )
+    }
+
+    expect(askedTexts).not.toContain('¿Vive normalmente en España o en la fauna ibérica?')
+    expect(askedTexts).not.toContain('¿Suele desplazarse principalmente por el aire o el agua?')
+    expect(state.guessCandidateId).toBe(dog.id)
+    expect(state.questionCount).toBeLessThanOrEqual(10)
+  })
 })

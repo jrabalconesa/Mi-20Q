@@ -440,7 +440,6 @@ function isLikelyHoofed(name: string): boolean {
 function inferAnimalAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const flies = attributes.flies === true
   const water = attributes.water === true || attributes.aquatic === true
-  const swims = attributes.swims === true
   const insect = attributes.insect === true
   const arachnid = attributes.arachnid === true
   const mollusk = attributes.mollusk === true
@@ -467,7 +466,7 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
     digitalOrElectronic: false,
     tangible: true,
     domesticFarmPet: attributes.domesticFarmPet ?? (attributes.domestic === true || attributes.farm === true),
-    movesByAirOrWater: attributes.movesByAirOrWater ?? (flies || water || swims),
+    movesByAirOrWater: attributes.movesByAirOrWater ?? (flies || water),
     semiAquatic: attributes.semiAquatic ?? (water && mammal ? 0.5 : false),
     fourOrMoreLegs: attributes.fourOrMoreLegs ?? (fourLegs || insect || arachnid || crustacean),
     felineOrCanid: attributes.felineOrCanid ?? (feline || canid),

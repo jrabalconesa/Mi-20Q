@@ -115,4 +115,24 @@ describe('availableQuestions', () => {
 
     expect(available.map(question => question.id)).not.toContain('object_cutlery')
   })
+
+  it('omite fauna iberica tras confirmar animal domestico o de granja', () => {
+    const available = availableQuestions(
+      appQuestions.filter(question => question.categories.includes('animal')),
+      ['animal_domestic_farm_pet'],
+      { animal_domestic_farm_pet: 'yes' }
+    )
+
+    expect(available.map(question => question.id)).not.toContain('animal_lives_in_spain')
+  })
+
+  it('omite desplazamiento por aire o agua tras confirmar canido', () => {
+    const available = availableQuestions(
+      appQuestions.filter(question => question.categories.includes('animal')),
+      ['animal_canid'],
+      { animal_canid: 'yes' }
+    )
+
+    expect(available.map(question => question.id)).not.toContain('animal_air_or_water')
+  })
 })
