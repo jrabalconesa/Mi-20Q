@@ -190,7 +190,7 @@ describe('animal regressions', () => {
     expect(state.questionCount).toBeLessThanOrEqual(12)
   })
 
-  it('sigue proponiendo candidatos tras fallar con gorrion pensando en buho', async () => {
+  it('no encadena candidatos tras fallar si ya agoto las preguntas', async () => {
     const knowledge = await loadCategoryKnowledge('animal')
     const owl = knowledge.candidates.find(candidate => candidate.name === 'Búho')
     const sparrow = knowledge.candidates.find(candidate => candidate.name === 'Gorrión')
@@ -217,9 +217,9 @@ describe('animal regressions', () => {
 
     const next = resolveGuess(state, false, narrowedKnowledge)
 
-    expect(next.status).toBe('guessing')
+    expect(next.status).toBe('lost')
     expect(next.excludedCandidateIds).toContain(sparrow.id)
-    expect(next.guessCandidateId).toBe(owl.id)
+    expect(next.guessCandidateId).toBeNull()
     expect(next.questionCount).toBe(11)
   })
 
