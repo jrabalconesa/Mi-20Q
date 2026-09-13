@@ -310,11 +310,56 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('tejon')) return 'Tejón'
   if (normalized.includes('topo')) return 'Topo'
   if (normalized.includes('caballito del diablo')) return 'Libélula'
+  if (normalized.startsWith('cola de golondrina') || normalized.startsWith('manchas verdes')) return 'Mariposa'
+  if (normalized.startsWith('boca de algodon') || normalized.startsWith('falsa coralillo') || normalized.startsWith('cabeza de cobre')) return 'Serpiente'
+  if (normalized.startsWith('gran kudu')) return 'Kudú'
+  if (normalized.startsWith('mayor cigarra')) return 'Cigarra'
+  if (normalized.startsWith('ardila ')) return 'Ardilla'
   if (normalized.includes('ganado vacuno') || normalized.includes('bos taurus')) return 'Vaca'
+  if (normalized === 'ganado') return 'Vaca'
   if (normalized.includes('felis silvestris')) return 'Gato'
   if (normalized.includes('capra aegagrus')) return 'Cabra'
   if (normalized.includes('ave de corral')) return 'Gallina'
   if (normalized.includes('cria de ave')) return 'Ave'
+  if (normalized.startsWith('macaca ')) return 'Macaco'
+
+  const nonSpecificLabels = new Set(['adulto', 'gigante', 'hembra', 'macho', 'presa', 'reina', 'superviviente', 'vastago'])
+  if (nonSpecificLabels.has(normalized)) return 'Animal'
+
+  const taxonomicNames: Record<string, string> = {
+    anthophila: 'Abeja',
+    araneae: 'Araña',
+    blattodea: 'Cucaracha',
+    bombus: 'Abejorro',
+    cacatuidae: 'Cacatúa',
+    cervidae: 'Ciervo',
+    chiroptera: 'Murciélago',
+    cicadidae: 'Cigarra',
+    coleoptera: 'Escarabajo',
+    dasypodidae: 'Armadillo',
+    elephantidae: 'Elefante',
+    erinaceinae: 'Erizo',
+    formicidae: 'Hormiga',
+    heterocero: 'Polilla',
+    hirudinea: 'Sanguijuela',
+    insecta: 'Insecto',
+    ixodoidea: 'Garrapata',
+    lacertilia: 'Lagarto',
+    mammalia: 'Mamífero',
+    ostrea: 'Ostra',
+    pisces: 'Pez',
+    pomatomidae: 'Pez',
+    psittaciformes: 'Loro',
+    rattus: 'Rata',
+    reptilia: 'Reptil',
+    salamandridos: 'Salamandra',
+    selachimorpha: 'Tiburón',
+    siphonaptera: 'Pulga',
+    strigiformes: 'Búho',
+    ursidae: 'Oso',
+    vulpini: 'Zorro'
+  }
+  if (taxonomicNames[normalized]) return taxonomicNames[normalized]
 
   const looksScientific = /^[A-ZÀ-Ü][a-zà-ÿ-]+\s+[a-zà-ÿ-]+(?:\s+[a-zà-ÿ-]+)?$/.test(name.trim())
   if (looksScientific) {

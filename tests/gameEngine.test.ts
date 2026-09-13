@@ -80,7 +80,7 @@ describe('gameEngine', () => {
   })
 
   it.each([
-    ['animal', 350],
+    ['animal', 325],
     ['object', 1_000],
     ['place', 1_000],
     ['person', 1_000]

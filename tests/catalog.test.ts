@@ -150,6 +150,17 @@ describe('catalog', () => {
       'Topo oriental'
     ]))
     expect(animalNames.every(name => /^\p{Lu}/u.test(name))).toBe(true)
+    expect(animalNames).not.toEqual(expect.arrayContaining([
+      'Adulto',
+      'Cola',
+      'Falsa',
+      'Gran',
+      'Hembra',
+      'Macho',
+      'Mammalia',
+      'Reina',
+      'Superviviente'
+    ]))
     expect(byName('Ornitorrinco')?.attributes.mammal).toBe(true)
     expect(byName('Ornitorrinco')?.attributes.oviparous).toBe(true)
     expect(byName('Ornitorrinco')?.attributes.monotreme).toBe(true)
@@ -170,7 +181,7 @@ describe('catalog', () => {
     const questions = knowledge.flatMap(category => category.questions)
 
     const issues = [
-      ...validateCatalog(candidates, questions, ['animal'], { minCandidates: 350, minCoverage: 0 }),
+      ...validateCatalog(candidates, questions, ['animal'], { minCandidates: 325, minCoverage: 0 }),
       ...validateCatalog(candidates, questions, ['object', 'place', 'person'], { minCoverage: 0 })
     ]
 
