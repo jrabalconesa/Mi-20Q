@@ -1,6 +1,6 @@
 # Auditoría de secuencias de preguntas
 
-Generado con `npm run audit:questions` el 2026-09-13T12:33:29.946Z.
+Generado con `npm run audit:questions` el 2026-09-13T12:45:28.871Z.
 
 El informe simula respuestas exactas para candidatos representativos. Si el motor hace una suposición incorrecta antes de 20 preguntas, la simulación responde que no y comprueba que la partida continúe.
 
@@ -63,6 +63,8 @@ El informe simula respuestas exactas para candidatos representativos. Si el moto
 | person | Mahatma Gandhi | OK | 15 | Mahatma Gandhi | Sin incidencias |
 | person | Pedro Sánchez | OK | 18 | Pedro Sánchez | Sin incidencias |
 | person | Barack Obama | OK | 9 | Barack Obama | Sin incidencias |
+| person | Nelson Mandela | OK | 20 | Nelson Mandela | Sin incidencias |
+| person | Cleopatra | OK | 20 | Cleopatra | Sin incidencias |
 | person | Don Quijote de la Mancha | OK | 3 | Don Quijote de la Mancha | Sin incidencias |
 | person | Fernando Alonso | OK | 20 | Fernando Alonso | Sin incidencias |
 | person | Rosalía | OK | 20 | Rosalía | Sin incidencias |
@@ -1243,7 +1245,7 @@ Estado: won. Preguntas: 15.
 2. ¿Es de origen español? -> No
 3. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
 4. ¿Se encuentra o se originó en el hemisferio occidental (América o Europa Occidental)? -> No
-5. ¿Está asociado principalmente a Asia? -> Sí
+5. ¿Está asociado principalmente con Asia? -> Sí
 6. ¿Tuvo o tiene poder político formal? -> No
 7. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> No
 8. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
@@ -1306,6 +1308,68 @@ Estado: won. Preguntas: 9.
 
 **Suposiciones**
 - Tras 9: Barack Obama (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Nelson Mandela
+
+Estado: won. Preguntas: 20.
+
+**Preguntas**
+1. ¿Es (o fue) una persona real de carne y hueso? -> Sí
+2. ¿Es de origen español? -> No
+3. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
+4. ¿Se encuentra o se originó en el hemisferio occidental (América o Europa Occidental)? -> No
+5. ¿Está asociado principalmente con Asia? -> No
+6. ¿Está asociado principalmente con África? -> Sí
+7. ¿Es una persona o personaje de género femenino? -> No
+8. ¿Tuvo o tiene poder político formal? -> Sí
+9. ¿Nació o se originó antes del año 1900? -> Sí
+10. ¿Está asociado a Roma o al Imperio romano? -> No
+11. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
+12. ¿Pertenece a la Antigüedad clásica? -> No
+13. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
+14. ¿Es una figura histórica? -> Sí
+15. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+16. ¿Es conocido por ser multimillonario? -> No
+17. ¿Pertenece al ámbito hispanohablante? -> No
+18. ¿Usa o usó un seudónimo o nombre artístico? -> No
+19. ¿Sigue con vida? -> No
+20. ¿Nació después de 1950? -> No lo sé
+
+**Suposiciones**
+- Tras 20: Nelson Mandela (acierto)
+
+**Incidencias**: Sin incidencias.
+
+### person: Cleopatra
+
+Estado: won. Preguntas: 20.
+
+**Preguntas**
+1. ¿Es (o fue) una persona real de carne y hueso? -> Sí
+2. ¿Es de origen español? -> No
+3. ¿Es conocido por la política, el activismo o el liderazgo social? -> Sí
+4. ¿Se encuentra o se originó en el hemisferio occidental (América o Europa Occidental)? -> No
+5. ¿Está asociado principalmente con Asia? -> No
+6. ¿Está asociado principalmente con África? -> Sí
+7. ¿Es una persona o personaje de género femenino? -> Sí
+8. ¿Tuvo o tiene poder político formal? -> Sí
+9. ¿Está asociado a la religión, la espiritualidad o la filosofía? -> No
+10. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
+11. ¿Nació o se originó antes del año 1900? -> Sí
+12. ¿Pertenece a la Antigüedad clásica? -> Sí
+13. ¿Está asociado a Roma o al Imperio romano? -> No
+14. ¿Es una figura histórica? -> Sí
+15. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
+16. ¿Es conocido por ser multimillonario? -> No
+17. ¿Pertenece al ámbito hispanohablante? -> No
+18. ¿Sigue con vida? -> No
+19. ¿Usa o usó un seudónimo o nombre artístico? -> No
+20. ¿Nació después de 1950? -> No lo sé
+
+**Suposiciones**
+- Tras 20: Cleopatra (acierto)
 
 **Incidencias**: Sin incidencias.
 
@@ -1447,10 +1511,10 @@ Estado: won. Preguntas: 9.
 3. ¿Es conocido por la política, el activismo o el liderazgo social? -> No
 4. ¿Es una figura conocida principalmente por el arte, entretenimiento o deporte? -> No
 5. ¿Se encuentra o se originó en el hemisferio occidental (América o Europa Occidental)? -> No
-6. ¿Está asociado principalmente a Asia? -> No
-7. ¿Es una persona o personaje de género femenino? -> Sí
-8. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
-9. ¿Tuvo o tiene poder político formal? -> No
+6. ¿Está asociado principalmente con Asia? -> No
+7. ¿Está asociado principalmente con África? -> Sí
+8. ¿Es una persona o personaje de género femenino? -> Sí
+9. ¿Está relacionado principalmente con la ciencia, la política o el liderazgo histórico? -> Sí
 
 **Suposiciones**
 - Tras 9: Hipatia de Alejandría (acierto)

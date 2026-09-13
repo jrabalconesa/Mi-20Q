@@ -156,6 +156,31 @@ function commonSpanishName(name: string): string {
   return spanishCommonNames[normalizedName(name)] ?? name
 }
 
+const africanAssociatedNames = new Set([
+  'amenhotep iii',
+  'cleopatra',
+  'cleopatra i of egypt',
+  'djer',
+  'djoser',
+  'hor-aha',
+  'horemheb',
+  'khafra',
+  'khufu',
+  'menkaura',
+  'menes',
+  'merneptah',
+  'narmer',
+  'nelson mandela',
+  'pepi ii neferkare',
+  'ptolemy i soter',
+  'ramesses i',
+  'seti i',
+  'smenkhkare',
+  'sneferu',
+  'thutmose i',
+  'thutmose iii'
+])
+
 function inferPersonAttributes(name: string, attributes: Record<string, AttributeValue>): Record<string, AttributeValue> {
   const artist = attributes.artist === true
   const sports = attributes.sports === true
@@ -166,6 +191,7 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
   const europe = attributes.europe === true
   const spanishOrigin = attributes.spanishOrigin === true
   const normalized = normalizedName(name)
+  const africa = attributes.africa === true || africanAssociatedNames.has(normalized)
   const musicName = [
     'rosalia', 'caballe', 'iglesias', 'sanz', 'sabina', 'serrat', 'falla', 'bisbal',
     'aitana', 'flores', 'jurado', 'sesto', 'alboran', 'tangana', 'jackson', 'swift',
@@ -229,6 +255,10 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
 
   return {
     ...attributes,
+    europe: africa ? false : attributes.europe,
+    americas: africa ? false : attributes.americas,
+    asia: africa ? false : attributes.asia,
+    africa,
     artificialOrFictional: attributes.realPerson === false,
     living,
     indoors: 0.5,
@@ -239,7 +269,7 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
     historical: attributes.historical ?? attributes.bornBefore1900,
     artEntertainmentSport: attributes.artEntertainmentSport ?? (artist || sports || writer),
     visualArtist: attributes.visualArtist ?? visualArtistName,
-    westernHemisphere: attributes.westernHemisphere ?? (americas || europe),
+    westernHemisphere: africa ? false : (attributes.westernHemisphere ?? (americas || europe)),
     spanishOrigin,
     hispanic: attributes.hispanic ?? (spanishOrigin || normalized.includes('borges') || normalized.includes('cortazar') || normalized.includes('shakira') || normalized.includes('luis miguel') || normalized.includes('bad bunny')),
     music: attributes.music ?? musicName,

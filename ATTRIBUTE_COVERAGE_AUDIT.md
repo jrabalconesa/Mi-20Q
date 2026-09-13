@@ -1,6 +1,6 @@
 # Auditoría de cobertura de atributos
 
-Generado con `npm run audit:attributes` el 2026-08-15T11:40:57.588Z.
+Generado con `npm run audit:attributes` el 2026-09-13T12:44:13.335Z.
 
 ## Atributos con 0% o 100% de respuestas afirmativas
 
@@ -8,9 +8,9 @@ La tasa se calcula solo sobre candidatos que tienen el atributo rellenado. Los a
 
 | Categoría | Atributo | Preguntas | Candidatos | Con dato | Cobertura | Sí | No | % Sí |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| animal | venomous | animal_venomous | 646 | 389 | 60.2% | 0 | 389 | 0.0% |
-| object | artificialOrFictional | universal_artificial_or_fictional | 1038 | 1038 | 100.0% | 1038 | 0 | 100.0% |
-| object | tangible | universal_tangible | 1038 | 1038 | 100.0% | 1038 | 0 | 100.0% |
+| animal | venomous | animal_venomous | 342 | 245 | 71.6% | 0 | 245 | 0.0% |
+| object | artificialOrFictional | universal_artificial_or_fictional | 1029 | 1029 | 100.0% | 1029 | 0 | 100.0% |
+| object | tangible | universal_tangible | 1029 | 1029 | 100.0% | 1029 | 0 | 100.0% |
 | place | before1900 | culture_before_1900 | 1056 | 57 | 5.4% | 57 | 0 | 100.0% |
 | place | geographicOrBuilt | place_geographic_or_built | 1056 | 1056 | 100.0% | 1056 | 0 | 100.0% |
 | place | realPlace | place_real | 1056 | 1056 | 100.0% | 1056 | 0 | 100.0% |
