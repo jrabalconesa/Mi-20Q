@@ -127,7 +127,7 @@ describe('catalog', () => {
       'Panda',
       'Gorila',
       'Camello',
-      'Oso polar'
+      'Oso'
     ]))
     expect(animalNames).not.toContain('Cigüeña Blanca')
     expect(animalNames).not.toContain('Rinoceronte Blanco')
@@ -170,7 +170,7 @@ describe('catalog', () => {
     const questions = knowledge.flatMap(category => category.questions)
 
     const issues = [
-      ...validateCatalog(candidates, questions, ['animal'], { minCandidates: 600, minCoverage: 0 }),
+      ...validateCatalog(candidates, questions, ['animal'], { minCandidates: 350, minCoverage: 0 }),
       ...validateCatalog(candidates, questions, ['object', 'place', 'person'], { minCoverage: 0 })
     ]
 

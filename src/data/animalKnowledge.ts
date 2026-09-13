@@ -309,7 +309,28 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('liebre')) return 'Liebre'
   if (normalized.includes('tejon')) return 'Tejón'
   if (normalized.includes('topo')) return 'Topo'
-  return name.charAt(0).toLocaleUpperCase('es') + name.slice(1)
+  if (normalized.includes('caballito del diablo')) return 'Libélula'
+  if (normalized.includes('ganado vacuno') || normalized.includes('bos taurus')) return 'Vaca'
+  if (normalized.includes('felis silvestris')) return 'Gato'
+  if (normalized.includes('capra aegagrus')) return 'Cabra'
+  if (normalized.includes('ave de corral')) return 'Gallina'
+  if (normalized.includes('cria de ave')) return 'Ave'
+
+  const looksScientific = /^[A-ZÀ-Ü][a-zà-ÿ-]+\s+[a-zà-ÿ-]+(?:\s+[a-zà-ÿ-]+)?$/.test(name.trim())
+  if (looksScientific) {
+    if (attributes.bird === true) return 'Ave'
+    if (attributes.fish === true) return 'Pez'
+    if (attributes.reptile === true) return 'Reptil'
+    if (attributes.amphibian === true) return 'Anfibio'
+    if (attributes.insect === true) return 'Insecto'
+    if (attributes.arachnid === true) return 'Arácnido'
+    if (attributes.mollusk === true) return 'Molusco'
+    if (attributes.crustacean === true) return 'Crustáceo'
+    if (attributes.mammal === true) return 'Mamífero'
+  }
+
+  const principalName = name.trim().split(/\s+/u)[0] ?? name
+  return principalName.charAt(0).toLocaleUpperCase('es') + principalName.slice(1).toLocaleLowerCase('es')
 }
 
 function inferredProfile(name: string): Record<string, AttributeValue> | undefined {
