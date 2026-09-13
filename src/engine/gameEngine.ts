@@ -1,12 +1,9 @@
 import { questions } from '../data/questions'
 import type { Answer, Category, GameKnowledge, GameState, Question } from '../types/game'
-import { effectiveCandidateCount } from './questionPhase'
+import { evaluateGuessPolicy, GUESS_POLICY } from './guessPolicy'
 import { expectedValue, normalizeAttribute, rankCandidates } from './scoring'
 import { selectNextQuestion } from './selectNextQuestion'
 
-const MAX_QUESTIONS = 20
-const MIN_GUESS_QUESTIONS = 6
-const SMALL_EFFECTIVE_SET = 3
 const builtInKnowledge: GameKnowledge = { candidates: [], questions }
 
 function questionMap(knowledge: GameKnowledge): Record<string, Question> {
@@ -18,21 +15,6 @@ function distinguishesLeaders(question: Question | null, best: GameState['ranked
   const bestExpected = normalizeAttribute(expectedValue(best, question))
   const secondExpected = normalizeAttribute(expectedValue(second, question))
   return Math.abs(bestExpected - secondExpected) >= 0.35
-}
-
-function nextGuessState(
-  state: GameState,
-  excludedCandidateIds: string[],
-  rankedCandidates: GameState['rankedCandidates']
-): GameState {
-  return {
-    ...state,
-    excludedCandidateIds,
-    rankedCandidates,
-    currentQuestionId: null,
-    guessCandidateId: null,
-    status: 'lost'
-  }
 }
 
 export function createGame(category: Category, knowledge: GameKnowledge = builtInKnowledge): GameState {
@@ -72,13 +54,12 @@ export function answerCurrentQuestion(
   const questionCount = state.questionCount + 1
   const best = rankedCandidates[0]
   const second = rankedCandidates[1]
-  const odds = best && second ? best.score / Math.max(second.score, Number.EPSILON) : Number.POSITIVE_INFINITY
-  const dominant = Boolean(best && questionCount >= MIN_GUESS_QUESTIONS && best.score >= 0.68 && odds >= 4)
-  const smallSet = questionCount >= MIN_GUESS_QUESTIONS && effectiveCandidateCount(rankedCandidates) <= SMALL_EFFECTIVE_SET
+  const guessPolicy = evaluateGuessPolicy(questionCount, rankedCandidates)
   const categoryQuestions = knowledge.questions.filter(question => question.categories.includes(state.category))
   const next = selectNextQuestion(categoryQuestions, rankedCandidates, askedQuestionIds, answers)
-  const canAskDiscriminatingQuestion = questionCount < MAX_QUESTIONS && distinguishesLeaders(next, best, second)
-  const shouldGuess = (dominant || smallSet || questionCount >= MAX_QUESTIONS) && !canAskDiscriminatingQuestion
+  const canAskDiscriminatingQuestion = questionCount < GUESS_POLICY.maxQuestions && distinguishesLeaders(next, best, second)
+  const shouldGuess = guessPolicy.ready &&
+    !canAskDiscriminatingQuestion
 
   if (shouldGuess && best) {
     return {
@@ -112,7 +93,7 @@ export function resolveGuess(
 ): GameState {
   if (state.status !== 'guessing') return state
   if (correct) return { ...state, status: 'won' }
-  if (state.questionCount >= MAX_QUESTIONS || !state.guessCandidateId) return { ...state, status: 'lost' }
+  if (state.questionCount >= GUESS_POLICY.maxQuestions || !state.guessCandidateId) return { ...state, status: 'lost' }
 
   const excludedCandidateIds = [...state.excludedCandidateIds, state.guessCandidateId]
   const questionsById = questionMap(knowledge)
@@ -123,7 +104,16 @@ export function resolveGuess(
   const categoryQuestions = knowledge.questions.filter(question => question.categories.includes(state.category))
   const next = selectNextQuestion(categoryQuestions, rankedCandidates, state.askedQuestionIds, state.answers)
 
-  if (!next) return nextGuessState(state, excludedCandidateIds, rankedCandidates)
+  if (!next) {
+    return {
+      ...state,
+      excludedCandidateIds,
+      rankedCandidates,
+      currentQuestionId: null,
+      guessCandidateId: null,
+      status: 'lost'
+    }
+  }
   return {
     ...state,
     excludedCandidateIds,

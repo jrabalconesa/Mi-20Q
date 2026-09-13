@@ -1,6 +1,6 @@
 # Benchmark del motor 20Q
 
-Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-08-15T13:16:49.857Z.
+Generado por `npm run test -- scripts/benchmarkEngine.test.ts` el 2026-09-13T12:14:02.310Z.
 
 La muestra usa una semilla fija para escoger 50 candidatos repartidos entre animal, objeto, lugar y persona. Cada partida responde con los atributos reales del candidato objetivo y se corta en 20 turnos de interacción.
 
@@ -9,51 +9,57 @@ La muestra usa una semilla fija para escoger 50 candidatos repartidos entre anim
 | Métrica | Valor |
 | --- | ---: |
 | Partidas simuladas | 50 |
-| Éxito antes de la pregunta 20 | 22.0% |
-| Promedio de preguntas hasta certeza > 90% | sin casos |
-| Casos que alcanzan certeza > 90% | 0 |
-| Candidatos fallidos o que requieren más de 20 turnos | 39 |
+| Éxito antes de la pregunta 20 | 10.0% |
+| Promedio de preguntas hasta certeza > 90% | 6.33 |
+| Casos que alcanzan certeza > 90% | 3 |
+| Candidatos fallidos o que requieren más de 20 turnos | 45 |
 
 ## Candidatos fallidos o lentos
 
 | Categoría | Candidato | Estado | Preguntas | Turnos | Certeza >90% en pregunta | Suposición final | Fallos previos |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| place | Riyadh | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| animal | Grulla Canadiense | guessing | 4 | 20 | no alcanzada | Cuervo | Pingüino, Garza, Zorzal Americano, Paloma, Cardenal... (+11) |
-| object | Stick | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| animal | Cobra de Anteojos | guessing | 6 | 20 | no alcanzada | Elaphe obsoleta | Lagarto, Abaniquillo pardo del Caribe, Abaniquillo verde del noreste, Caimán del Mississippi, Iguana verde... (+9) |
-| animal | Cercopiteco de diadema | guessing | 6 | 20 | no alcanzada | Rata almizclera | Delfín, Canguro, Gorila, Mapache, Humano... (+9) |
-| object | Tabi | guessing | 6 | 20 | no alcanzada | Overol | Mochila, Sombrero, Abrigo, Uniforme, Camisa... (+9) |
-| object | Punta | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| person | Joseph Conrad | guessing | 9 | 20 | no alcanzada | Aristófanes | William Shakespeare, Miguel de Cervantes, Federico García Lorca, Jorge Luis Borges, Julio Cortázar... (+6) |
-| place | Zhuzhou | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| person | Saint Christopher | guessing | 10 | 20 | no alcanzada | Elijah | Gautama Buddha, Heródoto, Tales de Mileto, Solomon, Laozi... (+5) |
-| animal | Galápago de Bosque | guessing | 6 | 20 | no alcanzada | Elaphe obsoleta | Lagarto, Abaniquillo pardo del Caribe, Abaniquillo verde del noreste, Caimán del Mississippi, Iguana verde... (+9) |
-| animal | Psittaciformes | guessing | 4 | 20 | no alcanzada | Cuervo | Pingüino, Garza, Zorzal Americano, Paloma, Cardenal... (+11) |
-| place | Xining | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| object | Producción | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| place | Kallakurichi | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| animal | Corzo Siberiano | guessing | 6 | 20 | no alcanzada | Rata almizclera | Delfín, Canguro, Gorila, Mapache, Humano... (+9) |
-| object | Cartera | guessing | 7 | 20 | no alcanzada | Bulto | Caja, Jarrón, Bandeja, Maleta, Sobre... (+8) |
-| place | Ibadan | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| place | Ribeirão Preto | guessing | 3 | 20 | no alcanzada | Fortaleza | Río Amazonas, São Paulo, Ciudad de México, Lima, Bogotá... (+12) |
-| place | Osogbo | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| animal | Grillo doméstico tropical | guessing | 4 | 20 | no alcanzada | Avispón de cara blanca | Abeja, Mariposa, Mariquita, Abejorro, Libélula... (+11) |
-| person | Decius | guessing | 7 | 20 | no alcanzada | Adriano | Carlos I de España, Felipe II, Alejandro Magno, Adolf Hitler, Carlomagno... (+8) |
-| place | Situbondo | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| animal | Cucarachero de Carolina | guessing | 4 | 20 | no alcanzada | Cuervo | Pingüino, Garza, Zorzal Americano, Paloma, Cardenal... (+11) |
-| person | J. M. W. Turner | guessing | 8 | 20 | no alcanzada | Rafael Sanzio | Pablo Picasso, Diego Velázquez, Francisco de Goya, Salvador Dalí, Apolo... (+7) |
-| place | Shangqiu | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| person | Artaxerxes I of Persia | guessing | 7 | 20 | no alcanzada | Ramesses I | Aníbal Barca, Tutankamón, Ramesses II, Akhenaten, Khufu... (+8) |
-| place | Haiphong | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| place | Jiaozhou | guessing | 3 | 20 | no alcanzada | Seoul | Río Nilo, Shanghai, Pekín, Shenzhen, Guangzhou... (+12) |
-| object | Infravivienda | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| person | Thucydides | guessing | 10 | 20 | no alcanzada | Tomás de Aquino | Leonardo da Vinci, Pitágoras, Cristóbal Colón, Martin Luther, Karl Marx... (+5) |
-| animal | Correlimos Común | guessing | 4 | 20 | no alcanzada | Cuervo | Pingüino, Garza, Zorzal Americano, Paloma, Cardenal... (+11) |
-| object | Mesa de cartas | guessing | 7 | 20 | no alcanzada | Trono | Silla, Mesa, Cama, Escritorio, Mobiliario... (+8) |
-| object | Bien comercial | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| person | Thomas the Apostle | guessing | 10 | 20 | no alcanzada | Elijah | Gautama Buddha, Heródoto, Tales de Mileto, Solomon, Laozi... (+5) |
-| object | Quiosco | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| object | Tabernáculo | guessing | 3 | 20 | no alcanzada | Bellas artes | Tienda de campaña, Casa, Habitación, Puerta, Carretera... (+12) |
-| person | John Calvin | guessing | 10 | 20 | no alcanzada | Tomás de Aquino | Leonardo da Vinci, Pitágoras, Cristóbal Colón, Martin Luther, Karl Marx... (+5) |
-| person | Edgar Degas | guessing | 8 | 20 | no alcanzada | Rafael Sanzio | Pablo Picasso, Diego Velázquez, Francisco de Goya, Salvador Dalí, Apolo... (+7) |
+| person | Kublai Khan | guessing | 20 | 20 | no alcanzada | Gengis Kan |  |
+| person | James Clerk Maxwell | guessing | 20 | 20 | no alcanzada | Santiago Ramón y Cajal |  |
+| object | Tino | guessing | 20 | 20 | no alcanzada | Máquina |  |
+| person | James Prescott Joule | guessing | 20 | 20 | no alcanzada | Santiago Ramón y Cajal |  |
+| object | Sendero | guessing | 20 | 20 | no alcanzada | Casa |  |
+| object | Bula | guessing | 20 | 20 | no alcanzada | Casa |  |
+| object | Vestíbulo | guessing | 20 | 20 | no alcanzada | Casa |  |
+| animal | Jilguero | lost | 15 | 16 | no alcanzada |  | Garza |
+| animal | Zurcidora | lost | 17 | 18 | no alcanzada |  | Mariquita |
+| object | Quiosco | guessing | 20 | 20 | no alcanzada | Casa |  |
+| object | Dirk | guessing | 20 | 20 | no alcanzada | Fusil |  |
+| place | Sanya | lost | 16 | 17 | no alcanzada |  | Shanghai |
+| person | Theodoric the Great | guessing | 20 | 20 | no alcanzada | Carlos I de España |  |
+| object | Comedor | guessing | 20 | 20 | no alcanzada | Casa |  |
+| place | Huainan | lost | 16 | 17 | no alcanzada |  | Shanghai |
+| person | Zenón de Elea | lost | 19 | 20 | no alcanzada |  | Leonardo da Vinci |
+| animal | Collalba | lost | 15 | 16 | no alcanzada |  | Garza |
+| place | Madinah | lost | 16 | 17 | no alcanzada |  | Shanghai |
+| place | Guankou | lost | 16 | 17 | no alcanzada |  | Shanghai |
+| person | Arminius | guessing | 20 | 20 | no alcanzada | Carlos I de España |  |
+| animal | Cisne | lost | 15 | 16 | no alcanzada |  | Garza |
+| animal | Candelita | lost | 15 | 16 | no alcanzada |  | Garza |
+| object | Alfombrilla | guessing | 20 | 20 | no alcanzada | Casa |  |
+| place | Jaboatão dos Guararapes | lost | 17 | 18 | no alcanzada |  | San Jose |
+| place | Zigong | lost | 16 | 17 | no alcanzada |  | Shanghai |
+| place | Adana | lost | 16 | 17 | no alcanzada |  | Shanghai |
+| person | Epictetus | lost | 19 | 20 | no alcanzada |  | Gautama Buddha |
+| place | Comilla | lost | 16 | 17 | no alcanzada |  | Dongying |
+| place | Zhenjiang | lost | 16 | 17 | no alcanzada |  | Dongying |
+| object | Labor | guessing | 20 | 20 | no alcanzada | Casa |  |
+| object | Recubrimiento | guessing | 20 | 20 | no alcanzada | Casa |  |
+| object | Mansión | guessing | 20 | 20 | no alcanzada | Casa |  |
+| object | Cubículo | guessing | 20 | 20 | no alcanzada | Silla |  |
+| animal | Langur | guessing | 20 | 20 | no alcanzada | Mapache |  |
+| animal | Pardillo | lost | 15 | 16 | no alcanzada |  | Garza |
+| person | Jean Piaget | lost | 19 | 20 | no alcanzada |  | Leonardo da Vinci |
+| place | Tanta | lost | 16 | 17 | no alcanzada |  | Dongying |
+| place | Fushun | lost | 16 | 17 | no alcanzada |  | Shanghai |
+| person | Tina Turner | guessing | 20 | 20 | no alcanzada | Marilyn Monroe |  |
+| animal | Bienteveo | lost | 15 | 16 | no alcanzada |  | Garza |
+| animal | Colimbo | lost | 15 | 16 | no alcanzada |  | Garza |
+| place | Tlaquepaque | lost | 17 | 18 | no alcanzada |  | San Jose |
+| person | Max Planck | guessing | 20 | 20 | no alcanzada | Santiago Ramón y Cajal |  |
+| person | Heinrich Böll | lost | 18 | 19 | no alcanzada |  | Jean-Paul Sartre |
+| person | Sun Yat-sen | guessing | 20 | 20 | no alcanzada | Gengis Kan |  |

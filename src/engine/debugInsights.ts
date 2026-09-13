@@ -1,26 +1,21 @@
 import type { GameKnowledge, GameState, RankedCandidate } from '../types/game'
+import { evaluateGuessPolicy, GUESS_POLICY, type GuessPolicyReason } from './guessPolicy'
 import { effectiveCandidateCount } from './questionPhase'
 import { rankAvailableQuestions } from './questionRanking'
 
-const MAX_QUESTIONS = 20
-const MIN_GUESS_QUESTIONS = 6
-const MIN_LEADER_SCORE = 0.68
-const MIN_LEADER_ODDS = 4
-const SMALL_EFFECTIVE_SET = 3
-
 export interface GuessReadiness {
   ready: boolean
-  reason: 'dominant' | 'small_set' | 'max_questions' | 'not_ready'
+  reason: GuessPolicyReason
   leaderScore: number
   leaderOdds: number
   effectiveCandidateCount: number
   questionCount: number
   thresholds: {
-    minQuestions: number
-    minScore: number
-    minOdds: number
+    absoluteProbability: number
+    lateQuestion: number
+    lateProbability: number
+    lateRatio: number
     maxQuestions: number
-    smallEffectiveSet: number
   }
 }
 
@@ -32,36 +27,18 @@ export interface DebugSnapshot {
 }
 
 export function getGuessReadiness(state: GameState): GuessReadiness {
-  const best = state.rankedCandidates[0]
-  const second = state.rankedCandidates[1]
-  const leaderScore = best?.score ?? 0
+  const evaluation = evaluateGuessPolicy(state.questionCount, state.rankedCandidates)
   const candidateCount = effectiveCandidateCount(state.rankedCandidates)
-  const leaderOdds = best && second
-    ? best.score / Math.max(second.score, Number.EPSILON)
-    : Number.POSITIVE_INFINITY
-  const dominant = Boolean(
-    best
-    && state.questionCount >= MIN_GUESS_QUESTIONS
-    && leaderScore >= MIN_LEADER_SCORE
-    && leaderOdds >= MIN_LEADER_ODDS
-  )
-  const smallSet = state.questionCount >= MIN_GUESS_QUESTIONS && candidateCount <= SMALL_EFFECTIVE_SET
-  const maxQuestionsReached = state.questionCount >= MAX_QUESTIONS
-  const reason = maxQuestionsReached ? 'max_questions' : dominant ? 'dominant' : smallSet ? 'small_set' : 'not_ready'
 
   return {
-    ready: dominant || smallSet || maxQuestionsReached,
-    reason,
-    leaderScore,
-    leaderOdds,
+    ready: evaluation.ready,
+    reason: evaluation.reason,
+    leaderScore: evaluation.leaderScore,
+    leaderOdds: evaluation.leaderOdds,
     effectiveCandidateCount: candidateCount,
     questionCount: state.questionCount,
     thresholds: {
-      minQuestions: MIN_GUESS_QUESTIONS,
-      minScore: MIN_LEADER_SCORE,
-      minOdds: MIN_LEADER_ODDS,
-      maxQuestions: MAX_QUESTIONS,
-      smallEffectiveSet: SMALL_EFFECTIVE_SET
+      ...GUESS_POLICY
     }
   }
 }

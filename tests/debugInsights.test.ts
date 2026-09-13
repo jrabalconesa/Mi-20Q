@@ -66,7 +66,10 @@ describe('debugInsights', () => {
     const readiness = getGuessReadiness(stateWithAnswers({ person_real: 'yes' }))
 
     expect(readiness.ready).toBe(false)
-    expect(readiness.thresholds.minQuestions).toBe(6)
+    expect(readiness.thresholds.absoluteProbability).toBe(0.7)
+    expect(readiness.thresholds.lateQuestion).toBe(15)
+    expect(readiness.thresholds.lateProbability).toBe(0.35)
+    expect(readiness.thresholds.lateRatio).toBe(2)
     expect(readiness.thresholds.maxQuestions).toBe(20)
   })
 })
