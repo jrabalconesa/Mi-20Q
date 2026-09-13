@@ -129,6 +129,12 @@ button:disabled { cursor: wait; opacity: 0.7; transform: none; }
   line-height: 1.5;
 }
 
+.opening-message {
+  margin: 0.7rem 0 0;
+  color: var(--blue-900);
+  font-weight: 850;
+}
+
 h2 {
   max-width: 38rem;
   margin: clamp(1.75rem, 5vw, 3rem) 0;
@@ -259,6 +265,17 @@ h2 {
 .update-notice button { margin-left: auto; padding: 0.55rem 0.8rem; background: white; color: var(--blue-900); }
 
 .game-card { min-height: 31rem; }
+.interaction-message {
+  margin: 1rem 0 0.35rem;
+  border-left: 4px solid var(--orange-500);
+  border-radius: 0 12px 12px 0;
+  padding: 0.7rem 0.85rem;
+  background: #fff7f1;
+  color: var(--blue-950);
+  font-weight: 750;
+  line-height: 1.45;
+}
+.outcome-message { margin-top: 1.4rem; }
 .game-header { display: flex; align-items: center; gap: 1rem; }
 .game-logo { flex: 0 0 auto; width: 4rem; height: 4rem; filter: drop-shadow(0 7px 10px rgba(6, 29, 99, 0.17)); }
 .game-meta { flex: 1; min-width: 0; }

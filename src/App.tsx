@@ -3,6 +3,7 @@ import { AnswerButtons } from './components/AnswerButtons'
 import { HowToPlay } from './components/HowToPlay'
 import { QuestionHistory } from './components/QuestionHistory'
 import { getCandidateName, getQuestion } from './engine/gameEngine'
+import { guessingInteractionMessage, outcomeInteractionMessage, playingInteractionMessage } from './engine/interactionMessages'
 import { useAppUpdate } from './hooks/useAppUpdate'
 import { useGame } from './hooks/useGame'
 import type { Category } from './types/game'
@@ -51,6 +52,7 @@ function App() {
             </h1>
             <div className="hero-copy">
               <span className="badge">Juego de deducción</span>
+              <p className="opening-message">Sé en qué estás pensando… ¿Estás listo?</p>
               <p className="hero-lead">Piensa en un animal, objeto, lugar o persona. Intentaré descubrirlo en veinte preguntas.</p>
             </div>
           </div>
@@ -112,6 +114,11 @@ function App() {
               onUndo={game.undo}
               state={state}
             />
+            {playingInteractionMessage(state) && (
+              <p className="interaction-message" role="status" aria-live="polite">
+                {playingInteractionMessage(state)}
+              </p>
+            )}
             <h2>{question.text}</h2>
             <AnswerButtons onAnswer={game.answer} />
           </>
@@ -125,6 +132,9 @@ function App() {
               onUndo={game.undo}
               state={state}
             />
+            <p className="interaction-message" role="status" aria-live="polite">
+              {guessingInteractionMessage(state)}
+            </p>
             <p className="eyebrow">Mi respuesta</p>
             <h2>¿Estabas pensando en {guess}?</h2>
             <div className="answer-grid two">
@@ -136,6 +146,9 @@ function App() {
 
         {(state.status === 'won' || state.status === 'lost') && (
           <>
+            <p className="interaction-message outcome-message" role="status" aria-live="polite">
+              {outcomeInteractionMessage(state)}
+            </p>
             <p className="eyebrow">{state.status === 'won' ? '¡Acerté!' : 'No lo conseguí'}</p>
             <h2>{state.status === 'won' ? `Era ${guess}.` : 'Esta vez no lo he acertado.'}</h2>
             <p>He utilizado {state.questionCount} preguntas.</p>

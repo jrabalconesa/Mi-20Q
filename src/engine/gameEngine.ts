@@ -130,6 +130,7 @@ export function resolveGuess(
     rankedCandidates,
     currentQuestionId: next.id,
     guessCandidateId: null,
+    lastRejectedGuessAt: state.questionCount,
     status: 'playing'
   }
 }

@@ -36,6 +36,8 @@ export interface GameState {
   currentQuestionId: string | null
   guessCandidateId: string | null
   excludedCandidateIds: string[]
+  /** Turno en el que se rechazó la última propuesta; permite anunciar un único reintento. */
+  lastRejectedGuessAt?: number
   questionCount: number
   status: 'playing' | 'guessing' | 'won' | 'lost'
 }
