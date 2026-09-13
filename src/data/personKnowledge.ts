@@ -179,6 +179,10 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
   const pseudonym = ['c. tangana', 'bad bunny', 'madonna', 'shakira', 'beyonce'].some(token => normalized.includes(token))
   const billionaire = ['amancio ortega', 'elon musk', 'bill gates', 'steve jobs'].some(token => normalized.includes(token))
   const scienceName = ['hipatia'].some(token => normalized.includes(token))
+  const visualArtistName = [
+    'dali', 'frida kahlo', 'goya', 'leonardo da vinci', 'miguel angel', 'picasso',
+    'rafael sanzio', 'van gogh', 'velazquez'
+  ].some(token => normalized.includes(token))
   const living = attributes.living ?? (
     normalized.includes('caballe') ? false :
     attributes.bornAfter1950 === true ? true :
@@ -233,6 +237,7 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
     before1900: attributes.bornBefore1900,
     historical: attributes.historical ?? attributes.bornBefore1900,
     artEntertainmentSport: attributes.artEntertainmentSport ?? (artist || sports || writer),
+    visualArtist: attributes.visualArtist ?? visualArtistName,
     westernHemisphere: attributes.westernHemisphere ?? (americas || europe),
     spanishOrigin,
     hispanic: attributes.hispanic ?? (spanishOrigin || normalized.includes('borges') || normalized.includes('cortazar') || normalized.includes('shakira') || normalized.includes('luis miguel') || normalized.includes('bad bunny')),

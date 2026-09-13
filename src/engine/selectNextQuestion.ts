@@ -47,6 +47,11 @@ export function selectNextQuestion(
   askedQuestionIds: string[],
   answers: Record<string, Answer> = {}
 ): Question | null {
+  const scriptedOpening = availableQuestions(questions, askedQuestionIds, answers)
+    .filter(question => question.openingOrder !== undefined)
+    .sort((left, right) => (left.openingOrder ?? 0) - (right.openingOrder ?? 0))[0]
+  if (scriptedOpening && askedQuestionIds.length < (scriptedOpening.openingOrder ?? 0)) return scriptedOpening
+
   return rankAvailableQuestions(questions, rankedCandidates, askedQuestionIds, answers)[0]?.question ??
     selectFallbackDiscriminator(questions, rankedCandidates, askedQuestionIds, answers)
 }
