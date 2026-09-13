@@ -138,7 +138,8 @@ describe('catalog', () => {
     expect(animalNames).not.toContain('Rinoceronte Blanco')
     expect(animalNames.filter(name => name === 'Pato')).toHaveLength(1)
     expect(animalNames.filter(name => name === 'Búho')).toHaveLength(1)
-    expect(animalNames.filter(name => name === 'Ganso')).toHaveLength(1)
+    expect(animalNames.filter(name => name === 'Ánsar')).toHaveLength(1)
+    expect(animalNames).not.toContain('Ganso')
     expect(animalNames).not.toEqual(expect.arrayContaining([
       'Pato Criollo',
       'Pato Joyuyo',

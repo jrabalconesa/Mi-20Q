@@ -36,6 +36,39 @@ describe('animal regressions', () => {
     expect(stork?.attributes.primarilyWild).toBe(true)
   })
 
+  it('separa pato, oca domestica y ansar silvestre con rasgos observables', async () => {
+    const knowledge = await loadCategoryKnowledge('animal')
+    const questionsById = Object.fromEntries(knowledge.questions.map(question => [question.id, question]))
+    const topName = (answers: Parameters<typeof rankCandidates>[2]) =>
+      rankCandidates(knowledge.candidates, questionsById, answers)[0]?.name
+
+    expect(topName({
+      animal_mammal: 'no',
+      animal_bird: 'yes',
+      animal_domestic_farm_pet: 'sometimes',
+      animal_goose_like: 'no',
+      animal_broad_flat_bill: 'yes'
+    })).toBe('Pato')
+
+    expect(topName({
+      animal_mammal: 'no',
+      animal_bird: 'yes',
+      animal_domestic_farm_pet: 'yes',
+      animal_goose_like: 'yes',
+      animal_mostly_white_plumage: 'yes',
+      animal_migratory_formation: 'no'
+    })).toBe('Oca')
+
+    expect(topName({
+      animal_mammal: 'no',
+      animal_bird: 'yes',
+      animal_domestic_farm_pet: 'no',
+      animal_goose_like: 'yes',
+      animal_mostly_white_plumage: 'no',
+      animal_migratory_formation: 'yes'
+    })).toBe('Ánsar')
+  })
+
   it('evita preguntas redundantes o de pelaje tras confirmar que es un ave', () => {
     const animalQuestions = questions.filter(question => question.categories.includes('animal'))
     const available = availableQuestions(
@@ -96,7 +129,7 @@ describe('animal regressions', () => {
       'animal_spotted'
     ]))
     expect(state.guessCandidateId).toBe(goose.id)
-    expect(state.questionCount).toBeLessThanOrEqual(12)
+    expect(state.questionCount, askedIds.join(' | ')).toBeLessThanOrEqual(12)
   })
 
   it('no vuelve a preguntar por otras clases animales tras confirmar mamifero', () => {

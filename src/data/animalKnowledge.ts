@@ -45,7 +45,8 @@ export const curatedAnimalCandidates: Candidate[] = [
       movesByAirOrWater: 0.5, semiAquatic: 0.5, laysEggs: true, oviparous: true,
       livesInSpain: true, dangerous: 0.5, venomous: false, feathers: true, scales: false,
       hasAntlers: false, stripedCoat: false, spottedCoat: false, blackWhitePattern: 0.5,
-      longNeck: true, nocturnal: false
+      longNeck: true, gooseLike: true, broadFlatBill: false, mostlyWhitePlumage: true,
+      migratoryFormation: false, nocturnal: false
     }
   },
   {
@@ -207,8 +208,8 @@ const profiles: Record<string, Record<string, AttributeValue>> = {
   'rana': { mammal: false, bird: false, fish: false, reptile: false, amphibian: true, carnivore: true, fourLegs: true, largerThanShoebox: false },
   'serpiente': { mammal: false, bird: false, fish: false, reptile: true, amphibian: false, carnivore: true, fourLegs: false, largerThanShoebox: 0.5 },
   'buho': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: true, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: 0.5, nocturnal: true, feathers: true, swims: false, water: false, blackWhitePattern: false },
-  'pato': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: false, feathers: true, swims: true, water: true, domestic: 0.5, farm: 0.5, livesInSpain: true, blackWhitePattern: false },
-  'ganso': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: true, feathers: true, swims: true, water: true, domestic: 0.5, farm: 0.5, livesInSpain: true, blackWhitePattern: false }
+  'pato': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: false, feathers: true, swims: true, water: true, domestic: 0.5, farm: 0.5, livesInSpain: true, blackWhitePattern: false, longNeck: false, gooseLike: false, broadFlatBill: true, mostlyWhitePlumage: 0.5, migratoryFormation: 0.5 },
+  'ansar': { mammal: false, bird: true, fish: false, reptile: false, amphibian: false, carnivore: false, fourLegs: false, flies: true, laysEggs: true, largerThanShoebox: true, feathers: true, swims: true, water: true, domestic: false, farm: false, domesticFarmPet: false, primarilyWild: true, livesInSpain: true, blackWhitePattern: false, longNeck: true, gooseLike: true, broadFlatBill: false, mostlyWhitePlumage: false, migratoryFormation: true, biggerThanDog: 0.5, dangerous: 0.5 }
 }
 
 const squirrelProfile: Record<string, AttributeValue> = {
@@ -255,7 +256,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('anade')) return 'Pato'
   if (normalized.includes('azulejo')) return 'Pájaro azul'
   if (normalized.includes('ballena')) return 'Ballena'
-  if (normalized.includes('barnacla')) return 'Ganso'
+  if (normalized.includes('ansar') || normalized.includes('barnacla')) return 'Ánsar'
   if (normalized.includes('bejori')) return 'Lagarto'
   if (normalized.includes('busardo')) return 'Busardo'
   if (normalized.includes('caballo')) return 'Caballo'
@@ -321,7 +322,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('zorro')) return 'Zorro'
   if (normalized.includes('zopilote') || normalized.includes('aura')) return 'Buitre'
   if (normalized.includes('buho') || normalized.includes('carabo')) return 'Búho'
-  if (normalized.includes('ganso')) return 'Ganso'
+  if (normalized.includes('ganso')) return 'Ánsar'
   if (normalized.includes('liebre')) return 'Liebre'
   if (normalized.includes('tejon')) return 'Tejón'
   if (normalized.includes('topo')) return 'Topo'
@@ -397,7 +398,7 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
 function inferredProfile(name: string): Record<string, AttributeValue> | undefined {
   if (name.includes('ardilla')) return squirrelProfile
   if (name.includes('anade') || name.includes('pato') || name.includes('serreta')) return profiles.pato
-  if (name.includes('barnacla') || name.includes('ganso')) return profiles.ganso
+  if (name.includes('ansar') || name.includes('barnacla') || name.includes('ganso')) return profiles.ansar
   if (name.includes('buho') || name.includes('carabo')) return profiles.buho
   return undefined
 }
