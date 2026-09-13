@@ -43,7 +43,7 @@ function App() {
 
   if (!state) {
     return (
-      <main className="shell">
+      <main className="shell landing-shell">
         {updateNotice}
         <section className="card hero">
           <div className="hero-intro">
@@ -89,7 +89,7 @@ function App() {
   const guess = getCandidateName(state.guessCandidateId, game.knowledge)
 
   return (
-    <main className="shell">
+    <main className="shell game-shell">
       {updateNotice}
       <section className={`card game-card status-${state.status}`}>
         <header className="game-header">

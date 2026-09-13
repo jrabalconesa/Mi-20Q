@@ -20,6 +20,9 @@
 
 * { box-sizing: border-box; }
 
+html,
+#root { min-height: 100%; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -36,6 +39,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100dvh;
   background:
     radial-gradient(circle at 8% 12%, rgba(7, 140, 255, 0.2), transparent 30rem),
     radial-gradient(circle at 92% 88%, rgba(255, 98, 0, 0.18), transparent 28rem),
@@ -76,10 +80,13 @@ button:disabled { cursor: wait; opacity: 0.7; transform: none; }
 
 .shell {
   min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
   padding: clamp(0.75rem, 3vw, 1.75rem);
 }
+
+.game-shell { place-items: start center; }
 
 .card {
   position: relative;
@@ -364,8 +371,7 @@ details { margin-top: 2rem; color: var(--muted); }
 details li { margin-block: 0.35rem; }
 
 @media (max-width: 520px) {
-  .card { border-radius: 24px; }
-  .answer-grid, .answer-grid.two { grid-template-columns: 1fr; }
+  .answer-grid, .answer-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .known-candidates ul { grid-template-columns: 1fr; }
   .update-notice { align-items: stretch; flex-direction: column; gap: 0.5rem; }
   .update-notice button { width: 100%; }
@@ -394,15 +400,36 @@ details li { margin-block: 0.35rem; }
 }
 
 @media (max-width: 600px) and (orientation: portrait) {
-  .shell { padding: 0.55rem; }
-  .hero { grid-template-columns: 1fr; gap: 0.9rem; padding: 1rem; }
+  body { background: white; }
+  body::before, body::after { display: none; }
+  .landing-shell, .game-shell {
+    width: 100%;
+    min-height: 100dvh;
+    padding: 0;
+  }
+  .card {
+    width: 100%;
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 0.9rem;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  }
   .hero-intro { display: flex; align-items: center; gap: 0.9rem; text-align: left; }
   .hero-logo { flex: 0 0 auto; width: clamp(4.75rem, 23vw, 6.25rem); margin: 0; }
   .hero-copy { min-width: 0; }
   .hero-lead { margin-top: 0.35rem; font-size: 0.84rem; line-height: 1.38; }
+  .opening-message { margin-top: 0.4rem; font-size: 0.9rem; line-height: 1.3; }
   .badge { font-size: 0.65rem; letter-spacing: 0.12em; }
   .category-picker legend { font-size: 0.95rem; }
   .category-picker .category-grid { gap: 0.5rem; margin-top: 0.55rem; }
+  .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .category-picker button { min-height: 2.75rem; padding: 0.7rem 0.5rem; }
   .hero-actions { display: block; }
   .knowledge-note { font-size: 0.82rem !important; }
@@ -412,10 +439,32 @@ details li { margin-block: 0.35rem; }
   .how-to-dialog { max-height: calc(100dvh - 1.1rem); border-radius: 20px; }
   .answer-guide { grid-template-columns: 1fr; }
   .version { margin-top: 0.45rem; font-size: 0.7rem; }
+  .game-card {
+    min-height: 100dvh;
+    padding: max(0.85rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  }
+  .game-card h2 {
+    margin: 1.1rem 0;
+    font-size: clamp(1.65rem, 8vw, 2.35rem);
+  }
+  .game-header { gap: 0.65rem; }
+  .game-logo { width: 2.9rem; height: 2.9rem; }
+  .progress { height: 8px; margin-top: 0.55rem; }
+  .interaction-message { margin-top: 0.8rem; padding: 0.6rem 0.7rem; font-size: 0.9rem; }
+  .answer-grid { gap: 0.55rem; margin-top: 1rem; }
+  .answer-grid button { min-height: 3.25rem; padding: 0.75rem 0.5rem; }
+  .question-history { margin-top: 0.85rem; padding-top: 0.75rem; }
+  .question-history-list { max-height: min(10rem, 25dvh); }
+}
+
+@media (max-width: 340px) {
+  .answer-grid, .answer-grid.two { grid-template-columns: 1fr; }
 }
 
 @media (orientation: landscape) and (max-height: 500px) {
-  .shell { align-items: center; padding: 0.45rem; }
+  .landing-shell { align-items: center; padding: 0.45rem; }
+  .game-shell { align-items: start; padding: 0; }
+  .game-card { width: 100%; min-height: 100dvh; border-radius: 0; }
   .hero {
     width: min(1000px, 100%);
     grid-template-columns: minmax(130px, 0.72fr) minmax(190px, 1fr) minmax(180px, 0.9fr);
