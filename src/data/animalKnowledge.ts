@@ -25,11 +25,27 @@ export const curatedAnimalCandidates: Candidate[] = [
     attributes: {
       mammal: false, bird: true, fish: false, reptile: false, amphibian: false, insect: false,
       arachnid: false, mollusk: false, crustacean: false, vertebrate: true, invertebrate: false,
-      carnivore: true, domesticFarmPet: false, large: false, largerThanShoebox: true,
+      carnivore: true, domesticFarmPet: false, primarilyWild: true, large: false, largerThanShoebox: true,
       biggerThanDog: false, fourLegs: false, fourOrMoreLegs: false, fur: false, flies: true,
       movesByAirOrWater: true, laysEggs: true, oviparous: true, livesInSpain: true,
       dangerous: false, venomous: false, feathers: true, scales: false, hasAntlers: false,
       stripedCoat: false, spottedCoat: false, blackWhitePattern: true, longNeck: true
+    }
+  },
+  {
+    id: 'curated-animal-goose',
+    name: 'Oca',
+    category: 'animal',
+    attributes: {
+      mammal: false, bird: true, fish: false, reptile: false, amphibian: false, insect: false,
+      arachnid: false, mollusk: false, crustacean: false, vertebrate: true, invertebrate: false,
+      carnivore: false, domestic: true, farm: true, domesticFarmPet: true, primarilyWild: false,
+      large: false, largerThanShoebox: true, biggerThanDog: 0.5, fourLegs: false,
+      fourOrMoreLegs: false, fur: false, flies: true, water: true, swims: true,
+      movesByAirOrWater: 0.5, semiAquatic: 0.5, laysEggs: true, oviparous: true,
+      livesInSpain: true, dangerous: 0.5, venomous: false, feathers: true, scales: false,
+      hasAntlers: false, stripedCoat: false, spottedCoat: false, blackWhitePattern: 0.5,
+      longNeck: true, nocturnal: false
     }
   },
   {
@@ -457,6 +473,14 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
   const hasLegs = fourLegs || bird || amphibian || insect || arachnid || crustacean
   const biggerThanDog = attributes.biggerThanDog ?? (large === true || attributes.largerThanTiger === true)
   const venomous = attributes.venomous ?? (name.includes('serpiente') ? 0.5 : (mammal || bird ? false : undefined))
+  const domesticFarmPet = attributes.domesticFarmPet ?? (
+    attributes.domestic === true || attributes.farm === true
+      ? true
+      : attributes.domestic === 0.5 || attributes.farm === 0.5
+        ? 0.5
+        : false
+  )
+  const primarilyWild = attributes.primarilyWild ?? (domesticFarmPet === 0.5 ? 0.5 : !domesticFarmPet)
 
   return {
     ...attributes,
@@ -465,7 +489,8 @@ function inferAnimalAttributes(name: string, attributes: Record<string, Attribut
     largerThanShoebox: attributes.largerThanShoebox ?? large,
     digitalOrElectronic: false,
     tangible: true,
-    domesticFarmPet: attributes.domesticFarmPet ?? (attributes.domestic === true || attributes.farm === true),
+    domesticFarmPet,
+    primarilyWild,
     movesByAirOrWater: attributes.movesByAirOrWater ?? (flies || water),
     semiAquatic: attributes.semiAquatic ?? (water && mammal ? 0.5 : false),
     fourOrMoreLegs: attributes.fourOrMoreLegs ?? (fourLegs || insect || arachnid || crustacean),

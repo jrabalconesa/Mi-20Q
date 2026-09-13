@@ -6,6 +6,99 @@ import { expectedValue, rankCandidates } from '../src/engine/scoring'
 import { answerCurrentQuestion, createGame, resolveGuess } from '../src/engine/gameEngine'
 
 describe('animal regressions', () => {
+  it('prioriza oca y descarta cigueña al confirmar que vive con personas o en granja', async () => {
+    const knowledge = await loadCategoryKnowledge('animal')
+    const questionsById = Object.fromEntries(knowledge.questions.map(question => [question.id, question]))
+    const ranked = rankCandidates(knowledge.candidates, questionsById, {
+      animal_mammal: 'no',
+      animal_bird: 'yes',
+      animal_lives_in_spain: 'yes',
+      animal_domestic_farm_pet: 'yes',
+      animal_air_or_water: 'sometimes',
+      animal_black_white: 'yes',
+      animal_long_neck: 'yes',
+      animal_carnivore_predator: 'no',
+      universal_larger_shoebox: 'yes',
+      animal_semi_aquatic: 'sometimes',
+      animal_bigger_than_dog: 'yes',
+      animal_dangerous: 'sometimes',
+      animal_nocturnal: 'no'
+    })
+    const goose = ranked.find(candidate => candidate.name === 'Oca')
+    const stork = ranked.find(candidate => candidate.name === 'Cigüeña')
+
+    expect(ranked[0]?.name).toBe('Oca')
+    expect(goose?.score).toBeGreaterThan(0)
+    expect(stork?.score).toBe(0)
+    expect(goose?.attributes.domesticFarmPet).toBe(true)
+    expect(goose?.attributes.primarilyWild).toBe(false)
+    expect(stork?.attributes.domesticFarmPet).toBe(false)
+    expect(stork?.attributes.primarilyWild).toBe(true)
+  })
+
+  it('evita preguntas redundantes o de pelaje tras confirmar que es un ave', () => {
+    const animalQuestions = questions.filter(question => question.categories.includes('animal'))
+    const available = availableQuestions(
+      animalQuestions,
+      ['animal_mammal', 'animal_bird'],
+      { animal_mammal: 'no', animal_bird: 'yes' }
+    )
+    const availableIds = available.map(question => question.id)
+
+    expect(availableIds).not.toEqual(expect.arrayContaining([
+      'animal_feathers',
+      'animal_oviparous',
+      'animal_four_or_more_legs',
+      'animal_vertebrate',
+      'animal_striped',
+      'animal_spotted'
+    ]))
+  })
+
+  it('solo pregunta si vive en estado salvaje cuando la convivencia con personas queda ambigua', () => {
+    const animalQuestions = questions.filter(question => question.categories.includes('animal'))
+    const afterYes = availableQuestions(animalQuestions, ['animal_domestic_farm_pet'], { animal_domestic_farm_pet: 'yes' })
+    const afterNo = availableQuestions(animalQuestions, ['animal_domestic_farm_pet'], { animal_domestic_farm_pet: 'no' })
+    const afterSometimes = availableQuestions(animalQuestions, ['animal_domestic_farm_pet'], { animal_domestic_farm_pet: 'sometimes' })
+
+    expect(afterYes.map(question => question.id)).not.toContain('animal_primarily_wild')
+    expect(afterNo.map(question => question.id)).not.toContain('animal_primarily_wild')
+    expect(afterSometimes.map(question => question.id)).toContain('animal_primarily_wild')
+  })
+
+  it('llega a oca sin gastar turnos en rasgos ya implicados por ser ave', async () => {
+    const knowledge = await loadCategoryKnowledge('animal')
+    const goose = knowledge.candidates.find(candidate => candidate.name === 'Oca')
+    expect(goose).toBeDefined()
+    if (!goose) return
+
+    let state = createGame('animal', knowledge)
+    const askedIds: string[] = []
+    while (state.status === 'playing') {
+      const question = knowledge.questions.find(item => item.id === state.currentQuestionId)
+      expect(question).toBeDefined()
+      if (!question) break
+      askedIds.push(question.id)
+      const value = expectedValue(goose, question)
+      state = answerCurrentQuestion(
+        state,
+        value === true ? 'yes' : value === false ? 'no' : value === 0.5 ? 'sometimes' : 'unknown',
+        knowledge
+      )
+    }
+
+    expect(askedIds).not.toEqual(expect.arrayContaining([
+      'animal_feathers',
+      'animal_oviparous',
+      'animal_four_or_more_legs',
+      'animal_vertebrate',
+      'animal_striped',
+      'animal_spotted'
+    ]))
+    expect(state.guessCandidateId).toBe(goose.id)
+    expect(state.questionCount).toBeLessThanOrEqual(12)
+  })
+
   it('no vuelve a preguntar por otras clases animales tras confirmar mamifero', () => {
     const animalQuestions = questions.filter(question => question.categories.includes('animal'))
     const available = availableQuestions(animalQuestions, ['animal_mammal'], { animal_mammal: 'yes' })
