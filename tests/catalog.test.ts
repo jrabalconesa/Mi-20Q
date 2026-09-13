@@ -22,6 +22,7 @@ describe('catalog', () => {
     const microwave = knowledge.candidates.find(candidate => candidate.name === 'Microondas')
     const washingMachine = knowledge.candidates.find(candidate => candidate.name === 'Lavadora')
     const vacuumCleaner = knowledge.candidates.find(candidate => candidate.name === 'Aspiradora')
+    const bloodPressureMonitor = knowledge.candidates.find(candidate => candidate.name === 'Tensiómetro')
 
     expect(guitar?.attributes.musicalInstrument).toBe(true)
     expect(guitar?.attributes.portable).toBe(true)
@@ -52,6 +53,9 @@ describe('catalog', () => {
     expect(microwave?.attributes.kitchenFood).toBe(true)
     expect(washingMachine?.attributes.cleaning).toBe(true)
     expect(vacuumCleaner?.attributes.cleaning).toBe(true)
+    expect(bloodPressureMonitor?.attributes.medicalDevice).toBe(true)
+    expect(bloodPressureMonitor?.attributes.measuringInstrument).toBe(true)
+    expect(bloodPressureMonitor?.attributes.weapon).toBe(false)
 
     const objectNames = knowledge.candidates.map(candidate => candidate.name)
     expect(objectNames.filter(name => name === 'Botella')).toHaveLength(1)

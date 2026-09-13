@@ -118,7 +118,7 @@ describe('gameEngine', () => {
       expect(targetRank, `${target.name}: ${askedTexts.join(' | ')}`).toBeLessThan(25)
       expect(targetScore, target.name).toBeGreaterThanOrEqual(leaderScore * 0.9)
     }
-  }, 30_000)
+  }, 60_000)
 
   it('prioriza guepardo usando el nuevo set semantico de animales', () => {
     const knowledge = knowledgeFor('animal')

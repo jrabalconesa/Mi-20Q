@@ -1,6 +1,7 @@
 import type { Candidate } from '../../types/game'
 
 export const coreCandidates: Candidate[] = [
+  { id: 'blood-pressure-monitor', name: 'Tensiómetro', category: 'object', attributes: { usedDaily:false, electronic:true, portable:0.5, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:true, furniture:false, tool:true, outdoors:false, device:true, machine:true, movingMechanicalElectronic:true, workStudyTool:0.5, metalOrPlastic:true, largerThanShoebox:false, weapon:false, medicalDevice:true, measuringInstrument:true } },
   { id: 'phone', name: 'Teléfono móvil', category: 'object', attributes: { usedDaily:true, electronic:true, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:true, furniture:false, tool:false, outdoors:false, computer:false } },
   { id: 'laptop', name: 'Ordenador portátil', category: 'object', attributes: { usedDaily:true, electronic:true, portable:true, indoors:true, large:false, kitchen:false, vehicle:false, wearable:false, screen:true, furniture:false, tool:false, outdoors:false, computer:true } },
   { id: 'chair', name: 'Silla', category: 'object', attributes: { usedDaily:true, electronic:false, portable:false, indoors:true, large:true, kitchen:false, vehicle:false, wearable:false, screen:false, furniture:true, tool:false, outdoors:false, sitOn:true } },

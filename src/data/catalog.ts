@@ -17,7 +17,9 @@ const categoryLoaders: Record<Category, () => Promise<Candidate[]>> = {
       import('./generated/object'),
       import('./objectKnowledge')
     ])
-    return [...core.coreCandidates, ...generated.generatedCandidates].map(knowledge.enrichObjectCandidate)
+    return [...core.coreCandidates, ...generated.generatedCandidates]
+      .map(knowledge.enrichObjectCandidate)
+      .filter(knowledge.isGuessableObjectCandidate)
   },
   place: async () => {
     const [core, generated, knowledge] = await Promise.all([

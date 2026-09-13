@@ -1,6 +1,7 @@
 import type { AttributeValue, Candidate } from '../types/game'
 
 const profiles: Record<string, Record<string, AttributeValue>> = {
+  'tensiometro': { electronic: true, portable: 0.5, indoors: true, screen: true, device: true, machine: true, movingMechanicalElectronic: true, workStudyTool: 0.5, tool: true, largerThanShoebox: false, weapon: false, medicalDevice: true, measuringInstrument: true },
   'telefono movil': { usedDaily: true, electronic: true, portable: true, indoors: true, screen: true, device: true, largerThanShoebox: false },
   'ordenador portatil': { usedDaily: true, electronic: true, portable: true, indoors: true, screen: true, computer: true, device: true, largerThanShoebox: true },
   'silla': { usedDaily: true, furniture: true, indoors: true, large: true, sitOn: true, largerThanShoebox: true },
@@ -63,6 +64,10 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
   const container = attributes.container === true
   const gameEquipment = attributes.gameEquipment === true
   const musicalInstrument = attributes.musicalInstrument === true
+  const screenName = ['telefono', 'televisor', 'ordenador', 'portatil', 'smartphone', 'tablet', 'camara'].some(token => name.includes(token))
+  const computerName = ['ordenador', 'portatil', 'smartphone', 'tablet'].some(token => name.includes(token))
+  const medicalDeviceName = ['tensiometro', 'termometro', 'estetoscopio', 'desfibrilador', 'marcapasos', 'pulsioximetro'].some(token => name.includes(token))
+  const measuringInstrumentName = medicalDeviceName || ['balanza', 'bascula', 'regla', 'metro', 'calibre', 'barometro', 'manometro'].some(token => name.includes(token))
   const cleaningName = ['escoba', 'fregona', 'jabon', 'detergente', 'aspiradora', 'bayeta'].some(token => name.includes(token))
   const liquidName = ['agua', 'aceite', 'leche', 'vino', 'zumo', 'gasolina'].some(token => name.includes(token))
   const edibleName = ['pan', 'queso', 'manzana', 'platano', 'arroz', 'pasta', 'pizza', 'chocolate'].some(token => name.includes(token))
@@ -70,20 +75,20 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
   const handleName = ['cuchara', 'cuchillo', 'tenedor', 'taza', 'sarten', 'martillo', 'taladro', 'paraguas', 'guitarra'].some(token => name.includes(token))
   const concaveName = ['cuchara', 'taza', 'vaso', 'cuenco', 'bol', 'sarten', 'olla'].some(token => name.includes(token))
 
-  const electronic = attributes.electronic ?? (device || machine)
+  const electronic = attributes.electronic ?? false
   const portable = attributes.portable ?? (wearable || tool || weapon || musicalInstrument || (container && !vehicle && !furniture))
   const outdoors = attributes.outdoors ?? (vehicle || gameEquipment)
   const indoors = attributes.indoors ?? (attributes.indoors === undefined && !outdoors
     ? (furniture || kitchen || device || machine || tool || musicalInstrument)
     : attributes.indoors)
   const large = attributes.large ?? (vehicle || furniture || machine)
-  const screen = attributes.screen ?? device
-  const computer = attributes.computer ?? (device && portable)
+  const screen = attributes.screen ?? screenName
+  const computer = attributes.computer ?? computerName
   const sitOn = attributes.sitOn ?? (furniture && attributes.sitOn === undefined ? false : attributes.sitOn)
-  const usedDaily = attributes.usedDaily ?? (wearable || kitchen || furniture || device)
+  const usedDaily = attributes.usedDaily ?? (wearable || kitchen || furniture)
   const largerThanShoebox = attributes.largerThanShoebox ?? (large || vehicle || furniture || machine)
-  const digitalOrElectronic = attributes.digitalOrElectronic ?? (electronic === true || device || screen === true || computer === true)
-  const movingMechanicalElectronic = attributes.movingMechanicalElectronic ?? (electronic === true || device || machine || vehicle)
+  const digitalOrElectronic = attributes.digitalOrElectronic ?? (electronic === true || screen === true || computer === true)
+  const movingMechanicalElectronic = attributes.movingMechanicalElectronic ?? (electronic === true || machine || vehicle)
   const workStudyTool = attributes.workStudyTool ?? (tool || computer === true || attributes.screen === true)
   const storeContainTransport = attributes.storeContainTransport ?? (container || vehicle)
   const kitchenFood = attributes.kitchenFood ?? kitchen
@@ -95,6 +100,8 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
   const cutlery = attributes.cutlery ?? cutleryName
   const hasHandle = attributes.hasHandle ?? handleName
   const concave = attributes.concave ?? concaveName
+  const medicalDevice = attributes.medicalDevice ?? medicalDeviceName
+  const measuringInstrument = attributes.measuringInstrument ?? measuringInstrumentName
 
   return {
     ...attributes,
@@ -117,6 +124,7 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
     kitchenFood,
     metalOrPlastic,
     vehicle,
+    weapon,
     wearable,
     gameEquipment,
     softFlexible,
@@ -125,8 +133,27 @@ function inferObjectAttributes(name: string, attributes: Record<string, Attribut
     cleaning,
     cutlery,
     hasHandle,
-    concave
+    concave,
+    medicalDevice,
+    measuringInstrument
   }
+}
+
+const nonSpecificObjectNames = new Set([
+  'cosa',
+  'dispositivo',
+  'equipamiento',
+  'instrumento',
+  'objeto',
+  'pedazo',
+  'porcion',
+  'produccion',
+  'sistema',
+  'superficie'
+])
+
+export function isGuessableObjectCandidate(candidate: Candidate): boolean {
+  return !nonSpecificObjectNames.has(normalizedName(candidate.name))
 }
 
 export function enrichObjectCandidate(candidate: Candidate): Candidate {
