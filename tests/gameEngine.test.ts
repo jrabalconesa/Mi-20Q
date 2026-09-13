@@ -239,6 +239,61 @@ describe('gameEngine', () => {
     expect(state.questionCount).toBeLessThanOrEqual(20)
   }, 30_000)
 
+  it('distingue Barack Obama de Pedro Sánchez y continúa tras una suposición fallida', () => {
+    const knowledge = knowledgeFor('person')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Barack Obama')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('person', knowledge)
+    const askedIds: string[] = []
+    const guesses: string[] = []
+
+    while (state.questionCount < 20 && state.status !== 'won' && state.status !== 'lost') {
+      while (state.status === 'playing') {
+        if (state.currentQuestionId) askedIds.push(state.currentQuestionId)
+        state = answerCurrentQuestion(state, answerForTarget(target, state, knowledge), knowledge)
+      }
+
+      if (state.status !== 'guessing' || !state.guessCandidateId) break
+      const guessed = knowledge.candidates.find(candidate => candidate.id === state.guessCandidateId)
+      if (guessed) guesses.push(guessed.name)
+      if (state.guessCandidateId === target.id) break
+
+      state = resolveGuess(state, false, knowledge)
+      expect(state.status, `Tras: ${guesses.join(', ')}. Preguntas: ${askedIds.join(', ')}`).toBe('playing')
+    }
+
+    expect(askedIds).toContain('culture_western_hemisphere')
+    expect(askedIds).toContain('person_americas_origin')
+    expect(askedIds).not.toContain('person_asia_origin')
+    expect(guesses).toEqual(['Barack Obama'])
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe(target.id)
+    expect(state.questionCount).toBeLessThanOrEqual(20)
+  }, 30_000)
+
+  it('llega a Gandhi por la rama asiática usando su liderazgo social', () => {
+    const knowledge = knowledgeFor('person')
+    const target = knowledge.candidates.find(candidate => candidate.name === 'Mahatma Gandhi')
+    expect(target).toBeDefined()
+    if (!target) return
+
+    let state = createGame('person', knowledge)
+    const askedIds: string[] = []
+    while (state.status === 'playing') {
+      if (state.currentQuestionId) askedIds.push(state.currentQuestionId)
+      state = answerCurrentQuestion(state, answerForTarget(target, state, knowledge), knowledge)
+    }
+
+    expect(askedIds).toContain('person_asia_origin')
+    expect(askedIds).not.toContain('person_americas_origin')
+    expect(askedIds).toContain('person_civic_leader')
+    expect(state.status).toBe('guessing')
+    expect(state.guessCandidateId).toBe(target.id)
+    expect(state.questionCount).toBeLessThanOrEqual(20)
+  }, 30_000)
+
   it('pregunta lo suficiente para distinguir Poseidón de Zeus antes de adivinar', () => {
     const knowledge = knowledgeFor('person')
     const target = knowledge.candidates.find(candidate => candidate.name === 'Poseidón')

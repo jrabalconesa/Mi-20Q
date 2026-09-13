@@ -78,4 +78,12 @@ describe('strict category filtering', () => {
     expect(viable.every(candidate => candidate.attributes.woman === true)).toBe(true)
     expect(ranked.find(candidate => candidate.name === 'Pedro Sánchez')?.score).toBe(0)
   })
+
+  it('descarta a Pedro Sánchez cuando la persona no es de origen español', async () => {
+    const knowledge = await loadCategoryKnowledge('person')
+    const ranked = rank(knowledge, { person_spanish_origin: 'no' })
+
+    expect(ranked.find(candidate => candidate.name === 'Barack Obama')?.score).toBeGreaterThan(0)
+    expect(ranked.find(candidate => candidate.name === 'Pedro Sánchez')?.score).toBe(0)
+  })
 })

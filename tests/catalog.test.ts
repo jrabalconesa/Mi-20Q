@@ -222,6 +222,8 @@ describe('catalog', () => {
     const gandhi = personKnowledge.candidates.find(candidate => candidate.name === 'Mahatma Gandhi')
     const julioCesar = personKnowledge.candidates.find(candidate => candidate.name === 'Julio César')
     const rosalia = personKnowledge.candidates.find(candidate => candidate.name === 'Rosalía')
+    const pedroSanchez = personKnowledge.candidates.find(candidate => candidate.name === 'Pedro Sánchez')
+    const rafaNadal = personKnowledge.candidates.find(candidate => candidate.name === 'Rafa Nadal')
 
     expect(personNames).toEqual(expect.arrayContaining([
       'Julio Iglesias',
@@ -242,6 +244,9 @@ describe('catalog', () => {
     expect(julioCesar?.attributes.ancientClassical).toBe(true)
     expect(julioCesar?.attributes.romanWorld).toBe(true)
     expect(rosalia?.attributes.living).toBe(true)
+    expect(pedroSanchez?.attributes.spanishOrigin).toBe(true)
+    expect(fernandoAlonso?.attributes.motorsport).toBe(true)
+    expect(rafaNadal?.attributes.motorsport).toBe(false)
   })
 
   it('incluye figuras antiguas y mitologicas frecuentes en espanol', async () => {

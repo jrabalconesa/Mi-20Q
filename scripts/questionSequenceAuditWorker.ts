@@ -10,7 +10,7 @@ const sampleTargets: Record<Category, string[]> = {
   animal: ['Ornitorrinco', 'Toro', 'Tigre', 'Tiburón', 'Delfín', 'Abeja', 'Águila', 'Búho', 'Lobo', 'Cabra', 'Pato', 'Oca', 'Ánsar', 'Pulpo', 'Cigüeña', 'Hipopótamo', 'Rinoceronte', 'Jirafa', 'Cebra', 'Canguro', 'Panda'],
   object: ['Cuchara', 'Teléfono móvil', 'Silla', 'Coche', 'Libro', 'Guitarra', 'Lámpara', 'Llave', 'Botella', 'Balón', 'Mochila'],
   place: ['París', 'Murcia', 'Cartagena (España)', 'Madrid', 'Barcelona', 'Sevilla', 'Valencia', 'Zaragoza', 'Bilbao', 'Las Palmas de Gran Canaria', 'Santa Cruz de Tenerife', 'Ceuta', 'Melilla', 'Islas Canarias', 'Islas Baleares', 'Río Amazonas', 'Río Nilo', 'Monte Everest', 'Gran Cañón', 'Taj Mahal'],
-  person: ['Mahatma Gandhi', 'Pedro Sánchez', 'Don Quijote de la Mancha', 'Fernando Alonso', 'Rosalía', 'Julio César', 'Elon Musk', 'Hipatia de Alejandría', 'Zeus', 'Poseidón', 'Afrodita', 'Hércules', 'Ulises', 'Cupido', 'Ares', 'Marte', 'Minotauro', 'Atenea', 'Medusa', 'Perseo', 'Orión', 'Casiopea', 'Centauro', 'Sherlock Holmes', 'Harry Potter', 'Mafalda']
+  person: ['Mahatma Gandhi', 'Pedro Sánchez', 'Barack Obama', 'Don Quijote de la Mancha', 'Fernando Alonso', 'Rosalía', 'Julio César', 'Elon Musk', 'Hipatia de Alejandría', 'Zeus', 'Poseidón', 'Afrodita', 'Hércules', 'Ulises', 'Cupido', 'Ares', 'Marte', 'Minotauro', 'Atenea', 'Medusa', 'Perseo', 'Orión', 'Casiopea', 'Centauro', 'Sherlock Holmes', 'Harry Potter', 'Mafalda']
 }
 
 interface AskedStep {

@@ -110,6 +110,25 @@ describe('availableQuestions', () => {
     expect(ids).not.toEqual(expect.arrayContaining(['place_capital', 'place_large_city']))
   })
 
+  it('divide Occidente entre America y Europa sin preguntar despues por Asia', () => {
+    const personQuestions = appQuestions.filter(question => question.categories.includes('person'))
+    const afterWestern = availableQuestions(
+      personQuestions,
+      ['culture_western_hemisphere'],
+      { culture_western_hemisphere: 'yes' }
+    )
+    const afterNotWestern = availableQuestions(
+      personQuestions,
+      ['culture_western_hemisphere'],
+      { culture_western_hemisphere: 'no' }
+    )
+
+    expect(afterWestern.map(question => question.id)).toContain('person_americas_origin')
+    expect(afterWestern.map(question => question.id)).not.toContain('person_asia_origin')
+    expect(afterNotWestern.map(question => question.id)).not.toContain('person_americas_origin')
+    expect(afterNotWestern.map(question => question.id)).toContain('person_asia_origin')
+  })
+
   it('evita preguntar si es cubierto cuando no esta relacionado con cocina o alimentacion', () => {
     const available = availableQuestions(appQuestions.filter(question => question.categories.includes('object')), ['object_kitchen_food'], { object_kitchen_food: 'no' })
 

@@ -178,6 +178,7 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
   ].some(token => normalized.includes(token))
   const pseudonym = ['c. tangana', 'bad bunny', 'madonna', 'shakira', 'beyonce'].some(token => normalized.includes(token))
   const billionaire = ['amancio ortega', 'elon musk', 'bill gates', 'steve jobs'].some(token => normalized.includes(token))
+  const motorsport = ['carlos sainz', 'fernando alonso', 'lewis hamilton', 'marc marquez', 'michael schumacher'].some(token => normalized.includes(token))
   const scienceName = ['hipatia'].some(token => normalized.includes(token))
   const visualArtistName = [
     'dali', 'frida kahlo', 'goya', 'leonardo da vinci', 'miguel angel', 'picasso',
@@ -247,6 +248,7 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
     worksInGroup: attributes.worksInGroup ?? (sports ? 0.5 : undefined),
     pseudonym: attributes.pseudonym ?? pseudonym,
     billionaire: attributes.billionaire ?? billionaire,
+    motorsport: attributes.motorsport ?? motorsport,
     scientist: attributes.scientist === true || scienceName,
     sciencePoliticsLeadership: attributes.sciencePoliticsLeadership ?? (scientist || scienceName || politician),
     religiousSpiritual: attributes.religiousSpiritual ?? religiousSpiritual,
@@ -273,5 +275,9 @@ function inferPersonAttributes(name: string, attributes: Record<string, Attribut
 
 export function enrichPersonCandidate(candidate: Candidate): Candidate {
   const name = commonSpanishName(candidate.name)
-  return { ...candidate, name, attributes: inferPersonAttributes(name, candidate.attributes) }
+  const knownSpanishOrigin = candidate.id.startsWith('spanish-') || normalizedName(name) === 'pablo picasso'
+  const attributes = knownSpanishOrigin
+    ? { ...candidate.attributes, spanishOrigin: true }
+    : candidate.attributes
+  return { ...candidate, name, attributes: inferPersonAttributes(name, attributes) }
 }
