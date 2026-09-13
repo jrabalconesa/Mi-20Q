@@ -25,14 +25,13 @@ function nextGuessState(
   excludedCandidateIds: string[],
   rankedCandidates: GameState['rankedCandidates']
 ): GameState {
-  const nextCandidate = rankedCandidates.find(candidate => !excludedCandidateIds.includes(candidate.id))
   return {
     ...state,
     excludedCandidateIds,
     rankedCandidates,
     currentQuestionId: null,
-    guessCandidateId: nextCandidate?.id ?? null,
-    status: nextCandidate ? 'guessing' : 'lost'
+    guessCandidateId: null,
+    status: 'lost'
   }
 }
 
