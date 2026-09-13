@@ -84,9 +84,20 @@ function applyBayesianAnswerUpdate(
   answer: Answer
 ): number[] {
   const posteriorNumerators = candidates.map((candidate, index) =>
-    answerLikelihood(candidate, question, answer) * priorScores[index]
+    hardFilterLikelihood(candidate, question, answer) * priorScores[index]
   )
   return normalizePosteriorScores(posteriorNumerators)
+}
+
+function hardFilterLikelihood(candidate: Candidate, question: Question, answer: Answer): number {
+  if (!question.hardFilter || (answer !== 'yes' && answer !== 'no')) {
+    return answerLikelihood(candidate, question, answer)
+  }
+
+  const expected = expectedValue(candidate, question)
+  if (typeof expected !== 'boolean') return answerLikelihood(candidate, question, answer)
+  const matches = answer === 'yes' ? expected : !expected
+  return matches ? answerLikelihood(candidate, question, answer) : 0
 }
 
 export function rankCandidates(

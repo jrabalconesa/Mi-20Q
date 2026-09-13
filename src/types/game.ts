@@ -20,6 +20,8 @@ export interface Question {
   askIf?: Array<{ questionId: string; answers: Answer[] }>
   skipIf?: Array<{ questionId: string; answers: Answer[] }>
   phase?: 'absolute' | 'segment' | 'closing'
+  /** Una respuesta definida descarta candidatos incompatibles con este rasgo objetivo. */
+  hardFilter?: boolean
 }
 
 export interface RankedCandidate extends Candidate {

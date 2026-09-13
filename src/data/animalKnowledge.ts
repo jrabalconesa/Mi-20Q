@@ -306,7 +306,10 @@ function genericAnimalName(name: string, attributes: Record<string, AttributeVal
   if (normalized.includes('zopilote') || normalized.includes('aura')) return 'Buitre'
   if (normalized.includes('buho') || normalized.includes('carabo')) return 'Búho'
   if (normalized.includes('ganso')) return 'Ganso'
-  return name
+  if (normalized.includes('liebre')) return 'Liebre'
+  if (normalized.includes('tejon')) return 'Tejón'
+  if (normalized.includes('topo')) return 'Topo'
+  return name.charAt(0).toLocaleUpperCase('es') + name.slice(1)
 }
 
 function inferredProfile(name: string): Record<string, AttributeValue> | undefined {

@@ -141,6 +141,15 @@ describe('catalog', () => {
       'Cárabo Norteamericano',
       'Ganso del Nilo'
     ]))
+    expect(animalNames).toEqual(expect.arrayContaining(['Liebre', 'Tejón', 'Topo']))
+    expect(animalNames).not.toEqual(expect.arrayContaining([
+      'Liebre americana',
+      'Liebre europea',
+      'Tejón europeo',
+      'Topo Europeo',
+      'Topo oriental'
+    ]))
+    expect(animalNames.every(name => /^\p{Lu}/u.test(name))).toBe(true)
     expect(byName('Ornitorrinco')?.attributes.mammal).toBe(true)
     expect(byName('Ornitorrinco')?.attributes.oviparous).toBe(true)
     expect(byName('Ornitorrinco')?.attributes.monotreme).toBe(true)

@@ -130,6 +130,38 @@ describe('animal regressions', () => {
     expect(state.questionCount).toBeLessThanOrEqual(20)
   })
 
+  it('descarta animales no felinos tras confirmar que es un felino', async () => {
+    const knowledge = await loadCategoryKnowledge('animal')
+    const questionsById = Object.fromEntries(knowledge.questions.map(question => [question.id, question]))
+    const ranked = rankCandidates(knowledge.candidates, questionsById, {
+      animal_mammal: 'yes',
+      animal_domestic_farm_pet: 'no',
+      animal_four_or_more_legs: 'yes',
+      animal_feline: 'yes',
+      animal_spotted: 'no',
+      animal_striped: 'no',
+      animal_bigger_than_dog: 'yes',
+      animal_air_or_water: 'no',
+      animal_lives_in_spain: 'no',
+      animal_oviparous: 'no',
+      animal_hoofed: 'no',
+      animal_black_white: 'no',
+      animal_marsupial: 'no',
+      animal_antlers: 'no',
+      animal_very_fast_runner: 'no',
+      animal_trunk: 'no',
+      animal_primate: 'no',
+      animal_canid: 'no',
+      animal_semi_aquatic: 'no'
+    })
+    const viable = ranked.filter(candidate => candidate.score > 0)
+
+    expect(viable.length).toBeGreaterThan(0)
+    expect(viable.every(candidate => candidate.attributes.feline === true)).toBe(true)
+    expect(ranked.find(candidate => candidate.name === 'Gorila')?.score).toBe(0)
+    expect(ranked.find(candidate => candidate.name === 'Jaguar')?.score).toBeGreaterThan(0)
+  })
+
   it('usa rasgos discriminatorios para llegar antes a tigre', async () => {
     const knowledge = await loadCategoryKnowledge('animal')
     const tiger = knowledge.candidates.find(candidate => candidate.name === 'Tigre')
